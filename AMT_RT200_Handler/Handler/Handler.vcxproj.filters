@@ -1,0 +1,1313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AlgMemory.cpp" />
+    <ClCompile Include="Alg_Excel.cpp" />
+    <ClCompile Include="Alg_Mysql.cpp" />
+    <ClCompile Include="Animate.cpp" />
+    <ClCompile Include="BannerStatic.cpp" />
+    <ClCompile Include="BCMenu.cpp" />
+    <ClCompile Include="BtnST.cpp" />
+    <ClCompile Include="ClientEcFirst.cpp" />
+    <ClCompile Include="ClientGms.cpp" />
+    <ClCompile Include="ClientRfid.cpp" />
+    <ClCompile Include="ClientSocket.cpp" />
+    <ClCompile Include="Cmmsdk.cpp" />
+    <ClCompile Include="ColorString.cpp" />
+    <ClCompile Include="ComizoaPublic.cpp" />
+    <ClCompile Include="Comm.cpp" />
+    <ClCompile Include="Controls\BmpImage.cpp" />
+    <ClCompile Include="Controls\BmpImageST.cpp" />
+    <ClCompile Include="Controls\CheckerCtrl.cpp" />
+    <ClCompile Include="Controls\ClockST.cpp" />
+    <ClCompile Include="Controls\ColorListBox.cpp" />
+    <ClCompile Include="Controls\ControlToolTip.cpp" />
+    <ClCompile Include="Controls\NewLabel.cpp" />
+    <ClCompile Include="Controls\StarWarsCtrl.cpp" />
+    <ClCompile Include="CtlBd_Function.cpp" />
+    <ClCompile Include="CtlBd_Library.cpp" />
+    <ClCompile Include="DialogAlarmIO.cpp" />
+    <ClCompile Include="DialogAlarmMotor.cpp" />
+    <ClCompile Include="DialogEqpStatus.cpp" />
+    <ClCompile Include="DialogManualIO.cpp" />
+    <ClCompile Include="DialogMessageBox.cpp" />
+    <ClCompile Include="DialogMessageView.cpp" />
+    <ClCompile Include="DialogXgem.cpp" />
+    <ClCompile Include="Dialog_About.cpp" />
+    <ClCompile Include="Dialog_Exit.cpp" />
+    <ClCompile Include="Dialog_Image_View.cpp" />
+    <ClCompile Include="Dialog_KeyBoard.cpp" />
+    <ClCompile Include="Dialog_KeyPad.cpp" />
+    <ClCompile Include="Dialog_List.cpp" />
+    <ClCompile Include="Dialog_Message.cpp" />
+    <ClCompile Include="Dialog_Part_IO.cpp" />
+    <ClCompile Include="Dialog_Password_Change.cpp" />
+    <ClCompile Include="Dialog_Pass_Check.cpp" />
+    <ClCompile Include="Dialog_Title.cpp" />
+    <ClCompile Include="Digit.cpp" />
+    <ClCompile Include="FastechPublic_IO.cpp" />
+    <ClCompile Include="FtpClient.cpp" />
+    <ClCompile Include="FtpComm.cpp" />
+    <ClCompile Include="GradientStatic.cpp" />
+    <ClCompile Include="Handler.cpp" />
+    <ClCompile Include="HandlerDoc.cpp" />
+    <ClCompile Include="HandlerView.cpp" />
+    <ClCompile Include="InitDialogBar.cpp" />
+    <ClCompile Include="LedButton.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MultiColorStatic.cpp" />
+    <ClCompile Include="MyBasicData.cpp" />
+    <ClCompile Include="MyJamData.cpp" />
+    <ClCompile Include="Picture.cpp" />
+    <ClCompile Include="PictureEx.cpp" />
+    <ClCompile Include="PublicFunction.cpp" />
+    <ClCompile Include="RegistryEx.cpp" />
+    <ClCompile Include="RunHandlerCheck.cpp" />
+    <ClCompile Include="RunReadIO.cpp" />
+    <ClCompile Include="RunTowerLamp.cpp" />
+    <ClCompile Include="ScreenAlarm.cpp" />
+    <ClCompile Include="ScreenBasic.cpp" />
+    <ClCompile Include="ScreenInitial.cpp" />
+    <ClCompile Include="ScreenIO.cpp" />
+    <ClCompile Include="ScreenList.cpp" />
+    <ClCompile Include="ScreenLock.cpp" />
+    <ClCompile Include="ScreenMain.cpp" />
+    <ClCompile Include="ScreenMotor.cpp" />
+    <ClCompile Include="ScreenPrgInfo.cpp" />
+    <ClCompile Include="ScreenWork.cpp" />
+    <ClCompile Include="ServerClient.cpp" />
+    <ClCompile Include="ServerFront.cpp" />
+    <ClCompile Include="ServerSocket.cpp" />
+    <ClCompile Include="ServerVnR.cpp" />
+    <ClCompile Include="SingleInstanceApp.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="SuperProgressCtrl.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="ThumbnailButton.cpp" />
+    <ClCompile Include="ThumbNailControl.cpp" />
+    <ClCompile Include="TrueColorToolBar.cpp" />
+    <ClCompile Include="UniButtonEx.cpp" />
+    <ClCompile Include="Union\Grid\GridCell.cpp" />
+    <ClCompile Include="Union\Grid\GridCellBase.cpp" />
+    <ClCompile Include="Union\Grid\GridCellCheck.cpp" />
+    <ClCompile Include="Union\Grid\GridCellCombo.cpp" />
+    <ClCompile Include="Union\Grid\GridCellDateTime.cpp" />
+    <ClCompile Include="Union\Grid\GridCellNumeric.cpp" />
+    <ClCompile Include="Union\Grid\GridCtrl.cpp" />
+    <ClCompile Include="Union\Grid\GridDropTarget.cpp" />
+    <ClCompile Include="Union\Grid\InPlaceEdit.cpp" />
+    <ClCompile Include="Union\Grid\TitleTip.cpp" />
+    <ClCompile Include="VLabel.cpp" />
+    <ClCompile Include="WorkInterface.cpp" />
+    <ClCompile Include="WorkMaintenance.cpp" />
+    <ClCompile Include="WorkMotorSpeed.cpp" />
+    <ClCompile Include="WorkRecipe.cpp" />
+    <ClCompile Include="WorkTab.cpp" />
+    <ClCompile Include="WorkWaitTime.cpp" />
+    <ClCompile Include="XgemClient.cpp" />
+    <ClCompile Include="XLAutomation.cpp" />
+    <ClCompile Include="XPGroupBox.cpp" />
+    <ClCompile Include="xShadeButton.cpp" />
+    <ClCompile Include="ACriticalSection.cpp" />
+    <ClCompile Include="RunConveyor.cpp" />
+    <ClCompile Include="RunRobot.cpp" />
+    <ClCompile Include="RunLabelFeeder.cpp" />
+    <ClCompile Include="RunPicker.cpp" />
+    <ClCompile Include="Barcode_1D.cpp" />
+    <ClCompile Include="Barcode_2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="32bit\FAS_HSSI.h" />
+    <ClInclude Include="64bit\FAS_HSSI.h" />
+    <ClInclude Include="AlgMemory.h" />
+    <ClInclude Include="Alg_Excel.h" />
+    <ClInclude Include="Alg_Mysql.h" />
+    <ClInclude Include="Animate.h" />
+    <ClInclude Include="BannerStatic.h" />
+    <ClInclude Include="BCMenu.h" />
+    <ClInclude Include="BtnST.h" />
+    <ClInclude Include="ClientEcFirst.h" />
+    <ClInclude Include="ClientGms.h" />
+    <ClInclude Include="ClientRfid.h" />
+    <ClInclude Include="ClientSocket.h" />
+    <ClInclude Include="Cmmsdk.h" />
+    <ClInclude Include="CmmsdkDef.h" />
+    <ClInclude Include="ColorString.h" />
+    <ClInclude Include="ComizoaPublic.h" />
+    <ClInclude Include="Comm.h" />
+    <ClInclude Include="Controls\BmpImage.h" />
+    <ClInclude Include="Controls\BmpImageST.h" />
+    <ClInclude Include="Controls\CheckerCtrl.h" />
+    <ClInclude Include="Controls\ClockST.h" />
+    <ClInclude Include="Controls\ColorListBox.h" />
+    <ClInclude Include="Controls\ControlToolTip.h" />
+    <ClInclude Include="Controls\NewLabel.h" />
+    <ClInclude Include="Controls\StarWarsCtrl.h" />
+    <ClInclude Include="CtlBd_Function.h" />
+    <ClInclude Include="CtlBd_Library.h" />
+    <ClInclude Include="Ctlbd_Variable.h" />
+    <ClInclude Include="DialogAlarmIO.h" />
+    <ClInclude Include="DialogAlarmMotor.h" />
+    <ClInclude Include="DialogEqpStatus.h" />
+    <ClInclude Include="DialogManualIO.h" />
+    <ClInclude Include="DialogMessageBox.h" />
+    <ClInclude Include="DialogMessageView.h" />
+    <ClInclude Include="DialogXgem.h" />
+    <ClInclude Include="Dialog_About.h" />
+    <ClInclude Include="Dialog_Exit.h" />
+    <ClInclude Include="Dialog_Image_View.h" />
+    <ClInclude Include="Dialog_KeyBoard.h" />
+    <ClInclude Include="Dialog_KeyPad.h" />
+    <ClInclude Include="Dialog_List.h" />
+    <ClInclude Include="Dialog_Message.h" />
+    <ClInclude Include="Dialog_Part_IO.h" />
+    <ClInclude Include="Dialog_Password_Change.h" />
+    <ClInclude Include="Dialog_Pass_Check.h" />
+    <ClInclude Include="Dialog_Title.h" />
+    <ClInclude Include="Digit.h" />
+    <ClInclude Include="FastechPublic_IO.h" />
+    <ClInclude Include="FAS_HSSI.h" />
+    <ClInclude Include="FtpClient.h" />
+    <ClInclude Include="FtpComm.h" />
+    <ClInclude Include="GradientStatic.h" />
+    <ClInclude Include="GridCellCheck.h" />
+    <ClInclude Include="GridControlAlg.h" />
+    <ClInclude Include="Handler.h" />
+    <ClInclude Include="HandlerDoc.h" />
+    <ClInclude Include="HandlerView.h" />
+    <ClInclude Include="InitDialogBar.h" />
+    <ClInclude Include="LedButton.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MultiColorStatic.h" />
+    <ClInclude Include="MyBasicData.h" />
+    <ClInclude Include="MyJamData.h" />
+    <ClInclude Include="Mysql\32bit\mysql.h" />
+    <ClInclude Include="Mysql\32bit\typelib.h" />
+    <ClInclude Include="Picture.h" />
+    <ClInclude Include="PictureEx.h" />
+    <ClInclude Include="PublicFunction.h" />
+    <ClInclude Include="RegistryEx.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="RunHandlerCheck.h" />
+    <ClInclude Include="RunReadIO.h" />
+    <ClInclude Include="RunTowerLamp.h" />
+    <ClInclude Include="ScreenAlarm.h" />
+    <ClInclude Include="ScreenBasic.h" />
+    <ClInclude Include="ScreenInitial.h" />
+    <ClInclude Include="ScreenIO.h" />
+    <ClInclude Include="ScreenList.h" />
+    <ClInclude Include="ScreenLock.h" />
+    <ClInclude Include="ScreenMain.h" />
+    <ClInclude Include="ScreenMotor.h" />
+    <ClInclude Include="ScreenPrgInfo.h" />
+    <ClInclude Include="ScreenWork.h" />
+    <ClInclude Include="ServerClient.h" />
+    <ClInclude Include="ServerFront.h" />
+    <ClInclude Include="ServerSocket.h" />
+    <ClInclude Include="ServerVnR.h" />
+    <ClInclude Include="SingleInstanceApp.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SuperProgressCtrl.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="ThumbnailButton.h" />
+    <ClInclude Include="ThumbNailControl.h" />
+    <ClInclude Include="TrueColorToolBar.h" />
+    <ClInclude Include="UniButtonEx.h" />
+    <ClInclude Include="Union\Grid\GridCell.h" />
+    <ClInclude Include="Union\Grid\GridCellBase.h" />
+    <ClInclude Include="Union\Grid\GridCellCheck.h" />
+    <ClInclude Include="Union\Grid\GridCellCombo.h" />
+    <ClInclude Include="Union\Grid\GridCellDateTime.h" />
+    <ClInclude Include="Union\Grid\GridCellNumeric.h" />
+    <ClInclude Include="Union\Grid\GridCtrl.h" />
+    <ClInclude Include="Union\Grid\GridDropTarget.h" />
+    <ClInclude Include="Union\Grid\InPlaceEdit.h" />
+    <ClInclude Include="Union\Grid\MemDC.h" />
+    <ClInclude Include="Union\Grid\TitleTip.h" />
+    <ClInclude Include="Variable.h" />
+    <ClInclude Include="VLabel.h" />
+    <ClInclude Include="WorkInterface.h" />
+    <ClInclude Include="WorkMaintenance.h" />
+    <ClInclude Include="WorkMotorSpeed.h" />
+    <ClInclude Include="WorkRecipe.h" />
+    <ClInclude Include="WorkTab.h" />
+    <ClInclude Include="WorkWaitTime.h" />
+    <ClInclude Include="XgemClient.h" />
+    <ClInclude Include="XLAutomation.h" />
+    <ClInclude Include="XPGroupBox.h" />
+    <ClInclude Include="xShadeButton.h" />
+    <ClInclude Include="ACriticalSection.h" />
+    <ClInclude Include="Ctrl\KeyBoard.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="RunConveyor.h" />
+    <ClInclude Include="RunRobot.h" />
+    <ClInclude Include="RunLabelFeeder.h" />
+    <ClInclude Include="RunPicker.h" />
+    <ClInclude Include="Barcode_1D.h" />
+    <ClInclude Include="Barcode_2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Handler.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="Cmmsdk.dll" />
+    <None Include="FAS_HSSI.dll" />
+    <None Include="Handler.aps" />
+    <None Include="Handler.sdf" />
+    <None Include="Handler.vcxproj" />
+    <None Include="HSSI.dll" />
+    <None Include="libmysql.dll" />
+    <None Include="Mysql\32bit\libmysql.dll" />
+    <None Include="Output-Build.txt" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\Handler.rc2" />
+    <None Include="res\3.5 inch Floppy.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\amt_logo_fast.gif">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_sepa.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_conv.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_grip.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_jig_.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_move.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_pcb_.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ani_pick.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Apply.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\backword.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ARW03DN.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\background1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\background2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Base.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap10.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00100.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap11.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap12.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap13.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap14.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap15.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap16.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap17.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap18.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap19.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap20.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap21.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap22.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap23.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap24.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap25.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap26.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap27.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap29.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap30.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap4.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap8.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_a.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_c.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_g.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_i.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_l.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_m.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_r.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_t.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmap_u.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bitmp_lo.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\BLedOff.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\BLedOn.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00001.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00002.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00003.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00004.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00005.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00006.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00007.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00008.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00009.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00010.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00011.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00012.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00013.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00014.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00015.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00016.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00017.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00018.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00019.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00020.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00021.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00022.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00023.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00024.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00025.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00026.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00027.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00028.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00029.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00030.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00031.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00032.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00033.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00034.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00035.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00036.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00037.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00038.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00039.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00040.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00041.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00042.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00043.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00044.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00045.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00046.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00047.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00048.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00049.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00050.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00051.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00052.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00053.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00054.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00055.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00056.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00057.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00058.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00059.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00060.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00061.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00062.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00063.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00064.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00065.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00066.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00067.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00068.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00069.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00070.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00071.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00072.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00073.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00074.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00075.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00076.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00077.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00078.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00079.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00080.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00081.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00082.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00083.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00084.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00085.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00086.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00087.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00088.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00089.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00090.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00091.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00092.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00093.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00094.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00095.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00096.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00097.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00098.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\bmp00099.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\BumpGroub.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\check_up2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CancelBtn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CancelBtn57.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CancelBtnDn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CancelBtnDn57.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\check_down1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\check_down2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\check_up1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\BOOK06.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\BOOK02.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ClockST_big.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CLSDFOLD.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ClockST_pane.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ClockST_small.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\close_down.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\close_up.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CokBuffer.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Convert.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Cool 004.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CvyAssy.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\CvyAssyMask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\db_add.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\DeviceR_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\db_add_dn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\db_del.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\db_del_dn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Device.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Device_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\DeviceL.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\DeviceL_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\DeviceR.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_b.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Document Folder 2.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_bd.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_c.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_d.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_g.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_r.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digit_y.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_b.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_bd.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_bl.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_c.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_d.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_g.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_r.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\digitB_y.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk10.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk4.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk5.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk6.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk7.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk8.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\disk9.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\dlgbackground1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\exit.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Door.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\door_close.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\door_open.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\down_m_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\down_m_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\down_p_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\down_p_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Download_DN.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Download_UP.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\EqpStatusChange.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\EqpStatusChangeDn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ERASE02.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Folder.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\FolderOpen.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\forword.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\forword.png">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\GuideOff.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\GuideOn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\HandlerDoc.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\hiDelete.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\hiFind.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\hiPrint.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\home_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\home_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Handler.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\icon1.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_9.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d4.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d5.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d6.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d7.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if3d8.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_4.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_5.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_6.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_7.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\if_8.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\initial-1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\initial-2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Initial.gif">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Keyboard.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\LedGreen.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\LedNone.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\LedRed.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\left_m_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\left_m_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\left_p_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\left_p_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Lightning.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\locking.gif">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\maximize_down.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\maximize_up.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\minimize_down.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\minimize_up.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\MvBuff.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\MvBuff1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\MvBuff2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\MvBuff3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\MvBuff4.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\MvBuff_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\OkBtn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\oper-del.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\OkBtn57.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\OkBtnDn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\OkBtnDn57.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\oper-add-dn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\oper-add.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\oper-apply-dn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\oper-apply.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\oper-del-dn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\preview.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\radio_down1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\radio_down2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\radio_up1.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\radio_up2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\RECYFULL.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Reject.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Reject2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Reject3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\RejectMask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\restore_down.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\restore_up.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Retest.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Retest2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Retest3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\RetestMask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\right_m_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\right_m_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\right_p_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\right_p_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Search document.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\search.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Set_Btn.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Testsite.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TestsiteImg.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TestsiteMask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Text Document TXT.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TEXTEDIT.ICO">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\title_background.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\toolbar_work.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ToolbarDraw.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ToolbarDrawDisabled.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\ToolbarDrawHot.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TowerLamp.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="image\Tray.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Tray.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Tray3x2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Tray3x2_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Tray3x2Full.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TrayImg.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TrayGroub.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TrayMask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TSiteDevice.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TSiteDevice2.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TSiteDevice2_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TSiteDevice3.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TSiteDevice3_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\TSiteDevice_Mask.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\unlock.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\up_m_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\up_m_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\up_p_d.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\up_p_u.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Upload_DN.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\Upload_UP.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="배경25.gif">
+      <Filter>res</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="32bit\HSSI.lib" />
+    <Library Include="64bit\FAS_HSSI.lib" />
+    <Library Include="FAS_HSSI.lib" />
+    <Library Include="HSSI.lib" />
+    <Library Include="libmysql.lib" />
+    <Library Include="Mysql\32bit\libmysql.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="res">
+      <UniqueIdentifier>{7dc1f393-2ca5-4043-b278-7a8aee52a817}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

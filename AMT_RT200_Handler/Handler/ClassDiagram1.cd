@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CColorString">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IMAACAQQAgAAAAABkAAACAAAAAAAAACBAAggAAIAAAA=</HashCode>
+      <FileName>ColorString.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAlg_Reg">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAABAAAUACIAIAAAgAIAQAIAJCAAAIABAAoAAAAA=</HashCode>
+      <FileName>Alg_Reg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

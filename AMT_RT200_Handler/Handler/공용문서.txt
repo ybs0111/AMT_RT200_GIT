@@ -1,0 +1,572 @@
+- RECIPE
+st_recipe_info.nTrayRol - 
+
+- MOTOR관련
+
+- MAIN 화면 DISPLAY MESSAGE (WM_WORK_DISPLAY)
+
+#define MAIN_TIMEINFO			100
+#define MAIN_COUNT_DISPLAY		101
+#define MAIN_LF_INTERFACE_DISPLAY	102 (left 테스트 상태 표시)
+#define MAIN_RI_INTERFACE_DISPLAY	103 (right 테스트 상태 표시)
+#define MAIN_LD_PICKER_DISPLAY 		104 (loader picker 상태 표시)
+#define MAIN_LD_BUF_PICK_DISPLAY	105 (loader buffer pick 상태 표시)
+#define MAIN_LD_BUF_PLACE_DISPLAY	106 (loader buffer place 상태표시)
+#define MAIN_LD_TRAY_DISPLAY		107 (loader tray 상태표시)
+#define MAIN_UNLD_PICKER_DISPLAY	108 (unloader picker 상태 표시)
+#define MAIN_UNLD_BUF_PICK_DISPLAY	109 (unloader buffer pick 상태표시)
+#define MAIN_UNLD_BUF_PLACE_DISPLAY	110 (unloader buffer place 상태표시)
+#define MAIN_UNLD_TRAY_DISPLAY		111 (unloader tray 상태 표시)
+#define MAIN_RETEST_BUF_DISPLAY		112 (retest buffer 상태 표시)
+#define MAIN_REJECT_BUF_DISPLAY		113 (reject buffer 상태 표시)
+#define MAIN_PCB_TRANS_DISPLAY		114 (pcb transfer 상태표시)
+
+
+enum BOARD_INFO
+{
+	BD_NONE							= 0,
+	BD_START						,
+	BD_END							,
+	BD_READY_CHK 					,
+	BD_READY_OK						,
+	BD_TEST_START_CHK				,
+	BD_TEST_START_OK				,
+	BD_SLOT_OFF						,
+	BD_SLOT_ON						,
+	BD_DATA_GOOD					= 200,
+	BD_DATA_REJECT					,
+	BD_DATA_ABORT					,
+	BD_CONT_TIMEOUT					,
+	BD_SEND_TIMEOUT					,
+	BD_RCV_TIMEOUT					,
+};
+
+
+// board 상태 정보
+#define 오전 11:12 2015-01-07					RGB(164, 164, 164)
+#define BIN_NONE				RGB(62,	55, 55)오전 10:25 2015-01-15
+#define BIN_LOAD				RGB(187, 250, 255)
+#define BIN_READY				RGB(150, 255, 150)
+#define BIN_START				RGB(255, 255, 0)
+#define BIN_ABORT				RGB(204, 102, 204)
+#define BIN_GOOD				RGB(124, 139, 252)
+#define BIN_FAIL				RGB(255, 0, 0)
+#define BIN_RELOAD				RGB(255, 150, 150)
+
+
+
+#define WINDOW_DN				RGB(219, 255, 210)
+#define WINDOW_UP				RGB(250, 255, 244)
+
+#define WINDOW_DN1				RGB(219, 255, 210)
+#define WINDOW_UP1				RGB(250, 250, 250)
+
+
+
+CString strLotNo;						// pcb Lot number.....
+CString strSerialNo;					// Lot에서 pcb의 순서번호......
+CString strBarcode;						// pcb 2D barcode......
+CString strPartNo;						// part no.....
+CString strArrNo;						// array serial....
+CString strPPID;						// ppid.....
+CString strPSID;						// psid....
+CString strWWN;							// wwn.....
+CString strCSerialNo;					// c_serial......
+
+enum THREAD_SYNC_VARIBLE_SITE_INFO  //위치별 트레이 존재 유무를 위치별로 정의해 놓음  
+{
+	// tray site
+	THD_PLATE_CV_LDTRAY_INPUT_SITE		=  0, //ld smema 통신처리 
+	THD_PLATE_CV_BCR_TRAY_SITE				,
+	THD_PLATE_LD_TRAY_1_SITE				,
+	THD_PLATE_LD_TRAY_2_SITE				,
+	THD_PLATE_EMPTY_TRAY_SITE				,
+	THD_PLATE_ULD_TRAY_1_SITE				,
+	THD_PLATE_ULD_TRAY_2_SITE				,
+	THD_PLATE_ULD_CV_MOVING_TRAY_SITE		, //7 //uld smema 통신처리  
+
+	//bottom site 동작 
+	THD_UNDER_EMPTY_LD_TRAY_2_SITE			, //8
+	THD_UNDER_EMPTY_TRAY_STACKER_SITE		, //9
+	THD_UNDER_UNLOAD_TRAY_STACKER_SITE		, //10
+
+	THD_LOAD_TRAY_MOVE_INDEX_SITE			,
+	THD_UNLOAD_TRAY_MOVE_INDEX_SITE			,
+	//////////// tray site
+
+	//robot site
+	THD_LD_ROBOT_SITE						,
+	THD_ULD_ROBOT_SITE						,
+	THD_TEST_ROBOT_SITE						,
+	THD_BCR_ROBOT_SITE					    , //2015.0119 
+
+	//Etc
+	THD_LD_ROTATOR_BUFF_SITE				,
+	THD_ULD_ROTATOR_BUFF_SITE				,
+
+	THD_RETEST_TRAY_BUFF_SITE				,
+	THD_REJECT_TRAY_BUFF_SITE			 ,
+	THD_REJECT_TRAY_UP_BUFF_SITE			,
+	THD_REJECT_TRAY_DOWN_BUFF_SITE			,
+
+	THD_COK_EXCHANGE_SITE					,
+	THD_LEFT_TEST_SITE						,
+	THD_RIGHT_TEST_SITE						,
+	THD_LEFT_MP_SITE						,
+	THD_RIGHT_MP_SITE						,
+
+	THD_MACHINE_INPUT_NETWORK_SITE			,
+	THD_MACHINE_OUTPUT_NETWORK_SITE			,
+
+	THREAD_MAX_SITE							,		,
+};
+
+
+afx_msg LRESULT OnClientEcFirst(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnClientXgem(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnClientRfid(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnClientInterface(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnClientRear(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnClientGms(WPARAM wParam, LPARAM lParam);
+
+afx_msg LRESULT OnServerEcFirst(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnServerXgem(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnServerRfid(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnServerInterface(WPARAM wParam, LPARAM lParam);
+afx_msg LRESULT OnServerFront(WPARAM wParam, LPARAM lParam);
+
+1. EC_FIRST_NETWORK				= 0,
+2. XGEM_NETWORK					,
+3. INTERFACE_NETWORK				,
+4. FRONT_NETWORK				,
+5. REAR_NETWORK					,
+6. RFID_NETWORK					,
+7. GMS_NETWORK					,
+8. FTP_NETWORK					,
+
+enum MOTOR_NUM
+{
+	M_BARCODE_X						= 0,
+	M_BARCODE_Y						,
+	M_BARCODE_Z						,
+	M_LD_TRAY_SHIFTER				,
+	M_UNLD_TRAY_SHIFTER				,
+	M_EMPTY_TRAY_ELV				,
+	M_LD_BUFF_ROTATOR				,
+	M_LD_BUFF_Y						,
+	M_UNLD_BUFF_ROTATOR				,
+	M_UNLD_BUFF_Y					,
+	M_COK_STK_X						,
+	M_COK_STK_Z						,
+	M_LD_RBT_X						,
+	M_LD_RBT_Y						,
+	M_LD_RBT_Z						,
+	M_LD_RBT_P						,
+	M_UNLD_RBT_X					,
+	M_UNLD_RBT_Y					,
+	M_UNLD_RBT_Z					,
+	M_UNLD_RBT_P					,
+	M_TSITE_RBT_X					,
+	M_TSITE_RBT_Y					,
+	M_TSITE_RBT_Z					,
+	M_LF_MP_Z						,
+	M_RI_MP_Z						,
+	M_MV_TRAYOUT_CV_X						,
+	M_GOOD_TRAY_ELV					,
+	M_REJ_RBT_Z_EMPTY				,
+	M_REJ_RBT_Z_FULL				,
+	M_MAX_MOTOR_NUM					, //29
+};
+
+enum M_BARCODE_X_POS
+{
+	P_BARCODE_X_SAFETY				= 0,	
+	P_BARCODE_X_TRAY_FIRST				,
+};
+
+enum M_BARCODE_Y_POS
+{
+	P_BARCODE_Y_SAFETY				= 0,	
+	P_BARCODE_Y_TRAY_FIRST				,
+};
+
+enum M_BARCODE_Z_POS
+{
+	P_BARCODE_Z_SAFETY				= 0,
+	P_BARCODE_Z_WORK					,
+									
+};
+
+enum M_LD_TRAY_SHIFTER_POS
+{
+	P_LD_TRAY_SHIFTER_SAFETY			= 0,	
+	P_LD_TRAY_SHIFTER_PICK			,	
+	P_LD_TRAY_SHIFTER_PLACE			   ,	
+};
+
+enum M_UNLD_TRAY_SHIFTER_POS
+{
+	P_UNLD_TRAY_SHIFTER_SAFETY		= 0,	
+	P_UNLD_TRAY_SHIFTER_PICK		,	
+	P_UNLD_TRAY_SHIFTER_PLACE		   ,	
+};
+
+enum M_EMPTY_TRAY_ELV_POS
+{	
+	P_EMPTY_TRAY_ELV_SAFETY		  = 0,//안전 위치 (down limit 위치일것임)
+	P_EMPTY_TRAY_ELV_UP_LIMIT			,  //high rail 까지 제일 윗쪽 
+	P_EMPTY_TRAY_ELV_DOWN_LIMIT		,  //제일 밑면 	
+	P_EMPTY_TRAY_ELV_SDSENSOR		, //sd sensor 감지 위치 	
+
+	//SD 센서 기준점으로 부터 이동하는 위치 
+	P_EMPTY_TRAY_ELV_RAIL_HIGH_SUPPLY_OFFSET	, // SD pos + high Up 트레이를 공급하는 
+	P_EMPTY_TRAY_ELV_RAIL_HIGH_RECEIVE_OFFSET	, // SD pos + high Up 트레이를 떨어트릴때 받는 위치( 초기화시 트레이를 스태커로 받을때 사용) 
+	P_EMPTY_TRAY_ELV_RAIL_LOW_RECEIVE_OFFSET	, // SD pos + up + Low up 트레이를 받는 위치
+//	P_EMPTY_TRAY_ELV_RCV_READY_OFFSET	, //SD pos - down	//low rail의 트레이를 받기위해 대기하는 위치 
+
+};
+
+enum M_LD_BUFF_ROTATOR_POS
+{
+	P_LD_BUFF_ROTATOR_SAFETY			= 0,	
+	P_LD_BUFF_ROTATOR_0				   ,
+	P_LD_BUFF_ROTATOR_90				   ,
+	P_LD_BUFF_ROTATOR_180				   ,
+	P_LD_BUFF_ROTATOR_270				   ,
+};
+
+enum M_LD_BUFF_Y_POS
+{
+	P_LD_BUFF_Y_SAFETY				= 0,	
+	P_LD_BUFF_Y_PLATE_LOAD				   ,	
+	P_LD_BUFF_Y_TEST_UNLOAD				   ,	
+	P_LD_BUFF_Y_ROTATOR		,
+};
+
+enum M_UNLD_BUFF_ROTATOR_POS
+{
+	P_UNLD_BUFF_ROTATOR_SAFETY			= 0,	
+	P_UNLD_BUFF_ROTATOR_0				   ,
+	P_UNLD_BUFF_ROTATOR_90				   ,
+	P_UNLD_BUFF_ROTATOR_180				   ,
+	P_UNLD_BUFF_ROTATOR_270				   ,
+};
+
+enum M_UNLD_BUFF_Y_POS
+{
+	P_UNLD_BUFF_Y_SAFETY				= 0,	
+	P_UNLD_BUFF_Y_TEST_LOAD				   ,	
+	P_UNLD_BUFF_Y_PLATE_UNLOAD				   ,	
+	P_UNLD_BUFF_Y_ROTATOR		,
+};
+
+enum M_COK_STK_X_POS
+{
+	P_COK_STK_X_SAFETY				= 0,
+	P_COK_STK_X_FIRST					,
+};
+
+enum M_COK_STK_Z_POS
+{
+	P_COK_STK_Z_SAFETY				= 0,
+	P_COK_STK_Z_FIRST  				,
+};
+
+enum M_LD_RBT_X_POS
+{
+	P_LD_RBT_X_SAFETY				= 0,
+	P_LD_RBT_X_LD1TRAY_FIRST			,
+	P_LD_RBT_X_LD2TRAY_FIRST			, 
+	P_LD_RBT_X_BUFFER_FIRST			, 
+	P_LD_RBT_X_RETESTTRAY_FIRST			, 
+};
+
+enum M_LD_RBT_Y_POS
+{
+	P_LD_RBT_Y_SAFETY				= 0,
+	P_LD_RBT_Y_LD1TRAY_FIRST			,
+	P_LD_RBT_Y_LD2TRAY_FIRST			, 
+	P_LD_RBT_Y_BUFFER_FIRST			, 
+	P_LD_RBT_Y_RETESTTRAY_FIRST			, 
+};
+
+enum M_LD_RBT_Z_POS
+{
+	P_LD_RBT_Z_SAFETY				= 0,
+	P_LD_RBT_Z_LD1TRAY_PICK			,
+	P_LD_RBT_Z_LD2TRAY_PICK			,
+	P_LD_RBT_Z_BUFFER_PLACE			,
+	P_LD_RBT_Z_RETESTTRAY_PICK			,
+
+};
+
+enum M_LD_RBT_P_POS
+{
+	P_LD_RBT_P_SAFETY				= 0,
+	P_LD_RBT_P_TRAY				   ,
+	P_LD_RBT_P_BUFFER				   ,
+};
+
+enum M_UNLD_RBT_X_POS
+{
+	P_UNLD_RBT_X_SAFETY				= 0,
+	P_UNLD_RBT_X_ULD1TRAY_FIRST		   ,
+	P_UNLD_RBT_X_ULD2TRAY_FIRST		   ,
+	P_UNLD_RBT_X_BUFFER_FIRST		   ,
+	P_UNLD_RBT_X_REJECT_FIRST		   ,
+	P_UNLD_RBT_X_RETEST_FIRST		   ,
+};
+
+enum M_UNLD_RBT_Y_POS
+{
+	P_UNLD_RBT_Y_SAFETY				= 0,
+	P_UNLD_RBT_Y_ULD1TRAY_FIRST		   ,
+	P_UNLD_RBT_Y_ULD2TRAY_FIRST		   ,
+	P_UNLD_RBT_Y_BUFFER_FIRST		   ,
+	P_UNLD_RBT_Y_REJECT_FIRST		   ,
+	P_UNLD_RBT_Y_RETEST_FIRST		   ,
+};
+enum M_UNLD_RBT_Z_POS
+{
+	P_UNLD_RBT_Z_SAFETY				= 0,
+	P_UNLD_RBT_Z_ULD1TRAY_PLACE		,
+	P_UNLD_RBT_Z_ULD2TRAY_PLACE		,
+	P_UNLD_RBT_Z_BUFFER_PICK			,
+	P_UNLD_RBT_Z_RETESTTRAY_PLACE		,
+	P_UNLD_RBT_Z_REJECTTRAY_PLACE		,
+};
+
+enum M_UNLD_RBT_P_POS
+{
+	P_UNLD_RBT_P_SAFETY				= 0,
+	P_UNLD_RBT_P_TRAY					   ,
+	P_UNLD_RBT_P_BUFFER				   ,
+};
+
+enum M_TSITE_RBT_X_POS
+{
+	P_TSITE_RBT_X_SAFETY				= 0,
+	P_TSITE_RBT_X_LEFT_LOW_FIRST	   ,
+	P_TSITE_RBT_X_LEFT_HIGH_FIRST	   ,
+	P_TSITE_RBT_X_RIGHT_LOW_FIRST	   ,
+	P_TSITE_RBT_X_RIGHT_HIGH_FIRST	   ,
+	P_TSITE_RBT_X_LOADBUFF_FIRST			   , 
+	P_TSITE_RBT_X_UNLOADBUFF_FIRST			   , 
+
+	P_TSITE_RBT_X_COK_LEFT_LOW_FIRST			   , 
+	P_TSITE_RBT_X_COK_LEFT_HIGH_FIRST			   , 
+	P_TSITE_RBT_X_COK_RIGHT_LOW_FIRST			   , 
+	P_TSITE_RBT_X_COK_RIGHT_HIGH_FIRST			   , 
+	P_TSITE_RBT_X_COK_EXCHANGE_BUFFER_FIRST			   , 
+};
+
+enum M_TSITE_RBT_Y_POS
+{
+	P_TSITE_RBT_Y_SAFETY				= 0,
+	P_TSITE_RBT_Y_LEFT_LOW_FIRST	   ,
+	P_TSITE_RBT_Y_LEFT_HIGH_FIRST	   ,
+	P_TSITE_RBT_Y_RIGHT_LOW_FIRST	   ,
+	P_TSITE_RBT_Y_RIGHT_HIGH_FIRST	   , 
+	P_TSITE_RBT_Y_LOADBUFF_FIRST			   , 
+	P_TSITE_RBT_Y_UNLOADBUFF_FIRST			   , 	
+
+	P_TSITE_RBT_Y_COK_LEFT_LOW_FIRST			   , 
+	P_TSITE_RBT_Y_COK_LEFT_HIGH_FIRST			   , 
+	P_TSITE_RBT_Y_COK_RIGHT_LOW_FIRST			   , 
+	P_TSITE_RBT_Y_COK_RIGHT_HIGH_FIRST			   , 
+	P_TSITE_RBT_Y_COK_EXCHANGE_BUFFER_FIRST		  , 
+};
+
+enum M_TSITE_RBT_Z_POS
+{
+	P_TSITE_RBT_Z_SAFETY				= 0,
+	P_TSITE_RBT_Z_BUFFER_PICK		,
+	P_TSITE_RBT_Z_BUFFER_PLACE		,
+	P_TSITE_RBT_Z_TESTLOW_PICK		,
+	P_TSITE_RBT_Z_TESTLOW_PLACE		,
+	P_TSITE_RBT_Z_TESTHIGH_PICK		,
+	P_TSITE_RBT_Z_TESTHIGH_PLACE	,
+
+	P_TSITE_RBT_Z_COK_LEFT_LOW_PICK			,
+	P_TSITE_RBT_Z_COK_LEFT_HIGH_PICK			,
+	P_TSITE_RBT_Z_COK_RIGHT_LOW_PICK			,
+	P_TSITE_RBT_Z_COK_RIGHT_HIGH_PICK			,
+	P_TSITE_RBT_Z_COK_LEFT_LOW_PLACE			,
+	P_TSITE_RBT_Z_COK_LEFT_HIGH_PLACE			,
+	P_TSITE_RBT_Z_COK_RIGHT_LOW_PLACE			,
+	P_TSITE_RBT_Z_COK_RIGHT_HIGH_PLACE			,
+
+	P_TSITE_RBT_Z_COK_EXCHANGE_BUFFER_PICK			   , 
+	P_TSITE_RBT_Z_COK_EXCHANGE_BUFFER_PLACE			   , 
+ 
+};
+
+enum M_LF_MP_Z_POS
+{
+	P_LF_MP_Z_SAFETY					= 0, 
+	P_LF_MP_Z_FLOOR_1						, //2.5" reverse
+	P_LF_MP_Z_FLOOR_2						, //2.5" front
+	P_LF_MP_Z_FLOOR_3						, //msata
+	P_LF_MP_Z_FLOOR_4						, //pogo tyoe
+	P_LF_MP_Z_FLOOR_5						,
+};
+
+enum M_RI_MP_Z_POS
+{
+	P_RI_MP_Z_SAFETY					= 0, 
+	P_RI_MP_Z_FLOOR_1						,//2.5" reverse
+	P_RI_MP_Z_FLOOR_2						,//2.5" front
+	P_RI_MP_Z_FLOOR_3						,//msata
+	P_RI_MP_Z_FLOOR_4						,//pogo tyoe
+	P_RI_MP_Z_FLOOR_5						,
+};
+
+enum M_MVTRAYOUT_CV_X_POS
+{
+	P_MVOUT_CVY_SAFETY					= 0,
+	P_MVOUT_CVY_IN					,
+	P_MVOUT_CVY_OUT					,
+};
+
+enum M_GOOD_TRAY_ELV_POS
+{
+	P_GOOD_TRAY_ELV_SAFETY			= 0, //안전 위치 (down limit 위치일것임) 
+	P_GOOD_TRAY_ELV_UP_LIMIT			,  //high rail 까지 제일 윗쪽 
+	P_GOOD_TRAY_ELV_DOWN_LIMIT		,  //제일 밑면 	
+	P_GOOD_TRAY_ELV_SDSENSOR		, //sd sensor 감지 위치 	
+
+	//SD 센서 기준점으로 부터 이동하는 위치 
+	//P_GOOD_TRAY_ELV_RAIL_HIGH_SUPPLY_OFFSET	, // SD pos + high Up 트레이를 공급하는 
+	P_GOOD_TRAY_ELV_RAIL_HIGH_RECEIVE_OFFSET	, // SD pos + high Up 트레이를 떨어트릴때 받는 위치( 초기화시 트레이를 스태커로 받을때 사용) 
+	//P_GOOD_TRAY_ELV_RAIL_LOW_RECEIVE_OFFSET	, // SD pos + up + Low up 트레이를 받는 위치
+};
+
+enum M_REJ_RBT_Z_EMPTY_POS
+{
+};
+
+enum M_REJ_RBT_Z_FULL_POS
+{
+
+};
+
+enum RFID_POS
+{
+	RF_CARRIER_ID					= 0,
+	RF_EQP_ID						,
+	RF_QTY							,
+	RF_QTY_T						,
+	RF_LOT_ID_J						, 
+	RF_STEP							,
+	RF_LOT_TYPE						,
+	RF_PART_ID						,
+	RF_PKG_CODE						,
+	RF_NONE_1						,
+	RF_LOT_ID_M						,
+	RF_CNT							,
+	RF_FLAG							,
+	RF_REJECT						,
+	RF_BIN							,
+	RF_NONE_2						,
+	RF_TRAY_QTY						,
+};
+
+enum COMM_PORT
+{
+	LD_BCR_PORT						= 0,
+	UNLD_BCR_A_PORT					,
+	UNLD_BCR_B_PORT					,
+};
+
+#define WAIT_CONNECT					5000
+#define WAIT_RCV						30000
+#define WAIT_CLOSE						300
+
+enum NETWORK_NUM
+{
+	EC_FIRST_NETWORK				= 0,
+	XGEM_NETWORK					,
+	INTERFACE_NETWORK				,
+	FRONT_NETWORK					,
+	REAR_NETWORK					,
+	RFID_NETWORK					,
+	FTP_NETWORK						,
+	GMS_NETWORK						,
+	EC_SECOND_NETWORK				,
+};
+
+/// 보간 작업
+m_nLinearMove_Index	= 3;   //현재 map index 
+m_lAxisCnt	= 2;            //현재의 IndexNum에서 사용 가능한 모터 수량 최대 4개  
+m_lpAxisNum[0] = M_BARCODE_X; //m_lpAxisNum[4];        //현재의 IndexNum에서 사용하는 모터 실재 번호를 가진다 ]
+m_lpAxisNum[1] = M_BARCODE_Y;
+
+
+m_nLinearMove_Index	= 0;   //현재 map index 
+m_lAxisCnt	= 2;            //현재의 IndexNum에서 사용 가능한 모터 수량 최대 4개  
+m_lpAxisNum[0] = M_LD_RBT_X; //m_lpAxisNum[4];        //현재의 IndexNum에서 사용하는 모터 실재 번호를 가진다 
+m_lpAxisNum[1] = M_LD_RBT_Y;
+m_lpAxisNum[2] = M_LD_RBT_Z;
+
+m_nLinearMove_Index	= 2;   //현재 map index 
+m_lAxisCnt	= 2;            //현재의 IndexNum에서 사용 가능한 모터 수량 최대 4개  
+m_lpAxisNum[0] = M_TSITE_RBT_X; //m_lpAxisNum[4];        //현재의 IndexNum에서 사용하는 모터 실재 번호를 가진다 
+m_lpAxisNum[1] = M_TSITE_RBT_Y;
+m_lpAxisNum[2] = M_TSITE_RBT_Z;
+
+m_nLinearMove_Index	= 1;   //현재 map index 
+m_lAxisCnt	= 2;            //현재의 IndexNum에서 사용 가능한 모터 수량 최대 4개  
+m_lpAxisNum[0] = M_UNLD_RBT_X; //m_lpAxisNum[4];        //현재의 IndexNum에서 사용하는 모터 실재 번호를 가진다 
+m_lpAxisNum[1] = M_UNLD_RBT_Y;
+m_lpAxisNum[2] = M_UNLD_RBT_Z;
+
+
+struct tagSAFETY_INFO
+{
+	// test site y축 안전체크
+	double dTsiteTopPlaceY;		// test site top y축이 안전위치 체크 (z축이 일정영역 밑으로 하강시 알람)
+	double dTsiteBottomPlaceY;  // test site bottom y축 안전위치 체크 (z축이 일정영역 밑으로 하강시 알람)
+	double dTsiteTopPlaceZ;		// test site top 작업시 y축이 안전영역 진입시 Z축 안전영역 체크
+	double dTsiteBottomPlaceZ;	// test site bottom 작업시 y축이 안전영역 진입시 Z축 안전영역 체크
+	
+	double dTsitePickMinX;		// test site pick min (buffer y, rotator 안전영역)
+	double dTsitePickMaxX;		// test site pick max (buffer y, rotator 안전영역)
+	double dTsitePickMinY;
+	double dTsitePickMaxY;
+	double dTsitePickZ;
+	double dLdBufPlace;
+	double dLdBufPick;
+	double dLdRbtPlaceMinX;
+	double dLdRbtPlaceMaxX;
+	double dLdRbtPlaceMinY;
+	double dLdRbtPlaceMaxY;
+	double dLdRbtPickMinX;
+	double dLdRbtPickMaxX;
+	double dLdRbtPickMinY;
+	double dLdRbtPickMaxY;
+	double dTsitePlaceMinX;		// test site pick min (buffer y, rotator 안전영역)
+	double dTsitePlaceMaxX;		// test site pick max (buffer y, rotator 안전영역)
+	double dTsitePlaceMinY;
+	double dTsitePlaceMaxY;
+	double dTsitePlaceZ;
+	double dUnLdBufPick;
+	double dUnLdBufPlace;
+	double dUnLdRbtPickMaxX;
+	double dUnLdRbtPickMinY;
+	double dUnLdRbtPickMaxY;
+	double dUnLdRbtPickMinX;
+	double dUnLdRbtPlaceMinX;
+	double dUnLdRbtPlaceMaxX;
+	double dUnLdRbtPlaceMinY;
+	double dUnLdRbtPlaceMaxY;
+	double dUnLdRbtRejectMinX;
+	double dUnLdRbtRejectMaxX;
+	double dUnLdRbtRejectMinY;
+	double dUnLdRbtRejectMaxY;
+	double dLdShiftX;
+	double dUnLdShiftX;
+	double dBar codeZ;
+	double dLdRbtZ;
+	double dUnLdRbtZ;
+	double dCokZ;
+};

@@ -1,0 +1,834 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D5B52A3A-EFD9-4E39-98D4-5A8F82F1551F}</ProjectGuid>
+    <RootNamespace>Handler</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files\MySQL\MySQL Server 5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\MySQL\MySQL Server 5.1\lib;$(LibraryPath)</LibraryPath>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\Program Files\MySQL\MySQL Server 5.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\MySQL\MySQL Server 5.1\include;$(IncludePath)</IncludePath>
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files\MySQL\MySQL Server 5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\MySQL\MySQL Server 5.1\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Codejock Software\MFC\Xtreme ToolkitPro v15.2.1\Source;C:\Program Files\mysql-5.6.11-winx64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Codejock Software\MFC\Xtreme ToolkitPro v15.2.1\Source;C:\Program Files\mysql-5.6.11-winx64\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\김종태\Bump Vision\Handler\Handler;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>libmysql.lib;wininet.lib;Interface.lib;KeyBoard.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libmysql.lib;ijl15l.lib;iplpxl.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libmysql.lib;FAS_HSSI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="Cmmsdk.dll" />
+    <None Include="FAS_HSSI.dll" />
+    <None Include="Handler.aps" />
+    <None Include="Handler.sdf" />
+    <None Include="Handler.vcxproj" />
+    <None Include="HSSI.dll" />
+    <None Include="image\check_down1.bmp" />
+    <None Include="image\check_down2.bmp" />
+    <None Include="image\check_up1.bmp" />
+    <None Include="image\check_up2.bmp" />
+    <None Include="image\close_down.bmp" />
+    <None Include="image\close_up.bmp" />
+    <None Include="image\disk1.bmp" />
+    <None Include="image\disk10.bmp" />
+    <None Include="image\disk2.bmp" />
+    <None Include="image\disk3.bmp" />
+    <None Include="image\disk4.bmp" />
+    <None Include="image\disk5.bmp" />
+    <None Include="image\disk6.bmp" />
+    <None Include="image\disk7.bmp" />
+    <None Include="image\disk8.bmp" />
+    <None Include="image\disk9.bmp" />
+    <None Include="image\if3d1.bmp" />
+    <None Include="image\if3d2.bmp" />
+    <None Include="image\if3d3.bmp" />
+    <None Include="image\if3d4.bmp" />
+    <None Include="image\if3d5.bmp" />
+    <None Include="image\if3d6.bmp" />
+    <None Include="image\if3d7.bmp" />
+    <None Include="image\if3d8.bmp" />
+    <None Include="image\if_1.bmp" />
+    <None Include="image\if_2.bmp" />
+    <None Include="image\if_3.bmp" />
+    <None Include="image\if_4.bmp" />
+    <None Include="image\if_5.bmp" />
+    <None Include="image\if_6.bmp" />
+    <None Include="image\if_7.bmp" />
+    <None Include="image\if_8.bmp" />
+    <None Include="image\if_9.bmp" />
+    <None Include="image\maximize_down.bmp" />
+    <None Include="image\maximize_up.bmp" />
+    <None Include="image\minimize_down.bmp" />
+    <None Include="image\minimize_up.bmp" />
+    <None Include="image\radio_down1.bmp" />
+    <None Include="image\radio_down2.bmp" />
+    <None Include="image\radio_up1.bmp" />
+    <None Include="image\radio_up2.bmp" />
+    <None Include="image\restore_down.bmp" />
+    <None Include="image\restore_up.bmp" />
+    <None Include="image\Tray.bmp" />
+    <None Include="libmysql.dll" />
+    <None Include="Mysql\32bit\libmysql.dll" />
+    <None Include="Output-Build.txt" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\3.5 inch Floppy.ico" />
+    <None Include="res\amt_logo_fast.gif" />
+    <None Include="res\ani_conv.bmp" />
+    <None Include="res\ani_grip.bmp" />
+    <None Include="res\ani_jig_.bmp" />
+    <None Include="res\ani_move.bmp" />
+    <None Include="res\ani_pcb_.bmp" />
+    <None Include="res\ani_pick.bmp" />
+    <None Include="res\ani_sepa.bmp" />
+    <None Include="res\Apply.bmp" />
+    <None Include="res\ARW03DN.ICO" />
+    <None Include="res\background1.bmp" />
+    <None Include="res\background2.bmp" />
+    <None Include="res\backword.bmp" />
+    <None Include="res\Base.bmp" />
+    <None Include="res\bitmap10.bmp" />
+    <None Include="res\bitmap11.bmp" />
+    <None Include="res\bitmap12.bmp" />
+    <None Include="res\bitmap13.bmp" />
+    <None Include="res\bitmap14.bmp" />
+    <None Include="res\bitmap15.bmp" />
+    <None Include="res\bitmap16.bmp" />
+    <None Include="res\bitmap17.bmp" />
+    <None Include="res\bitmap18.bmp" />
+    <None Include="res\bitmap19.bmp" />
+    <None Include="res\bitmap2.bmp" />
+    <None Include="res\bitmap20.bmp" />
+    <None Include="res\bitmap21.bmp" />
+    <None Include="res\bitmap22.bmp" />
+    <None Include="res\bitmap23.bmp" />
+    <None Include="res\bitmap24.bmp" />
+    <None Include="res\bitmap25.bmp" />
+    <None Include="res\bitmap26.bmp" />
+    <None Include="res\bitmap27.bmp" />
+    <None Include="res\bitmap29.bmp" />
+    <None Include="res\bitmap3.bmp" />
+    <None Include="res\bitmap30.bmp" />
+    <None Include="res\bitmap4.bmp" />
+    <None Include="res\bitmap8.bmp" />
+    <None Include="res\bitmap_a.bmp" />
+    <None Include="res\bitmap_c.bmp" />
+    <None Include="res\bitmap_g.bmp" />
+    <None Include="res\bitmap_i.bmp" />
+    <None Include="res\bitmap_l.bmp" />
+    <None Include="res\bitmap_m.bmp" />
+    <None Include="res\bitmap_r.bmp" />
+    <None Include="res\bitmap_t.bmp" />
+    <None Include="res\bitmap_u.bmp" />
+    <None Include="res\bitmp_lo.bmp" />
+    <None Include="res\BLedOff.ico" />
+    <None Include="res\BLedOn.ico" />
+    <None Include="res\bmp00001.bmp" />
+    <None Include="res\bmp00002.bmp" />
+    <None Include="res\bmp00003.bmp" />
+    <None Include="res\bmp00004.bmp" />
+    <None Include="res\bmp00005.bmp" />
+    <None Include="res\bmp00006.bmp" />
+    <None Include="res\bmp00007.bmp" />
+    <None Include="res\bmp00008.bmp" />
+    <None Include="res\bmp00009.bmp" />
+    <None Include="res\bmp00010.bmp" />
+    <None Include="res\bmp00011.bmp" />
+    <None Include="res\bmp00012.bmp" />
+    <None Include="res\bmp00013.bmp" />
+    <None Include="res\bmp00014.bmp" />
+    <None Include="res\bmp00015.bmp" />
+    <None Include="res\bmp00016.bmp" />
+    <None Include="res\bmp00017.bmp" />
+    <None Include="res\bmp00018.bmp" />
+    <None Include="res\bmp00019.bmp" />
+    <None Include="res\bmp00020.bmp" />
+    <None Include="res\bmp00021.bmp" />
+    <None Include="res\bmp00022.bmp" />
+    <None Include="res\bmp00023.bmp" />
+    <None Include="res\bmp00024.bmp" />
+    <None Include="res\bmp00025.bmp" />
+    <None Include="res\bmp00026.bmp" />
+    <None Include="res\bmp00027.bmp" />
+    <None Include="res\bmp00028.bmp" />
+    <None Include="res\bmp00029.bmp" />
+    <None Include="res\bmp00030.bmp" />
+    <None Include="res\bmp00031.bmp" />
+    <None Include="res\bmp00032.bmp" />
+    <None Include="res\bmp00033.bmp" />
+    <None Include="res\bmp00034.bmp" />
+    <None Include="res\bmp00035.bmp" />
+    <None Include="res\bmp00036.bmp" />
+    <None Include="res\bmp00037.bmp" />
+    <None Include="res\bmp00038.bmp" />
+    <None Include="res\bmp00039.bmp" />
+    <None Include="res\bmp00040.bmp" />
+    <None Include="res\bmp00041.bmp" />
+    <None Include="res\bmp00042.bmp" />
+    <None Include="res\bmp00043.bmp" />
+    <None Include="res\bmp00044.bmp" />
+    <None Include="res\bmp00045.bmp" />
+    <None Include="res\bmp00046.bmp" />
+    <None Include="res\bmp00047.bmp" />
+    <None Include="res\bmp00048.bmp" />
+    <None Include="res\bmp00049.bmp" />
+    <None Include="res\bmp00050.bmp" />
+    <None Include="res\bmp00051.bmp" />
+    <None Include="res\bmp00052.bmp" />
+    <None Include="res\bmp00053.bmp" />
+    <None Include="res\bmp00054.bmp" />
+    <None Include="res\bmp00055.bmp" />
+    <None Include="res\bmp00056.bmp" />
+    <None Include="res\bmp00057.bmp" />
+    <None Include="res\bmp00058.bmp" />
+    <None Include="res\bmp00059.bmp" />
+    <None Include="res\bmp00060.bmp" />
+    <None Include="res\bmp00061.bmp" />
+    <None Include="res\bmp00062.bmp" />
+    <None Include="res\bmp00063.bmp" />
+    <None Include="res\bmp00064.bmp" />
+    <None Include="res\bmp00065.bmp" />
+    <None Include="res\bmp00066.bmp" />
+    <None Include="res\bmp00067.bmp" />
+    <None Include="res\bmp00068.bmp" />
+    <None Include="res\bmp00069.bmp" />
+    <None Include="res\bmp00070.bmp" />
+    <None Include="res\bmp00071.bmp" />
+    <None Include="res\bmp00072.bmp" />
+    <None Include="res\bmp00073.bmp" />
+    <None Include="res\bmp00074.bmp" />
+    <None Include="res\bmp00075.bmp" />
+    <None Include="res\bmp00076.bmp" />
+    <None Include="res\bmp00077.bmp" />
+    <None Include="res\bmp00078.bmp" />
+    <None Include="res\bmp00079.bmp" />
+    <None Include="res\bmp00080.bmp" />
+    <None Include="res\bmp00081.bmp" />
+    <None Include="res\bmp00082.bmp" />
+    <None Include="res\bmp00083.bmp" />
+    <None Include="res\bmp00084.bmp" />
+    <None Include="res\bmp00085.bmp" />
+    <None Include="res\bmp00086.bmp" />
+    <None Include="res\bmp00087.bmp" />
+    <None Include="res\bmp00088.bmp" />
+    <None Include="res\bmp00089.bmp" />
+    <None Include="res\bmp00090.bmp" />
+    <None Include="res\bmp00091.bmp" />
+    <None Include="res\bmp00092.bmp" />
+    <None Include="res\bmp00093.bmp" />
+    <None Include="res\bmp00094.bmp" />
+    <None Include="res\bmp00095.bmp" />
+    <None Include="res\bmp00096.bmp" />
+    <None Include="res\bmp00097.bmp" />
+    <None Include="res\bmp00098.bmp" />
+    <None Include="res\bmp00099.bmp" />
+    <None Include="res\bmp00100.bmp" />
+    <None Include="res\BOOK02.ICO" />
+    <None Include="res\BOOK06.ICO" />
+    <None Include="res\BumpGroub.bmp" />
+    <None Include="res\CancelBtn.bmp" />
+    <None Include="res\CancelBtn57.bmp" />
+    <None Include="res\CancelBtnDn.bmp" />
+    <None Include="res\CancelBtnDn57.bmp" />
+    <None Include="res\ClockST_big.bmp" />
+    <None Include="res\ClockST_pane.bmp" />
+    <None Include="res\ClockST_small.bmp" />
+    <None Include="res\CLSDFOLD.ICO" />
+    <None Include="res\CokBuffer.bmp" />
+    <None Include="res\Convert.bmp" />
+    <None Include="res\Cool 004.ico" />
+    <None Include="res\CvyAssy.bmp" />
+    <None Include="res\CvyAssyMask.bmp" />
+    <None Include="res\db_add.bmp" />
+    <None Include="res\db_add_dn.bmp" />
+    <None Include="res\db_del.bmp" />
+    <None Include="res\db_del_dn.bmp" />
+    <None Include="res\Device.bmp" />
+    <None Include="res\DeviceL.bmp" />
+    <None Include="res\DeviceL_Mask.bmp" />
+    <None Include="res\DeviceR.bmp" />
+    <None Include="res\DeviceR_Mask.bmp" />
+    <None Include="res\Device_Mask.bmp" />
+    <None Include="res\digitB_b.bmp" />
+    <None Include="res\digitB_bd.bmp" />
+    <None Include="res\digitB_bl.bmp" />
+    <None Include="res\digitB_c.bmp" />
+    <None Include="res\digitB_d.bmp" />
+    <None Include="res\digitB_g.bmp" />
+    <None Include="res\digitB_r.bmp" />
+    <None Include="res\digitB_y.bmp" />
+    <None Include="res\digit_b.bmp" />
+    <None Include="res\digit_bd.bmp" />
+    <None Include="res\digit_c.bmp" />
+    <None Include="res\digit_d.bmp" />
+    <None Include="res\digit_g.bmp" />
+    <None Include="res\digit_r.bmp" />
+    <None Include="res\digit_y.bmp" />
+    <None Include="res\dlgbackground1.bmp" />
+    <None Include="res\Document Folder 2.ico" />
+    <None Include="res\Door.bmp" />
+    <None Include="res\door_close.bmp" />
+    <None Include="res\door_open.bmp" />
+    <None Include="res\Download_DN.bmp" />
+    <None Include="res\Download_UP.bmp" />
+    <None Include="res\down_m_d.ico" />
+    <None Include="res\down_m_u.ico" />
+    <None Include="res\down_p_d.ico" />
+    <None Include="res\down_p_u.ico" />
+    <None Include="res\EqpStatusChange.bmp" />
+    <None Include="res\EqpStatusChangeDn.bmp" />
+    <None Include="res\ERASE02.ICO" />
+    <None Include="res\exit.bmp" />
+    <None Include="res\Folder.ico" />
+    <None Include="res\FolderOpen.ico" />
+    <None Include="res\forword.bmp" />
+    <None Include="res\forword.png" />
+    <None Include="res\GuideOff.bmp" />
+    <None Include="res\GuideOn.bmp" />
+    <None Include="res\Handler.ico" />
+    <None Include="res\Handler.rc2" />
+    <None Include="res\HandlerDoc.ico" />
+    <None Include="res\hiDelete.ico" />
+    <None Include="res\hiFind.ico" />
+    <None Include="res\hiPrint.ico" />
+    <None Include="res\home_d.ico" />
+    <None Include="res\home_u.ico" />
+    <None Include="res\icon1.ico" />
+    <None Include="res\initial-1.bmp" />
+    <None Include="res\initial-2.bmp" />
+    <None Include="res\Initial.gif" />
+    <None Include="res\Keyboard.bmp" />
+    <None Include="res\LedGreen.ico" />
+    <None Include="res\LedNone.ico" />
+    <None Include="res\LedRed.ico" />
+    <None Include="res\left_m_d.ico" />
+    <None Include="res\left_m_u.ico" />
+    <None Include="res\left_p_d.ico" />
+    <None Include="res\left_p_u.ico" />
+    <None Include="res\Lightning.ico" />
+    <None Include="res\locking.gif" />
+    <None Include="res\MvBuff.bmp" />
+    <None Include="res\MvBuff1.bmp" />
+    <None Include="res\MvBuff2.bmp" />
+    <None Include="res\MvBuff3.bmp" />
+    <None Include="res\MvBuff4.bmp" />
+    <None Include="res\MvBuff_Mask.bmp" />
+    <None Include="res\OkBtn.bmp" />
+    <None Include="res\OkBtn57.bmp" />
+    <None Include="res\OkBtnDn.bmp" />
+    <None Include="res\OkBtnDn57.bmp" />
+    <None Include="res\oper-add-dn.bmp" />
+    <None Include="res\oper-add.bmp" />
+    <None Include="res\oper-apply-dn.bmp" />
+    <None Include="res\oper-apply.bmp" />
+    <None Include="res\oper-del-dn.bmp" />
+    <None Include="res\oper-del.bmp" />
+    <None Include="res\preview.bmp" />
+    <None Include="res\RECYFULL.ICO" />
+    <None Include="res\Reject.bmp" />
+    <None Include="res\Reject2.bmp" />
+    <None Include="res\Reject3.bmp" />
+    <None Include="res\RejectMask.bmp" />
+    <None Include="res\Retest.bmp" />
+    <None Include="res\Retest2.bmp" />
+    <None Include="res\Retest3.bmp" />
+    <None Include="res\RetestMask.bmp" />
+    <None Include="res\right_m_d.ico" />
+    <None Include="res\right_m_u.ico" />
+    <None Include="res\right_p_d.ico" />
+    <None Include="res\right_p_u.ico" />
+    <None Include="res\Search document.ico" />
+    <None Include="res\search.bmp" />
+    <None Include="res\Set_Btn.bmp" />
+    <None Include="res\Testsite.bmp" />
+    <None Include="res\TestsiteImg.bmp" />
+    <None Include="res\TestsiteMask.bmp" />
+    <None Include="res\Text Document TXT.ico" />
+    <None Include="res\TEXTEDIT.ICO" />
+    <None Include="res\title_background.bmp" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\ToolbarDraw.bmp" />
+    <None Include="res\ToolbarDrawDisabled.bmp" />
+    <None Include="res\ToolbarDrawHot.bmp" />
+    <None Include="res\toolbar_work.bmp" />
+    <None Include="res\TowerLamp.bmp" />
+    <None Include="res\Tray.bmp" />
+    <None Include="res\Tray3x2.bmp" />
+    <None Include="res\Tray3x2Full.bmp" />
+    <None Include="res\Tray3x2_Mask.bmp" />
+    <None Include="res\TrayGroub.bmp" />
+    <None Include="res\TrayImg.bmp" />
+    <None Include="res\TrayMask.bmp" />
+    <None Include="res\TSiteDevice.bmp" />
+    <None Include="res\TSiteDevice2.bmp" />
+    <None Include="res\TSiteDevice2_Mask.bmp" />
+    <None Include="res\TSiteDevice3.bmp" />
+    <None Include="res\TSiteDevice3_Mask.bmp" />
+    <None Include="res\TSiteDevice_Mask.bmp" />
+    <None Include="res\unlock.bmp" />
+    <None Include="res\Upload_DN.bmp" />
+    <None Include="res\Upload_UP.bmp" />
+    <None Include="res\up_m_d.ico" />
+    <None Include="res\up_m_u.ico" />
+    <None Include="res\up_p_d.ico" />
+    <None Include="res\up_p_u.ico" />
+    <None Include="배경25.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="32bit\FAS_HSSI.h" />
+    <ClInclude Include="64bit\FAS_HSSI.h" />
+    <ClInclude Include="ACriticalSection.h" />
+    <ClInclude Include="AlgMemory.h" />
+    <ClInclude Include="Alg_Excel.h" />
+    <ClInclude Include="Alg_Mysql.h" />
+    <ClInclude Include="Animate.h" />
+    <ClInclude Include="BannerStatic.h" />
+    <ClInclude Include="Barcode_1D.h" />
+    <ClInclude Include="Barcode_2D.h" />
+    <ClInclude Include="BCMenu.h" />
+    <ClInclude Include="BtnST.h" />
+    <ClInclude Include="ClientEcFirst.h" />
+    <ClInclude Include="ClientGms.h" />
+    <ClInclude Include="ClientRfid.h" />
+    <ClInclude Include="ClientSocket.h" />
+    <ClInclude Include="Cmmsdk.h" />
+    <ClInclude Include="CmmsdkDef.h" />
+    <ClInclude Include="ColorString.h" />
+    <ClInclude Include="ComizoaPublic.h" />
+    <ClInclude Include="Comm.h" />
+    <ClInclude Include="Controls\BmpImage.h" />
+    <ClInclude Include="Controls\BmpImageST.h" />
+    <ClInclude Include="Controls\CheckerCtrl.h" />
+    <ClInclude Include="Controls\ClockST.h" />
+    <ClInclude Include="Controls\ColorListBox.h" />
+    <ClInclude Include="Controls\ControlToolTip.h" />
+    <ClInclude Include="Controls\NewLabel.h" />
+    <ClInclude Include="Controls\StarWarsCtrl.h" />
+    <ClInclude Include="CtlBd_Function.h" />
+    <ClInclude Include="CtlBd_Library.h" />
+    <ClInclude Include="Ctlbd_Variable.h" />
+    <ClInclude Include="Ctrl\KeyBoard.h" />
+    <ClInclude Include="DialogAlarmIO.h" />
+    <ClInclude Include="DialogAlarmMotor.h" />
+    <ClInclude Include="DialogEqpStatus.h" />
+    <ClInclude Include="DialogManualIO.h" />
+    <ClInclude Include="DialogMessageBox.h" />
+    <ClInclude Include="DialogMessageView.h" />
+    <ClInclude Include="DialogXgem.h" />
+    <ClInclude Include="Dialog_About.h" />
+    <ClInclude Include="Dialog_Exit.h" />
+    <ClInclude Include="Dialog_Image_View.h" />
+    <ClInclude Include="Dialog_KeyBoard.h" />
+    <ClInclude Include="Dialog_KeyPad.h" />
+    <ClInclude Include="Dialog_List.h" />
+    <ClInclude Include="Dialog_Message.h" />
+    <ClInclude Include="Dialog_Part_IO.h" />
+    <ClInclude Include="Dialog_Password_Change.h" />
+    <ClInclude Include="Dialog_Pass_Check.h" />
+    <ClInclude Include="Dialog_Title.h" />
+    <ClInclude Include="Digit.h" />
+    <ClInclude Include="FastechPublic_IO.h" />
+    <ClInclude Include="FAS_HSSI.h" />
+    <ClInclude Include="FtpClient.h" />
+    <ClInclude Include="FtpComm.h" />
+    <ClInclude Include="GradientStatic.h" />
+    <ClInclude Include="GridCellCheck.h" />
+    <ClInclude Include="GridControlAlg.h" />
+    <ClInclude Include="Handler.h" />
+    <ClInclude Include="HandlerDoc.h" />
+    <ClInclude Include="HandlerView.h" />
+    <ClInclude Include="InitDialogBar.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="LedButton.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MultiColorStatic.h" />
+    <ClInclude Include="MyBasicData.h" />
+    <ClInclude Include="MyJamData.h" />
+    <ClInclude Include="Mysql\32bit\mysql.h" />
+    <ClInclude Include="Mysql\32bit\typelib.h" />
+    <ClInclude Include="Picture.h" />
+    <ClInclude Include="PictureEx.h" />
+    <ClInclude Include="PublicFunction.h" />
+    <ClInclude Include="RegistryEx.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="RunConveyor.h" />
+    <ClInclude Include="RunHandlerCheck.h" />
+    <ClInclude Include="RunLabelFeeder.h" />
+    <ClInclude Include="RunPicker.h" />
+    <ClInclude Include="RunReadIO.h" />
+    <ClInclude Include="RunRobot.h" />
+    <ClInclude Include="RunTowerLamp.h" />
+    <ClInclude Include="ScreenAlarm.h" />
+    <ClInclude Include="ScreenBasic.h" />
+    <ClInclude Include="ScreenInitial.h" />
+    <ClInclude Include="ScreenIO.h" />
+    <ClInclude Include="ScreenList.h" />
+    <ClInclude Include="ScreenLock.h" />
+    <ClInclude Include="ScreenMain.h" />
+    <ClInclude Include="ScreenMotor.h" />
+    <ClInclude Include="ScreenPrgInfo.h" />
+    <ClInclude Include="ScreenWork.h" />
+    <ClInclude Include="ServerClient.h" />
+    <ClInclude Include="ServerFront.h" />
+    <ClInclude Include="ServerSocket.h" />
+    <ClInclude Include="ServerVnR.h" />
+    <ClInclude Include="SingleInstanceApp.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SuperProgressCtrl.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="ThumbnailButton.h" />
+    <ClInclude Include="ThumbNailControl.h" />
+    <ClInclude Include="TrueColorToolBar.h" />
+    <ClInclude Include="UniButtonEx.h" />
+    <ClInclude Include="Union\Grid\GridCell.h" />
+    <ClInclude Include="Union\Grid\GridCellBase.h" />
+    <ClInclude Include="Union\Grid\GridCellCheck.h" />
+    <ClInclude Include="Union\Grid\GridCellCombo.h" />
+    <ClInclude Include="Union\Grid\GridCellDateTime.h" />
+    <ClInclude Include="Union\Grid\GridCellNumeric.h" />
+    <ClInclude Include="Union\Grid\GridCtrl.h" />
+    <ClInclude Include="Union\Grid\GridDropTarget.h" />
+    <ClInclude Include="Union\Grid\InPlaceEdit.h" />
+    <ClInclude Include="Union\Grid\MemDC.h" />
+    <ClInclude Include="Union\Grid\TitleTip.h" />
+    <ClInclude Include="Variable.h" />
+    <ClInclude Include="VLabel.h" />
+    <ClInclude Include="WorkInterface.h" />
+    <ClInclude Include="WorkMaintenance.h" />
+    <ClInclude Include="WorkMotorSpeed.h" />
+    <ClInclude Include="WorkRecipe.h" />
+    <ClInclude Include="WorkTab.h" />
+    <ClInclude Include="WorkWaitTime.h" />
+    <ClInclude Include="XgemClient.h" />
+    <ClInclude Include="XLAutomation.h" />
+    <ClInclude Include="XPGroupBox.h" />
+    <ClInclude Include="xShadeButton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ACriticalSection.cpp" />
+    <ClCompile Include="AlgMemory.cpp" />
+    <ClCompile Include="Alg_Excel.cpp" />
+    <ClCompile Include="Alg_Mysql.cpp" />
+    <ClCompile Include="Animate.cpp" />
+    <ClCompile Include="BannerStatic.cpp" />
+    <ClCompile Include="Barcode_1D.cpp" />
+    <ClCompile Include="Barcode_2D.cpp" />
+    <ClCompile Include="BCMenu.cpp" />
+    <ClCompile Include="BtnST.cpp" />
+    <ClCompile Include="ClientEcFirst.cpp" />
+    <ClCompile Include="ClientGms.cpp" />
+    <ClCompile Include="ClientRfid.cpp" />
+    <ClCompile Include="ClientSocket.cpp" />
+    <ClCompile Include="Cmmsdk.cpp" />
+    <ClCompile Include="ColorString.cpp" />
+    <ClCompile Include="ComizoaPublic.cpp" />
+    <ClCompile Include="Comm.cpp" />
+    <ClCompile Include="Controls\BmpImage.cpp" />
+    <ClCompile Include="Controls\BmpImageST.cpp" />
+    <ClCompile Include="Controls\CheckerCtrl.cpp" />
+    <ClCompile Include="Controls\ClockST.cpp" />
+    <ClCompile Include="Controls\ColorListBox.cpp" />
+    <ClCompile Include="Controls\ControlToolTip.cpp" />
+    <ClCompile Include="Controls\NewLabel.cpp" />
+    <ClCompile Include="Controls\StarWarsCtrl.cpp" />
+    <ClCompile Include="CtlBd_Function.cpp" />
+    <ClCompile Include="CtlBd_Library.cpp" />
+    <ClCompile Include="DialogAlarmIO.cpp" />
+    <ClCompile Include="DialogAlarmMotor.cpp" />
+    <ClCompile Include="DialogEqpStatus.cpp" />
+    <ClCompile Include="DialogManualIO.cpp" />
+    <ClCompile Include="DialogMessageBox.cpp" />
+    <ClCompile Include="DialogMessageView.cpp" />
+    <ClCompile Include="DialogXgem.cpp" />
+    <ClCompile Include="Dialog_About.cpp" />
+    <ClCompile Include="Dialog_Exit.cpp" />
+    <ClCompile Include="Dialog_Image_View.cpp" />
+    <ClCompile Include="Dialog_KeyBoard.cpp" />
+    <ClCompile Include="Dialog_KeyPad.cpp" />
+    <ClCompile Include="Dialog_List.cpp" />
+    <ClCompile Include="Dialog_Message.cpp" />
+    <ClCompile Include="Dialog_Part_IO.cpp" />
+    <ClCompile Include="Dialog_Password_Change.cpp" />
+    <ClCompile Include="Dialog_Pass_Check.cpp" />
+    <ClCompile Include="Dialog_Title.cpp" />
+    <ClCompile Include="Digit.cpp" />
+    <ClCompile Include="FastechPublic_IO.cpp" />
+    <ClCompile Include="FtpClient.cpp" />
+    <ClCompile Include="FtpComm.cpp" />
+    <ClCompile Include="GradientStatic.cpp" />
+    <ClCompile Include="Handler.cpp" />
+    <ClCompile Include="HandlerDoc.cpp" />
+    <ClCompile Include="HandlerView.cpp" />
+    <ClCompile Include="InitDialogBar.cpp" />
+    <ClCompile Include="LedButton.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MultiColorStatic.cpp" />
+    <ClCompile Include="MyBasicData.cpp" />
+    <ClCompile Include="MyJamData.cpp" />
+    <ClCompile Include="Picture.cpp" />
+    <ClCompile Include="PictureEx.cpp" />
+    <ClCompile Include="PublicFunction.cpp" />
+    <ClCompile Include="RegistryEx.cpp" />
+    <ClCompile Include="RunConveyor.cpp" />
+    <ClCompile Include="RunHandlerCheck.cpp" />
+    <ClCompile Include="RunLabelFeeder.cpp" />
+    <ClCompile Include="RunPicker.cpp" />
+    <ClCompile Include="RunReadIO.cpp" />
+    <ClCompile Include="RunRobot.cpp" />
+    <ClCompile Include="RunTowerLamp.cpp" />
+    <ClCompile Include="ScreenAlarm.cpp" />
+    <ClCompile Include="ScreenBasic.cpp" />
+    <ClCompile Include="ScreenInitial.cpp" />
+    <ClCompile Include="ScreenIO.cpp" />
+    <ClCompile Include="ScreenList.cpp" />
+    <ClCompile Include="ScreenLock.cpp" />
+    <ClCompile Include="ScreenMain.cpp" />
+    <ClCompile Include="ScreenMotor.cpp" />
+    <ClCompile Include="ScreenPrgInfo.cpp" />
+    <ClCompile Include="ScreenWork.cpp" />
+    <ClCompile Include="ServerClient.cpp" />
+    <ClCompile Include="ServerFront.cpp" />
+    <ClCompile Include="ServerSocket.cpp" />
+    <ClCompile Include="ServerVnR.cpp" />
+    <ClCompile Include="SingleInstanceApp.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SuperProgressCtrl.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="ThumbnailButton.cpp" />
+    <ClCompile Include="ThumbNailControl.cpp" />
+    <ClCompile Include="TrueColorToolBar.cpp" />
+    <ClCompile Include="UniButtonEx.cpp" />
+    <ClCompile Include="Union\Grid\GridCell.cpp" />
+    <ClCompile Include="Union\Grid\GridCellBase.cpp" />
+    <ClCompile Include="Union\Grid\GridCellCheck.cpp" />
+    <ClCompile Include="Union\Grid\GridCellCombo.cpp" />
+    <ClCompile Include="Union\Grid\GridCellDateTime.cpp" />
+    <ClCompile Include="Union\Grid\GridCellNumeric.cpp" />
+    <ClCompile Include="Union\Grid\GridCtrl.cpp" />
+    <ClCompile Include="Union\Grid\GridDropTarget.cpp" />
+    <ClCompile Include="Union\Grid\InPlaceEdit.cpp" />
+    <ClCompile Include="Union\Grid\TitleTip.cpp" />
+    <ClCompile Include="VLabel.cpp" />
+    <ClCompile Include="WorkInterface.cpp" />
+    <ClCompile Include="WorkMaintenance.cpp" />
+    <ClCompile Include="WorkMotorSpeed.cpp" />
+    <ClCompile Include="WorkRecipe.cpp" />
+    <ClCompile Include="WorkTab.cpp" />
+    <ClCompile Include="WorkWaitTime.cpp" />
+    <ClCompile Include="XgemClient.cpp" />
+    <ClCompile Include="XLAutomation.cpp" />
+    <ClCompile Include="XPGroupBox.cpp" />
+    <ClCompile Include="xShadeButton.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Handler.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="32bit\HSSI.lib" />
+    <Library Include="64bit\FAS_HSSI.lib" />
+    <Library Include="FAS_HSSI.lib" />
+    <Library Include="HSSI.lib" />
+    <Library Include="libmysql.lib" />
+    <Library Include="Mysql\32bit\libmysql.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Handler.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

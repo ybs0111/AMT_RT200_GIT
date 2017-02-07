@@ -1,0 +1,27 @@
+2015.05.21 Barcode Retry관련 프로그램 수정
+- Retry 수량 Define에서 수량입력으로 수정
+
+2015.05.26 Scrap Code Retest 수정
+- Test Site Robot Process_Test_Pick 5000번지 수정
+- Scrap Code별 Retest 수량 참조해서 Bin 처리
+
+2015.05.27 연속 Lot 후 Lot 처리수량 입력 수정
+
+2015.06.27 in-line mode add
+           unloader robot tray pos move device check
+
+2015.08.03 연속 LOT 처리
+           - Basic 화면 설정수량 + 6 이상 테스터 빈소켓 있을시 다음 LOT 투입
+           ScrapCode별 Retest횟수 처리 추가
+           Socket Off 이력관리창 추가
+
+20150929 Recipe 관련 Recipe_Rule.TXT 파일 FTP 다운로드 수정
+         PartNo 비교 처리 추가
+         Recipe 변경시 Conveyor, Reject Tray, Retest Tray 제거 알람 추가
+
+20160127 Auto Recipe 변경 추가
+         Unloader Robot Sequence 수정
+         Test Site Robot Loader Buffer 이동 수정(Loader 작업 후 대기)
+         Abort Time 자동계산 기능 추가완료
+ 
+

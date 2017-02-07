@@ -1,0 +1,10113 @@
+[000001]
+
+COUNT = 5
+
+1 = It is Barcode X Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[000002]
+
+COUNT = 4
+
+1 = It is Barcode X Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[000003]
+
+COUNT = 2
+
+1 = Parameter Setting of Barcode X Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[000004]
+
+COUNT = 2
+
+1 = Setting of value that Barcode X Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Barcode X Axis department motor display
+
+
+
+[000005]
+
+COUNT = 3
+
+1 = It is Barcode X Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[000006]
+
+COUNT = 3
+
+1 = It is Barcode X Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[000007]
+
+COUNT = 3
+
+1 = It is Barcode X Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[000008]
+
+COUNT = 3
+
+1 = It is Barcode X Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[000009]
+
+COUNT = 3
+
+1 = It is Barcode X Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[000011]
+
+COUNT = 4
+
+1 = It is Barcode X Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+
+//////////////////////////////////// 01
+
+[010001]
+
+COUNT = 5
+
+1 = It is Barcode Y Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[010002]
+
+COUNT = 4
+
+1 = It is Barcode Y Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[010003]
+
+COUNT = 2
+
+1 = Parameter Setting of Barcode Y Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[010004]
+
+COUNT = 2
+
+1 = Setting of value that Barcode Y Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Barcode Y Axis department motor display
+
+
+
+[010005]
+
+COUNT = 3
+
+1 = It is Barcode Y Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[010006]
+
+COUNT = 3
+
+1 = It is Barcode Y Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[010007]
+
+COUNT = 3
+
+1 = It is Barcode Y Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[010008]
+
+COUNT = 3
+
+1 = It is Barcode Y Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[010009]
+
+COUNT = 3
+
+1 = It is Barcode Y Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[010011]
+
+COUNT = 4
+
+1 = It is Barcode Y Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+
+
+////////////////////////////////////02
+[020001]
+
+COUNT = 5
+
+1 = It is Barcode Z Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[020002]
+
+COUNT = 4
+
+1 = It is Barcode Z Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[020003]
+
+COUNT = 2
+
+1 = Parameter Setting of Barcode Z Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[020004]
+
+COUNT = 2
+
+1 = Setting of value that Barcode Z Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Barcode Z Axis department motor display
+
+
+
+[020005]
+
+COUNT = 3
+
+1 = It is Barcode Z Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[020006]
+
+COUNT = 3
+
+1 = It is Barcode Z Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[020007]
+
+COUNT = 3
+
+1 = It is Barcode Z Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[020008]
+
+COUNT = 3
+
+1 = It is Barcode Z Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[020009]
+
+COUNT = 3
+
+1 = It is Barcode Z Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[020011]
+
+COUNT = 4
+
+1 = It is Barcode Z Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 03
+
+[030001]
+
+COUNT = 5
+
+1 = It is Loading Tray Shifter is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[030002]
+
+COUNT = 4
+
+1 = It is Loading Tray Shifter is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[030003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Tray Shifter is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[030004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Tray Shifter is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Tray Shifter department motor display
+
+
+
+[030005]
+
+COUNT = 3
+
+1 = It is Loading Tray Shifter is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[030006]
+
+COUNT = 3
+
+1 = It is Loading Tray Shifter is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[030007]
+
+COUNT = 3
+
+1 = It is Loading Tray Shifter is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[030008]
+
+COUNT = 3
+
+1 = It is Loading Tray Shifter Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[030009]
+
+COUNT = 3
+
+1 = It is Loading Tray Shifter is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[030011]
+
+COUNT = 4
+
+1 = It is Loading Tray Shifter is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 04
+
+[040001]
+
+COUNT = 5
+
+1 = It is Unloading Tray Shifter is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[040002]
+
+COUNT = 4
+
+1 = It is Unloading Tray Shifter is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[040003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Tray Shifter is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[040004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Tray Shifter is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Tray Shifter department motor display
+
+
+
+[040005]
+
+COUNT = 3
+
+1 = It is Unloading Tray Shifter is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[040006]
+
+COUNT = 3
+
+1 = It is Unloading Tray Shifter is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[040007]
+
+COUNT = 3
+
+1 = It is Unloading Tray Shifter is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[040008]
+
+COUNT = 3
+
+1 = It is Unloading Tray Shifter Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[040009]
+
+COUNT = 3
+
+1 = It is Unloading Tray Shifter is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[040011]
+
+COUNT = 4
+
+1 = It is Unloading Tray Shifter is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 05
+
+[050001]
+
+COUNT = 5
+
+1 = It is Empty Tray Elevator is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[050002]
+
+COUNT = 4
+
+1 = It is Empty Tray Elevator is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[050003]
+
+COUNT = 2
+
+1 = Parameter Setting of Empty Tray Elevator is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[050004]
+
+COUNT = 2
+
+1 = Setting of value that Empty Tray Elevator is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Empty Tray Elevator department motor display
+
+
+
+[050005]
+
+COUNT = 3
+
+1 = It is Empty Tray Elevator is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[050006]
+
+COUNT = 3
+
+1 = It is Empty Tray Elevator is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[050007]
+
+COUNT = 3
+
+1 = It is Empty Tray Elevator is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[050008]
+
+COUNT = 3
+
+1 = It is Empty Tray Elevator Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[050009]
+
+COUNT = 3
+
+1 = It is Empty Tray Elevator is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[050011]
+
+COUNT = 4
+
+1 = It is Empty Tray Elevator is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+////////////////////////////////////////////////////// 06
+
+[060001]
+
+COUNT = 5
+
+1 = It is Loading Buffer Rotator is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[060002]
+
+COUNT = 4
+
+1 = It is Loading Buffer Rotator is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[060003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Buffer Rotator is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[060004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Buffer Rotator is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Buffer Rotator department motor display
+
+
+
+[060005]
+
+COUNT = 3
+
+1 = It is Loading Buffer Rotator is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[060006]
+
+COUNT = 3
+
+1 = It is Loading Buffer Rotator is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[060007]
+
+COUNT = 3
+
+1 = It is Loading Buffer Rotator is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[060008]
+
+COUNT = 3
+
+1 = It is Loading Buffer Rotator Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[060009]
+
+COUNT = 3
+
+1 = It is Loading Buffer Rotator is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[060011]
+
+COUNT = 4
+
+1 = It is Loading Buffer Rotator is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+////////////////////////////////////////////////////// 07
+
+[070001]
+
+COUNT = 5
+
+1 = It is Loading Buffer Y is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[070002]
+
+COUNT = 4
+
+1 = It is Loading Buffer Y is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[070003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Buffer Y is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[070004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Buffer Y is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Buffer Y department motor display
+
+
+
+[070005]
+
+COUNT = 3
+
+1 = It is Loading Buffer Y is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[070006]
+
+COUNT = 3
+
+1 = It is Loading Buffer Y is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[070007]
+
+COUNT = 3
+
+1 = It is Loading Buffer Y is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[070008]
+
+COUNT = 3
+
+1 = It is Loading Buffer Y Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[070009]
+
+COUNT = 3
+
+1 = It is Loading Buffer Y is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[070011]
+
+COUNT = 4
+
+1 = It is Loading Buffer Y is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 08
+
+[081001]
+
+COUNT = 5
+
+1 = It is Unloading Buffer Rotator is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[081002]
+
+COUNT = 4
+
+1 = It is Unloading Buffer Rotator is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[081003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Buffer Rotator is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[081004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Buffer Rotator is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Buffer Rotator department motor display
+
+
+
+[081005]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Rotator is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[081006]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Rotator is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[081007]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Rotator is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[081008]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Rotator Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[081009]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Rotator is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[081011]
+
+COUNT = 4
+
+1 = It is Unloading Buffer Rotator is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 09
+
+[090001]
+
+COUNT = 5
+
+1 = It is Unloading Buffer Y is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[090002]
+
+COUNT = 4
+
+1 = It is Unloading Buffer Y is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[090003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Buffer Y is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[090004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Buffer Y is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Buffer Y department motor display
+
+
+
+[090005]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Y is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[090006]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Y is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[090007]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Y is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[090008]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Y Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[090009]
+
+COUNT = 3
+
+1 = It is Unloading Buffer Y is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[090011]
+
+COUNT = 4
+
+1 = It is Unloading Buffer Y is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 10
+
+[100001]
+
+COUNT = 5
+
+1 = It is COK Stacker X is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[100002]
+
+COUNT = 4
+
+1 = It is COK Stacker X is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[100003]
+
+COUNT = 2
+
+1 = Parameter Setting of COK Stacker X is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[100004]
+
+COUNT = 2
+
+1 = Setting of value that COK Stacker X is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in COK Stacker X department motor display
+
+
+
+[100005]
+
+COUNT = 3
+
+1 = It is COK Stacker X is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[100006]
+
+COUNT = 3
+
+1 = It is COK Stacker X is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[100007]
+
+COUNT = 3
+
+1 = It is COK Stacker X is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[100008]
+
+COUNT = 3
+
+1 = It is COK Stacker X Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[100009]
+
+COUNT = 3
+
+1 = It is COK Stacker X is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[100011]
+
+COUNT = 4
+
+1 = It is COK Stacker X is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 11
+
+[110001]
+
+COUNT = 5
+
+1 = It is COK Stacker Z is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[110002]
+
+COUNT = 4
+
+1 = It is COK Stacker Z is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[110003]
+
+COUNT = 2
+
+1 = Parameter Setting of COK Stacker Z is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[110004]
+
+COUNT = 2
+
+1 = Setting of value that COK Stacker Z is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in COK Stacker Z department motor display
+
+
+
+[110005]
+
+COUNT = 3
+
+1 = It is COK Stacker Z is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[110006]
+
+COUNT = 3
+
+1 = It is COK Stacker Z is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[110007]
+
+COUNT = 3
+
+1 = It is COK Stacker Z is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[110008]
+
+COUNT = 3
+
+1 = It is COK Stacker Z Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[110009]
+
+COUNT = 3
+
+1 = It is COK Stacker Z is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[110011]
+
+COUNT = 4
+
+1 = It is COK Stacker Z is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+////////////////////////////////////////////////////// 12
+
+[120001]
+
+COUNT = 5
+
+1 = It is Loading Robot X Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[120002]
+
+COUNT = 4
+
+1 = It is Loading Robot X Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[120003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Robot X Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[120004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Robot X Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Robot X Axis department motor display
+
+
+
+[120005]
+
+COUNT = 3
+
+1 = It is Loading Robot X Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[120006]
+
+COUNT = 3
+
+1 = It is Loading Robot X Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[120007]
+
+COUNT = 3
+
+1 = It is Loading Robot X Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[120008]
+
+COUNT = 3
+
+1 = It is Loading Robot X Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[120009]
+
+COUNT = 3
+
+1 = It is Loading Robot X Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[120011]
+
+COUNT = 4
+
+1 = It is Loading Robot X Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+
+////////////////////////////////////////////////////// 13
+
+[130001]
+
+COUNT = 5
+
+1 = It is Loading Robot Y Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[130002]
+
+COUNT = 4
+
+1 = It is Loading Robot Y Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[130003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Robot Y Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[130004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Robot Y Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Robot Y Axis department motor display
+
+
+
+[130005]
+
+COUNT = 3
+
+1 = It is Loading Robot Y Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[130006]
+
+COUNT = 3
+
+1 = It is Loading Robot Y Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[130007]
+
+COUNT = 3
+
+1 = It is Loading Robot Y Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[130008]
+
+COUNT = 3
+
+1 = It is Loading Robot Y Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[130009]
+
+COUNT = 3
+
+1 = It is Loading Robot Y Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[130011]
+
+COUNT = 4
+
+1 = It is Loading Robot Y Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 14
+
+[140001]
+
+COUNT = 5
+
+1 = It is Loading Robot Z Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[140002]
+
+COUNT = 4
+
+1 = It is Loading Robot Z Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[140003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Robot Z Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[140004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Robot Z Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Robot Z Axis department motor display
+
+
+
+[140005]
+
+COUNT = 3
+
+1 = It is Loading Robot Z Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[140006]
+
+COUNT = 3
+
+1 = It is Loading Robot Z Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[140007]
+
+COUNT = 3
+
+1 = It is Loading Robot Z Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[140008]
+
+COUNT = 3
+
+1 = It is Loading Robot Z Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[140009]
+
+COUNT = 3
+
+1 = It is Loading Robot Z Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[140011]
+
+COUNT = 4
+
+1 = It is Loading Robot Z Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 15
+
+[150001]
+
+COUNT = 5
+
+1 = It is Loading Robot Pitch is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[150002]
+
+COUNT = 4
+
+1 = It is Loading Robot Pitch is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[150003]
+
+COUNT = 2
+
+1 = Parameter Setting of Loading Robot Pitch is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[150004]
+
+COUNT = 2
+
+1 = Setting of value that Loading Robot Pitch is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Loading Robot Pitch department motor display
+
+
+
+[150005]
+
+COUNT = 3
+
+1 = It is Loading Robot Pitch is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[150006]
+
+COUNT = 3
+
+1 = It is Loading Robot Pitch is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[150007]
+
+COUNT = 3
+
+1 = It is Loading Robot Pitch is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[150008]
+
+COUNT = 3
+
+1 = It is Loading Robot Pitch Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[150009]
+
+COUNT = 3
+
+1 = It is Loading Robot Pitch is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[150011]
+
+COUNT = 4
+
+1 = It is Loading Robot Pitch is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 16
+
+[160001]
+
+COUNT = 5
+
+1 = It is Unloading Robot X Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[160002]
+
+COUNT = 4
+
+1 = It is Unloading Robot X Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[160003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Robot X Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[160004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Robot X Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Robot X Axis department motor display
+
+
+
+[160005]
+
+COUNT = 3
+
+1 = It is Unloading Robot X Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[160006]
+
+COUNT = 3
+
+1 = It is Unloading Robot X Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[160007]
+
+COUNT = 3
+
+1 = It is Unloading Robot X Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[160008]
+
+COUNT = 3
+
+1 = It is Unloading Robot X Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[160009]
+
+COUNT = 3
+
+1 = It is Unloading Robot X Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[160011]
+
+COUNT = 4
+
+1 = It is Unloading Robot X Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////17
+
+[170001]
+
+COUNT = 5
+
+1 = It is Unloading Robot Y Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[170002]
+
+COUNT = 4
+
+1 = It is Unloading Robot Y Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[170003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Robot Y Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[170004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Robot Y Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Robot Y Axis department motor display
+
+
+
+[170005]
+
+COUNT = 3
+
+1 = It is Unloading Robot Y Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[170006]
+
+COUNT = 3
+
+1 = It is Unloading Robot Y Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[170007]
+
+COUNT = 3
+
+1 = It is Unloading Robot Y Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[170008]
+
+COUNT = 3
+
+1 = It is Unloading Robot Y Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[170009]
+
+COUNT = 3
+
+1 = It is Unloading Robot Y Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[170011]
+
+COUNT = 4
+
+1 = It is Unloading Robot Y Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 18
+
+[180001]
+
+COUNT = 5
+
+1 = It is Unloading Robot Z Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[180002]
+
+COUNT = 4
+
+1 = It is Unloading Robot Z Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[180003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Robot Z Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[180004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Robot Z Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Robot Z Axis department motor display
+
+
+
+[180005]
+
+COUNT = 3
+
+1 = It is Unloading Robot Z Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[180006]
+
+COUNT = 3
+
+1 = It is Unloading Robot Z Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[180007]
+
+COUNT = 3
+
+1 = It is Unloading Robot Z Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[180008]
+
+COUNT = 3
+
+1 = It is Unloading Robot Z Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[180009]
+
+COUNT = 3
+
+1 = It is Unloading Robot Z Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[180011]
+
+COUNT = 4
+
+1 = It is Unloading Robot Z Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+////////////////////////////////////////////////////// 19
+
+[190001]
+
+COUNT = 5
+
+1 = It is Unloading Robot Pitch is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[190002]
+
+COUNT = 4
+
+1 = It is Unloading Robot Pitch is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[190003]
+
+COUNT = 2
+
+1 = Parameter Setting of Unloading Robot Pitch is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[190004]
+
+COUNT = 2
+
+1 = Setting of value that Unloading Robot Pitch is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Unloading Robot Pitch department motor display
+
+
+
+[190005]
+
+COUNT = 3
+
+1 = It is Unloading Robot Pitch is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[190006]
+
+COUNT = 3
+
+1 = It is Unloading Robot Pitch is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[190007]
+
+COUNT = 3
+
+1 = It is Unloading Robot Pitch is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[190008]
+
+COUNT = 3
+
+1 = It is Unloading Robot Pitch Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[190009]
+
+COUNT = 3
+
+1 = It is Unloading Robot Pitch is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[190011]
+
+COUNT = 4
+
+1 = It is Unloading Robot Pitch is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////20
+
+[200001]
+
+COUNT = 5
+
+1 = It is Testsite Robot X Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[200002]
+
+COUNT = 4
+
+1 = It is Testsite Robot X Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[200003]
+
+COUNT = 2
+
+1 = Parameter Setting of Testsite Robot X Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[200004]
+
+COUNT = 2
+
+1 = Setting of value that Testsite Robot X Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Testsite Robot X Axis department motor display
+
+
+
+[200005]
+
+COUNT = 3
+
+1 = It is Testsite Robot X Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[200006]
+
+COUNT = 3
+
+1 = It is Testsite Robot X Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[200007]
+
+COUNT = 3
+
+1 = It is Testsite Robot X Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[200008]
+
+COUNT = 3
+
+1 = It is Testsite Robot X Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[200009]
+
+COUNT = 3
+
+1 = It is Testsite Robot X Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[200011]
+
+COUNT = 4
+
+1 = It is Testsite Robot X Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////21
+
+[210001]
+
+COUNT = 5
+
+1 = It is Testsite Robot Y Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[210002]
+
+COUNT = 4
+
+1 = It is Testsite Robot Y Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[210003]
+
+COUNT = 2
+
+1 = Parameter Setting of Testsite Robot Y Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[210004]
+
+COUNT = 2
+
+1 = Setting of value that Testsite Robot Y Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Testsite Robot Y Axis department motor display
+
+
+
+[210005]
+
+COUNT = 3
+
+1 = It is Testsite Robot Y Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[210006]
+
+COUNT = 3
+
+1 = It is Testsite Robot Y Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[210007]
+
+COUNT = 3
+
+1 = It is Testsite Robot Y Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[210008]
+
+COUNT = 3
+
+1 = It is Testsite Robot Y Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[210009]
+
+COUNT = 3
+
+1 = It is Testsite Robot Y Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[210011]
+
+COUNT = 4
+
+1 = It is Testsite Robot Y Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////22
+
+[220001]
+
+COUNT = 5
+
+1 = It is Testsite Robot Z Axis is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[220002]
+
+COUNT = 4
+
+1 = It is Testsite Robot Z Axis is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[220003]
+
+COUNT = 2
+
+1 = Parameter Setting of Testsite Robot Z Axis is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[220004]
+
+COUNT = 2
+
+1 = Setting of value that Testsite Robot Z Axis is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Testsite Robot Z Axis department motor display
+
+
+
+[220005]
+
+COUNT = 3
+
+1 = It is Testsite Robot Z Axis is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[220006]
+
+COUNT = 3
+
+1 = It is Testsite Robot Z Axis is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[220007]
+
+COUNT = 3
+
+1 = It is Testsite Robot Z Axis is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[220008]
+
+COUNT = 3
+
+1 = It is Testsite Robot Z Axis Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[220009]
+
+COUNT = 3
+
+1 = It is Testsite Robot Z Axis is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[220011]
+
+COUNT = 4
+
+1 = It is Testsite Robot Z Axis is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////23
+
+[230001]
+
+COUNT = 5
+
+1 = It is Left MP Z is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[230002]
+
+COUNT = 4
+
+1 = It is Left MP Z is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[230003]
+
+COUNT = 2
+
+1 = Parameter Setting of Left MP Z is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[230004]
+
+COUNT = 2
+
+1 = Setting of value that Left MP Z is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Left MP Z department motor display
+
+
+
+[230005]
+
+COUNT = 3
+
+1 = It is Left MP Z is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[230006]
+
+COUNT = 3
+
+1 = It is Left MP Z is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[230007]
+
+COUNT = 3
+
+1 = It is Left MP Z is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[230008]
+
+COUNT = 3
+
+1 = It is Left MP Z Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[230009]
+
+COUNT = 3
+
+1 = It is Left MP Z is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[230011]
+
+COUNT = 4
+
+1 = It is Left MP Z is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////24
+
+[240001]
+
+COUNT = 5
+
+1 = It is Right MP Z is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[240002]
+
+COUNT = 4
+
+1 = It is Right MP Z is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[240003]
+
+COUNT = 2
+
+1 = Parameter Setting of Right MP Z is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[240004]
+
+COUNT = 2
+
+1 = Setting of value that Right MP Z is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Right MP Z department motor display
+
+
+
+[240005]
+
+COUNT = 3
+
+1 = It is Right MP Z is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[240006]
+
+COUNT = 3
+
+1 = It is Right MP Z is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[240007]
+
+COUNT = 3
+
+1 = It is Right MP Z is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[240008]
+
+COUNT = 3
+
+1 = It is Right MP Z Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[240009]
+
+COUNT = 3
+
+1 = It is Right MP Z is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[240011]
+
+COUNT = 4
+
+1 = It is Right MP Z is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////25
+
+[250001]
+
+COUNT = 5
+
+1 = It is Moving C/V is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[250002]
+
+COUNT = 4
+
+1 = It is Moving C/V is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[250003]
+
+COUNT = 2
+
+1 = Parameter Setting of Moving C/V is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[250004]
+
+COUNT = 2
+
+1 = Setting of value that Moving C/V is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Moving C/V department motor display
+
+
+
+[250005]
+
+COUNT = 3
+
+1 = It is Moving C/V is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[250006]
+
+COUNT = 3
+
+1 = It is Moving C/V is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[250007]
+
+COUNT = 3
+
+1 = It is Moving C/V is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[250008]
+
+COUNT = 3
+
+1 = It is Moving C/V Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[250009]
+
+COUNT = 3
+
+1 = It is Moving C/V is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[250011]
+
+COUNT = 4
+
+1 = It is Moving C/V is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////26
+
+[260001]
+
+COUNT = 5
+
+1 = It is Good Tray Elevator is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[260002]
+
+COUNT = 4
+
+1 = It is Good Tray Elevator is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[260003]
+
+COUNT = 2
+
+1 = Parameter Setting of Good Tray Elevator is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[260004]
+
+COUNT = 2
+
+1 = Setting of value that Good Tray Elevator is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Good Tray Elevator department motor display
+
+
+
+[260005]
+
+COUNT = 3
+
+1 = It is Good Tray Elevator is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[260006]
+
+COUNT = 3
+
+1 = It is Good Tray Elevator is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[260007]
+
+COUNT = 3
+
+1 = It is Good Tray Elevator is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[260008]
+
+COUNT = 3
+
+1 = It is Good Tray Elevator Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[260009]
+
+COUNT = 3
+
+1 = It is Good Tray Elevator is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[260011]
+
+COUNT = 4
+
+1 = It is Good Tray Elevator is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////27
+
+[270001]
+
+COUNT = 5
+
+1 = It is Reject Robot Z Empty is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[270002]
+
+COUNT = 4
+
+1 = It is Reject Robot Z Empty is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[270003]
+
+COUNT = 2
+
+1 = Parameter Setting of Reject Robot Z Empty is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[270004]
+
+COUNT = 2
+
+1 = Setting of value that Reject Robot Z Empty is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Reject Robot Z Empty department motor display
+
+
+
+[270005]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Empty is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[270006]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Empty is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[270007]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Empty is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[270008]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Empty Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[270009]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Empty is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[270011]
+
+COUNT = 4
+
+1 = It is Reject Robot Z Empty is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////////////////////////////////////28
+
+[280001]
+
+COUNT = 5
+
+1 = It is Reject Robot Z Full is Motor Home Check Error.
+
+2 = Confirm motor power and the Home Check speed.
+
+3 = Confirm whether Home Check sensor and obstacle are.
+
+4 = Confirm whether motor state is normally.
+
+5 = Confirm whether motor driver is normally.
+
+
+
+[280002]
+
+COUNT = 4
+
+1 = It is Reject Robot Z Full is Motor Alarm Error.
+
+2 = Confirm whether is part that give overload to motor.
+
+3 = Confirm whether motor state is normally.
+
+4 = Confirm whether motor driver is normally.
+
+
+
+[280003]
+
+COUNT = 2
+
+1 = Parameter Setting of Reject Robot Z Full is Motor mistook.
+
+2 = Confirm parameter in motor speed screen.
+
+
+
+[280004]
+
+COUNT = 2
+
+1 = Setting of value that Reject Robot Z Full is Motor moves mistook.
+
+2 = Confirm whether location measure is normal in Reject Robot Z Full department motor display
+
+
+
+[280005]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Full is Motor Power Off Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[280006]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Full is Motor Move Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[280007]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Full is Motor Do Not Home Check Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[280008]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Full Motor is Non Safety Pos Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[280009]
+
+COUNT = 3
+
+1 = It is Reject Robot Z Full is Motor Destination is Non Safety Pos Error
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+
+
+[280011]
+
+COUNT = 4
+
+1 = It is Reject Robot Z Full is Motor Time Out Error.
+
+2 = Confirm whether motor state is normally.
+
+3 = Confirm whether motor driver is normally.
+
+4 = Motor Speed Check.
+
+//////////////////////INTERFACE////////////////////////
+
+[600000]
+
+COUNT = 1
+
+1 = It is Interface Server Connector Timeout Error
+
+[600001]
+
+COUNT = 1
+
+1 = It is Interface Server Data Receive Timeout Error
+
+[610000]
+
+COUNT = 1
+
+1 = It is EC Server Connector Timeout Error
+
+[610001]
+
+COUNT = 1
+
+1 = It is EC Server Data Receive Timeout Error
+
+[620000]
+
+COUNT = 1
+
+1 = It is RFID Server Connector Timeout Error
+
+[620001]
+
+COUNT = 1
+
+1 = It is RFID Server Data Receive Timeout Error
+
+[630000]
+
+COUNT = 1
+
+1 = It is TTS VnR Server Connector Timeout Error
+
+[630001]
+
+COUNT = 1
+
+1 = It is TTS VnR Server Data Receive Timeout Error
+
+[640000]
+
+COUNT = 1
+
+1 = It is TTS VnR Server Data Receive Timeout Error
+
+[640001]
+
+COUNT = 1
+
+1 = It is TTS VnR Server Data Receive Timeout Error
+
+////////////////////////RS-232//////////////////////////
+
+[700000]
+
+COUNT = 1
+
+1 = It is Loader Barcode Data Receive Timeout Error
+
+[700001]
+
+COUNT = 1
+
+1 = It is Loader Barcode Data Connector Error
+
+[710000]
+
+COUNT = 1
+
+1 = It is Unloader Barcode A Data Receive Timeout Error
+
+[710001]
+
+COUNT = 1
+
+1 = It is Unloader Barcode A Connector Error
+
+[720000]
+
+COUNT = 1
+
+1 = It is Unloader Barcode B Data Receive Timeout Error
+
+[720001]
+
+COUNT = 1
+
+1 = It is Unloader Barcode B Connector Error
+
+//////////////////////////I/O////////////////////////////
+
+[800008]
+
+COUNT = 2
+
+1 = It is Start Switch Check Error  
+
+2 = Confirm Start Switch state is normally.
+
+[800009]
+
+COUNT = 2
+
+1 = It is Stop Switch Check Error  
+
+2 = Confirm whether Stop Switch state is normally.
+
+[800010]
+
+COUNT = 2
+
+1 = It is Alarm Clear Check Error  
+
+2 = Confirm whether Alarm Clear state is normally.
+
+[800011]
+
+COUNT = 2
+
+1 = It is Buzzer Off Check Error  
+
+2 = Confirm whether Buzzer state is normally.
+
+[800012]
+
+COUNT = 2
+
+1 = It is Auto Mode Switch Check Error  
+
+2 = Confirm whether Auto Mode Switch state is normally.
+
+[800013]
+
+COUNT = 2
+
+1 = It is Manual Mode Switch Check Error  
+
+2 = Confirm whether Manual Mode Switch state is normally.
+
+[800014]
+
+COUNT = 2
+
+1 = It is Front Select Switch Check Error  
+
+2 = Confirm whether Front Select Switch state is normally.
+
+[800015]
+
+COUNT = 2
+
+1 = It is Rear Select Switch Check Error  
+
+2 = Confirm whether Rear Select Switch state is normally.
+
+[810008]
+
+COUNT = 2
+
+1 = It is Start Switch Check Error  
+
+2 = Confirm whether Start Switch state is normally.
+
+[810009]
+
+COUNT = 2
+
+1 = It is Stop Switch Check Error  
+
+2 = Confirm whether Stop Switch state is normally.
+
+[810010]
+
+COUNT = 2
+
+1 = It is Alarm Clear Check Error  
+
+2 = Confirm whether Alarm Clear state is normally.
+
+
+[810011]
+
+COUNT = 2
+
+1 = It is Buzzer Off Check Error  
+
+2 = Confirm whether Buzzer state is normally.
+
+[810012]
+
+COUNT = 2
+
+1 = It is Auto Mode Switch Check Error  
+
+2 = Confirm whether Auto Mode Switch state is normally.
+
+[810013]
+
+COUNT = 2
+
+1 = It is Manual Mode Switch Check Error  
+
+2 = Confirm whether Manual Mode Switch state is normally.
+
+[810014]
+
+COUNT = 2
+
+1 = It is Front Select Switch Check Error  
+
+2 = Confirm whether Front Select Switch state is normally.
+
+[810015]
+
+COUNT = 2
+
+1 = It is Rear Select Switch Check Error  
+
+2 = Confirm whether Rear Select Switch state is normally.
+
+///////////////////////////////////////////////////100
+
+[800108]
+
+COUNT = 2
+
+1 = It is Main MC Check Error  
+
+2 = Confirm whether Main MC state is normally.
+
+[800109]
+
+COUNT = 2
+
+1 = It is Main Air Check Error  
+
+2 = Confirm whether Main Air state is normally.
+
+[800110]
+
+COUNT = 2
+
+1 = It is Left Test-Site Docking Safety Check Error  
+
+2 = Confirm whether Left Test-Site Docking Safety state is normally.
+
+[800111]
+
+COUNT = 2
+
+1 = It is Right Test-Site Docking Safety Check Error  
+
+2 = Confirm whether Right Test-Site Docking Safety state is normally.
+
+[800112]
+
+COUNT = 2
+
+1 = It is EMO Switch#1 Check Error  
+
+2 = Confirm whether EMO Switch#1 state is normally.
+
+[800113]
+
+COUNT = 2
+
+1 = It is EMO Switch#2 Check Error  
+
+2 = Confirm whether EMO Switch#2 state is normally.
+
+[800114]
+
+COUNT = 2
+
+1 = It is EMO Switch#3 Check Error  
+
+2 = Confirm whether EMO Switch#3 state is normally.
+
+[800115]
+
+COUNT = 2
+
+1 = It is EMO Switch#4 Check Error  
+
+2 = Confirm whether EMO Switch#4 state is normally.
+
+
+[810108]
+
+COUNT = 2
+
+1 = It is Main MC Check Error  
+
+2 = Confirm whether Main MC state is normally.
+
+[810109]
+
+COUNT = 2
+
+1 = It is Main Air Check Error  
+
+2 = Confirm whether Main Air state is normally.
+
+[810110]
+
+COUNT = 2
+
+1 = It is Left Test-Site Docking Safety Check Error  
+
+2 = Confirm whether Left Test-Site Docking Safety state is normally.
+
+[810111]
+
+COUNT = 2
+
+1 = It is Right Test-Site Docking Safety Check Error  
+
+2 = Confirm whether Right Test-Site Docking Safety state is normally.
+
+[810112]
+
+COUNT = 2
+
+1 = It is EMO Switch#1 Check Error  
+
+2 = Confirm whether EMO Switch#1 state is normally.
+
+[810113]
+
+COUNT = 2
+
+1 = It is EMO Switch#2 Check Error  
+
+2 = Confirm whether EMO Switch#2 state is normally.
+
+[810114]
+
+COUNT = 2
+
+1 = It is EMO Switch#3 Check Error  
+
+2 = Confirm whether EMO Switch#3 state is normally.
+
+[810115]
+
+COUNT = 2
+
+1 = It is EMO Switch#4 Check Error  
+
+2 = Confirm whether EMO Switch#4 state is normally.
+
+///////////////////////////////////////////////////200
+
+[800200]
+
+COUNT = 2
+
+1 = It is Door#1 Open/Close Check Error  
+
+2 = Confirm whether Door#1 state is normally.
+
+[800201]
+
+COUNT = 2
+
+1 = It is Door#2 Open/Close Check Error  
+
+2 = Confirm whether Door#2 state is normally.
+
+[800202]
+
+COUNT = 2
+
+1 = It is Door#3 Open/Close Check Error  
+
+2 = Confirm whether Door#3 state is normally.
+
+[800203]
+
+COUNT = 2
+
+1 = It is Door#4 Open/Close Check Error  
+
+2 = Confirm whether Door#4 state is normally.
+
+[800204]
+
+COUNT = 2
+
+1 = It is Door#5 Open/Close Check Error  
+
+2 = Confirm whether Door#5 state is normally.
+
+[800205]
+
+COUNT = 2
+
+1 = It is Door#6 Open/Close Check Error  
+
+2 = Confirm whether Door#6 state is normally.
+
+[800206]
+
+COUNT = 2
+
+1 = It is Door#7 Open/Close Check Error  
+
+2 = Confirm whether Door#7 state is normally.
+
+[800207]
+
+COUNT = 2
+
+1 = It is Door#8 Open/Close Check Error  
+
+2 = Confirm whether Door#8 state is normally.
+
+[800208]
+
+COUNT = 2
+
+1 = It is Door#9 Open/Close Check Error  
+
+2 = Confirm whether Door#9 state is normally.
+
+[800209]
+
+COUNT = 2
+
+1 = It is Door#10 Open/Close Check Error  
+
+2 = Confirm whether Door#10 state is normally.
+
+[800210]
+
+COUNT = 2
+
+1 = It is Door#11 Open/Close Check Error  
+
+2 = Confirm whether Door#11 state is normally.
+
+[800211]
+
+COUNT = 2
+
+1 = It is Door#12 Open/Close Check Error  
+
+2 = Confirm whether Door#12 state is normally.
+
+[800212]
+
+COUNT = 2
+
+1 = It is Door#13 Open/Close Check Error  
+
+2 = Confirm whether Door#13 state is normally.
+
+[800213]
+
+COUNT = 2
+
+1 = It is Door#14 Open/Close Check Error  
+
+2 = Confirm whether Door#14 state is normally.
+
+[800214]
+
+COUNT = 2
+
+1 = It is Door#15 Open/Close Check Error  
+
+2 = Confirm whether Door#15 state is normally.
+
+[810200]
+
+COUNT = 2
+
+1 = It is Door#1 Open/Close Check Error  
+
+2 = Confirm whether Door#1 state is normally.
+
+[810201]
+
+COUNT = 2
+
+1 = It is Door#2 Open/Close Check Error  
+
+2 = Confirm whether Door#2 state is normally.
+
+[810202]
+
+COUNT = 2
+
+1 = It is Door#3 Open/Close Check Error  
+
+2 = Confirm whether Door#3 state is normally.
+
+[810203]
+
+COUNT = 2
+
+1 = It is Door#4 Open/Close Check Error  
+
+2 = Confirm whether Door#4 state is normally.
+
+[810204]
+
+COUNT = 2
+
+1 = It is Door#5 Open/Close Check Error  
+
+2 = Confirm whether Door#5 state is normally.
+
+[810205]
+
+COUNT = 2
+
+1 = It is Door#6 Open/Close Check Error  
+
+2 = Confirm whether Door#6 state is normally.
+
+[810206]
+
+COUNT = 2
+
+1 = It is Door#7 Open/Close Check Error  
+
+2 = Confirm whether Door#7 state is normally.
+
+[810207]
+
+COUNT = 2
+
+1 = It is Door#8 Open/Close Check Error  
+
+2 = Confirm whether Door#8 state is normally.
+
+[810208]
+
+COUNT = 2
+
+1 = It is Door#9 Open/Close Check Error  
+
+2 = Confirm whether Door#9 state is normally.
+
+[810209]
+
+COUNT = 2
+
+1 = It is Door#10 Open/Close Check Error  
+
+2 = Confirm whether Door#10 state is normally.
+
+[810210]
+
+COUNT = 2
+
+1 = It is Door#11 Open/Close Check Error  
+
+2 = Confirm whether Door#11 state is normally.
+
+[810211]
+
+COUNT = 2
+
+1 = It is Door#12 Open/Close Check Error  
+
+2 = Confirm whether Door#12 state is normally.
+
+[810212]
+
+COUNT = 2
+
+1 = It is Door#13 Open/Close  Check Error  
+
+2 = Confirm whether Door#13 state is normally.
+
+[810213]
+
+COUNT = 2
+
+1 = It is Door#14 Open/Close Check Error  
+
+2 = Confirm whether Door#14 state is normally.
+
+[810214]
+
+COUNT = 2
+
+1 = It is Door#15 Open/Close Check Error  
+
+2 = Confirm whether Door#15 state is normally.
+
+//////////////////////////////////////////////////// 300
+
+[800308]
+
+COUNT = 2
+
+1 = It is Front Shuttle Transfer Signal On Check Error 
+
+2 = Confirm whether Front Shuttle Transfer Signal state is normally.
+
+[800309]
+
+COUNT = 2
+
+1 = It is Front Shuttle Flipper Signal Off Check Error  
+
+2 = Confirm whether Front Shuttle Flipper Signal state is normally.
+
+[800310]
+
+COUNT = 2
+
+1 = It is Rear Shuttle Request Signal Off Check Error  
+
+2 = Confirm whether Rear Shuttle Request Signal state is normally.
+
+[800311]
+
+COUNT = 2
+
+1 = It is Rear Shuttle Complete Signal Off Check Error  
+
+2 = Confirm whether Rear Shuttle Complete Signal state is normally.
+
+
+[810308]
+
+COUNT = 2
+
+1 = It is Front Shuttle Transfer Signal On Check Error  
+
+2 = Confirm whether Front Shuttle Transfer Signal state is normally.
+
+[810309]
+
+COUNT = 2
+
+1 = It is Front Shuttle Flipper Signal On Check Error  
+
+2 = Confirm whether Front Shuttle Flipper Signal state is normally.
+
+[810310]
+
+COUNT = 2
+
+1 = It is Rear Shuttle Request Signal On Check Error  
+
+2 = Confirm whether Rear Shuttle Request Signal state is normally.
+
+[810311]
+
+COUNT = 2
+
+1 = It is Rear Shuttle Complete Signal On Check Error  
+
+2 = Confirm whether Rear Shuttle Complete Signal state is normally.
+
+///////////////////////////////////////////////////400
+
+[800405]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray In Off Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray In state is normally.
+
+[800406]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray Stopper Fw Off Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray Stopper Fw state is normally.
+
+[800407]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray Stopper Bw Off Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray Stopper Bw state is normally.
+
+[800408]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray Stopper Position Off Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray Stopper Position state is normally.
+
+[800409]
+
+COUNT = 2
+
+1 = It is Loading C/V Wait Tray Stopper Fw Off Check Error  
+
+2 = Confirm whether Loading C/V Wait Tray Stopper Fw state is normally.
+
+[800410]
+
+COUNT = 2
+
+1 = It is Loading C/V Wait Tray Stopper Bw Off Check Error  
+
+2 = Confirm whether Loading C/V Wait Tray Stopper Bw state is normally.
+
+[800411]
+
+COUNT = 2
+
+1 = It is Loading C/V Wait Tray Stopper Position Off Check Error  
+
+2 = Confirm whether Loading C/V Wait Tray Stopper Position state is normally.
+
+[800412]
+
+COUNT = 2
+
+1 = It is LoadingC/V Wait Tray Align Fw Off Check Error  
+
+2 = Confirm whether LoadingC/V Wait Tray Align Fw state is normally.
+
+[800413]
+
+COUNT = 2
+
+1 = It is LoadingC/V Wait Tray Align Bw Off Check Error  
+
+2 = Confirm whether LoadingC/V Wait Tray Align Bw state is normally.
+
+
+[810405]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray In On Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray In state is normally.
+
+[810406]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray Stopper Fw On Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray Stopper Fw state is normally.
+
+[810407]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray Stopper Bw On Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray Stopper Bw state is normally.
+
+[810408]
+
+COUNT = 2
+
+1 = It is Loading C/V Buffer Tray Stopper Position On Check Error  
+
+2 = Confirm whether Loading C/V Buffer Tray Stopper Position state is normally.
+
+[810409]
+
+COUNT = 2
+
+1 = It is Loading C/V Wait Tray Stopper Fw On Check Error  
+
+2 = Confirm whether Loading C/V Wait Tray Stopper Fw state is normally.
+
+[810410]
+
+COUNT = 2
+
+1 = It is Loading C/V Wait Tray Stopper Bw On Check Error  
+
+2 = Confirm whether Loading C/V Wait Tray Stopper Bw state is normally.
+
+[810411]
+
+COUNT = 2
+
+1 = It is Loading C/V Wait Tray Stopper Position On Check Error  
+
+2 = Confirm whether Loading C/V Wait Tray Stopper Position state is normally.
+
+[810412]
+
+COUNT = 2
+
+1 = It is LoadingC/V Wait Tray Align Fw On Check Error  
+
+2 = Confirm whether LoadingC/V Wait Tray Align Fw state is normally.
+
+[810413]
+
+COUNT = 2
+
+1 = It is LoadingC/V Wait Tray Align Bw On Check Error  
+
+2 = Confirm whether LoadingC/V Wait Tray Align Bw state is normally.
+
+///////////////////////////////////////////////////500
+
+[800505]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#1 Align Fw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#1 Align Fw state is normally.
+
+[800506]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#1 Align Bw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#1 Align Bw state is normally.
+
+[800507]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#1 Tray Stopper Position Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#1 Tray Stopper Position state is normally.
+
+[800508]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Align Fw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Align Fw state is normally.
+
+[800509]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Align Bw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Align Bw state is normally.
+
+[800510]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Tray Stopper Position Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Tray Stopper Position state is normally.
+
+[800511]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Front Fw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Front Fw state is normally.
+
+[800512]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Front Bw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Front Bw state is normally.
+
+[800513]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Rear Fw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Rear Fw state is normally.
+
+[800514]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Rear bw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Rear bw state is normally.
+
+
+[810505]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#1 Align Fw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#1 Align Fw state is normally.
+
+[810506]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#1 Align Bw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#1 Align Bw state is normally.
+
+[810507]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#1 Tray Stopper Position On Check Error  
+
+2 = Confirm whether LoadingTray Rail#1 Tray Stopper Position state is normally.
+
+[810508]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Align Fw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Align Fw state is normally.
+
+[810509]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Align Bw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Align Bw state is normally.
+
+[810510]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Tray Stopper Position On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Tray Stopper Position state is normally.
+
+[810511]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Front Fw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Front Fw state is normally.
+
+[810512]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Front Bw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Front Bw state is normally.
+
+[810513]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Rear Fw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Rear Fw state is normally.
+
+[810514]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail#2 Rear bw On Check Error  
+
+2 = Confirm whether LoadingTray Rail#2 Rear bw state is normally.
+
+///////////////////////////////////////////////////600
+
+[800608]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail Low Tray Pusher Fw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail Low Tray Pusher Fw state is normally.
+
+[800609]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail Low Tray Pusher Bw Off Check Error  
+
+2 = Confirm whether LoadingTray Rail Low Tray Pusher Bw state is normally.
+
+[800610]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail Low Tray Position Off Check Error  
+
+2 = Confirm whether LoadingTray Rail Low Tray Position state is normally.
+
+[800611]
+
+COUNT = 2
+
+1 = It is LoadingTray Index Tray Clamp Fw Off Check Error  
+
+2 = Confirm whether LoadingTray Index Tray Clamp Fw state is normally.
+
+[800612]
+
+COUNT = 2
+
+1 = It is LoadingTray Index Tray Clamp Bw Off Check Error  
+
+2 = Confirm whether LoadingTray Index Tray Clamp Bw state is normally.
+
+[800615]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail1 Empty Tray Exist Off Check Error
+
+2 = Confirm whether Unloading Tray Rail1 state is normally.
+
+
+[810608]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail Low Tray Pusher Fw On Check Error  
+
+2 = Confirm whether LoadingTray Rail Low Tray Pusher Fw state is normally.
+
+[810609]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail Low Tray Pusher Bw On Check Error  
+
+2 = Confirm whether LoadingTray Rail Low Tray Pusher Bw state is normally.
+
+[810610]
+
+COUNT = 2
+
+1 = It is LoadingTray Rail Low Tray Position On Check Error  
+
+2 = Confirm whether LoadingTray Rail Low Tray Position state is normally.
+
+[810611]
+
+COUNT = 2
+
+1 = It is LoadingTray Index Tray Clamp Fw On Check Error  
+
+2 = Confirm whether LoadingTray Index Tray Clamp Fw state is normally.
+
+[810612]
+
+COUNT = 2
+
+1 = It is LoadingTray Index Tray Clamp Bw On Check Error  
+
+2 = Confirm whether LoadingTray Index Tray Clamp Bw state is normally.
+
+[810615]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail1 Empty Tray Exist On Check Error
+
+2 = Confirm whether Unloading Tray Rail1 state is normally.
+
+///////////////////////////////////////////////////700
+
+[800704]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty E/V Limit Safety Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty E/V Limit Safety state is normally.
+
+[810705]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray state is normally.
+
+[800705]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray state is normally.
+
+[800706]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Low Tray Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Low Tray state is normally.
+
+[800707]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Tray Full Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Tray Full state is normally.
+
+[800708]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw state is normally.
+
+[800709]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw state is normally.
+
+[800710]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw state is normally.
+
+[800711]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw state is normally.
+
+[800712]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw state is normally.
+
+[800713]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw state is normally.
+
+[800714]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw state is normally.
+
+[800715]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw state is normally.
+
+
+[810704]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty E/V Limit Safety On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty E/V Limit Safety state is normally.
+
+[810706]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Low Tray On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Low Tray state is normally.
+
+[810707]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Tray Full On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Tray Full state is normally.
+
+[810708]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw state is normally.
+
+[810709]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw state is normally.
+
+[810710]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw state is normally.
+
+[810711]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw state is normally.
+
+[810712]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Fw state is normally.
+
+[810713]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Front Bw state is normally.
+
+[810714]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Fw state is normally.
+
+[810715]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Empty Hi Tray Rail Rear Bw state is normally.
+
+///////////////////////////////////////////////////////// 1000
+
+[801005]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#1 Tray Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#1 Tray state is normally.
+
+[801006]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#1 Align Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#1 Align Fw state is normally.
+
+[801007]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#1 Align Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#1 Align Bw state is normally.
+
+[801008]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Align Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Align Fw state is normally.
+
+[801009]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Align Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Align Bw state is normally.
+
+[801010]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 E/V Limit Safety Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 E/V Limit Safety state is normally.
+
+[801011]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray state is normally.
+
+[801012]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Front Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Front Fw state is normally.
+[801013]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Front Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Front Bw state is normally.
+
+[801014]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Fw state is normally.
+
+[801015]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Bw state is normally.
+
+
+[811005]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#1 Tray On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#1 Tray state is normally.
+
+[811006]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#1 Align Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#1 Align Fw state is normally.
+
+[811007]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#1 Align Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#1 Align Bw state is normally.
+
+[811008]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Align Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Align Fw state is normally.
+
+[811009]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Align Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Align Bw state is normally.
+
+[811010]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 E/V Limit Safety On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 E/V Limit Safety state is normally.
+
+[811011]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray state is normally.
+
+[811012]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Front Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Front Fw state is normally.
+
+[811013]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Front Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Front Bw state is normally.
+
+[811014]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Fw state is normally.
+
+[811015]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Rail Rear Bw state is normally.
+
+///////////////////////////////////////////////////////// 1100
+
+[801108]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Low Tray Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Low Tray state is normally.
+
+[801109]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Out Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Out state is normally.
+
+[801110]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 light Curtain Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 light Curtain state is normally.
+
+[801111]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 light Curtain Muting Off Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 light Curtain Muting state is normally.
+
+[801112]
+
+COUNT = 2
+
+1 = It is Unloading Tray Index Tray Clamp Fw Off Check Error  
+
+2 = Confirm whether Unloading Tray Index Tray Clamp Fw state is normally.
+
+[801113]
+
+COUNT = 2
+
+1 = It is Unloading Tray Index Tray Clamp Bw Off Check Error  
+
+2 = Confirm whether Unloading Tray Index Tray Clamp Bw state is normally.
+
+
+[811108]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Low Tray On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Low Tray state is normally.
+
+[811109]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 Tray Out On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 Tray Out state is normally.
+
+[811110]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 light Curtain On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 light Curtain state is normally.
+
+[811111]
+
+COUNT = 2
+
+1 = It is Unloading Tray Rail#1 Unloading#2 light Curtain Muting On Check Error  
+
+2 = Confirm whether Unloading Tray Rail#1 Unloading#2 light Curtain Muting state is normally.
+
+[811112]
+
+COUNT = 2
+
+1 = It is Unloading Tray Index Tray Clamp Fw On Check Error  
+
+2 = Confirm whether Unloading Tray Index Tray Clamp Fw state is normally.
+
+[811113]
+
+COUNT = 2
+
+1 = It is Unloading Tray Index Tray Clamp Bw On Check Error  
+
+2 = Confirm whether Unloading Tray Index Tray Clamp Bw state is normally.
+
+/////////////////////////////////////////////////////////1200
+
+[801206]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray In Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray In state is normally.
+
+[801207]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray Stopper Position Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray Stopper Position state is normally.
+
+[801208]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray Stopper Fw Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray Stopper Fw state is normally.
+
+[801209]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray Stopper Bw Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray Stopper Bw state is normally.
+
+[801210]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Front Light Curtain Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Front Light Curtain state is normally.
+
+[801211]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Front Light Curtain Muting Switch Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Front Light Curtain Muting Switch state is normally.
+
+[801212]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Rear Light Curtain Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Rear Light Curtain state is normally.
+
+[801213]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Rear Light Curtain Muting Switch Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Rear Light Curtain Muting Switch state is normally.
+
+[801214]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Scaffolding Off Check Error  
+
+2 = Confirm whether Unloading Moving C/V Scaffolding state is normally.
+
+
+[811206]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray In On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray In state is normally.
+
+[811207]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray Stopper Position On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray Stopper Position state is normally.
+
+[811208]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray Stopper Fw On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray Stopper Fw state is normally.
+
+[811209]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Tray Stopper Bw On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Tray Stopper Bw state is normally.
+
+[811210]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Front Light Curtain On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Front Light Curtain state is normally.
+
+[811211]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Front Light Curtain Muting Switch On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Front Light Curtain Muting Switch state is normally.
+
+[811212]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Rear Light Curtain On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Rear Light Curtain state is normally.
+
+[811213]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Rear Light Curtain Muting Switch On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Rear Light Curtain Muting Switch state is normally.
+
+[811214]
+
+COUNT = 2
+
+1 = It is Unloading Moving C/V Scaffolding On Check Error  
+
+2 = Confirm whether Unloading Moving C/V Scaffolding state is normally.
+
+///////////////////////////////////////////////////////// 1300
+
+[801300]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product1 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801301]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product2 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801302]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product3 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801303]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product4 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801304]
+
+COUNT = 2
+
+1 = It is Loading Buffer Cok Type1 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801305]
+
+COUNT = 2
+
+1 = It is Loading Buffer Cok Type2 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801306]
+
+COUNT = 2
+
+1 = It is Loading Buffer Cok Type3 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801308]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product1 Off Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[801309]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product2 Off Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[801310]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product3 Off Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[801311]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product4 Off Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[801312]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Cok Type1 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801313]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Cok Type2 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[801314]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Cok Type3 Off Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+
+[811300]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product1 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811301]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product2 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811302]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product3 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811303]
+
+COUNT = 2
+
+1 = It is Loading Buffer Product4 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811304]
+
+COUNT = 2
+
+1 = It is Loading Buffer Cok Type1 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811305]
+
+COUNT = 2
+
+1 = It is Loading Buffer Cok Type2 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811306]
+
+COUNT = 2
+
+1 = It is Loading Buffer Cok Type3 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811308]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product1 On Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[811309]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product2 On Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[811310]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product3 On Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[811311]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Product4 On Check Error
+
+2 = Confirm whether Unloading Buffer state is normally.
+
+[811312]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Cok Type1 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811313]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Cok Type2 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+[811314]
+
+COUNT = 2
+
+1 = It is Unloading Buffer Cok Type3 On Check Error
+
+2 = Confirm whether Loading Buffer state is normally.
+
+///////////////////////////////////////////////////////// 1400
+
+[801408]
+
+COUNT = 2
+
+1 = It is Retest Buffer Product Off Check Error  
+
+2 = Confirm whether Retest Buffer Product state is normally.
+
+[801409]
+
+COUNT = 2
+
+1 = It is Retest Buffer Fw Off Check Error  
+
+2 = Confirm whether Retest Buffer Fw state is normally.
+
+[801410]
+
+COUNT = 2
+
+1 = It is Retest Buffer Bw Off Check Error  
+
+2 = Confirm whether Retest Buffer Bw state is normally.
+
+[801411]
+
+COUNT = 2
+
+1 = It is Retest Buffer Tray Align Fw Off Check Error
+
+2 = Confirm whether Retest Buffer Tray Align state is normally.
+
+[801412]
+
+COUNT = 2
+
+1 = It is Retest Buffer Tray Align Bw Off Check Error
+
+2 = Confirm whether Retest Buffer Tray Align state is normally.
+
+[801414]
+
+COUNT = 2
+
+1 = It is Testsite Robot Z Up Push Switch Off Check Error  
+
+2 = Confirm whether Testsite Robot Z Up Push Switch state is normally.
+
+[801415]
+
+COUNT = 2
+
+1 = It is Testsite Robot Z Down Push Switch Off Check Error  
+
+2 = Confirm whether Testsite Robot Z Down Push Switch state is normally.
+
+
+[811408]
+
+COUNT = 2
+
+1 = It is Retest Buffer Product On Check Error  
+
+2 = Confirm whether Retest Buffer Product state is normally.
+
+[811409]
+
+COUNT = 2
+
+1 = It is Retest Buffer Fw On Check Error  
+
+2 = Confirm whether Retest Buffer Fw state is normally.
+
+[811410]
+
+COUNT = 2
+
+1 = It is Retest Buffer Bw On Check Error  
+
+2 = Confirm whether Retest Buffer Bw state is normally.
+
+[811411]
+
+COUNT = 2
+
+1 = It is Retest Buffer Tray Align Fw On Check Error
+
+2 = Confirm whether Retest Buffer Tray Align state is normally.
+
+[811412]
+
+COUNT = 2
+
+1 = It is Retest Buffer Tray Align Bw On Check Error
+
+2 = Confirm whether Retest Buffer Tray Align state is normally.
+
+[811414]
+
+COUNT = 2
+
+1 = It is Testsite Robot Z Up Push Switch On Check Error  
+
+2 = Confirm whether Testsite Robot Z Up Push Switch state is normally.
+
+[811415]
+
+COUNT = 2
+
+1 = It is Testsite Robot Z Down Push Switch On Check Error  
+
+2 = Confirm whether Testsite Robot Z Down Push Switch state is normally.
+
+/////////////////////////////////////////////////////////1500
+
+[801508]
+
+COUNT = 2
+
+1 = It is Loading Robot Front Picker Vacuum Off Check Error  
+
+2 = Confirm whether Loading Robot Front Picker Vacuum state is normally.
+
+[801509]
+
+COUNT = 2
+
+1 = It is Loading Robot Rear Picker Vacuum Off Check Error  
+
+2 = Confirm whether Loading Robot Rear Picker Vacuum state is normally.
+
+[801510]
+
+COUNT = 2
+
+1 = It is Loading Robot Front Picker Fw Off Check Error  
+
+2 = Confirm whether Loading Robot Front Picker Fw state is normally.
+
+[801511]
+
+COUNT = 2
+
+1 = It is Loading Robot Front Picker Bw Off Check Error  
+
+2 = Confirm whether Loading Robot Front Picker Bw state is normally.
+
+[801512]
+
+COUNT = 2
+
+1 = It is Loading Robot Rear Picker Fw Off Check Error  
+
+2 = Confirm whether Loading Robot Rear Picker Fw state is normally.
+
+[801513]
+
+COUNT = 2
+
+1 = It is Loading Robot Rear Picker Bw Off Check Error  
+
+2 = Confirm whether Loading Robot Rear Picker Bw state is normally.
+
+[801514]
+
+COUNT = 2
+
+1 = It is Loading Robot Z Up Push Switch Off Check Error  
+
+2 = Confirm whether Loading Robot Z Up Push Switch state is normally.
+
+[801515]
+
+COUNT = 2
+
+1 = It is Loading Robot Z Down Push Switch Off Check Error  
+
+2 = Confirm whether Loading Robot Z Down Push Switch state is normally.
+
+
+[811508]
+
+COUNT = 2
+
+1 = It is Loading Robot Front Picker Vacuum On Check Error  
+
+2 = Confirm whether Loading Robot Front Picker Vacuum state is normally.
+
+[811509]
+
+COUNT = 2
+
+1 = It is Loading Robot Rear Picker Vacuum On Check Error  
+
+2 = Confirm whether Loading Robot Rear Picker Vacuum state is normally.
+
+[811510]
+
+COUNT = 2
+
+1 = It is Loading Robot Front Picker Fw On Check Error  
+
+2 = Confirm whether Loading Robot Front Picker Fw state is normally.
+
+[811511]
+
+COUNT = 2
+
+1 = It is Loading Robot Front Picker Bw On Check Error  
+
+2 = Confirm whether Loading Robot Front Picker Bw state is normally.
+
+[811512]
+
+COUNT = 2
+
+1 = It is Loading Robot Rear Picker Fw On Check Error  
+
+2 = Confirm whether Loading Robot Rear Picker Fw state is normally.
+
+[811513]
+
+COUNT = 2
+
+1 = It is Loading Robot Rear Picker Bw On Check Error  
+
+2 = Confirm whether Loading Robot Rear Picker Bw state is normally.
+
+[811514]
+
+COUNT = 2
+
+1 = It is Loading Robot Z Up Push Switch On Check Error  
+
+2 = Confirm whether Loading Robot Z Up Push Switch state is normally.
+
+[811515]
+
+COUNT = 2
+
+1 = It is Loading Robot Z Down Push Switch On Check Error  
+
+2 = Confirm whether Loading Robot Z Down Push Switch state is normally.
+
+/////////////////////////////////////////////////////////1600
+
+[801615]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker  COK Gripper COK Exist Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker  COK Gripper COK Exist state is normally.
+
+
+[811615]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker  COK Gripper COK Exist On Check Error  
+
+2 = Confirm whether Testsite Robot Picker  COK Gripper COK Exist state is normally.
+
+/////////////////////////////////////////////////////////1700
+
+[801700]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker Gripper Fw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker Gripper Fw state is normally.
+
+[801701]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker Gripper Bw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker Gripper Bw state is normally.
+
+[801702]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker COK Gripper Fw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker COK Gripper Fw state is normally.
+
+[801703]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker COK Gripper Bw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker COK Gripper Bw state is normally.
+
+[801704]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#1 Fw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#1 Fw state is normally.
+
+[801705]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#1 Bw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#1 Bw state is normally.
+
+[801706]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#2 Fw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#2 Fw state is normally.
+
+[801707]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#2 Bw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#2 Bw state is normally.
+
+[801708]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#3 Fw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#3 Fw state is normally.
+
+[801709]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#3 Bw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#3 Bw state is normally.
+
+[801710]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#4 Fw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#4 Fw state is normally.
+
+[801711]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#4 Bw Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#4 Bw state is normally.
+
+[801712]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#1 Vacuum Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#1 Vacuum state is normally.
+
+[801713]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#2 Vacuum Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#2 Vacuum state is normally.
+
+[801714]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#3 Vacuum Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#3 Vacuum state is normally.
+
+[801715]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#4 Vacuum Off Check Error  
+
+2 = Confirm whether Testsite Robot Picker#4 Vacuum state is normally.
+
+
+[811700]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker Gripper Fw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker Gripper Fw state is normally.
+
+[811701]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker Gripper Bw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker Gripper Bw state is normally.
+
+[811702]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker COK Gripper Fw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker COK Gripper Fw state is normally.
+
+[811703]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker COK Gripper Bw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker COK Gripper Bw state is normally.
+
+[811704]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#1 Fw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#1 Fw state is normally.
+
+[811705]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#1 Bw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#1 Bw state is normally.
+
+[811706]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#2 Fw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#2 Fw state is normally.
+
+[811707]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#2 Bw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#2 Bw state is normally.
+
+[811708]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#3 Fw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#3 Fw state is normally.
+
+[811709]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#3 Bw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#3 Bw state is normally.
+
+[811710]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#4 Fw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#4 Fw state is normally.
+
+[811711]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#4 Bw On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#4 Bw state is normally.
+
+[811712]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#1 Vacuum On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#1 Vacuum state is normally.
+
+[811713]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#2 Vacuum On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#2 Vacuum state is normally.
+
+[811714]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#3 Vacuum On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#3 Vacuum state is normally.
+
+[811715]
+
+COUNT = 2
+
+1 = It is Testsite Robot Picker#4 Vacuum On Check Error  
+
+2 = Confirm whether Testsite Robot Picker#4 Vacuum state is normally.
+
+///////////////////////////////////////////////////////// 2000
+
+[802008]
+
+COUNT = 2
+
+1 = It is Unloading Robot Front Picker Vacuum Off Check Error  
+
+2 = Confirm whether Unloading Robot Front Picker Vacuum state is normally.
+
+[802009]
+
+COUNT = 2
+
+1 = It is Unloading Robot Rear Picker Vacuum Off Check Error  
+
+2 = Confirm whether Unloading Robot Rear Picker Vacuum state is normally.
+
+[802010]
+
+COUNT = 2
+
+1 = It is Unloading Robot Front Picker Fw Off Check Error  
+
+2 = Confirm whether Unloading Robot Front Picker Fw state is normally.
+
+[802011]
+
+COUNT = 2
+
+1 = It is Unloading Robot Front Picker Bw Off Check Error  
+
+2 = Confirm whether Unloading Robot Front Picker Bw state is normally.
+
+[802012]
+
+COUNT = 2
+
+1 = It is Unloading Robot Rear Picker Fw Off Check Error  
+
+2 = Confirm whether Unloading Robot Rear Picker Fw state is normally.
+
+[802013]
+
+COUNT = 2
+
+1 = It is Unloading Robot Rear Picker Bw Off Check Error  
+
+2 = Confirm whether Unloading Robot Rear Picker Bw state is normally.
+
+[802014]
+
+COUNT = 2
+
+1 = It is Unloading Robot Z Up Push Switch Off Check Error  
+
+2 = Confirm whether Unloading Robot Z Up Push Switch state is normally.
+
+[802015]
+
+COUNT = 2
+
+1 = It is Unloading Robot Z Down Push Switch Off Check Error  
+
+2 = Confirm whether Unloading Robot Z Down Push Switch state is normally.
+
+
+[812008]
+
+COUNT = 2
+
+1 = It is Unloading Robot Front Picker Vacuum On Check Error  
+
+2 = Confirm whether Unloading Robot Front Picker Vacuum state is normally.
+
+[812009]
+
+COUNT = 2
+
+1 = It is Unloading Robot Rear Picker Vacuum On Check Error  
+
+2 = Confirm whether Unloading Robot Rear Picker Vacuum state is normally.
+
+[812010]
+
+COUNT = 2
+
+1 = It is Unloading Robot Front Picker Fw On Check Error  
+
+2 = Confirm whether Unloading Robot Front Picker Fw state is normally.
+
+[812011]
+
+COUNT = 2
+
+1 = It is Unloading Robot Front Picker Bw On Check Error  
+
+2 = Confirm whether Unloading Robot Front Picker Bw state is normally.
+
+[812012]
+
+COUNT = 2
+
+1 = It is Unloading Robot Rear Picker Fw On Check Error  
+
+2 = Confirm whether Unloading Robot Rear Picker Fw state is normally.
+
+[812013]
+
+COUNT = 2
+
+1 = It is Unloading Robot Rear Picker Bw On Check Error  
+
+2 = Confirm whether Unloading Robot Rear Picker Bw state is normally.
+
+[812014]
+
+COUNT = 2
+
+1 = It is Unloading Robot Z Up Push Switch On Check Error  
+
+2 = Confirm whether Unloading Robot Z Up Push Switch state is normally.
+
+[812015]
+
+COUNT = 2
+
+1 = It is Unloading Robot Z Down Push Switch On Check Error  
+
+2 = Confirm whether Unloading Robot Z Down Push Switch state is normally.
+
+///////////////////////////////////////////////////////// 2100
+
+[802111]
+
+COUNT = 2
+
+1 = It is Left Testsite HI-FIX#1 Position Off Check Error  
+
+2 = Confirm whether Left Testsite HI-FIX#1 Position state is normally.
+
+[802112]
+
+COUNT = 2
+
+1 = It is Left Testsite HI-FIX#2 Position Off Check Error  
+
+2 = Confirm whether Left Testsite HI-FIX#2 Position state is normally.
+
+[802113]
+
+COUNT = 2
+
+1 = It is Testsite HI-FIX#3 Position Off Check Error  
+
+2 = Confirm whether Testsite HI-FIX#3 Position state is normally.
+
+[802114]
+
+COUNT = 2
+
+1 = It is Testsite HI-FIX#4 Position Off Check Error  
+
+2 = Confirm whether Testsite HI-FIX#4 Position state is normally.
+
+
+[812111]
+
+COUNT = 2
+
+1 = It is Left Testsite HI-FIX#1 Position On Check Error  
+
+2 = Confirm whether Left Testsite HI-FIX#1 Position state is normally.
+
+[812112]
+
+COUNT = 2
+
+1 = It is Left Testsite HI-FIX#2 Position On Check Error  
+
+2 = Confirm whether Left Testsite HI-FIX#2 Position state is normally.
+
+[812113]
+
+COUNT = 2
+
+1 = It is Testsite HI-FIX#3 Position On Check Error  
+
+2 = Confirm whether Testsite HI-FIX#3 Position state is normally.
+
+[812114]
+
+COUNT = 2
+
+1 = It is Testsite HI-FIX#4 Position On Check Error  
+
+2 = Confirm whether Testsite HI-FIX#4 Position state is normally.
+
+///////////////////////////////////////////////////////// 2200
+
+[802200]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Left Clamp Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Left Clamp Fw state is normally.
+
+[802201]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Left Clamp Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Left Clamp Bw state is normally.
+
+[812202]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Right Clamp Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Right Clamp Fw state is normally.
+
+[802202]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Right Clamp Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Right Clamp Fw state is normally.
+
+[802203]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Right Clamp Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Right Clamp Bw state is normally.
+
+[802204]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#1 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#1 Fw state is normally.
+
+[802205]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#1 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#1 Bw state is normally.
+
+[802206]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#2 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#2 Fw state is normally.
+
+[802207]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#2 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#2 Bw state is normally.
+
+[802208]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#3 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#3 Fw state is normally.
+
+[802209]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#3 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#3 Bw state is normally.
+
+[802210]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#4 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#4 Fw state is normally.
+
+[802211]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#4 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#4 Bw state is normally.
+
+[802212]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#5 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#5 Fw state is normally.
+
+[802213]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#5 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#5 Bw state is normally.
+
+[802214]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#6 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#6 Fw state is normally.
+
+[802215]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#6 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#6 Bw state is normally.
+
+
+[812200]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Left Clamp Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Left Clamp Fw state is normally.
+
+[812201]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Left Clamp Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Left Clamp Bw state is normally.
+
+[812203]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK Right Clamp Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK Right Clamp Bw state is normally.
+
+[812204]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#1 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#1 Fw state is normally.
+
+[812205]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#1 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#1 Bw state is normally.
+
+[812206]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#2 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#2 Fw state is normally.
+
+[812207]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#2 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#2 Bw state is normally.
+
+[812208]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#3 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#3 Fw state is normally.
+
+[812209]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#3 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#3 Bw state is normally.
+
+[812210]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#4 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#4 Fw state is normally.
+
+[812211]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#4 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#4 Bw state is normally.
+
+[812212]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#5 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#5 Fw state is normally.
+
+[812213]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#5 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#5 Bw state is normally.
+
+[812214]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#6 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#6 Fw state is normally.
+
+[812215]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Socket Insert#6 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Socket Insert#6 Bw state is normally.
+
+/////////////////////////////////////////////////////////2300
+
+[802300]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#1 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#1 state is normally.
+
+[802301]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#2 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#2 state is normally.
+
+[802302]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#3 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#3 state is normally.
+
+[802303]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#4 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#4 state is normally.
+
+[802304]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#5 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#5 state is normally.
+
+[802305]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#6 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#6 state is normally.
+
+[802306]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#7 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#7 state is normally.
+
+[802307]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#8 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#8 state is normally.
+
+[802308]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#9 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#9 state is normally.
+
+[802309]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#10 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#10 state is normally.
+
+[802310]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#11 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#11 state is normally.
+
+[802311]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#12 Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#12 state is normally.
+
+[802312]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Left Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Left Contact Fw state is normally.
+
+[802313]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Left Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Left Contact Bw state is normally.
+
+[802314]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Right Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Right Contact Fw state is normally.
+
+[802315]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Right Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Right Contact Bw state is normally.
+
+
+[812300]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#1 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#1 state is normally.
+
+[812301]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#2 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#2 state is normally.
+
+[812302]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#3 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#3 state is normally.
+
+[812303]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#4 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#4 state is normally.
+
+[812304]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#5 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#5 state is normally.
+
+[812305]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#6 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#6 state is normally.
+
+[812306]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#7 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#7 state is normally.
+
+[812307]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#8 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#8 state is normally.
+
+[812308]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#9 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#9 state is normally.
+
+[812309]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#10 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#10 state is normally.
+
+[812310]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#11 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#11 state is normally.
+
+[812311]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom COK#12 On Check Error  
+
+2 = Confirm whether Left Testsite Bottom COK#12 state is normally.
+
+[812312]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Left Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Left Contact Fw state is normally.
+
+[812313]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Left Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Left Contact Bw state is normally.
+
+[812314]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Right Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Right Contact Fw state is normally.
+
+[812315]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Tester Right Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Bottom Tester Right Contact Bw state is normally.
+
+/////////////////////////////////////////////////////////2400
+
+[802408]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Top HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Left Top HI-FIX Contact Fw state is normally.
+
+[802409]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Top HI-FIX Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Left Top HI-FIX Contact Bw state is normally.
+
+[802410]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Bottom HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Left Bottom HI-FIX Contact Fw state is normally.
+
+[802411]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Bottom HI-FIX Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Left Bottom HI-FIX Contact Bw state is normally.
+
+[802412]
+
+COUNT = 2
+
+1 = It is Left Testsite Right HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Right HI-FIX Contact Fw state is normally.
+
+[802413]
+
+COUNT = 2
+
+1 = It is Left Testsite Right HI-FIX Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Right HI-FIX Contact Bw state is normally.
+
+[802415]
+
+COUNT = 2
+
+1 = It is Left Light Curtain Off Check Error
+
+2 = Confirm whether Left Light Curtain state is normally.
+
+
+[812408]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Top HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Left Top HI-FIX Contact Fw state is normally.
+
+[812409]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Top HI-FIX Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Left Top HI-FIX Contact Bw state is normally.
+
+[812410]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Bottom HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Left Bottom HI-FIX Contact Fw state is normally.
+
+[812411]
+
+COUNT = 2
+
+1 = It is Left Testsite Left Bottom HI-FIX Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Left Bottom HI-FIX Contact Bw state is normally.
+
+[812412]
+
+COUNT = 2
+
+1 = It is Left Testsite Right HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Right HI-FIX Contact Fw state is normally.
+
+[812413]
+
+COUNT = 2
+
+1 = It is Left Testsite Right HI-FIX Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Right HI-FIX Contact Bw state is normally.
+
+[812415]
+
+COUNT = 2
+
+1 = It is Left Light Curtain On Check Error
+
+2 = Confirm whether Left Light Curtain state is normally.
+
+///////////////////////////////////////////////////////// 2500
+
+[802511]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Left Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Left Contact Fw state is normally.
+
+[802512]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Left Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Left Contact Bw state is normally.
+
+[802513]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Right Contact Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Right Contact Fw state is normally.
+
+[802514]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Right Contact Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Right Contact Bw state is normally.
+
+
+[812511]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Left Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Left Contact Fw state is normally.
+
+[812512]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Left Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Left Contact Bw state is normally.
+
+[812513]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Right Contact Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Right Contact Fw state is normally.
+
+[812514]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Tester Right Contact Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Tester Right Contact Bw state is normally.
+
+///////////////////////////////////////////////////////// 2600
+
+[802600]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Left Clamp Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK Left Clamp Fw state is normally.
+
+[802601]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Left Clamp Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK Left Clamp Bw state is normally.
+
+[802602]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Right Clamp Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK Right Clamp Fw state is normally.
+
+[802603]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Right Clamp Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK Right Clamp Bw state is normally.
+
+[802604]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#1 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#1 Fw state is normally.
+
+[802605]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#1 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#1 Bw state is normally.
+
+[802606]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#2 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#2 Fw state is normally.
+
+[802607]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#2 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#2 Bw state is normally.
+
+[802608]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#3 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#3 Fw state is normally.
+
+[802609]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#3 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#3 Bw state is normally.
+
+[802610]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#4 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#4 Fw state is normally.
+
+[802611]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#4 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#4 Bw state is normally.
+
+[802612]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#5 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#5 Fw state is normally.
+
+[802613]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#5 Bw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#5 Bw state is normally.
+
+[802614]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#6 Fw Off Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#6 Fw state is normally.
+
+
+[812600]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Left Clamp Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top COK Left Clamp Fw state is normally.
+
+[812601]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Left Clamp Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top COK Left Clamp Bw state is normally.
+
+[812602]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Right Clamp Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top COK Right Clamp Fw state is normally.
+
+[812603]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK Right Clamp Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top COK Right Clamp Bw state is normally.
+
+[812604]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#1 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#1 Fw state is normally.
+
+[812605]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#1 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#1 Bw state is normally.
+
+[812606]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#2 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#2 Fw state is normally.
+
+[812607]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#2 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#2 Bw state is normally.
+
+[812608]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#3 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#3 Fw state is normally.
+
+[812609]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#3 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#3 Bw state is normally.
+
+[812610]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#4 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#4 Fw state is normally.
+
+[812611]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#4 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#4 Bw state is normally.
+
+[812612]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#5 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#5 Fw state is normally.
+
+[812613]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#5 Bw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#5 Bw state is normally.
+
+[812614]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Socket Insert#6 Fw On Check Error  
+
+2 = Confirm whether Left Testsite Top Socket Insert#6 Fw state is normally.
+
+/////////////////////////////////////////////////////////2700
+
+[802700]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#1 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#1 state is normally.
+
+[802701]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#2 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#2 state is normally.
+
+[802702]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#3 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#3 state is normally.
+
+[802703]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#4 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#4 state is normally.
+
+[802704]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#5 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#5 state is normally.
+
+[802705]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#6 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#6 state is normally.
+
+[802706]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#7 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#7 state is normally.
+
+[802707]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#8 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#8 state is normally.
+
+[802708]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#9 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#9 state is normally.
+
+[802709]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#10 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#10 state is normally.
+
+[802710]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#11 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#11 state is normally.
+
+[802711]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#12 Off Check Error  
+
+2 = Confirm whether Left Testsite Top COK#12 state is normally.
+
+
+[812700]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#1 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#1 state is normally.
+
+[812701]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#2 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#2 state is normally.
+
+[812702]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#3 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#3 state is normally.
+
+[812703]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#2 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#2 state is normally.
+
+[812704]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#5 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#5 state is normally.
+
+[812705]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#6 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#6 state is normally.
+
+[812706]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#7 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#7 state is normally.
+
+[812707]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#8 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#8 state is normally.
+
+[812708]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#9 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#9 state is normally.
+
+[812709]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#10 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#10 state is normally.
+
+[812710]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#11 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#11 state is normally.
+
+[812711]
+
+COUNT = 2
+
+1 = It is Left Testsite Top COK#12 On Check Error  
+
+2 = Confirm whether Left Testsite Top COK#12 state is normally.
+
+///////////////////////////////////////////////////////// 3000
+
+[803011]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#1 Position Off Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#1 Position state is normally.
+
+[803012]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#2 Position Off Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#2 Position state is normally.
+
+[803013]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#3 Position Off Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#3 Position state is normally.
+
+[803014]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#4 Position Off Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#4 Position state is normally.
+
+
+[813011]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#1 Position On Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#1 Position state is normally.
+
+[813012]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#2 Position On Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#2 Position state is normally.
+
+[813013]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#3 Position On Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#3 Position state is normally.
+
+[813014]
+
+COUNT = 2
+
+1 = It is Right Testsite HI-FIX#4 Position On Check Error  
+
+2 = Confirm whether Right Testsite HI-FIX#4 Position state is normally.
+
+/////////////////////////////////////////////////////////3100
+
+[803100]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Left Clamp Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Left Clamp Fw state is normally.
+
+[803101]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Left Clamp Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Left Clamp Bw state is normally.
+
+[803102]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Right Clamp Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Right Clamp Fw state is normally.
+
+[803103]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Right Clamp Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Right Clamp Bw state is normally.
+
+[803104]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#1 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#1 Fw state is normally.
+
+[803105]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#1 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#1 Bw state is normally.
+
+[803106]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#2 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#2 Fw state is normally.
+
+[803107]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#2 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#2 Bw state is normally.
+
+[803108]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#3 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#3 Fw state is normally.
+
+[803109]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#3 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#3 Bw state is normally.
+
+[803110]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#4 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#4 Fw state is normally.
+
+[803111]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#4 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#4 Bw state is normally.
+
+[803112]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#5 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#5 Fw state is normally.
+
+[803113]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#5 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#5 Bw state is normally.
+
+[803114]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#6 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#6 Fw state is normally.
+
+[803115]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#6 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#6 Bw state is normally.
+
+
+[813100]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Left Clamp Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Left Clamp Fw state is normally.
+
+[813101]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Left Clamp Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Left Clamp Bw state is normally.
+
+[813102]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Right Clamp Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Right Clamp Fw state is normally.
+
+[813103]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK Right Clamp Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK Right Clamp Bw state is normally.
+
+[813104]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#1 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#1 Fw state is normally.
+
+[813105]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#1 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#1 Bw state is normally.
+
+[813106]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#2 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#2 Fw state is normally.
+
+[813107]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#2 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#2 Bw state is normally.
+
+[813108]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#3 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#3 Fw state is normally.
+
+[813109]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#3 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#3 Bw state is normally.
+
+[813110]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#4 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#4 Fw state is normally.
+
+[813111]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#4 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#4 Bw state is normally.
+
+[813112]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#5 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#5 Fw state is normally.
+
+[813113]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#5 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#5 Bw state is normally.
+
+[813114]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#6 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#6 Fw state is normally.
+
+[813115]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Socket Insert#6 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Socket Insert#6 Bw state is normally.
+
+
+///////////////////////////////////////////////////////// 3200
+
+
+
+[803200]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#1 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#1 state is normally.
+
+[803201]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#2 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#2 state is normally.
+
+[803202]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#3 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#3 state is normally.
+
+[803203]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#4 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#4 state is normally.
+
+[803204]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#5 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#5 state is normally.
+
+[803205]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#6 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#6 state is normally.
+
+[803206]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#7 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#7 state is normally.
+
+[803207]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#8 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#8 state is normally.
+
+[803208]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#9 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#9 state is normally.
+
+[803209]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#10 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#10 state is normally.
+
+[803210]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#11 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#11 state is normally.
+
+[803211]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#12 Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#12 state is normally.
+
+[803212]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Left Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Left Contact Fw state is normally.
+
+[803213]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Left Contact Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Left Contact Bw state is normally.
+
+[803214]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Right Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Right Contact Fw state is normally.
+
+[803215]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Right Contact Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Right Contact Bw state is normally.
+
+
+[813200]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#1 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#1 state is normally.
+
+[813201]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#2 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#2 state is normally.
+
+[813202]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#3 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#3 state is normally.
+
+[813203]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#4 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#4 state is normally.
+
+[813204]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#5 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#5 state is normally.
+
+[813205]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#6 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#6 state is normally.
+
+[813206]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#7 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#7 state is normally.
+
+[813207]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#8 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#8 state is normally.
+
+[813208]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#9 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#9 state is normally.
+
+[813209]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#10 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#10 state is normally.
+
+[813210]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#11 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#11 state is normally.
+
+[813211]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom COK#12 On Check Error  
+
+2 = Confirm whether Right Testsite Bottom COK#12 state is normally.
+
+[813212]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Left Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Left Contact Fw state is normally.
+
+[813213]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Left Contact Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Left Contact Bw state is normally.
+
+[813214]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Right Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Right Contact Fw state is normally.
+
+[813215]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Tester Right Contact Bw On Check Error  
+
+2 = Confirm whether Right Testsite Bottom Tester Right Contact Bw state is normally.
+
+
+
+/////////////////////////////////////////////////////////3300
+
+[803308]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Top HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Left Top HI-FIX Contact Fw state is normally.
+
+[803309]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Top HI-FIX Contact Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Left Top HI-FIX Contact Bw state is normally.
+
+[803310]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Bottom HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Left Bottom HI-FIX Contact Fw state is normally.
+
+[803311]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Bottom HI-FIX Contact Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Left Bottom HI-FIX Contact Bw state is normally.
+
+[803312]
+
+COUNT = 2
+
+1 = It is Right Testsite Right HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Right HI-FIX Contact Fw state is normally.
+
+[803313]
+
+COUNT = 2
+
+1 = It is Right Testsite Right HI-FIX Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Right HI-FIX Contact Fw state is normally.
+
+[803315]
+
+COUNT = 2
+
+1= It is Right Light Curtain Off Check Error
+
+2 = Confirm whether Right Light Curtain state is normally.
+
+
+[813308]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Top HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Left Top HI-FIX Contact Fw state is normally.
+
+[813309]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Top HI-FIX Contact Bw On Check Error  
+
+2 = Confirm whether Right Testsite Left Top HI-FIX Contact Bw state is normally.
+
+[813310]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Bottom HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Left Bottom HI-FIX Contact Fw state is normally.
+
+[813311]
+
+COUNT = 2
+
+1 = It is Right Testsite Left Bottom HI-FIX Contact Bw On Check Error  
+
+2 = Confirm whether Right Testsite Left Bottom HI-FIX Contact Bw state is normally.
+
+[813312]
+
+COUNT = 2
+
+1 = It is Right Testsite Right HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Right HI-FIX Contact Fw state is normally.
+
+[813313]
+
+COUNT = 2
+
+1 = It is Right Testsite Right HI-FIX Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Right HI-FIX Contact Fw state is normally.
+
+[813315]
+
+COUNT = 2
+
+1= It is Right Light Curtain On Check Error
+
+2 = Confirm whether Right Light Curtain state is normally.
+
+///////////////////////////////////////////////////////// 3400
+
+[803411]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Left Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Left Contact Fw state is normally.
+
+[803412]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Left Contact Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Left Contact Bw state is normally.
+
+[803413]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Right Contact Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Right Contact Fw state is normally.
+
+[803414]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Right Contact Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Right Contact Bw state is normally.
+
+
+[813411]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Left Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Left Contact Fw state is normally.
+
+[813412]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Left Contact Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Left Contact Bw state is normally.
+
+[813413]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Right Contact Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Right Contact Fw state is normally.
+
+[813414]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Tester Right Contact Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Tester Right Contact Bw state is normally.
+
+///////////////////////////////////////////////////////// 3500
+
+[803500]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Left Clamp Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK Left Clamp Fw state is normally.
+
+[803501]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Left Clamp Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK Left Clamp Bw state is normally.
+
+[803502]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Right Clamp Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK Right Clamp Fw state is normally.
+
+[803503]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Right Clamp Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK Right Clamp Bw state is normally.
+
+[803504]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#1 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#1 Fw state is normally.
+
+[803505]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#1 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#1 Bw state is normally.
+
+[803506]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#2 Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#2 state is normally.
+
+[803507]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#2 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#2 Bw state is normally.
+
+[803508]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#3 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#3 Fw state is normally.
+
+[803509]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#3 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#3 Bw state is normally.
+
+[803510]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#4 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#4 Fw state is normally.
+
+[803511]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#4 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#4 Bw state is normally.
+
+[803512]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#5 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#5 Fw state is normally.
+
+[803513]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#5 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#5 Bw state is normally.
+
+[803514]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#6 Fw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#6 Fw state is normally.
+
+[803515]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#6 Bw Off Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#6 Bw state is normally.
+
+
+[813500]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Left Clamp Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top COK Left Clamp Fw state is normally.
+
+[813501]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Left Clamp Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top COK Left Clamp Bw state is normally.
+
+[813502]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Right Clamp Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top COK Right Clamp Fw state is normally.
+
+[813503]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK Right Clamp Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top COK Right Clamp Bw state is normally.
+
+[813504]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#1 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#1 Fw state is normally.
+
+[813505]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#1 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#1 Bw state is normally.
+
+[813506]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#2 On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#2 state is normally.
+
+[813507]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#2 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#2 Bw state is normally.
+
+[813508]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#3 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#3 Fw state is normally.
+
+[813509]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#3 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#3 Bw state is normally.
+
+[813510]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#4 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#4 Fw state is normally.
+
+[813511]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#4 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#4 Bw state is normally.
+
+[813512]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#5 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#5 Fw state is normally.
+
+[813513]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#5 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#5 Bw state is normally.
+
+[813514]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#6 Fw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#6 Fw state is normally.
+
+[813515]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Socket Insert#6 Bw On Check Error  
+
+2 = Confirm whether Right Testsite Top Socket Insert#6 Bw state is normally.
+
+///////////////////////////////////////////////////////// 3600
+
+[803600]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#1 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#1 state is normally.
+
+[803601]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#2 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#2 state is normally.
+
+[803602]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#3 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#3 state is normally.
+
+[803603]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#4 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#4 state is normally.
+
+[803604]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#5 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#5 state is normally.
+
+[803605]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#6 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#6 state is normally.
+
+[803606]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#7 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#7 state is normally.
+
+[803607]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#8 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#8 state is normally.
+
+[803608]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#9 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#9 state is normally.
+
+[803609]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#10 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#10 state is normally.
+
+[803610]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#11 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#11 state is normally.
+
+[803611]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#12 Off Check Error  
+
+2 = Confirm whether Right Testsite Top COK#12 state is normally.
+
+
+[813600]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#1 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#1 state is normally.
+
+[813601]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#2 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#2 state is normally.
+
+[813602]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#3 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#3 state is normally.
+
+[813603]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#4 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#4 state is normally.
+
+[813604]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#5 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#5 state is normally.
+
+[813605]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#6 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#6 state is normally.
+
+[813606]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#7 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#7 state is normally.
+
+[813607]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#8 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#8 state is normally.
+
+[813608]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#9 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#9 state is normally.
+
+[813609]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#10 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#10 state is normally.
+
+[813610]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#11 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#11 state is normally.
+[813611]
+
+COUNT = 2
+
+1 = It is Right Testsite Top COK#12 On Check Error  
+
+2 = Confirm whether Right Testsite Top COK#12 state is normally.
+
+///////////////////////////////////////////////////////// 3700
+
+[803708]
+
+COUNT = 2
+
+1 = It is Left Manipulator Left Clamp Fw Off Check Error  
+
+2 = Confirm whether Left Manipulator Left Clamp Fw state is normally.
+
+[803709]
+
+COUNT = 2
+
+1 = It is Left Manipulator Left Clamp Bw Off Check Error  
+
+2 = Confirm whether Left Manipulator Left Clamp Bw state is normally.
+
+[803710]
+
+COUNT = 2
+
+1 = It is Left Manipulator Right Clamp Fw Off Check Error  
+
+2 = Confirm whether Left Manipulator Right Clamp Fw state is normally.
+
+[803711]
+
+COUNT = 2
+
+1 = It is Left Manipulator Right Clamp Bw Off Check Error  
+
+2 = Confirm whether Left Manipulator Right Clamp Bw state is normally.
+
+[803712]
+
+COUNT = 2
+
+1 = It is Right Manipulator Left Clamp Fw Off Check Error  
+
+2 = Confirm whether Right Manipulator Left Clamp Fw state is normally.
+
+[803713]
+
+COUNT = 2
+
+1 = It is Right Manipulator Left Clamp Bw Off Check Error  
+
+2 = Confirm whether Right Manipulator Left Clamp Bw state is normally.
+
+[803714]
+
+COUNT = 2
+
+1 = It is Right Manipulator Right Clamp Fw Off Check Error  
+
+2 = Confirm whether Right Manipulator Right Clamp Fw state is normally.
+
+[803715]
+
+COUNT = 2
+
+1 = It is Right Manipulator Right Clamp Bw Off Check Error  
+
+2 = Confirm whether Right Manipulator Right Clamp Bw state is normally.
+
+
+[813708]
+
+COUNT = 2
+
+1 = It is Left Manipulator Left Clamp Fw On Check Error  
+
+2 = Confirm whether Left Manipulator Left Clamp Fw state is normally.
+
+[813709]
+
+COUNT = 2
+
+1 = It is Left Manipulator Left Clamp Bw On Check Error  
+
+2 = Confirm whether Left Manipulator Left Clamp Bw state is normally.
+
+[813710]
+
+COUNT = 2
+
+1 = It is Left Manipulator Right Clamp Fw On Check Error  
+
+2 = Confirm whether Left Manipulator Right Clamp Fw state is normally.
+
+[813711]
+
+COUNT = 2
+
+1 = It is Left Manipulator Right Clamp Bw On Check Error  
+
+2 = Confirm whether Left Manipulator Right Clamp Bw state is normally.
+
+[813712]
+
+COUNT = 2
+
+1 = It is Right Manipulator Left Clamp Fw On Check Error  
+
+2 = Confirm whether Right Manipulator Left Clamp Fw state is normally.
+
+[813713]
+
+COUNT = 2
+
+1 = It is Right Manipulator Left Clamp Bw On Check Error  
+
+2 = Confirm whether Right Manipulator Left Clamp Bw state is normally.
+
+[813714]
+
+COUNT = 2
+
+1 = It is Right Manipulator Right Clamp Fw On Check Error  
+
+2 = Confirm whether Right Manipulator Right Clamp Fw state is normally.
+
+[813715]
+
+COUNT = 2
+
+1 = It is Right Manipulator Right Clamp Bw On Check Error  
+
+2 = Confirm whether Right Manipulator Right Clamp Bw state is normally.
+
+/////////////////////////////////////////////////////////4000
+
+[804006]
+
+COUNT = 2
+
+1 = It is COK Change COK Clamp Fw Off Check Error  
+
+2 = Confirm whether COK Change COK Clamp Fw state is normally.
+
+[804007]
+
+COUNT = 2
+
+1 = It is COK Change COK Clamp Bw Off Check Error  
+
+2 = Confirm whether COK Change COK Clamp Bw state is normally.
+
+[804008]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#1 Off Check Error  
+
+2 = Confirm whether COK Change COK Empty#1 state is normally.
+
+[804009]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#1 Off Check Error  
+
+2 = Confirm whether COK Change COK Up Position#1 state is normally.
+
+[804010]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#2 Off Check Error  
+
+2 = Confirm whether COK Change COK Empty#2 state is normally.
+
+[804011]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#2 Off Check Error  
+
+2 = Confirm whether COK Change COK Up Position#2 state is normally.
+
+[804012]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#3 Off Check Error  
+
+2 = Confirm whether COK Change COK Empty#3 state is normally.
+
+[804013]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#3 Off Check Error  
+
+2 = Confirm whether COK Change COK Up Position#3 state is normally.
+
+[804014]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#4 Off Check Error  
+
+2 = Confirm whether COK Change COK Empty#4 state is normally.
+
+[804015]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#4 Off Check Error  
+
+2 = Confirm whether COK Change COK Up Position#4 state is normally.
+
+
+[814006]
+
+COUNT = 2
+
+1 = It is COK Change COK Clamp Fw On Check Error  
+
+2 = Confirm whether COK Change COK Clamp Fw state is normally.
+
+[814007]
+
+COUNT = 2
+
+1 = It is COK Change COK Clamp Bw On Check Error  
+
+2 = Confirm whether COK Change COK Clamp Bw state is normally.
+
+[814008]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#1 On Check Error  
+
+2 = Confirm whether COK Change COK Empty#1 state is normally.
+
+[814009]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#1 On Check Error  
+
+2 = Confirm whether COK Change COK Up Position#1 state is normally.
+
+[814010]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#2 On Check Error  
+
+2 = Confirm whether COK Change COK Empty#2 state is normally.
+
+[814011]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#2 On Check Error  
+
+2 = Confirm whether COK Change COK Up Position#2 state is normally.
+
+[814012]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#3 On Check Error  
+
+2 = Confirm whether COK Change COK Empty#3 state is normally.
+
+[814013]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#3 On Check Error  
+
+2 = Confirm whether COK Change COK Up Position#3 state is normally.
+
+[814014]
+
+COUNT = 2
+
+1 = It is COK Change COK Empty#4 On Check Error  
+
+2 = Confirm whether COK Change COK Empty#4 state is normally.
+
+[814015]
+
+COUNT = 2
+
+1 = It is COK Change COK Up Position#4 On Check Error  
+
+2 = Confirm whether COK Change COK Up Position#4 state is normally.
+
+///////////////////////////////////////////////////////// 4100
+
+[804108]
+
+COUNT = 2
+
+1 = It is Reject Gripper Clamp Fw Off Check Error  
+
+2 = Confirm whether Reject Gripper Clamp Fw state is normally.
+
+[804109]
+
+COUNT = 2
+
+1 = It is Reject Gripper Clamp Bw Off Check Error  
+
+2 = Confirm whether Reject Gripper Clamp Bw state is normally.
+
+[804110]
+
+COUNT = 2
+
+1 = It is Reject Gripper Tray Exist Check Error  
+
+2 = Confirm whether Reject Gripper Tray Exist state is normally.
+
+[804111]
+
+COUNT = 2
+
+1 = It is Reject Gripper Up/Down Fw Off Check Error  
+
+2 = Confirm whether Reject Gripper Up/Down state is normally.
+
+[804112]
+
+COUNT = 2
+
+1 = It is Reject Gripper Up/Down Bw Off Check Error  
+
+2 = Confirm whether Reject Bottom Tray Exist state is normally.
+
+[804113]
+
+COUNT = 2
+
+1 = It is Reject Push Fw Off Check Error
+
+2 = Confirm whether Reject Push state is normally.
+
+[804114]
+
+COUNT = 2
+
+1 = It is Reject Push Bw Off Check Error
+
+2 = Confirm whether Reject Push state is normally.
+
+
+[814108]
+
+COUNT = 2
+
+1 = It is Reject Gripper Clamp Fw On Check Error  
+
+2 = Confirm whether Reject Gripper Clamp Fw state is normally.
+
+[814109]
+
+COUNT = 2
+
+1 = It is Reject Gripper Clamp Bw On Check Error  
+
+2 = Confirm whether Reject Gripper Clamp Bw state is normally.
+
+[814110]
+
+COUNT = 2
+
+1 = It is Reject Gripper Tray Exist Check Error  
+
+2 = Confirm whether Reject Gripper Tray Exist state is normally.
+
+[814111]
+
+COUNT = 2
+
+1 = It is Reject Gripper Up/Down Fw On Check Error  
+
+2 = Confirm whether Reject Gripper Up/Down state is normally.
+
+[814112]
+
+COUNT = 2
+
+1 = It is Reject Gripper Up/Down Bw On Check Error  
+
+2 = Confirm whether Reject Bottom Tray Exist state is normally.
+
+[814113]
+
+COUNT = 2
+
+1 = It is Reject Push Fw On Check Error
+
+2 = Confirm whether Reject Push state is normally.
+
+[814114]
+
+COUNT = 2
+
+1 = It is Reject Push Bw On Check Error
+
+2 = Confirm whether Reject Push state is normally.
+
+
+
+/////////////////////////////////////////////////////////4200
+
+[804204]
+
+COUNT = 2
+
+1 = It is Low Door#1 Safety Off Check Error  
+
+2 = Confirm whether Low Door#1 Safety state is normally.
+
+[804205]
+
+COUNT = 2
+
+1 = It is Low Door#2 Safety Off Check Error  
+
+2 = Confirm whether Low Door#2 Safety state is normally.
+
+[804206]
+
+COUNT = 2
+
+1 = It is Low Door#3 Safety Off Check Error  
+
+2 = Confirm whether Low Door#3 Safety state is normally.
+
+[804207]
+
+COUNT = 2
+
+1 = It is Low Door#4 Safety Off Check Error  
+
+2 = Confirm whether Low Door#4 Safety state is normally.
+
+[804208]
+
+COUNT = 2
+
+1 = It is Low Door#5 Safety Off Check Error  
+
+2 = Confirm whether Low Door#5 Safety state is normally.
+
+[804211]
+
+COUNT = 2
+
+1 = It is Left Manipulator Z Up Push Switch Lamp Off Check Error  
+
+2 = Confirm whether Left Manipulator Z Up Push Switch Lamp state is normally.
+
+[804212]
+
+COUNT = 2
+
+1 = It is Left Manipulator Z Down Push Switch Lamp Off Check Error  
+
+2 = Confirm whether Left Manipulator Z Down Push Switch Lamp state is normally.
+
+[804213]
+
+COUNT = 2
+
+1 = It is Right Manipulator Z Up Push Switch Lamp Off Check Error  
+
+2 = Confirm whether Right Manipulator Z Up Push Switch Lamp state is normally.
+
+[804214]
+
+COUNT = 2
+
+1 = It is Right Manipulator Z Down Push Switch Lamp Off Check Error  
+
+2 = Confirm whether Right Manipulator Z Down Push Switch Lamp state is normally.
+
+
+[814204]
+
+COUNT = 2
+
+1 = It is Low Door#1 Safety On Check Error  
+
+2 = Confirm whether Low Door#1 Safety state is normally.
+
+[814205]
+
+COUNT = 2
+
+1 = It is Low Door#2 Safety On Check Error  
+
+2 = Confirm whether Low Door#2 Safety state is normally.
+
+[814206]
+
+COUNT = 2
+
+1 = It is Low Door#3 Safety On Check Error  
+
+2 = Confirm whether Low Door#3 Safety state is normally.
+
+[814207]
+
+COUNT = 2
+
+1 = It is Low Door#4 Safety On Check Error  
+
+2 = Confirm whether Low Door#4 Safety state is normally.
+
+[814208]
+
+COUNT = 2
+
+1 = It is Low Door#5 Safety On Check Error  
+
+2 = Confirm whether Low Door#5 Safety state is normally.
+
+[814211]
+
+COUNT = 2
+
+1 = It is Left Manipulator Z Up Push Switch Lamp On Check Error  
+
+2 = Confirm whether Left Manipulator Z Up Push Switch Lamp state is normally.
+
+[814212]
+
+COUNT = 2
+
+1 = It is Left Manipulator Z Down Push Switch Lamp On Check Error  
+
+2 = Confirm whether Left Manipulator Z Down Push Switch Lamp state is normally.
+
+[814213]
+
+COUNT = 2
+
+1 = It is Right Manipulator Z Up Push Switch Lamp On Check Error  
+
+2 = Confirm whether Right Manipulator Z Up Push Switch Lamp state is normally.
+
+[814214]
+
+COUNT = 2
+
+1 = It is Right Manipulator Z Down Push Switch Lamp On Check Error  
+
+2 = Confirm whether Right Manipulator Z Down Push Switch Lamp state is normally.
+
+/////////////////////////////////////////////////////////4300
+
+[804308]
+
+COUNT = 2
+
+1 = It is Reject Empty High Tray Exist Off Check Error
+
+2 = Confirm whether Reject Empty High Tray state is normally.
+
+[804309]
+
+COUNT = 2
+
+1 = It is Reject Empty Low Tray Exist Off Check Error
+
+2 = Confirm whether Reject Empty Low Tray state is normally.
+
+[804310]
+
+COUNT = 2
+
+1 = It is Reject Full High Tray Exist Off Check Error
+
+2 = Confirm whether Reject Full High Tray state is normally.
+
+[804311]
+
+COUNT = 2
+
+1 = It is Reject Full Low Tray Exist Off Check Error
+
+2 = Confirm whether Reject Full Low Tray state is normally.
+
+[804312]
+
+COUNT = 2
+
+1 = It is Reject Tray Align Fw Off Check Error
+
+2 = Confirm whether Reject Tray Align state is normally.
+
+[804313]
+
+COUNT = 2
+
+1 = It is Reject Tray Align Bw Off Check Error
+
+2 = Confirm whether Reject Tray Align state is normally.
+
+[804314]
+
+COUNT = 2
+
+1 = It is Reject Empty Stacker Position Off Check Error
+
+2 = Confirm whether Reject Empty Stacker state is normally.
+
+[804315]
+
+COUNT = 2
+
+1 = It is Reject Full Stacker Position Off Check Error
+
+2 = Confirm whether Reject Full Stacker state is normally.
+
+
+
+[814308]
+
+COUNT = 2
+
+1 = It is Reject Empty High Tray Exist On Check Error
+
+2 = Confirm whether Reject Empty High Tray state is normally.
+
+[814309]
+
+COUNT = 2
+
+1 = It is Reject Empty Low Tray Exist On Check Error
+
+2 = Confirm whether Reject Empty Low Tray state is normally.
+
+[814310]
+
+COUNT = 2
+
+1 = It is Reject Full High Tray Exist On Check Error
+
+2 = Confirm whether Reject Full High Tray state is normally.
+
+[814311]
+
+COUNT = 2
+
+1 = It is Reject Full Low Tray Exist On Check Error
+
+2 = Confirm whether Reject Full Low Tray state is normally.
+
+[814312]
+
+COUNT = 2
+
+1 = It is Reject Tray Align Fw On Check Error
+
+2 = Confirm whether Reject Tray Align state is normally.
+
+[814313]
+
+COUNT = 2
+
+1 = It is Reject Tray Align Bw On Check Error
+
+2 = Confirm whether Reject Tray Align state is normally.
+
+[814314]
+
+COUNT = 2
+
+1 = It is Reject Empty Stacker Position On Check Error
+
+2 = Confirm whether Reject Empty Stacker state is normally.
+
+[814315]
+
+COUNT = 2
+
+1 = It is Reject Full Stacker Position On Check Error
+
+2 = Confirm whether Reject Full Stacker state is normally.
+
+/////////////////////////////////////////////////////////5100
+
+[805108]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo1 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo1 state is normally.
+
+[805109]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo2 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo2 state is normally.
+
+[805110]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo3 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo3 state is normally.
+
+[805111]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo4 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo4 state is normally.
+
+[805112]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo5 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo5 state is normally.
+
+[805113]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo6 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo6 state is normally.
+
+[805114]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo7 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo7 state is normally.
+
+[805115]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo8 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo8 state is normally.
+
+
+[815108]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo1 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo1 state is normally.
+
+[815109]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo2 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo2 state is normally.
+
+[815110]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo3 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo3 state is normally.
+
+[815111]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo4 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo4 state is normally.
+
+[815112]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo5 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo5 state is normally.
+
+[815113]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo6 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo6 state is normally.
+
+[815114]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo7 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo7 state is normally.
+
+[815115]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo8 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo8 state is normally.
+
+/////////////////////////////////////////////////////////5200
+
+[805200]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo9 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo9 state is normally.
+
+[805201]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo10 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo10 state is normally.
+
+[805202]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo11 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo11 state is normally.
+
+[805203]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo12 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo12 state is normally.
+
+[805204]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo1 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo1 state is normally.
+
+[805205]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo2 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo2 state is normally.
+
+[805206]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo3 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo3 state is normally.
+
+[805207]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo4 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo4 state is normally.
+
+[805208]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo5 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo5 state is normally.
+
+[805209]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo6 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo6 state is normally.
+
+[805210]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo7 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo7 state is normally.
+
+[805211]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo8 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo8 state is normally.
+
+[805212]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo9 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo9 state is normally.
+
+[805213]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo10 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo10 state is normally.
+
+[805214]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo11 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo11 state is normally.
+
+[805215]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo12 Fw Off Check Error
+
+2 = Confirm whether Left Testsite Top Pogo12 state is normally.
+
+
+[815200]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo9 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo9 state is normally.
+
+[815201]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo10 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo10 state is normally.
+
+[815202]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo11 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo11 state is normally.
+
+[815203]
+
+COUNT = 2
+
+1 = It is Left Testsite Bottom Pogo12 Fw On Check Error
+
+2 = Confirm whether Left Testsite Bottom Pogo12 state is normally.
+
+[815204]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo1 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo1 state is normally.
+
+[815205]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo2 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo2 state is normally.
+
+[815206]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo3 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo3 state is normally.
+
+[815207]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo4 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo4 state is normally.
+
+[815208]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo5 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo5 state is normally.
+
+[815209]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo6 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo6 state is normally.
+
+[815210]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo7 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo7 state is normally.
+
+[815211]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo8 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo8 state is normally.
+
+[815212]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo9 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo9 state is normally.
+
+[815213]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo10 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo10 state is normally.
+
+[815214]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo11 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo11 state is normally.
+
+[815215]
+
+COUNT = 2
+
+1 = It is Left Testsite Top Pogo12 Fw On Check Error
+
+2 = Confirm whether Left Testsite Top Pogo12 state is normally.
+
+/////////////////////////////////////////////////////////5400
+
+[805408]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo1 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo1 state is normally.
+
+[805409]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo2 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo2 state is normally.
+
+[805410]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo3 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo3 state is normally.
+
+[805411]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo4 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo4 state is normally.
+
+[805412]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo5 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo5 state is normally.
+
+[805413]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo6 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo6 state is normally.
+
+[805414]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo7 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo7 state is normally.
+
+[805415]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo8 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo8 state is normally.
+
+
+[815408]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo1 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo1 state is normally.
+
+[815409]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo2 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo2 state is normally.
+
+[815410]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo3 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo3 state is normally.
+
+[815411]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo4 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo4 state is normally.
+
+[815412]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo5 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo5 state is normally.
+
+[815413]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo6 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo6 state is normally.
+
+[815414]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo7 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo7 state is normally.
+
+[815415]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo8 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo8 state is normally.
+
+/////////////////////////////////////////////////////////5500
+
+[805500]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo9 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo9 state is normally.
+
+[805501]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo10 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo10 state is normally.
+
+[805502]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo11 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo11 state is normally.
+
+[805503]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo12 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo12 state is normally.
+
+[805504]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo1 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo1 state is normally.
+
+[805505]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo2 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo2 state is normally.
+
+[805506]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo3 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo3 state is normally.
+
+[805507]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo4 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo4 state is normally.
+
+[805508]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo5 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo5 state is normally.
+
+[805509]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo6 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo6 state is normally.
+
+[805510]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo7 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo7 state is normally.
+
+[805511]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo8 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo8 state is normally.
+
+[805512]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo9 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo9 state is normally.
+
+[805513]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo10 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo10 state is normally.
+
+[805514]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo11 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo11 state is normally.
+
+[805515]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo12 Fw Off Check Error
+
+2 = Confirm whether Right Testsite Top Pogo12 state is normally.
+
+
+[815500]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo9 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo9 state is normally.
+
+[815501]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo10 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo10 state is normally.
+
+[815502]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo11 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo11 state is normally.
+
+[815503]
+
+COUNT = 2
+
+1 = It is Right Testsite Bottom Pogo12 Fw On Check Error
+
+2 = Confirm whether Right Testsite Bottom Pogo12 state is normally.
+
+[815504]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo1 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo1 state is normally.
+
+[815505]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo2 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo2 state is normally.
+
+[815506]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo3 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo3 state is normally.
+
+[815507]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo4 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo4 state is normally.
+
+[815508]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo5 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo5 state is normally.
+
+[815509]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo6 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo6 state is normally.
+
+[815510]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo7 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo7 state is normally.
+
+[815511]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo8 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo8 state is normally.
+
+[815512]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo9 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo9 state is normally.
+
+[815513]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo10 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo10 state is normally.
+
+[815514]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo11 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo11 state is normally.
+
+[815515]
+
+COUNT = 2
+
+1 = It is Right Testsite Top Pogo12 Fw On Check Error
+
+2 = Confirm whether Right Testsite Top Pogo12 state is normally.
+
+///////////////////////////////////////////////////////
+
+//  00 : Magazine Transfer X
+
+///////////////////////////////////////////////////////
+
+[900600]
+
+COUNT = 1
+
+1 = Model is Not Correct Error.
+
+
+
+[990000]
+
+COUNT = 1
+
+1 = Lot End
+
+
+
+[998100]
+
+COUNT = 1
+
+1 = AMT UF100 Module Handler Is Ok!
+
+
+
+[999999]
+
+COUNT = 1
+
+1 = AMT UF100 Module Handler Alarm Message.
+
+
+

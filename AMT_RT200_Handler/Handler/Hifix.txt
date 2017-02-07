@@ -1,0 +1,6 @@
+[I-TEST]
+Total=4
+1=PCIe
+2=M-SATA
+3=PCI
+4=SATA

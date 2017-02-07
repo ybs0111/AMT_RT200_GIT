@@ -1,0 +1,12 @@
+1. FTP SCRAP_CODE
+ - 5/30 완료
+
+2. Barcode 연속 Fail시 메세지 처리
+ - 5/30 완료 
+
+3. SCRAP CODE 변경 프로토콜 작업
+ - 5/30 완료
+
+4. Rework Mode
+
+5. PartNo 비교처리

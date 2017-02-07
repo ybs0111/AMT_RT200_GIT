@@ -1,0 +1,6 @@
+03/09/15 09:30:35 , [TCP/IP] INTERFACE_NETWORK Server Open Success.
+03/09/15 09:30:35 , [TCP/IP] FRONT_NETWORK Server Open Success.
+03/09/15 09:30:35 , [TCP/IP] TTS_VNR_NETWORK Server Open Success.
+03/09/15 09:30:35 , Alarm Code = 810200
+03/09/15 09:30:40 , [INIT] Equipment's Init Failure
+03/09/15 09:30:40 , [Now RUNNING] do first STOP Switch
