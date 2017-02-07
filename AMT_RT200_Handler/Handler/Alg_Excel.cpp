@@ -11,7 +11,7 @@ CAlg_Excel::CAlg_Excel(void)
 
 
 CAlg_Excel::~CAlg_Excel(void)
-{
+{//ybs setup
 }
 
 
