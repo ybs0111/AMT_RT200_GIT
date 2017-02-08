@@ -72,7 +72,7 @@ tagLOT_HISTORY_INFO			st_lot_history_info;
 tagPART_INFO				st_part_info;
 tagTYPE_INFO				st_type_info;
 tagPICKER_DATA_INFO			st_Picker_info; //kwlee 2017.0204
-tagBUFFER_DATA_INFO			st_Buffer_info;
+tagBUFFER_DATA_INFO			st_Buffer_info[3];
 /* 2015.0108
 // loader picker ±¸Á¶Ã¼
 tagLD_PICKER_INFO			st_ld_picker_info[MAX_PICKER];
