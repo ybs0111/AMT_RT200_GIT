@@ -2028,6 +2028,7 @@ void CRunRobot::OnRobotRun()
 		//1. Print 출력 Cnt 증가.
 		//2. Serial Data 무조건 저장.
 		//3. 로봇이 다른 작업 중 출력 할수 있도록 수정 해야함.
+		//4. Fail 시 Buffer 관리 추가 해야 함.
 	case 3100:
 // 		if( m_nLabelFailCheck == TRUE)
 // 		{
@@ -2038,12 +2039,18 @@ void CRunRobot::OnRobotRun()
 // 		}
 // 		else
 // 		{
-		if (st_Picker_info.nPickerFailCnt == 1 && m_nLabelFailCheck == TRUE)
+		if ( m_nLabelFailCheck == TRUE)
 		{
-
+			if (st_Picker_info.nPickerFailCnt == 1)
+			{
+			}
+			else
+			{
+				OnBufferDataTransfer();
+			}
 		}
-		else
-		{
+		//else
+		//{
 // 			if (m_nLabelFailCheck == TRUE)
 // 			{
 // 				nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
@@ -2062,12 +2069,13 @@ void CRunRobot::OnRobotRun()
 // 					//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
 // 				}
 // 			}
-			nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
-			if (nRet == RET_GOOD)
-			{
-				m_nPrintOutPutCnt++;
-				//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
-			}
+			
+	//	}
+		nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
+		if (nRet == RET_GOOD)
+		{
+			m_nPrintOutPutCnt++;
+			//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
 		}
 		//}
 // 		}
@@ -2086,6 +2094,7 @@ void CRunRobot::OnRobotRun()
 		//kwlee 2017.0119 Barcode Read
 		//1. 바코드 Read
 		//2. 양품인지 확인.
+		
 	case 3200:
 		//if (FAS_IO.get_in_bit(st_io_info.i_LabelFeederProductChk1,IO_ON) && m_nPrintOutPutCnt >= 16)
 		//kwlee 2017.0204
@@ -2172,14 +2181,12 @@ void CRunRobot::OnRobotRun()
 		if (m_nLabelFailCheck == TRUE)
 		{
 			OnVaccummSet(1,m_nPickCnt,IO_ON);
-			m_nRunStep = 7000;
 		}
 		else
 		{
 			OnVaccummSet(0,m_nPickCnt,IO_ON);
-			m_nRunStep = 6000;
 		}
-		
+		m_nRunStep = 6000;
 		break;
 
 	case 6000:	
@@ -2737,7 +2744,8 @@ void CRunRobot::OnRobotRun()
 			//kwlee 2017.0204
 			if (m_nLabelFailCheck == TRUE)
 			{
-				m_nRunStep = 3100;
+				//m_nRunStep = 3100;
+				m_nRunStep = 2000;
 			}
 			else
 			{
