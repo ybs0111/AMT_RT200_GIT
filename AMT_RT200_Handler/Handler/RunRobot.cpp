@@ -49,7 +49,7 @@ CRunRobot::CRunRobot(void)
 	
 	for (int i = 0; i<2; i++)
 	{
-		for (int j =0; j<MAX_BUFFER; j++)
+		for (int j =0; j<MAX_PICKER; j++)
 		{
 			for (int k =0; k< MAX_INFO; k++)
 			{

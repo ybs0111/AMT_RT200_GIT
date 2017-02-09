@@ -690,6 +690,7 @@
     <ClInclude Include="XLAutomation.h" />
     <ClInclude Include="XPGroupBox.h" />
     <ClInclude Include="xShadeButton.h" />
+    <ClInclude Include="ZebraPrint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ACriticalSection.cpp" />
@@ -811,6 +812,7 @@
     <ClCompile Include="XLAutomation.cpp" />
     <ClCompile Include="XPGroupBox.cpp" />
     <ClCompile Include="xShadeButton.cpp" />
+    <ClCompile Include="ZebraPrint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Handler.rc" />

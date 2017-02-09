@@ -127,9 +127,11 @@ public:
 	afx_msg void OnPgminfo();
 	afx_msg LRESULT OnClientEcFirst(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnClientXgem(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnClientZebraPrint(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnClientRfid(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnServerGms(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnServerFront(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnServerZebraPrinter(WPARAM wParam, LPARAM lParam);	
 	afx_msg LRESULT OnClientFtp(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnNcLButtonDblClk(UINT nHitTest, CPoint point);
 	afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);

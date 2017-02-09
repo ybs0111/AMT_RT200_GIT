@@ -13,6 +13,7 @@
 #include "CtlBd_Library.h"
 #include "math.h"
 #include "ACriticalSection.h"
+#include "ZebraPrint.h"
 
 CPublicFunction clsFunc;
 
@@ -28,7 +29,8 @@ CPublicFunction::CPublicFunction(void)
 		m_pFont[i]	= new CFont;
 		m_pFont[i]->CreateFont(i + 10,0,0,0,900,0,0,0,0,0,0,ANTIALIASED_QUALITY,0, _T("MS Sans Serif"));		//Bitstream Vera Sans Mono
 	}
-
+	m_pZebra[0]		= NULL;
+	m_pZebra[0]		= new CZebraPrint;
 	m_ArLotHistory.RemoveAll();
 }
 
@@ -44,6 +46,11 @@ CPublicFunction::~CPublicFunction(void)
 			delete m_pFont[i];
 			m_pFont[i] = NULL;
 		}
+	}
+	if (m_pZebra[0] != NULL)
+	{
+		delete m_pZebra[0];
+		m_pZebra[0] = NULL;
 	}
 }
 

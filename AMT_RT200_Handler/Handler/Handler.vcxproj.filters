@@ -115,6 +115,7 @@
     <ClCompile Include="RunPicker.cpp" />
     <ClCompile Include="Barcode_1D.cpp" />
     <ClCompile Include="Barcode_2D.cpp" />
+    <ClCompile Include="ZebraPrint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="32bit\FAS_HSSI.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="RunPicker.h" />
     <ClInclude Include="Barcode_1D.h" />
     <ClInclude Include="Barcode_2D.h" />
+    <ClInclude Include="ZebraPrint.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Handler.rc" />
