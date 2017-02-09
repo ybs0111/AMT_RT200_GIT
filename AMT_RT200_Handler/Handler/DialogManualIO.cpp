@@ -1978,7 +1978,7 @@ int CDialogManualIO::OnRobotRelayMove()
 			//붙이는 작업 
 		case 16100:
 			//for (int i =0; i<PICKCNT; i++ )
-			for (int i =0; i < m_nPickCnt; i++ )
+			for (int i =0; i < TOTAL_PICK; i++ )
 			{
 				if(m_bSecondPos == false)
 				{
@@ -2033,7 +2033,7 @@ int CDialogManualIO::OnRobotRelayMove()
 			break;
 
 		case 19000:
-			for (int i =0; i<m_nPickCnt; i++ )
+			for (int i =0; i<TOTAL_PICK; i++ )
 			{
 				if(m_bSecondPos == false)
 				{
@@ -2063,7 +2063,7 @@ int CDialogManualIO::OnRobotRelayMove()
 			break;
 
 		case 19100:
-			for (int i =0; i<m_nPickCnt; i++ )
+			for (int i =0; i<TOTAL_PICK; i++ )
 			{
 				if(m_bSecondPos == false)
 				{
@@ -2098,7 +2098,7 @@ int CDialogManualIO::OnRobotRelayMove()
 		case 20000:
 			// loader robot picker up 요청
 			//for (int i =0; i<PICKCNT; i++ )
-			for (int i =0; i<m_nPickCnt; i++ )
+			for (int i =0; i<TOTAL_PICK; i++ )
 			{
 				//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 				if(m_bSecondPos == false)
