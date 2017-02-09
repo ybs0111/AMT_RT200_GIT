@@ -46,17 +46,19 @@ CRunRobot::CRunRobot(void)
 	//kwlee 2017.0204
 	m_nPrintOutPutCnt = 0; 
 	m_nLabelFailCheck = FALSE;
+
+	// 	for (int i = 0; i<2; i++)
+	// 	{
+	// 		for (int j =0; j<MAX_BUFFER; j++)
+	// 		{
+	// 			for (int k =0; k< MAX_INFO; k++)
+	// 			{
+	// 				st_Picker_info.nPickerData[i][j][k]  = 0;
+	// 			}
+	// 		}
+	// 	}
 	
-	for (int i = 0; i<2; i++)
-	{
-		for (int j =0; j<MAX_BUFFER; j++)
-		{
-			for (int k =0; k< MAX_INFO; k++)
-			{
-				st_Picker_info.nPickerData[i][j][k]  = 0;
-			}
-		}
-	}
+
 }
 
 
@@ -400,7 +402,28 @@ void CRunRobot::OnSetPickerUpDn(int  nPickCnt)
 }
 void CRunRobot::OnBufferDataTransfer()
 {
+	for (int i =0; i<2; i++)
+	{
+		for (int j =0; j<MAX_BUFFER; j++)
+		{
+			for (int k =0; j<MAX_INFO; k++)
+			{
+				if (st_Buffer_info[PICK].strBufferSerial[i][MAX_PICKER + j] != _T(""))
+				{
+					st_Buffer_info[TEMP].nBufferData[i][j][k] =  st_Buffer_info[PICK].nBufferData[i][m_nPrintOutPutCnt + j][k];
+					st_Buffer_info[TEMP].strBufferSerial[i][j] =  st_Buffer_info[PICK].strBufferSerial[i][m_nPrintOutPutCnt + j];
 
+					st_Buffer_info[PICK].nBufferData[i][j][k] = st_Buffer_info[TEMP].nBufferData[i][j][k];
+					st_Buffer_info[PICK].strBufferSerial[i][j] = st_Buffer_info[TEMP].strBufferSerial[i][j];
+					m_nEmptyCntBuffer++;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+	}
 }
 void CRunRobot::OnDataExchange(int nPickPlace,int nFailCheck)
 {
@@ -1083,7 +1106,7 @@ int CRunRobot::OnPrinterFeeder(int nCnt, int nFailCheck)
 // 	}
 	//Printer Alarm 시 알람
 	///
-
+	
 	switch(m_nFeederStep)
 	{
 		case 0:
@@ -2034,67 +2057,29 @@ void CRunRobot::OnRobotRun()
 // 		{
 			//m_nRunStep = 3200;
 		//kwlee 2017.0204 
-// 		if (st_Picker_info.nPickerFailCnt == 1 || m_nLabelFailCheck == TRUE)
-// 		{
-// 		}
-// 		else
-// 		{
 		if ( m_nLabelFailCheck == TRUE)
 		{
 			if (st_Picker_info.nPickerFailCnt == 1)
 			{
+
 			}
 			else
 			{
 				OnBufferDataTransfer();
 			}
 		}
-		//else
-		//{
-// 			if (m_nLabelFailCheck == TRUE)
-// 			{
-// 				nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
-// 				if (nRet == RET_GOOD)
-// 				{
-// 					m_nPrintOutPutCnt++;
-// 					//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
-// 				}
-// 			}
-// 			else
-// 			{
-// 				nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
-// 				if (nRet == RET_GOOD)
-// 				{
-// 					m_nPrintOutPutCnt++;
-// 					//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
-// 				}
-// 			}
-			
-	//	}
 		nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
 		if (nRet == RET_GOOD)
 		{
 			m_nPrintOutPutCnt++;
 			//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
 		}
-		//}
-// 		}
-// 		else 
-// 		{
-// 			nRet = OnPrinterFeeder(m_nPrintOutPutCnt);
-// 			if (nRet == RET_GOOD)
-// 			{
-// 				m_nPrintOutPutCnt++;
-// 				st_Buffer_info.nOutPutCnt = m_nPrintOutPutCnt;	
-// 			}
-// 		}
 		m_nRunStep = 3200;
 		break;
 
 		//kwlee 2017.0119 Barcode Read
 		//1. 바코드 Read
 		//2. 양품인지 확인.
-		
 	case 3200:
 		//if (FAS_IO.get_in_bit(st_io_info.i_LabelFeederProductChk1,IO_ON) && m_nPrintOutPutCnt >= 16)
 		//kwlee 2017.0204
@@ -2122,15 +2107,6 @@ void CRunRobot::OnRobotRun()
 		if( m_dwTimeCheck[2] <= 0 ) m_dwTimeCheck[0] = GetCurrentTime();
 		if( m_dwTimeCheck[2] >  1000 )
 		{
-// 			nRet = OnBarcodeReadCheck();
-// 			if (nRet == RET_GOOD)
-// 			{
-// 
-// 			}
-// 			else
-// 			{
-// 				m_nLabelFailCheck = TRUE;
-// 			}
 // 			//Label Pick 동작..
 // 			OnSetLabelPick(0,m_nPickCnt); 
 // 			clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
@@ -2497,7 +2473,6 @@ void CRunRobot::OnRobotRun()
 		// 			}
 		// 
 		// 			break;
-
 	case 7300:	
 		//z축 up
 		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_PICKERRBT_Z, st_motor_info[M_PICKERRBT_Z].d_pos[ROBOT_SAFETY], COMI.mn_runspeed_rate);
@@ -2623,6 +2598,7 @@ void CRunRobot::OnRobotRun()
 			st_Buffer_info[PICK].nBufferFailCnt = nCnt;
 			m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;
 			OnDataExchange(PICK,m_nLabelFailCheck);
+
 			if(nCnt == 0)
 			{
 				m_nLabelFailCheck = FALSE;
@@ -2749,7 +2725,10 @@ void CRunRobot::OnRobotRun()
 			}
 			else
 			{
-				m_nRunStep = 7500;
+				//모두 집었다.
+				//정상 이다.
+				//m_nRunStep = 7500;
+				m_nRunStep = 9000;
 			}
 			break;
 
@@ -2774,8 +2753,7 @@ void CRunRobot::OnRobotRun()
 // 			}
 // 			break;
 
-	//모두 집었다.
-	//정상 이다.
+	
 	case 7500:
 // 		if (st_basic_info.nPcbType == UDIMM_9 || st_basic_info.nPcbType == UDIMM_10 || 
 // 			st_basic_info.nPcbType == SODIMM || st_basic_info.nPcbType == RDIMM)
@@ -2811,7 +2789,7 @@ void CRunRobot::OnRobotRun()
 
 			//kwlee 2017.0111
 			
-			m_nRunStep = 9000;
+			//m_nRunStep = 9000;
 			//m_nLabelFailCheck = FALSE;
 		///	OnFeederReq(COM_CLEAR);
 		//}

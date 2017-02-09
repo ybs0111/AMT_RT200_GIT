@@ -32,7 +32,7 @@ public:
 	int             m_nJobNextPos; //kwlee 2016.1229
 	//kwlee 2017.0204
 	int             m_nPrintOutPutCnt;
-	int             m_nLabelCnt;
+	int             m_nEmptyCntBuffer;
 	CString         m_strPrintSerial[2];
 	int             m_nLabelFailCheck;
 	CString			m_strAlarmCode;	

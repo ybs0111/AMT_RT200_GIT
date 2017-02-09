@@ -1255,7 +1255,7 @@ struct tagPICKER_DATA_INFO
 
 	CString strPickerSerial[2][30];
 };
-extern  tagPICKER_DATA_INFO  st_Picker_info;
+extern tagPICKER_DATA_INFO  st_Picker_info;
 //
 
 struct tagBUFFER_DATA_INFO
@@ -1266,7 +1266,7 @@ struct tagBUFFER_DATA_INFO
 	int nBufferFailCnt;
 	
 };
-extern  tagBUFFER_DATA_INFO  st_Buffer_info[3];
+extern tagBUFFER_DATA_INFO  st_Buffer_info[3];
 
 enum LAMP_CTRL
 {
