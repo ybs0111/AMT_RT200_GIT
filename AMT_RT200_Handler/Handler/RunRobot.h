@@ -64,8 +64,9 @@ public:
 	void    OnSetLabelPick(int nMode, int nPickCnt);
 	void    OnSetPickerUpDn(int nPickCnt);
 	void    OnVaccummSet(int nMode, int nPickCnt,int OnOff);
-	void    OnBlowSet(int OnOff);
-	void     OnGetPickCheck(int nMode, int nPickCnt);
+	//void    OnBlowSet(int OnOff);
+	void    OnBlowSet(int nMode, int OnOff);
+	void    OnGetPickCheck(int nMode, int nPickCnt);
 	
 	int     OnGetVaccumgmCheck(int OnOff,int nPickCnt);
 	void    OnDataExchange(int nPickPlace,int nFailCheck);

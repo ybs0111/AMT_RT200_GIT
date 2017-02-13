@@ -1415,8 +1415,11 @@ struct tagIO_INFO
 	// Module No 07
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	int		o_LabelFeederMotorOn;							// S0700
-	int		o_LabelFeederClmpOn1;							// S0701
-	int		o_LabelFeederClmpOn2;							// S0702
+	//int		o_LabelFeederClmpOn1;							// S0701
+	//int		o_LabelFeederClmpOn2;							// S0702
+	//kwlee 2017.0210
+	int		o_LabelFeederClmpOff;							// S0701
+	int		o_LabelFeederClmpOn;							// S0702
 	// S0703
 	int		o_PcReady;										//S0704
 	int		o_PcComplete;									//S0705
@@ -1444,7 +1447,10 @@ struct tagIO_INFO
 	int		o_Rear_Label_Complete;			//S1003
 	int		o_LabelInterface5;				//S1004
 	int		o_LabelInterface6;				//S1005 
-	int		o_LabelInterface7;				//S1006 
+	//int		o_LabelInterface7;				//S1006 
+	//kwlee 2017.0210
+	int		o_LabelRejectCylinderDn;		//S1006 
+	int		o_LabelRejectCylinderUp;		//S1007 
 
 	int		i_LabelFeederProductChk1_1;		//PS1000
 	int		i_LabelFeederProductChk2_1;		//PS1001
@@ -1452,6 +1458,9 @@ struct tagIO_INFO
 	int		i_FrontComplete;				//PS1003
 	int     i_RearReq;			            //PS1004
 	int     i_RearComplete;                 //PS1005 
+	//kwlee 2017.0210
+	int     i_LabelRejectCylinderDnCheck;   //PS1006
+	int     i_LabelRejectCylinderUpCheck;   //PS1006
 
 	int     o_HeadCylUpDn[PICKCNT];
 	int     i_HeadVaccumCheck[PICKCNT];

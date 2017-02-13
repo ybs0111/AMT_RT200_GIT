@@ -3047,8 +3047,12 @@ void CFastechPublic_IO::Initialize_Map()
 	// 	// Module No 07
 	// 	///////////////////////////////////////////////////////////////////////////////////////////////
 	 	st_io_info.o_LabelFeederMotorOn			= 700;		// S0700	
-	 	st_io_info.o_LabelFeederClmpOn1			= 701;		// S0701
-	 	st_io_info.o_LabelFeederClmpOn2			= 702;		// S0702
+	 	//st_io_info.o_LabelFeederClmpOn1			= 701;		// S0701
+	 	//st_io_info.o_LabelFeederClmpOn2			= 702;		// S0702
+		//kwlee 2017.0210
+		st_io_info.o_LabelFeederClmpOff			= 701;		// S0701
+		st_io_info.o_LabelFeederClmpOn			= 702;		// S0702
+
 	// 	// S0703
 	 	st_io_info.o_PcReady					= 704;		//S0704
 	 	st_io_info.o_PcComplete					= 705;		//S0705		
@@ -3073,15 +3077,21 @@ void CFastechPublic_IO::Initialize_Map()
 		st_io_info.o_Rear_Label_Complete				= 1003;		// S1003
 	 	st_io_info.o_LabelInterface5					= 1004;		// S1004
 	 	st_io_info.o_LabelInterface6					= 1005;		// S1005
-	 	st_io_info.o_LabelInterface7					= 1006;		// S1006
+	 	//st_io_info.o_LabelInterface7					= 1006;		// S1006
+		//kwlee 2017.0210
+		st_io_info.o_LabelRejectCylinderDn				= 1006;		// S1006
+		st_io_info.o_LabelRejectCylinderUp				= 1007;		// S1007
+
 	// 	// S1007
 	 	st_io_info.i_LabelFeederProductChk1_1			= 1008;		//PS1000	
 	 	st_io_info.i_LabelFeederProductChk2_1			= 1009;		//PS1001	
 		st_io_info.i_FrontReady							= 1010;     //PS1002
 		st_io_info.i_FrontComplete		                = 1011;     //PS1003
-		st_io_info.i_RearReq							= 1012;     //PS1002
-		st_io_info.i_RearComplete		                = 1013;     //PS1003
-
+		st_io_info.i_RearReq							= 1012;     //PS1004
+		st_io_info.i_RearComplete		                = 1013;     //PS1005
+		//kwlee 2017.0210
+		st_io_info.i_LabelRejectCylinderDnCheck         = 1014;		//PS1006
+		st_io_info.i_LabelRejectCylinderUpCheck         = 1015;		//PS1007
 
 		st_io_info.o_HeadCylUpDn[0]						 = st_io_info.o_HeadCylUpDw1;
 		st_io_info.o_HeadCylUpDn[1]						 = st_io_info.o_HeadCylUpDw2;
