@@ -85,6 +85,9 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define WM_CLIENT_MSG_9			WM_USER + 508
 #define WM_CLIENT_MSG_10		WM_USER + 509
 
+#define WM_ZEBRA_CLIENT_MSG	WM_USER + 509
+
+
 #define WM_SERVER_MSG			WM_USER + 550
 #define WM_SERVER_MSG_1			WM_USER + 550
 #define WM_SERVER_MSG_2			WM_USER + 551
@@ -764,13 +767,26 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define OUT_CONVEYOR_STOPPER_DOWN  10
 
 
+#define CLS_BCR_PRINTER1			0
+
 enum PICKERUPDN
 {
 	PICKER_UP = 0,
 	PICKER_DN,
 };
 
+enum NET_BCRPRINT_RECEIVED
+{
+	NVR_NONE,
+	NVR_PASS,
+	NVR_FAIL,
+};
 
+enum NETCLIENT
+{
+	CLS_ECSERVER	= 0,
+	CLS_XGEM,
+};
 
 struct tagHANDLER_INFO
 {
@@ -2510,6 +2526,30 @@ struct tagdbTimeTmp_database
 
 };
 extern struct tagdbTimeTmp_database	*st_dbTimeTmp;
+
+
+struct st_barcode_param 
+{
+	int nApplyButton[5];
+	int mn_labelset_sd[4];
+	int mn_labelset_lt[4];
+	int mn_labelset_lhx[4];
+	int mn_labelset_lhy[4];
+	int mn_Prt_Mode[4];
+	int mn_Prt_complete_use[4];
+
+	bool b_print_complete[MAX_PORT];
+	int n_barcode_hs_cnt;
+	int n_barcode_hs_paper_out_error[MAX_PORT];
+	int n_barcode_hs_pause_error[MAX_PORT];
+	int n_barcode_hs_head_up_error[MAX_PORT];
+	int n_barcode_hs_ribbon_out_error[MAX_PORT];
+	int n_barcode_hs_print_mode[MAX_PORT];
+
+	CString new_barcode_info[2];//2014,1125 ysj
+
+} ;
+extern  st_barcode_param  st_barcode;
 //////////////
 
 
@@ -2726,9 +2766,7 @@ enum NETWORK_NUM
 	FTP_NETWORK						,
 	GMS_NETWORK						,
 	EC_SECOND_NETWORK				,
-	//kwlee 2017.0204
-	PRINTER_SERVER_NETWORK          ,
-	PRINTER_CLIENT_NETWORK          ,
+	PRINTER_NETWORK ,
 };
 
 //2015.1005

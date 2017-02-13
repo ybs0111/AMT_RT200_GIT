@@ -40,6 +40,7 @@
 #include "io.h"	
 #include "ACriticalSection.h"
 #include "CtlBd_Library.h"
+#include "ZebraPrint.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -122,6 +123,7 @@ tagdbtime_database			st_dbtime;
 tagdbTimeTmp_database		*st_dbTimeTmp;
 tagdbTimeTmp_database       *st_dbTimeDate;
 tagBuffer_DB_database		st_BufferTemp;
+st_barcode_param			st_barcode;
 
 PCB_info                    st_Pcb_info;
 
@@ -157,8 +159,10 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_MESSAGE(WM_CLIENT_MSG_2, OnClientXgem)						// Network관련된 작업을 담당한다.
 	ON_MESSAGE(WM_CLIENT_MSG_6, OnClientRfid)						// Network관련된 작업을 담당한다.
 	ON_MESSAGE(WM_CLIENT_MSG_7,	OnClientFtp)
+	ON_MESSAGE(WM_CLIENT_MSG_10,	OnClientZebraPrint)
 	ON_MESSAGE(WM_SERVER_MSG_4, OnServerFront)						// Network관련된 작업을 담당한다.
 	ON_MESSAGE(WM_SERVER_MSG_8, OnServerGms)
+	ON_MESSAGE(WM_SERVER_MSG_10,	OnServerZebraPrinter)
 	ON_MESSAGE(WM_WORK_COMMAND, OnXgemCommand)						// Network관련된 작업을 담당한다. 
 	ON_MESSAGE(WM_LEFT_POS, OnRobotLeftTurnUI)
 	ON_MESSAGE(WM_RIGHT_POS, OnRobotRightTurnUI)
@@ -183,10 +187,13 @@ CMainFrame::CMainFrame()
 	// 온양삼성/중국 IO 불일치  온양 (0) 중국(1)
 	st_handler_info.nPgmVer = 1;
 
-	for (int i=0; i<10; i++)
+	for (int i=0; i<20; i++)
 	{
 		m_pClient[i] = NULL;
 		m_pServer[i] = NULL;
+
+		st_client_info[i].nConnect = CTL_NO;
+		st_server_info[i].nConnect = CTL_NO;
 	}
 
 // 	st_dbTimeTmp = NULL;
@@ -242,7 +249,7 @@ CMainFrame::~CMainFrame()
 {
 	int i;
 
-	for (i=0; i<10; i++)
+	for (i=0; i<20; i++)
 	{
 		if (m_pClient[i] != NULL)
 		{
@@ -1030,6 +1037,13 @@ void CMainFrame::OnMainVarDefaultSet()
 		st_gms_info.ArValVolt[i].SetSize(60);
 		st_gms_info.ArValRes[i].SetSize(60);
 	}
+
+	//2017.0209
+		clsZebra.SetDarkness_TCP(0);
+		clsZebra.LabelTop_TCP(0);
+		clsZebra.OnPrintAnswerMode(2, 0, CLS_BCR_PRINTER1);
+		clsZebra.Rewind_Mode_TCP(0);
+	
 
 //	char chr_data[50];
 
@@ -2474,28 +2488,29 @@ LRESULT CMainFrame::OnBarcode(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-LRESULT CMainFrame::OnPrinterServer(WPARAM wParam, LPARAM lParam)
+LRESULT CMainFrame::OnServerZebraPrinter(WPARAM wParam, LPARAM lParam)
 {
 
 	int i;
 	int nLength;
+	CString strMsg, sRcv;
 
 	switch(wParam)
 	{
 	case SERVER_CONNECT:
-		if (m_pServer[PRINTER_SERVER_NETWORK] != NULL)
+		if (m_pServer[PRINTER_NETWORK] != NULL)
 		{
-			m_pServer[PRINTER_SERVER_NETWORK]->OnClose();
+			m_pServer[PRINTER_NETWORK]->OnClose();
 
-			delete m_pServer[PRINTER_SERVER_NETWORK];
-			m_pServer[PRINTER_SERVER_NETWORK] = NULL;
+			delete m_pServer[PRINTER_NETWORK];
+			m_pServer[PRINTER_NETWORK] = NULL;
 		}
 
 		// sevrer 생성
-		m_pServer[PRINTER_SERVER_NETWORK] = new CServerSocket;
+		m_pServer[PRINTER_NETWORK] = new CServerSocket;
 
 		// Tcp/IP server open
-		if (m_pServer[PRINTER_SERVER_NETWORK]->OnOpen(this, st_server_info[PRINTER_SERVER_NETWORK].nPort, PRINTER_SERVER_NETWORK))
+		if (m_pServer[PRINTER_NETWORK]->OnOpen(this, st_server_info[PRINTER_NETWORK].nPort, PRINTER_NETWORK))
 		{
 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 			{
@@ -2513,37 +2528,46 @@ LRESULT CMainFrame::OnPrinterServer(WPARAM wParam, LPARAM lParam)
 				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
 			}
 
-			delete m_pServer[PRINTER_SERVER_NETWORK];
-			m_pServer[PRINTER_SERVER_NETWORK] = NULL;
+			delete m_pServer[PRINTER_NETWORK];
+			m_pServer[PRINTER_NETWORK] = NULL;
 		}
 		break;
 
 	case SERVER_CLOSE:
-		if (m_pServer[PRINTER_SERVER_NETWORK] != NULL)
+		if (m_pServer[PRINTER_NETWORK] != NULL)
 		{
-			m_pServer[PRINTER_SERVER_NETWORK]->OnCloseClient(lParam);
+			m_pServer[PRINTER_NETWORK]->OnCloseClient(lParam);
 		}
 		break;
 
 	case SERVER_REV:
 	//	clsFront.OnDataReceive(st_server_info[FRONT_NETWORK].strRev);
+		strMsg.Format(_T("%s"), st_server_info[PRINTER_NETWORK].strRev);
+		//sRcv = sTmp.Mid(0, st_client_info[PRINTER_NETWORK].nRevLength);
+
+		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+		{
+			//strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strRev);
+			clsMem.OnNormalMessageWrite(strMsg);
+			st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+		}
 		break;
 
 	case SERVER_SEND:
 		for (i=0; i<MAX_USER; i++)
 		{
-			if (m_pServer[PRINTER_SERVER_NETWORK] != NULL)
+			if (m_pServer[PRINTER_NETWORK] != NULL)
 			{
 				// client가 server에 접속중이면 
-				if (m_pServer[PRINTER_SERVER_NETWORK]->m_pClient[i] != NULL)
+				if (m_pServer[PRINTER_NETWORK]->m_pClient[i] != NULL)
 				{
 					// message 전송
-					clsFunc.OnStringToChar(st_server_info[PRINTER_SERVER_NETWORK].strSend, st_server_info[PRINTER_SERVER_NETWORK].chSend);
-					nLength = st_server_info[PRINTER_SERVER_NETWORK].strSend.GetLength();
+					clsFunc.OnStringToChar(st_server_info[PRINTER_NETWORK].strSend, st_server_info[PRINTER_NETWORK].chSend);
+					nLength = st_server_info[PRINTER_NETWORK].strSend.GetLength();
 
-					m_pServer[PRINTER_SERVER_NETWORK]->m_pClient[i]->Send(st_server_info[PRINTER_SERVER_NETWORK].chSend, nLength);
+					m_pServer[PRINTER_NETWORK]->m_pClient[i]->Send(st_server_info[PRINTER_NETWORK].chSend, nLength);
 
-					clsMem.OnNormalMessageWrite(st_server_info[PRINTER_SERVER_NETWORK].strSend);
+					clsMem.OnNormalMessageWrite(st_server_info[PRINTER_NETWORK].strSend);
 					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
 				}
 			}
@@ -2553,34 +2577,37 @@ LRESULT CMainFrame::OnPrinterServer(WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
-LRESULT CMainFrame::OnPrinterClient(WPARAM wParam, LPARAM lParam)
-{
-	
-	CString strMsg;
+
+//Client 192.168.0..16 9100
+//Server 192.168.0.101
+
+LRESULT CMainFrame::OnClientZebraPrint(WPARAM wParam, LPARAM lParam)
+{	
+	CString strMsg, sRcv, sTmp;
 
 	int nLength;
 
 	switch(wParam)
 	{
 	case CLIENT_CONNECT:
-		if (m_pClient[PRINTER_CLIENT_NETWORK] != NULL)
+		if (m_pClient[PRINTER_NETWORK] != NULL)
 		{
-			if (st_client_info[PRINTER_CLIENT_NETWORK].nConnect == YES) 
+			if (st_client_info[PRINTER_NETWORK].nConnect == YES) 
 			{
-				st_client_info[PRINTER_CLIENT_NETWORK].nConnect = NO;
+				st_client_info[PRINTER_NETWORK].nConnect = NO;
 
-				delete m_pClient[PRINTER_CLIENT_NETWORK];
-				m_pClient[PRINTER_CLIENT_NETWORK] = NULL;
+				delete m_pClient[PRINTER_NETWORK];
+				m_pClient[PRINTER_NETWORK] = NULL;
 			}
 
-			m_pClient[PRINTER_CLIENT_NETWORK] = new CClientSocket();
-			m_pClient[PRINTER_CLIENT_NETWORK]->Create();
+			m_pClient[PRINTER_NETWORK] = new CClientSocket();
+			m_pClient[PRINTER_NETWORK]->Create();
 
-			m_pClient[PRINTER_CLIENT_NETWORK]->OnOpen(this, PRINTER_CLIENT_NETWORK);
-			if (m_pClient[PRINTER_CLIENT_NETWORK]->Connect(st_client_info[PRINTER_CLIENT_NETWORK].strIp, st_client_info[PRINTER_CLIENT_NETWORK].nPort))
+			m_pClient[PRINTER_NETWORK]->OnOpen(this, PRINTER_NETWORK);
+			if (m_pClient[PRINTER_NETWORK]->Connect(st_client_info[PRINTER_NETWORK].strIp, st_client_info[PRINTER_NETWORK].nPort))
 			{
-				delete m_pClient[PRINTER_CLIENT_NETWORK];
-				m_pClient[PRINTER_CLIENT_NETWORK] = NULL;
+				delete m_pClient[PRINTER_NETWORK];
+				m_pClient[PRINTER_NETWORK] = NULL;
 
 				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 				{
@@ -2599,16 +2626,16 @@ LRESULT CMainFrame::OnPrinterClient(WPARAM wParam, LPARAM lParam)
 		}
 		else
 		{
-			st_client_info[PRINTER_CLIENT_NETWORK].nConnect = NO;
+			st_client_info[PRINTER_NETWORK].nConnect = NO;
 
-			m_pClient[PRINTER_CLIENT_NETWORK] = new CClientSocket();
-			m_pClient[PRINTER_CLIENT_NETWORK]->Create();
+			m_pClient[PRINTER_NETWORK] = new CClientSocket();
+			m_pClient[PRINTER_NETWORK]->Create();
 
-			m_pClient[PRINTER_CLIENT_NETWORK]->OnOpen(this, PRINTER_CLIENT_NETWORK);
-			if (m_pClient[PRINTER_CLIENT_NETWORK]->Connect(st_client_info[PRINTER_CLIENT_NETWORK].strIp, st_client_info[PRINTER_CLIENT_NETWORK].nPort))
+			m_pClient[PRINTER_NETWORK]->OnOpen(this, PRINTER_NETWORK);
+			if (m_pClient[PRINTER_NETWORK]->Connect(st_client_info[PRINTER_NETWORK].strIp, st_client_info[PRINTER_NETWORK].nPort))
 			{
-				delete m_pClient[PRINTER_CLIENT_NETWORK];
-				m_pClient[PRINTER_CLIENT_NETWORK] = NULL;
+				delete m_pClient[PRINTER_NETWORK];
+				m_pClient[PRINTER_NETWORK] = NULL;
 
 				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 				{
@@ -2628,28 +2655,28 @@ LRESULT CMainFrame::OnPrinterClient(WPARAM wParam, LPARAM lParam)
 		break;
 
 	case CLIENT_CLOSE:
-		if (m_pClient[PRINTER_CLIENT_NETWORK] != NULL)
+		if (m_pClient[PRINTER_NETWORK] != NULL)
 		{
-			st_client_info[PRINTER_CLIENT_NETWORK].nConnect = NO;
+			st_client_info[PRINTER_NETWORK].nConnect = NO;
 
-			delete m_pClient[PRINTER_CLIENT_NETWORK];
-			m_pClient[PRINTER_CLIENT_NETWORK] = NULL;
+			delete m_pClient[PRINTER_NETWORK];
+			m_pClient[PRINTER_NETWORK] = NULL;
 		}
 		break;
 
 	case CLIENT_SEND:
-		if (st_client_info[PRINTER_CLIENT_NETWORK].nConnect == YES)
+		if (st_client_info[PRINTER_NETWORK].nConnect == YES)
 		{
-			if (m_pClient[PRINTER_CLIENT_NETWORK] == NULL) return 0;
+			if (m_pClient[PRINTER_NETWORK] == NULL) return 0;
 
-			clsFunc.OnStringToChar(st_client_info[PRINTER_CLIENT_NETWORK].strSend, st_client_info[PRINTER_CLIENT_NETWORK].chSend);
-			nLength = st_client_info[PRINTER_CLIENT_NETWORK].strSend.GetLength();
+			clsFunc.OnStringToChar(st_client_info[PRINTER_NETWORK].strSend, st_client_info[PRINTER_NETWORK].chSend);
+			nLength = st_client_info[PRINTER_NETWORK].strSend.GetLength();
 
-			m_pClient[PRINTER_CLIENT_NETWORK]->Send(st_client_info[PRINTER_CLIENT_NETWORK].chSend, nLength);
+			m_pClient[PRINTER_NETWORK]->Send(st_client_info[PRINTER_NETWORK].chSend, nLength);
 
 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 			{
-				strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_CLIENT_NETWORK].strSend);
+				strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strSend);
 				clsMem.OnNormalMessageWrite(strMsg);
 				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
 			}
@@ -2657,31 +2684,39 @@ LRESULT CMainFrame::OnPrinterClient(WPARAM wParam, LPARAM lParam)
 		break;
 
 	case CLIENT_REV:
-		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_CLIENT_NETWORK].strRev);
+		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_NETWORK].strRev);
+		strMsg.Format(_T("%s"), st_client_info[PRINTER_NETWORK].strRev);
+		sRcv = sTmp.Mid(0, st_client_info[PRINTER_NETWORK].nRevLength);
+
+		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+		{
+			//strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strRev);
+			clsMem.OnNormalMessageWrite(strMsg);
+			st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+		}
 		break;
 
 	case CLIENT_ACCEPT:
 		if (lParam != 0)
 		{
-			st_client_info[PRINTER_CLIENT_NETWORK].nConnect = NO;
+			st_client_info[PRINTER_NETWORK].nConnect = NO;
 
-			delete m_pClient[PRINTER_CLIENT_NETWORK];
-			m_pClient[PRINTER_CLIENT_NETWORK] = NULL;
+			delete m_pClient[PRINTER_NETWORK];
+			m_pClient[PRINTER_NETWORK] = NULL;
 
 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 			{
-				clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] PRINTER_CLIENT_NETWORK Client Accept Fail."));
+				clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] PRINTER_NETWORK Client Accept Fail."));
 				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
 			}
 
 			return 0;
 		}
 
-		st_client_info[PRINTER_CLIENT_NETWORK].nConnect = YES;
-
+		st_client_info[PRINTER_NETWORK].nConnect = YES;
 		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 		{
-			clsMem.OnNormalMessageWrite(_T("[TCP/IP] PRINTER_CLIENT_NETWORK Client Accept Success."));
+			clsMem.OnNormalMessageWrite(_T("[TCP/IP] PRINTER_NETWORK Client Accept Success."));
 			st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
 		}
 		break;

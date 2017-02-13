@@ -1,7 +1,10 @@
 #include "Variable.h"
 #include <afxtempl.h>
+#include "ZebraPrint.h"
 
 #pragma once
+
+class CZebraPrint;
 
 class CPublicFunction : public CObject
 {
@@ -17,6 +20,8 @@ public:
 
 	CString			m_strThreadStep[100];
 	CTime			m_tThreadTime[100];
+
+	CZebraPrint	*m_pZebra[1];
 
 	CArray			<tagLOT_HISTORY_INFO, tagLOT_HISTORY_INFO&>	m_ArLotHistory;
 public:

@@ -172,6 +172,8 @@ BEGIN_MESSAGE_MAP(CWorkInterface, CDialog)
 	ON_BN_CLICKED(IDC_BTN_CLIENT_PORT_7, &CWorkInterface::OnBnClickedBtnClientPort7)
 	ON_BN_CLICKED(IDC_CHECK_UNLOAD_BARCODE_A, &CWorkInterface::OnBnClickedCheckUnloadBarcodeA)
 	ON_BN_CLICKED(IDC_CHECK_UNLOAD_BARCODE_B, &CWorkInterface::OnBnClickedCheckUnloadBarcodeB)
+	ON_BN_CLICKED(IDC_BUTTON6, &CWorkInterface::OnBnClickedButton6)
+	ON_BN_CLICKED(IDC_BUTTON_CONNECT, &CWorkInterface::OnBnClickedButtonConnect)
 END_MESSAGE_MAP()
 
 
@@ -2057,4 +2059,23 @@ void CWorkInterface::OnBnClickedCheckUnloadBarcodeB()
 			m_btnUnldBcr[1].SetCheck(m_bUnldBcrFlag[1][0]);
 		}
 	}
+}
+
+
+void CWorkInterface::OnBnClickedButton6()
+{
+	if (st_client_info[PRINTER_NETWORK].nConnect == CTL_YES)
+	{
+		 (clsFunc.m_pZebra[0])->m_nPrintStatusBin = NVR_NONE;
+
+		 CString strFormat = _T("^XA^FO100,100^BY3^B2Nm150,Y,N,N^FD123^FO560,100^BY3^B2Nm150,Y,N,N^FD456^XZ");
+
+		 (clsFunc.m_pZebra[0])->OnPrintOutput(2, PRINTER_NETWORK, 0, 0,  strFormat);
+	}
+}
+
+
+void CWorkInterface::OnBnClickedButtonConnect()
+{
+	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG + PRINTER_NETWORK, CLIENT_CONNECT, 0);
 }
