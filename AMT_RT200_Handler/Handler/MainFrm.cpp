@@ -157,12 +157,12 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_PGMINFO, &CMainFrame::OnPgminfo)
 	ON_MESSAGE(WM_CLIENT_MSG_1, OnClientEcFirst)					// Network관련된 작업을 담당한다.
 	ON_MESSAGE(WM_CLIENT_MSG_2, OnClientXgem)						// Network관련된 작업을 담당한다.
+	ON_MESSAGE(WM_CLIENT_MSG_3,	OnClientZebraPrint)
 	ON_MESSAGE(WM_CLIENT_MSG_6, OnClientRfid)						// Network관련된 작업을 담당한다.
 	ON_MESSAGE(WM_CLIENT_MSG_7,	OnClientFtp)
-	ON_MESSAGE(WM_CLIENT_MSG_10,	OnClientZebraPrint)
+	ON_MESSAGE(WM_SERVER_MSG_3,	OnServerZebraPrinter)
 	ON_MESSAGE(WM_SERVER_MSG_4, OnServerFront)						// Network관련된 작업을 담당한다.
 	ON_MESSAGE(WM_SERVER_MSG_8, OnServerGms)
-	ON_MESSAGE(WM_SERVER_MSG_10,	OnServerZebraPrinter)
 	ON_MESSAGE(WM_WORK_COMMAND, OnXgemCommand)						// Network관련된 작업을 담당한다. 
 	ON_MESSAGE(WM_LEFT_POS, OnRobotLeftTurnUI)
 	ON_MESSAGE(WM_RIGHT_POS, OnRobotRightTurnUI)
@@ -338,6 +338,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 // 	SendMessage(WM_SERVER_MSG_3, SERVER_CONNECT);
 // 	SendMessage(WM_SERVER_MSG_4, SERVER_CONNECT);
 // 	SendMessage(WM_SERVER_MSG_8, SERVER_CONNECT);
+
+	SendMessage(WM_SERVER_MSG_3, SERVER_CONNECT);
 
 	SetTimer(TM_MAIN_REFRESH, 500, NULL);  // 리스트 파일 생성 타이머
 	SetTimer(TM_FILE_CREATE, 500, NULL);
@@ -2578,7 +2580,7 @@ LRESULT CMainFrame::OnServerZebraPrinter(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//Client 192.168.0..16 9100
+//Client 192.168.0.16 9100
 //Server 192.168.0.101
 
 LRESULT CMainFrame::OnClientZebraPrint(WPARAM wParam, LPARAM lParam)
@@ -2671,14 +2673,16 @@ LRESULT CMainFrame::OnClientZebraPrint(WPARAM wParam, LPARAM lParam)
 		{
 			if (m_pClient[PRINTER_NETWORK] == NULL) return 0;
 
-			clsFunc.OnStringToChar(st_client_info[PRINTER_NETWORK].strSend, st_client_info[PRINTER_NETWORK].chSend);
+			//clsFunc.OnStringToChar(st_client_info[PRINTER_NETWORK].strSend, st_client_info[PRINTER_NETWORK].chSend);
+			
+			st_client_info[PRINTER_NETWORK].strSend.Format(_T("%s"),st_client_info[PRINTER_NETWORK].chSend);
 			nLength = st_client_info[PRINTER_NETWORK].strSend.GetLength();
 
 			m_pClient[PRINTER_NETWORK]->Send(st_client_info[PRINTER_NETWORK].chSend, nLength);
 
 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 			{
-				strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strSend);
+				strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].chSend);
 				clsMem.OnNormalMessageWrite(strMsg);
 				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
 			}
