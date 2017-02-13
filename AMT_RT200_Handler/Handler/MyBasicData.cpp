@@ -1963,9 +1963,9 @@ void CMyBasicData::OnBasic_Data_Save()
 	mstr_temp.Format(_T("%d"), st_basic_info.nModeJigStack);
 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nModeJigStack"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strLastOperatorName"), st_worker_info.strWorker_Name, st_path_info.strFileBasic);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strLastOperatorCrem"), st_worker_info.strWorker_Crem, st_path_info.strFileBasic);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strLastOperatorId"), st_worker_info.strWorker_Num, st_path_info.strFileBasic);
+	//	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strLastOperatorName"), st_worker_info.strWorker_Name, st_path_info.strFileBasic);
+	//	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strLastOperatorCrem"), st_worker_info.strWorker_Crem, st_path_info.strFileBasic);
+	//	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strLastOperatorId"), st_worker_info.strWorker_Num, st_path_info.strFileBasic);
 
 	mstr_temp.Format(_T("%d"), st_basic_info.nModeFrontSmema);
 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nModeFrontSmema"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
@@ -1978,9 +1978,9 @@ void CMyBasicData::OnBasic_Data_Save()
 
 	mstr_temp.Format(_T("%d"), st_basic_info.nModeRfid);
 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nModeRfid"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-	//kwlee 2017.0204
-	mstr_temp.Format(_T("%d"), st_basic_info.nBarcodeErrorSkip);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nBarcodeErrorSkip"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+	//kwlee 2017.0204 
+ 	mstr_temp.Format(_T("%d"), st_basic_info.nBarcodeErrorSkip);
+ 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nBarcodeErrorSkip"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 	//
 
 	mstr_temp.Format(_T("%d"), st_basic_info.nModeLdBcr);
@@ -1995,7 +1995,7 @@ void CMyBasicData::OnBasic_Data_Save()
 	mstr_temp.Format(_T("%d"), st_basic_info.nUldGoodTrayStack_Count);
 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nUldGoodTrayStack_Count"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("ModelName"), LPCTSTR(st_basic_info.strModelName), str_save_file);
+	//:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("ModelName"), LPCTSTR(st_basic_info.strModelName), str_save_file);
 	
 	mstr_temp.Format(_T("%d"), st_basic_info.nPcbArray);
 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nPcbArray"), LPCTSTR(mstr_temp), str_save_file);
@@ -2036,7 +2036,7 @@ void CMyBasicData::OnBasic_Data_Save()
 		{
 			mstr_temp.Format(_T("PCB_Sel_%02d_%02d"), i+1, j+1);
 			str_tmp.Format(_T("%d"), st_Pcb_info.nPcbSelect[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, str_save_file);
+			:: WritePrivateProfileString(_T("BASIC_SCREEN"), LPCTSTR(mstr_temp), str_tmp, str_save_file);
 		}
 	}
 	///////////////
@@ -2046,7 +2046,7 @@ void CMyBasicData::OnBasic_Data_Save()
 		{
 			mstr_temp.Format(_T("Picker_Sel_%02d_%02d"), i+1, j+1);
 			str_tmp.Format(_T("%d"), st_basic_info.nCellPos[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+			:: WritePrivateProfileString(_T("BASIC_SCREEN"), LPCTSTR(mstr_temp), str_tmp, st_path_info.strFileBasic);
 		}
 	}
 
@@ -2054,7 +2054,7 @@ void CMyBasicData::OnBasic_Data_Save()
 	{
 		mstr_temp.Format(_T("Picker_Use_%02d"), i+1);
 		str_tmp.Format(_T("%d"), st_basic_info.nPickerSelect[i]);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("BASIC_SCREEN"), LPCTSTR(mstr_temp), str_tmp, st_path_info.strFileBasic);
 	}
 	///////////////////
 
@@ -2092,49 +2092,49 @@ void CMyBasicData::OnBasic_Data_Save()
 	:: WritePrivateProfileString(_T("TIME"), _T("Daily_Ref_Time"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 
 	CString str;
-	for (j =0; j<TSITE_SOCKET_CNT; j++)
-	{
-		str.Format(_T("Daily_RunDown_Time[%d]"), j);
-		mstr_temp.Format(_T("%d"),st_handler_info.m_tDRdown[j]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-
-		str.Format(_T("m_tDStop[%d]"), j);
-		mstr_temp.Format(_T("%d"),st_handler_info.m_tDStop[j]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-
-		str.Format(_T("Daily_UserStop[%d]"), j);
-		mstr_temp.Format(_T("%d"),st_handler_info.m_tDUserStop[j]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-		
-		//kwlee 2015.1127
+// 	for (j =0; j<TSITE_SOCKET_CNT; j++)
+// 	{
+// 		str.Format(_T("Daily_RunDown_Time[%d]"), j);
+// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDRdown[j]);
+// 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 
+// 		str.Format(_T("m_tDStop[%d]"), j);
+// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDStop[j]);
+// 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 
+// 		str.Format(_T("Daily_UserStop[%d]"), j);
+// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDUserStop[j]);
+// 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 		
+// 		//kwlee 2015.1127
+// // 		str.Format(_T("InStandBy_Time[%d]"), j);
+// // 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDInStandby[j]);
+// // 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 
 // 		str.Format(_T("InStandBy_Time[%d]"), j);
-// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDInStandby[j]);
+// 		mstr_temp.Format(_T("%d"),st_DB_time.n_Db_time[INSTANBY][j]);
 // 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 		///////////
+// 	}
 
-		str.Format(_T("InStandBy_Time[%d]"), j);
-		mstr_temp.Format(_T("%d"),st_DB_time.n_Db_time[INSTANBY][j]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-		///////////
-	}
-
-	for ( k = 0; k < TSITE_SOCKET_CNT; k++ )
-	{
-		str.Format(_T("Daily_Test_Time[%d]"), k);
-		mstr_temp.Format(_T("%d"),st_handler_info.m_tDtest[k]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-
-		str.Format(_T("Daily_SokOff_Time[%d]"), k);
-		mstr_temp.Format(_T("%d"),st_handler_info.m_tDSokOff[k]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-		//kwlee 2015.1127
+// 	for ( k = 0; k < TSITE_SOCKET_CNT; k++ )
+// 	{
+// 		str.Format(_T("Daily_Test_Time[%d]"), k);
+// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDtest[k]);
+// 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 
+// 		str.Format(_T("Daily_SokOff_Time[%d]"), k);
+// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDSokOff[k]);
+// 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 		//kwlee 2015.1127
+// // 		str.Format(_T("OutStandBy_Time[%d]"), k);
+// // 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDOutStandby[k]);
+// // 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+// 
 // 		str.Format(_T("OutStandBy_Time[%d]"), k);
-// 		mstr_temp.Format(_T("%d"),st_handler_info.m_tDOutStandby[k]);
+// 		mstr_temp.Format(_T("%d"),st_DB_time.n_Db_time[OUTREADY][k]);
 // 		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-
-		str.Format(_T("OutStandBy_Time[%d]"), k);
-		mstr_temp.Format(_T("%d"),st_DB_time.n_Db_time[OUTREADY][k]);
-		:: WritePrivateProfileString(_T("TIME"), str, LPCTSTR(mstr_temp), st_path_info.strFileBasic);
-	}
+// 	}
 	////////////////
 
 	mstr_temp.Format(_T("%d"), st_handler_info.tCreate.GetYear());
@@ -2156,13 +2156,13 @@ void CMyBasicData::OnBasic_Data_Save()
 	:: WritePrivateProfileString(_T("TIME"), _T("CREATE_SECOND"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 
 	// 20140811 jtkim
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strToolName"), st_basic_info.strToolName, st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strFtpUser"), st_basic_info.strFtpUser, st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strFtpPass"), st_basic_info.strFtpPass, st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strPathFtpGms"), st_path_info.strPathFtpGms, st_path_info.strFileBasic);
+	//:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strToolName"), st_basic_info.strToolName, st_path_info.strFileBasic);
+	//
+	//:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strFtpUser"), st_basic_info.strFtpUser, st_path_info.strFileBasic);
+	//
+	//:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strFtpPass"), st_basic_info.strFtpPass, st_path_info.strFileBasic);
+	//
+	//:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strPathFtpGms"), st_path_info.strPathFtpGms, st_path_info.strFileBasic);
 
 	mstr_temp.Format(_T("%d"), st_lot_info[LOT_CURR].nLotStatus);
 	:: WritePrivateProfileString(_T("LOT_INFO"), _T("LOT_CURR_STATUS"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
@@ -2170,26 +2170,26 @@ void CMyBasicData::OnBasic_Data_Save()
 	mstr_temp.Format(_T("%d"), st_lot_info[LOT_NEXT].nLotStatus);
 	:: WritePrivateProfileString(_T("LOT_INFO"), _T("LOT_NEXT_STATUS"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 
-	for (i=0; i<8; i++)
-	{
-		mstr_temp.Format(_T("VnR_Voltage_Spec #%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrSpec[1][i], st_path_info.strFileBasic);
-		
-		mstr_temp.Format(_T("VnR_Resistance_Spec #%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrSpec[0][i], st_path_info.strFileBasic);
-
-		mstr_temp.Format(_T("VnR_Voltage_Ucl #%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrUcl[1][i], st_path_info.strFileBasic);
-
-		mstr_temp.Format(_T("VnR_Resistance_Ucl #%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrUcl[0][i], st_path_info.strFileBasic);
-
-		mstr_temp.Format(_T("VnR_Voltage_Lcl #%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrLcl[1][i], st_path_info.strFileBasic);
-
-		mstr_temp.Format(_T("VnR_Resistance_Lcl #%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrLcl[0][i], st_path_info.strFileBasic);
-	}
+// 	for (i=0; i<8; i++)
+// 	{
+// 		mstr_temp.Format(_T("VnR_Voltage_Spec #%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrSpec[1][i], st_path_info.strFileBasic);
+// 		
+// 		mstr_temp.Format(_T("VnR_Resistance_Spec #%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrSpec[0][i], st_path_info.strFileBasic);
+// 
+// 		mstr_temp.Format(_T("VnR_Voltage_Ucl #%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrUcl[1][i], st_path_info.strFileBasic);
+// 
+// 		mstr_temp.Format(_T("VnR_Resistance_Ucl #%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrUcl[0][i], st_path_info.strFileBasic);
+// 
+// 		mstr_temp.Format(_T("VnR_Voltage_Lcl #%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrLcl[1][i], st_path_info.strFileBasic);
+// 
+// 		mstr_temp.Format(_T("VnR_Resistance_Lcl #%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strVnrLcl[0][i], st_path_info.strFileBasic);
+// 	}
 
 	for (i=0; i<HSSI_MAX_IO; i++)
 	{
@@ -2238,166 +2238,166 @@ void CMyBasicData::OnBasic_Data_Save()
 			str_tmp.Format(_T("%d"), st_count_info.nRejectCount[i][j]);
 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
 */
-			mstr_temp.Format(_T("COUNT_IN_%02d_%02d"), i+1, j+1);
-			str_tmp.Format(_T("%d"), st_count_info.nInCount[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-			mstr_temp.Format(_T("COUNT_PRIME_%02d_%02d"), i+1, j+1);
-			str_tmp.Format(_T("%d"), st_count_info.nPrimeCount[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-			mstr_temp.Format(_T("COUNT_PASS_%02d_%02d"), i+1, j+1);
-			str_tmp.Format(_T("%d"), st_count_info.nPassCount[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-			mstr_temp.Format(_T("COUNT_PRIME_REJECT_%02d_%02d"), i+1, j+1);
-			str_tmp.Format(_T("%d"), st_count_info.nPrimeRejectCount[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-			mstr_temp.Format(_T("COUNT_REJECT_%02d_%02d"), i+1, j+1);
-			str_tmp.Format(_T("%d"), st_count_info.nRejectCount[i][j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 			mstr_temp.Format(_T("COUNT_IN_%02d_%02d"), i+1, j+1);
+// 			str_tmp.Format(_T("%d"), st_count_info.nInCount[i][j]);
+// 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 			mstr_temp.Format(_T("COUNT_PRIME_%02d_%02d"), i+1, j+1);
+// 			str_tmp.Format(_T("%d"), st_count_info.nPrimeCount[i][j]);
+// 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 			mstr_temp.Format(_T("COUNT_PASS_%02d_%02d"), i+1, j+1);
+// 			str_tmp.Format(_T("%d"), st_count_info.nPassCount[i][j]);
+// 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 			mstr_temp.Format(_T("COUNT_PRIME_REJECT_%02d_%02d"), i+1, j+1);
+// 			str_tmp.Format(_T("%d"), st_count_info.nPrimeRejectCount[i][j]);
+// 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 			mstr_temp.Format(_T("COUNT_REJECT_%02d_%02d"), i+1, j+1);
+// 			str_tmp.Format(_T("%d"), st_count_info.nRejectCount[i][j]);
+// 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
 		}
 	}
 
 	// jtkim 20150709
 	str_tmp.Format(_T("%d"), st_count_info.nUph);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("UPH_COUNT"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("UPH_COUNT"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 	// jtkim 20150709
 	str_tmp.Format(_T("%d"), st_count_info.nDailyUph);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("DAILY_UPH_COUNT"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("DAILY_UPH_COUNT"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 	// jtkim 20150709
 	str_tmp.Format(_T("%d"), st_count_info.nUphCnt);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nUphCnt"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nUphCnt"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 	// jtkim 20150709
 	str_tmp.Format(_T("%.2f"), st_count_info.dHourPer);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("dHourPer"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("dHourPer"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 	str_tmp.Format(_T("%.2f"), st_count_info.dDailyPer);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("dDailyPer"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("dDailyPer"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
-	for (i=0; i<12; i++)
-	{
-		mstr_temp.Format(_T("TSITE_OFFSET_Y_%02d"), i);
-		str_tmp.Format(_T("%.3f"), st_recipe_info.dTsiteOffsetY[i]);
-		:: WritePrivateProfileString(_T("TSITE_OFFSET"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-	}
-
-	for (i=0; i<24; i++)		//2015.03.17 sjs
-	{
-		mstr_temp.Format(_T("UPH_%dh"), i);
-		str_tmp.Format(_T("%d"), st_count_info.nLatestUph[i]);
-		:: WritePrivateProfileString(_T("LATEST_UPH"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-	}
+// 	for (i=0; i<12; i++)
+// 	{
+// 		mstr_temp.Format(_T("TSITE_OFFSET_Y_%02d"), i);
+// 		str_tmp.Format(_T("%.3f"), st_recipe_info.dTsiteOffsetY[i]);
+// 		:: WritePrivateProfileString(_T("TSITE_OFFSET"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 	}
+// 
+// 	for (i=0; i<24; i++)		//2015.03.17 sjs
+// 	{
+// 		mstr_temp.Format(_T("UPH_%dh"), i);
+// 		str_tmp.Format(_T("%d"), st_count_info.nLatestUph[i]);
+// 		:: WritePrivateProfileString(_T("LATEST_UPH"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 	}
 
 	// jtkim 20150323
-	for (i=0; i<2; i++)
-	{
-		for (j=0; j<2; j++)
-		{
-			for (k=0; k<12; k++)
-			{
-				mstr_temp.Format(_T("BdTestCnt_%02d_%02d_%02d"), i+1, j+1, k+1);
-				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdTestCnt[k]);
-				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-				mstr_temp.Format(_T("BdPassCnt_%02d_%02d_%02d"), i+1, j+1, k+1);
-				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdPassCnt[k]);
-				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-				mstr_temp.Format(_T("BdInfo_%02d_%02d_%02d"), i+1, j+1, k+1);
-				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdInfo[k]);
-				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-				mstr_temp.Format(_T("BdBin_%02d_%02d_%02d"), i+1, j+1, k+1);
-				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdBin[k]);
-				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-				mstr_temp.Format(_T("BdFailContiCnt_%02d_%02d_%02d"), i+1, j+1, k+1);
-				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdFailContiCnt[k]);
-				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-				mstr_temp.Format(_T("strBinHistory_%02d_%02d_%02d"), i+1, j+1, k+1);
-				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_bd_info[i][j].strBinHistory[k], st_path_info.strFileBasic);
-			}
-		}
-	}
+// 	for (i=0; i<2; i++)
+// 	{
+// 		for (j=0; j<2; j++)
+// 		{
+// 			for (k=0; k<12; k++)
+// 			{
+// 				mstr_temp.Format(_T("BdTestCnt_%02d_%02d_%02d"), i+1, j+1, k+1);
+// 				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdTestCnt[k]);
+// 				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 				mstr_temp.Format(_T("BdPassCnt_%02d_%02d_%02d"), i+1, j+1, k+1);
+// 				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdPassCnt[k]);
+// 				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 				mstr_temp.Format(_T("BdInfo_%02d_%02d_%02d"), i+1, j+1, k+1);
+// 				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdInfo[k]);
+// 				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 				mstr_temp.Format(_T("BdBin_%02d_%02d_%02d"), i+1, j+1, k+1);
+// 				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdBin[k]);
+// 				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 				mstr_temp.Format(_T("BdFailContiCnt_%02d_%02d_%02d"), i+1, j+1, k+1);
+// 				str_tmp.Format(_T("%d"), st_bd_info[i][j].nBdFailContiCnt[k]);
+// 				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 				mstr_temp.Format(_T("strBinHistory_%02d_%02d_%02d"), i+1, j+1, k+1);
+// 				:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_bd_info[i][j].strBinHistory[k], st_path_info.strFileBasic);
+// 			}
+// 		}
+// 	}
 
 	// jtkim 20150330 cok
 
 
-	for (i=0; i<4; i++)
-	{
-		mstr_temp.Format(_T("BUFFER_COK_NUM_%02d"), i+1);
-		str_tmp.Format(_T("%d"), st_Cok_Buff_info[i].st_pcb_info.nCOK_IDNum);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 	for (i=0; i<4; i++)
+// 	{
+// 		mstr_temp.Format(_T("BUFFER_COK_NUM_%02d"), i+1);
+// 		str_tmp.Format(_T("%d"), st_Cok_Buff_info[i].st_pcb_info.nCOK_IDNum);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 		mstr_temp.Format(_T("BUFFER_COK_COUNT_%02d"), i+1);
+// 		str_tmp.Format(_T("%d"), st_Cok_Buff_info[i].nCokCount);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 
+// 		for (j=0; j<24; j++)
+// 		{
+// 			mstr_temp.Format(_T("BUFFER_COK_%02d_%02d"), i+1, j+1);
+// 			str_tmp.Format(_T("%d"), st_Cok_Buff_info[i].st_pcb_info.nYesNo[j]);
+// 			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+// 		}
+// 	}
 
-		mstr_temp.Format(_T("BUFFER_COK_COUNT_%02d"), i+1);
-		str_tmp.Format(_T("%d"), st_Cok_Buff_info[i].nCokCount);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-
-		for (j=0; j<24; j++)
-		{
-			mstr_temp.Format(_T("BUFFER_COK_%02d_%02d"), i+1, j+1);
-			str_tmp.Format(_T("%d"), st_Cok_Buff_info[i].st_pcb_info.nYesNo[j]);
-			:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
-		}
-	}
-
-	for (i=0; i<5; i++)
-	{
-		mstr_temp.Format(_T("COK_MODE_%02d"), i+1);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strHifixType[i], st_path_info.strFileBasic);
-	}
+// 	for (i=0; i<5; i++)
+// 	{
+// 		mstr_temp.Format(_T("COK_MODE_%02d"), i+1);
+// 		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, st_basic_info.strHifixType[i], st_path_info.strFileBasic);
+// 	}
 
 	for (i=0; i<M_MAX_MOTOR_NUM; i++)
 	{
 		mstr_temp.Format(_T("MOTOR_LAST_%02d"), i+1);
 		str_tmp.Format(_T("%.3f"), st_work_info.dCurrPos[i]);
-		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, str_tmp, st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("BASIC_SCREEN"), mstr_temp, LPCTSTR(str_tmp), st_path_info.strFileBasic);
 	}
 
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strScrapName"), st_basic_info.strScrapName, st_path_info.strFileBasic);
+// 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strScrapName"), st_basic_info.strScrapName, st_path_info.strFileBasic);
+// 
+// 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strScrapHead"), st_basic_info.strScrapHead, st_path_info.strFileBasic);
+// 
+// 	// 20150623 in-line
+// 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strProcess"), st_basic_info.strProcess, st_path_info.strFileBasic);
 
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strScrapHead"), st_basic_info.strScrapHead, st_path_info.strFileBasic);
-
-	// 20150623 in-line
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("strProcess"), st_basic_info.strProcess, st_path_info.strFileBasic);
-
-
-	// jtkim 20150709
-	str_tmp.Format(_T("%d"), st_handler_info.nFtpVer);
-	:: WritePrivateProfileString(_T("BASIC"), _T("nFtpVer"), str_tmp, st_path_info.strFileBasic);
 
 	// jtkim 20150709
-	str_tmp.Format(_T("%d"), st_basic_info.nSocketCount);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nSocketCount"), str_tmp, st_path_info.strFileBasic);
+// 	str_tmp.Format(_T("%d"), st_handler_info.nFtpVer);
+// 	:: WritePrivateProfileString(_T("BASIC"), _T("nFtpVer"), str_tmp, st_path_info.strFileBasic);
+// 
+// 	// jtkim 20150709
+// 	str_tmp.Format(_T("%d"), st_basic_info.nSocketCount);
+// 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nSocketCount"), str_tmp, st_path_info.strFileBasic);
 
 	// jtkim 20150902
-	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_01"), st_work_info.strHifix[0], st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_02"), st_work_info.strHifix[1], st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_03"), st_work_info.strHifix[2], st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_04"), st_work_info.strHifix[3], st_path_info.strFileBasic);
-
-	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_05"), st_work_info.strHifix[4], st_path_info.strFileBasic);
+// 	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_01"), st_work_info.strHifix[0], st_path_info.strFileBasic);
+// 
+// 	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_02"), st_work_info.strHifix[1], st_path_info.strFileBasic);
+// 
+// 	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_03"), st_work_info.strHifix[2], st_path_info.strFileBasic);
+// 
+// 	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_04"), st_work_info.strHifix[3], st_path_info.strFileBasic);
+// 
+// 	:: WritePrivateProfileString(_T("HIFIX"), _T("HIFIX_05"), st_work_info.strHifix[4], st_path_info.strFileBasic);
 
 	// jtkim 20150930
 	str_tmp.Format(_T("%d"), st_basic_info.nRecipeYesNo);
-	:: WritePrivateProfileString(_T("BASIC"), _T("nRecipeYesNo"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC"), _T("nRecipeYesNo"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 	// jtkim 20151229 사용관련
 	str_tmp.Format(_T("%d"), st_basic_info.nRetestCount);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nRetestCount"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nRetestCount"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 	// jtkim 20160124
 	str_tmp.Format(_T("%d"), st_recipe_info.nAbortPer);
-	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nAbortPer"), str_tmp, st_path_info.strFileBasic);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nAbortPer"), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 }
 
 CString CMyBasicData::OnGet_File_Name()
@@ -2516,35 +2516,35 @@ void CMyBasicData::OnInterface_Data_Save()
 	{
 		str_name.Format(_T("%02d_CLIENT_IP"), i);
 		str_tmp.Format(_T("%s"), st_client_info[i].strIp);
-		:: WritePrivateProfileString(_T("INTERFACE_SCREEN"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("INTERFACE_SCREEN"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("%02d_CLIENT_PORT"), i);
 		str_tmp.Format(_T("%d"), st_client_info[i].nPort);
-		:: WritePrivateProfileString(_T("INTERFACE_SCREEN"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("INTERFACE_SCREEN"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("%02d_SERVER_PORT"), i);
 		str_tmp.Format(_T("%d"), st_server_info[i].nPort);
-		:: WritePrivateProfileString(_T("INTERFACE_SCREEN"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("INTERFACE_SCREEN"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("PORT_%02d"), i+1);
 		str_tmp.Format(_T("%d"), st_serial_info.nSerialPort[i]);
-		:: WritePrivateProfileString(_T("SERIAL"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("SERIAL"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("BAUDRATE_%02d"), i+1);
 		str_tmp.Format(_T("%d"), st_serial_info.nSerialBaudrate[i]);
-		:: WritePrivateProfileString(_T("SERIAL"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("SERIAL"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("DATA_%02d"), i+1);
 		str_tmp.Format(_T("%d"), st_serial_info.nSerialData[i]);
-		:: WritePrivateProfileString(_T("SERIAL"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("SERIAL"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("STOP_%02d"), i+1);
 		str_tmp.Format(_T("%d"), st_serial_info.nSerialStop[i]);
-		:: WritePrivateProfileString(_T("SERIAL"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("SERIAL"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 
 		str_name.Format(_T("PARITY_%02d"), i+1);
 		str_tmp.Format(_T("%d"), st_serial_info.nSerialParity[i]);
-		:: WritePrivateProfileString(_T("SERIAL"), str_name, LPCTSTR(str_tmp), st_path_info.strFileBasic);
+		:: WritePrivateProfileString(_T("SERIAL"), LPCTSTR(str_name), LPCTSTR(str_tmp), st_path_info.strFileBasic);
 	}
 }
 

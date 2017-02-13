@@ -305,8 +305,8 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define  Y_POS             3
 #define  FAILPICK          4
 
-#define  LEFT              100
-#define  RIGHT             200
+#define  LEFT              0
+#define  RIGHT             1
 
 
 
@@ -732,7 +732,10 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 //kwlee 2017.0204
 #define PICK                            0
 #define PLACE                           1
+#define TEMP                            2
+
 #define MAX_PICKER                      5
+#define TOTAL_PICK                      10
 #define MAX_INFO                        5
 #define MAX_BUFFER                      30
 
@@ -1268,7 +1271,7 @@ struct tagPICKER_DATA_INFO
 
 	CString strPickerSerial[2][30];
 };
-extern  tagPICKER_DATA_INFO  st_Picker_info;
+extern tagPICKER_DATA_INFO  st_Picker_info;
 //
 
 struct tagBUFFER_DATA_INFO
@@ -1279,7 +1282,7 @@ struct tagBUFFER_DATA_INFO
 	int nBufferFailCnt;
 	
 };
-extern  tagBUFFER_DATA_INFO  st_Buffer_info;
+extern tagBUFFER_DATA_INFO  st_Buffer_info[3];
 
 enum LAMP_CTRL
 {

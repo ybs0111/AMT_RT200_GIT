@@ -106,9 +106,11 @@ UINT OnThreadHandlerCheck(LPVOID lParam)
 UINT OnThreadReadIO(LPVOID lParam)
 {
 	CSingleLock sing(&mutex);
-	
+
 	while(!AllStop[0])
 	{
+
+		
 		sing.Lock();
 		
 		clsReadIO.OnThreadRun();
@@ -148,7 +150,7 @@ UINT OnThreadTowerLamp(LPVOID lParam)
 UINT OnThreadAlarmDisplay(LPVOID lParam)
 {
 	CSingleLock sing(&mutex);
-	
+
 	while(!AllStop[0])
 	{
 		sing.Lock();

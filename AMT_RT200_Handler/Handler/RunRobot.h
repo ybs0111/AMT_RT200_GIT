@@ -32,7 +32,7 @@ public:
 	int             m_nJobNextPos; //kwlee 2016.1229
 	//kwlee 2017.0204
 	int             m_nPrintOutPutCnt;
-	int             m_nLabelCnt;
+	int             m_nEmptyCntBufferCnt;
 	CString         m_strPrintSerial[2];
 	int             m_nLabelFailCheck;
 	CString			m_strAlarmCode;	
@@ -65,14 +65,14 @@ public:
 	void    OnSetPickerUpDn(int nPickCnt);
 	void    OnVaccummSet(int nMode, int nPickCnt,int OnOff);
 	void    OnBlowSet(int OnOff);
-
-	void     OnGetPickCheck(int nPickCnt);
-	int     OnFailLabelCheck();
+	void     OnGetPickCheck(int nMode, int nPickCnt);
+	
 	int     OnGetVaccumgmCheck(int OnOff,int nPickCnt);
-	void    OnDataExchange(int nPickPlace);
+	void    OnDataExchange(int nPickPlace,int nFailCheck);
+	int     OnPrinterFeeder(int nCnt, int nFailCheck);
     void    OnBufferDataTransfer();
-	int    OnPrinterFeeder(int nCnt);
-	int    OnBarcodeReadCheck();
+	int     OnFailLabelCheck();
+	void    OnBarcodeReadCheck();
 };
 
 extern CRunRobot	clsRunRobot;

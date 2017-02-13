@@ -33,7 +33,7 @@ CRunRobot::CRunRobot(void)
 	m_dpTargetPosList[0]  = 0; 
 	m_dpTargetPosList[1]  = 0;
 	m_dpTargetPosList[2]  = 0;
-
+	
 	m_dpSpdRatio[0] = 100; 		//	m_dpSpdRatio[3];        //속도비율 [0]:Vel, [1]:Acc, [2]:Dec
 	m_dpSpdRatio[1] = 100;
 	m_dpSpdRatio[2] = 100;
@@ -46,7 +46,19 @@ CRunRobot::CRunRobot(void)
 	//kwlee 2017.0204
 	m_nPrintOutPutCnt = 0; 
 	m_nLabelFailCheck = FALSE;
+	m_nEmptyCntBufferCnt = 0;
+	// 	for (int i = 0; i<2; i++)
+	// 	{
+	// 		for (int j =0; j<MAX_BUFFER; j++)
+	// 		{
+	// 			for (int k =0; k< MAX_INFO; k++)
+	// 			{
+	// 				st_Picker_info.nPickerData[i][j][k]  = 0;
+	// 			}
+	// 		}
+	// 	}
 	
+<<<<<<< HEAD
 	for (int i = 0; i<2; i++)
 	{
 		for (int j =0; j<MAX_PICKER; j++)
@@ -57,6 +69,9 @@ CRunRobot::CRunRobot(void)
 			}
 		}
 	}
+=======
+
+>>>>>>> dbf831b9c97e835a432de50d6c706fa8fe0cc6c3
 }
 
 
@@ -142,14 +157,12 @@ void CRunRobot::OnRunInit()
 			}
 		
 			OnSetPickerUpDn(0, PICKER_UP, m_npTemp_Picker_YesNo);
-	
 			m_nInitStep = 200;
 			break;
 
 		case 200:
 			// loader robot picker up 체크
 			nRet_1 = OnGetPickerUpDn(0, PICKER_UP, m_npTemp_Picker_YesNo);
-
 			if(nRet_1 == RET_GOOD)
 			{
 				m_nInitStep = 300;
@@ -330,7 +343,8 @@ void CRunRobot::OnSetPickerUpDn(int  nPickCnt)
 		clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_NO;	
 	}
 
-	for (int i =0; i < nPickCnt; i++ )
+	//for (int i =0; i < nPickCnt; i++ )
+	for (int i =0; i < TOTAL_PICK; i++ )
 	{
 		if(m_bSecondPos == false)
 		{
@@ -368,9 +382,7 @@ void CRunRobot::OnSetPickerUpDn(int  nPickCnt)
 			{ 
 				if(i > 2) 
  				{
-
 					clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i - 1] = CTL_YES;	
-	
 				}
 			}
 			else if (st_basic_info.nPcbType == UDIMM_10)
@@ -390,7 +402,7 @@ void CRunRobot::OnSetPickerUpDn(int  nPickCnt)
 				{	
 // 					if (st_basic_info.nPickerSelect[PICKCNT - 6 + i] == CTL_YES)
 // 					{
-					clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 4 - i] = CTL_YES;	
+					clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
 					//}
 				}
 			}
@@ -398,7 +410,30 @@ void CRunRobot::OnSetPickerUpDn(int  nPickCnt)
 	}
 	//clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
 }
-void CRunRobot::OnDataExchange(int nPickPlace)
+void CRunRobot::OnBufferDataTransfer()
+{
+	for (int i =0; i<2; i++)
+	{
+		//for (int j =0; j<MAX_BUFFER; j++)
+		for (int j =0; j<MAX_PICKER; j++)
+		{
+			for (int k =0; j<MAX_INFO; k++)
+			{
+				if (st_Buffer_info[PICK].strBufferSerial[i][MAX_PICKER + j] != _T(""))
+				{
+					st_Buffer_info[TEMP].nBufferData[i][j][k] =  st_Buffer_info[PICK].nBufferData[i][MAX_PICKER + j][k];
+					st_Buffer_info[TEMP].strBufferSerial[i][j] =  st_Buffer_info[PICK].strBufferSerial[i][MAX_PICKER + j];
+
+					st_Buffer_info[PICK].nBufferData[i][j][k] = st_Buffer_info[TEMP].nBufferData[i][j][k];
+					st_Buffer_info[PICK].strBufferSerial[i][j] = st_Buffer_info[TEMP].strBufferSerial[i][j];
+				//	m_nEmptyCntBufferCnt++;
+				}
+				
+			}
+		}
+	}
+}
+void CRunRobot::OnDataExchange(int nPickPlace,int nFailCheck)
 {
 	if (nPickPlace == PICK)
 	{
@@ -408,23 +443,417 @@ void CRunRobot::OnDataExchange(int nPickPlace)
 			{
 				for (int k =0; k<MAX_INFO; k++)
 				{
-					st_Picker_info.nPickerData[i][j][k] = st_Buffer_info.nBufferData[i][j][k];
-					st_Picker_info.strPickerSerial[i][j] = st_Buffer_info.strBufferSerial[i][j];
-					st_Picker_info.nPickerFailCnt        = st_Buffer_info.nBufferFailCnt;
-					if (st_Picker_info.nPickerData[i][j][k] == st_Buffer_info.nBufferData[i][j][k] && 
-						st_Picker_info.strPickerSerial[i][j] == st_Buffer_info.strBufferSerial[i][j])
+					st_Picker_info.nPickerData[i][j][k] = st_Buffer_info[PICK].nBufferData[i][j][k];
+					st_Picker_info.strPickerSerial[i][j] = st_Buffer_info[PICK].strBufferSerial[i][j];
+					st_Picker_info.nPickerFailCnt        = st_Buffer_info[PICK].nBufferFailCnt;
+
+// 					if (st_Picker_info.nPickerData[i][j][k] == st_Buffer_info[PICK].nBufferData[i][j][k] && 
+// 						st_Picker_info.strPickerSerial[i][j] == st_Buffer_info[PICK].strBufferSerial[i][j])
+					if (st_Picker_info.nPickerData[i][j][k] == st_Buffer_info[PICK].nBufferData[i][j][k] && 
+						st_Picker_info.strPickerSerial[i][j] == st_Buffer_info[PICK].strBufferSerial[i][j] && 
+						m_nLabelFailCheck == FALSE)
 					{
-						st_Buffer_info.nBufferData[i][j][k] = -1;
-						st_Buffer_info.strBufferSerial[i][j] = _T("");
-						st_Buffer_info.nBufferFailCnt = 0;
-						
+
+						st_Buffer_info[PICK].nBufferData[i][j][k] = -1;
+						st_Buffer_info[PICK].strBufferSerial[i][j] = _T("");
+						//st_Buffer_info.nBufferFailCnt = 0;	
 					}
 				}
 			}
 		}
 	}
-	
+	else if (nPickPlace == PLACE)
+	{
+		for (int i =0; i<2; i++)
+		{
+			for (int j = 0; j< MAX_PICKER; j++)
+			{
+				for (int k =0; k<MAX_INFO; k++)
+				{
+					st_Buffer_info[PLACE].nBufferData[i][j][k]  = st_Picker_info.nPickerData[i][j][k] ;
+					st_Buffer_info[PLACE].strBufferSerial[i][j] = st_Picker_info.strPickerSerial[i][j] ;
+					//st_Picker_info.nPickerFailCnt        = st_Buffer_info.nBufferFailCnt;
+
+					// 					if (st_Picker_info.nPickerData[i][j][k] == st_Buffer_info[PICK].nBufferData[i][j][k] && 
+					// 						st_Picker_info.strPickerSerial[i][j] == st_Buffer_info[PICK].strBufferSerial[i][j])
+					if (st_Buffer_info[PLACE].nBufferData[i][j][k]  ==  st_Picker_info.nPickerData[i][j][k] && 
+						 st_Buffer_info[PLACE].strBufferSerial[i][j] == st_Picker_info.strPickerSerial[i][j]
+						)
+						//m_nLabelFailCheck == FALSE
+						
+					{
+						st_Picker_info.nPickerData[i][j][k]  = -1; 
+						st_Picker_info.strPickerSerial[i][j] = _T("");
+
+						//st_Buffer_info[PICK].nBufferData[i][j][k] = -1;
+						//st_Buffer_info[PICK].strBufferSerial[i][j] = _T("");
+						//st_Buffer_info.nBufferFailCnt = 0;	
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+
+	}
 }
+
+//kwlee 2017.0204
+int CRunRobot::OnGetVaccumgmCheck(int OnOff,int nPickCnt)
+{
+	int i,nFailCnt;
+	int nRet;
+	if (OnOff == IO_ON)
+	{
+		for (i = 0; i < TOTAL_PICK; i++)
+		{
+			if (st_basic_info.nPcbType == UDIMM_10)
+			{
+				if( i < 5)
+				{
+					//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
+					//kwlee 2017.0204
+					//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
+					if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES && st_Buffer_info[PICK].strBufferSerial[0][i] !=_T(""))
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
+						if (nRet == IO_OFF)
+						{
+							st_Buffer_info[PICK].nBufferData[0][i][BIN] = FAIL;
+							st_Buffer_info[PICK].nBufferData[0][i][EXIST] = NO;
+						//	m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
+							//return RET_ERROR;
+						}
+
+					}
+					else if (st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] == YES)
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
+						if (nRet == IO_ON)
+						{
+							st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] = NO;		
+						}
+					}
+					//kwlee 2017.0209
+					else
+					{
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == NO)
+						{
+							st_Buffer_info[PICK].nBufferData[0][i][X_POS] = LEFT;
+							st_Buffer_info[PICK].nBufferData[0][i][Y_POS] = i;
+							st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] = YES;
+							//return RET_ERROR;
+						}
+					}
+				}
+				else
+				{
+					//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 5 - m_nPickerNum],IO_ON);
+					//	if(nPickCnt >= (PICKCNT + 3 - i)) 
+					//	{
+					//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 4 - i],IO_ON);
+					//kwlee 2017.0204
+					//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
+					if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES && st_Buffer_info[PICK].strBufferSerial[1][nPickCnt - i]!= _T(""))
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
+						if (nRet == IO_OFF)
+						{
+							st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] = FAIL;
+							st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] = NO;
+						//	m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i], OnOff);
+							//return RET_ERROR;
+						}	
+					}
+					else if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] == YES)
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
+						if (nRet == IO_ON)
+						{
+							st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] = NO;
+						}
+					}
+					//kwlee 2017.0209
+					else
+					{
+// 						if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == NO)
+// 						{
+// 							st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][X_POS] = RIGHT;
+// 							st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][Y_POS] = i;
+// 							st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] = YES;
+// 							//return RET_ERROR;
+// 						}
+					}
+				}
+			}
+			else
+			{
+				if (st_basic_info.nPcbType == RDIMM)
+				{
+					if (i < 3)
+					{
+						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
+						//kwlee 2017.0204
+						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES && st_Buffer_info[PICK].strBufferSerial[0][i] != _T(""))
+						{
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
+							if (nRet == IO_OFF)
+							{
+								st_Buffer_info[PICK].nBufferData[0][i][BIN] = FAIL;
+								st_Buffer_info[PICK].nBufferData[0][i][EXIST] = NO;
+								//m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
+								//return RET_ERROR;
+							}
+						}
+						else if (st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] == YES)
+						{
+							//FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
+							if (nRet == IO_ON)
+							{
+								st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] = NO;
+							}
+						}
+						//kwlee 2017.0209
+						else
+						{
+							if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == NO)
+							{
+								st_Buffer_info[PICK].nBufferData[0][i][X_POS] = RIGHT;
+								st_Buffer_info[PICK].nBufferData[0][i][Y_POS] = i;
+								st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] = YES;
+								//return RET_ERROR;
+							}
+						}
+					}
+					else
+					{	
+						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT - i],IO_ON);
+						//kwlee 2017.0204
+						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
+						if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES && st_Buffer_info[PICK].strBufferSerial[1][nPickCnt - i] != _T("") )
+						{
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1],IO_ON);
+							if (nRet == IO_OFF)
+							{
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] = FAIL;
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] = NO;
+								//m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1], OnOff);
+								//return RET_ERROR;
+							}
+
+						}
+						else if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] == YES)
+						{
+							//FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i],IO_OFF);
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1],IO_ON);
+							if (nRet == IO_ON)
+							{
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] = NO;
+							}
+						}
+						//kwlee 2017.0209
+						else
+						{
+							if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == NO)
+							{
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][X_POS] = RIGHT;
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][Y_POS] = i;
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] = YES;
+								//return RET_ERROR;
+							}
+						}
+					}
+				}
+				else //Sodimm, Udimm_9
+				{
+					if (i <5)
+					{
+						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);	
+						//kwlee 2017.0204
+						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES && st_Buffer_info[PICK].strBufferSerial[0][i]!= _T(""))
+						{
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);	
+							if (nRet == IO_OFF)
+							{
+								st_Buffer_info[PICK].nBufferData[0][i][BIN] = FAIL;
+								st_Buffer_info[PICK].nBufferData[0][i][EXIST] = NO;
+								//m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
+								//return RET_ERROR;
+							}
+						}
+						else if (st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] == YES)
+						{
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
+							if (nRet == IO_ON)
+							{
+								st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] = NO;
+							}
+						}
+						//kwlee 2017.0209
+						else
+						{
+							if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == NO)
+							{
+								st_Buffer_info[PICK].nBufferData[0][i][X_POS] = RIGHT;
+								st_Buffer_info[PICK].nBufferData[0][i][Y_POS] = i;
+								st_Buffer_info[PICK].nBufferData[0][i][FAILPICK] = YES;
+								//return RET_ERROR;
+							}
+						}
+					}
+					else
+					{
+						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 3 - i],IO_ON);
+						//kwlee 2017.0204
+						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
+						if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES && st_Buffer_info[PICK].strBufferSerial[1][nPickCnt - i] !=_T(""))
+						{
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
+							if (nRet == IO_OFF)
+							{
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] = FAIL;
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] = NO;
+								//m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i], OnOff);
+								//return RET_ERROR;
+							}
+						}
+						else if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] == YES)
+						{
+							//FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_OFF);
+							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
+							if (nRet == IO_ON)
+							{
+								st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][FAILPICK] = NO;
+							}
+						}
+						//kwlee 2017.0209
+						else
+						{
+							if (st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][EXIST] == NO)
+							{
+								st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][X_POS] = RIGHT;
+								st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][Y_POS] = i;
+								st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][FAILPICK] = YES;
+							//	return RET_ERROR;
+							}
+						}
+					}
+				}
+			}
+		}
+		//kwlee 2017.0209
+		nFailCnt = 0;
+		for (int i = 0; i<2; i++)
+		{
+			for (int j =0; j < MAX_PICKER; j++)
+			{
+				if (st_Buffer_info[PICK].nBufferData[i][j][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[i][j][EXIST] == NO)
+				{
+					st_Buffer_info[PICK].nBufferData[i][j][X_POS] = i;
+					st_Buffer_info[PICK].nBufferData[i][j][Y_POS] = j;
+					st_Buffer_info[PICK].nBufferData[i][j][FAILPICK] = YES;
+					nFailCnt++;
+				}
+			}
+		}
+
+		if (nFailCnt > 0)
+		{
+			st_Buffer_info[PICK].nBufferFailCnt = nFailCnt;
+			return RET_ERROR;
+		}
+		else
+		{
+			return RET_GOOD;
+		}
+		////
+	}
+	else //OnOff == IO_OFF
+	{
+		for (int i =0; i<TOTAL_PICK; i++ )
+		{
+			if(m_bSecondPos == false)
+			{
+				if(st_basic_info.nPcbType == RDIMM)
+				{
+					if (i < 3)
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
+						if (nRet == IO_ON)
+						{
+							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
+							return RET_ERROR;
+						}
+					}
+				}
+				else if (st_basic_info.nPcbType == UDIMM_10)
+				{
+					if (i < 5)
+					{
+
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
+						if (nRet == IO_ON)
+						{
+							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
+							return RET_ERROR;
+						}
+					}
+				}
+			}
+			else
+			{
+				if(st_basic_info.nPcbType == RDIMM)
+				{
+					//if(m_nPickCnt > (PICKCNT - i)) 
+					if(i > 2) 
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1],IO_OFF);
+						if (nRet == IO_ON)
+						{
+							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1], OnOff);
+							return RET_ERROR;
+						}
+					}
+				}
+				else if (st_basic_info.nPcbType == UDIMM_10)
+				{
+					//if (st_basic_info.nPickerSelect[PICKCNT - 6 + i] == CTL_YES)
+					if (i > 4)
+					{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_OFF);
+						if (nRet == IO_ON)
+						{
+							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i], OnOff);
+							return RET_ERROR;
+						}
+					}
+				}
+				else //Sodimm, Udimm_9
+				{
+					//if(m_nPickCnt > (PICKCNT - 6 + i))
+					if(i > 4)
+					{
+						// 						if (st_basic_info.nPickerSelect[PICKCNT - 6 + i] == CTL_YES)
+						// 						{
+						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_OFF);
+						if (nRet == IO_ON)
+						{
+							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i], OnOff);
+							return RET_ERROR;
+						}
+						//}	
+					}
+				}
+			}
+		}
+	}
+	return RET_GOOD;
+}
+/////
 void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 {
 	int i;
@@ -434,34 +863,42 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 	}
 
 	//for (int i =0; i<PICKCNT; i++)
-	for (i =0; i<nPickCnt; i++)
+	//for (i =0; i<nPickCnt; i++)
+	for (i =0; i<TOTAL_PICK; i++)
 	{
 		if (nMode == 1)
 		{
-			//
-			if (st_Picker_info.nPickerFailCnt > 0)
-			{
-				if ((st_Picker_info.nPickerData[0][i][X_POS] == 0 && st_Picker_info.nPickerData[0][i][FAILPICK] == YES) || 
-					(st_Picker_info.nPickerData[1][nPickCnt - i][X_POS] == 1 && st_Picker_info.nPickerData[1][nPickCnt - i][FAILPICK] == YES))
+			//if ((st_Picker_info.nPickerData[0][i][X_POS] == LEFT && st_Picker_info.nPickerData[0][i][FAILPICK] == YES) || 
+				//(st_Picker_info.nPickerData[1][nPickCnt - i][X_POS] == RIGHT && st_Picker_info.nPickerData[1][nPickCnt - i][FAILPICK] == YES))
+			//{
+				if (i < 5 && st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 				{
-					if (i < 5 && st_Picker_info.nPickerData[0][i][X_POS] == 0)
+					//if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
+					//if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == NO)
+					if (st_Picker_info.nPickerData[0][i][BIN] == FAIL && st_Picker_info.nPickerData[0][i][EXIST] == NO)
 					{
 						clsRunRobot.m_npTemp_Picker_YesNo[st_Picker_info.nPickerData[0][i][Y_POS]] = CTL_YES;
-						//st_Picker_info.nPickerData[0][st_Picker_info.nPickerData[0][i][Y_POS]][FAILPICK] = NO;
-						break;
 					}
-					else
-					{
-						clsRunRobot.m_npTemp_Picker_YesNo[6 + st_Picker_info.nPickerData[1][i][Y_POS]] = CTL_YES;
-						//st_Picker_info.nPickerData[1][st_Picker_info.nPickerData[1][i][Y_POS]][FAILPICK] = NO;
-						break;
-					}
-				}
-			}
-			else 
-			{
 					
-			}
+					//st_Picker_info.nPickerData[0][st_Picker_info.nPickerData[0][i][Y_POS]][FAILPICK] = NO;
+				//	break;
+				}
+				else if (i > 4 && st_Buffer_info[PICK].nBufferData[1][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][i][EXIST] == YES)
+				{
+					//if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
+					//if (st_Buffer_info[PICK].nBufferData[1][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][i][EXIST] == YES)
+					if (st_Picker_info.nPickerData[1][nPickCnt - i][BIN] == FAIL && st_Picker_info.nPickerData[1][nPickCnt - i][EXIST] == NO)
+					{	
+						clsRunRobot.m_npTemp_Picker_YesNo[MAX_PICKER + st_Picker_info.nPickerData[1][nPickCnt - i][Y_POS]] = CTL_YES;
+					}
+					//st_Picker_info.nPickerData[1][st_Picker_info.nPickerData[1][i][Y_POS]][FAILPICK] = NO;
+				//	break;
+				}
+				else
+				{
+
+				}
+			//}
 		}
 		else
 		{
@@ -472,7 +909,7 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 					//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 					//kwlee 2017.0204
 					//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-					if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+					if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 					{
 						clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 					}
@@ -486,7 +923,7 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 					//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
 					//kwlee 2017.0204
 					//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-					if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+					if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
 					{
 						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
 					}
@@ -506,7 +943,7 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 						/*clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;	*/
 						//kwlee 2017.0204
 						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 						{
 							clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;	
 						}
@@ -519,7 +956,7 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 					{
 						//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_YES;
 						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+						if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
 						{
 							clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_YES;
 						}
@@ -536,7 +973,7 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 						//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 						//kwlee 2017.0204
 						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 						{
 							clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 						}
@@ -550,7 +987,8 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 						//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
 						//kwlee 2017.0204
 						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+						//if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
+						if (st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i - 1][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i - 1][EXIST] == YES)
 						{
 							clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
 						}
@@ -570,7 +1008,7 @@ void CRunRobot::OnBlowSet(int OnOff)
 
 	if (OnOff == IO_ON)
 	{
-		for (int i =0; i<m_nPickCnt; i++ )
+		for (int i =0; i<TOTAL_PICK; i++ )
 		{
 			if(m_bSecondPos == false)
 			{
@@ -638,7 +1076,7 @@ void CRunRobot::OnBlowSet(int OnOff)
 	}
 	else //OnOff == IO_OFF
 	{
-		for (int i =0; i<m_nPickCnt; i++ )
+		for (int i =0; i<TOTAL_PICK; i++ )
 		{
 			if(m_bSecondPos == false)
 			{
@@ -707,7 +1145,7 @@ void CRunRobot::OnBlowSet(int OnOff)
 	}
 }
 
-int CRunRobot::OnBarcodeReadCheck()
+void CRunRobot::OnBarcodeReadCheck()
 {
 	int nRet = 0;
 	int nCnt = 0;
@@ -715,31 +1153,31 @@ int CRunRobot::OnBarcodeReadCheck()
 	{
 		for (int j = 0; j < MAX_PICKER; j++)
 		{
-			if (st_Buffer_info.nBufferData[i][j][BIN] == GOOD && st_Buffer_info.strBufferSerial[i][j] !=_T(""))
+			if (st_Buffer_info[PICK].nBufferData[i][j][BIN] == GOOD && st_Buffer_info[PICK].strBufferSerial[i][j] !=_T(""))
 			{
-				st_Buffer_info.nBufferData[i][j][EXIST] = YES;
+				st_Buffer_info[PICK].nBufferData[i][j][EXIST] = YES;
 			}
 			else
 			{
-				st_Buffer_info.nBufferData[i][j][EXIST] = NO;
-				nCnt++;
+				st_Buffer_info[PICK].nBufferData[i][j][EXIST] = NO;
+				//nCnt++;
 			}
 		}
 	}
-
-	if (nCnt > 0)
-	{
-		st_Buffer_info.nBufferFailCnt = nCnt;
-		nRet = BD_ERROR;
-	}
-	else
-	{
-		nRet = BD_GOOD;
-	}
-	return nRet;
+	
+// 	if (nCnt > 0)
+// 	{
+// 		st_Buffer_info[PICK].nBufferFailCnt = nCnt;
+// 		nRet = BD_ERROR;
+// 	}
+// 	else
+// 	{
+// 		nRet = BD_GOOD;
+// 	}
+	//return nRet;
 }
 //kwlee 2017.0202
-int CRunRobot::OnPrinterFeeder(int nCnt)
+int CRunRobot::OnPrinterFeeder(int nCnt, int nFailCheck)
 {
 
 	CString strMsg;
@@ -754,284 +1192,47 @@ int CRunRobot::OnPrinterFeeder(int nCnt)
 	//Printer Alarm 시 알람
 	///
 
-	switch(m_nFeederStep)
-	{
-		case 0:
-
-			m_nFeederStep = 100;
-		break;
-
-		case 100:
-			m_nFeederStep = 200;
-		break;
-
-		case 200:
-			m_nFeederStep = 300;
-			break;
-
-	}
-	
 
 	return RET_GOOD;
 }
 
-//kwlee 2017.0204
-int CRunRobot::OnGetVaccumgmCheck(int OnOff,int nPickCnt)
-{
-	int i;
-	int nRet;
-	if (OnOff == IO_ON)
-	{
-		for (i = 0; i < nPickCnt; i++)
-		{
-			if (st_basic_info.nPcbType == UDIMM_10)
-			{
-				if( i < 5)
-				{
-					//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
-					//kwlee 2017.0204
-					//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-					if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
-					{
-						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
 
-						if (nRet == IO_OFF)
-						{	
-							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-							return RET_ERROR;
-						}
-					}
-// 					else
-// 					{
-// 						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
-// 
-// 						if (nRet == IO_ON)
-// 						{
-// 							return RET_ERROR;
-// 						}
-// 						else
-// 						{
-// 							return RET_GOOD;
-// 						}
-// 					}
-				}
-				else
-				{
-					//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 5 - m_nPickerNum],IO_ON);
-					if(nPickCnt >= (PICKCNT + 3 - i)) 
-					{
-						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 4 - i],IO_ON);
-						//kwlee 2017.0204
-						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
-						{
-							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
-							if (nRet == IO_OFF)
-							{
-								m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-								return RET_ERROR;
-							}
-						}
-// 						else
-// 						{
-// 							FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_OFF);
-// 						}
-					}
-				}
-			}
-			else
-			{
-
-				if (st_basic_info.nPcbType == RDIMM)
-				{
-					if (i < 3)
-					{
-						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
-						//kwlee 2017.0204
-						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
-						{
-							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);
-							if (nRet == IO_OFF)
-							{
-								m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-								return RET_ERROR;
-							}
-						}
-// 						else
-// 						{
-// 							FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
-// 						}
-					}
-					else
-					{	
-						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT - i],IO_ON);
-						//kwlee 2017.0204
-						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
-						{
-							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1],IO_ON);
-							if (nRet == IO_OFF)
-							{
-								m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-								return RET_ERROR;
-							}
-						}
-// 						else
-// 						{
-// 							FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i],IO_OFF);
-// 						}
-
-					}
-				}
-				else //Sodimm, Udimm_9
-				{
-					if (i <5)
-					{
-						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);	
-						//kwlee 2017.0204
-						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
-						{
-							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_ON);	
-							if (nRet == IO_OFF)
-							{
-								m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-								return RET_ERROR;
-							}
-						}
-// 						else
-// 						{
-// 							FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);	
-// 						}
-					}
-					else
-					{
-						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 3 - i],IO_ON);
-						//kwlee 2017.0204
-						//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
-						{
-							nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
-							if (nRet == IO_OFF)
-							{
-								m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-								return RET_ERROR;
-							}
-						}
-// 						else
-// 						{
-// 							FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_OFF);
-// 						}
-					}
-				}
-			}
-		}
-	}
-	else //OnOff == IO_OFF
-	{
-		for (int i =0; i<nPickCnt; i++ )
-		{
-			if(m_bSecondPos == false)
-			{
-				if(st_basic_info.nPcbType == RDIMM)
-				{
-					if (i < 3)
-					{
-						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
-						if (nRet == IO_ON)
-						{
-							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-							return RET_ERROR;
-						}
-					}
-				}
-				else if (st_basic_info.nPcbType == UDIMM_10)
-				{
-					if (i < 5)
-					{
-
-						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[i],IO_OFF);
-						if (nRet == IO_ON)
-						{
-							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-							return RET_ERROR;
-						}
-					}
-				}
-			}
-			else
-			{
-				if(st_basic_info.nPcbType == RDIMM)
-				{
-					//if(m_nPickCnt > (PICKCNT - i)) 
-					if(i > 2) 
-					{
-						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT - i - 1],IO_OFF);
-						if (nRet == IO_ON)
-						{
-							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-							return RET_ERROR;
-						}
-					}
-				}
-				else if (st_basic_info.nPcbType == UDIMM_10)
-				{
-					//if (st_basic_info.nPickerSelect[PICKCNT - 6 + i] == CTL_YES)
-					if (i > 4)
-					{
-						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_OFF);
-						if (nRet == IO_ON)
-						{
-							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-							return RET_ERROR;
-						}
-					}
-				}
-				else //Sodimm, Udimm_9
-				{
-					//if(m_nPickCnt > (PICKCNT - 6 + i))
-					if(i > 4)
-					{
-// 						if (st_basic_info.nPickerSelect[PICKCNT - 6 + i] == CTL_YES)
-// 						{
-						nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 4 - i],IO_OFF);
-						if (nRet == IO_ON)
-						{
-							m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_HeadVaccumCheck[i], OnOff);
-							return RET_ERROR;
-						}
-						//}	
-					}
-				}
-			}
-		}
-	}
-	return RET_GOOD;
-}
-/////
 
 void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 {
 	int i;
 	if (OnOff == IO_ON)
 	{
-		for (i = 0; i < nPickCnt; i++)
+		//for (i = 0; i < nPickCnt; i++)
+		for (i = 0; i < TOTAL_PICK; i++)
 		{
 			if (nMode == 1)
 			{
-				if ((st_Picker_info.nPickerData[0][i][X_POS] == 0 && st_Picker_info.nPickerData[0][i][FAILPICK] == YES) || 
-					(st_Picker_info.nPickerData[1][i][X_POS] == 1 && st_Picker_info.nPickerData[1][nPickCnt - i][FAILPICK] == YES))
+				if ((st_Picker_info.nPickerData[0][i][X_POS] == LEFT && st_Picker_info.nPickerData[0][i][FAILPICK] == YES) || 
+					(st_Picker_info.nPickerData[1][i][X_POS] == RIGHT && st_Picker_info.nPickerData[1][nPickCnt - i][FAILPICK] == YES))
 				{
-					if (st_Picker_info.nPickerData[0][i][X_POS] == 0)
+					if (i < 5 &&st_Picker_info.nPickerData[0][i][X_POS] == LEFT)
 					{
-						FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[st_Picker_info.nPickerData[0][i][Y_POS]],IO_ON);
-						break;
+						//if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
+						if (st_Picker_info.nPickerData[0][i][BIN] == FAIL && st_Picker_info.nPickerData[0][i][EXIST] == NO)
+						{
+							FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[st_Picker_info.nPickerData[0][i][Y_POS]],IO_ON);
+						}
+						//break;
+					}
+					else if (i > 4 && st_Picker_info.nPickerData[1][i][X_POS] == RIGHT)
+					{
+						//if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
+						//if (st_Buffer_info[PICK].nBufferData[1][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][i][EXIST] == YES)
+						if (st_Picker_info.nPickerData[1][i][BIN] == FAIL && st_Picker_info.nPickerData[1][i][EXIST] == NO)
+						{
+							FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[MAX_PICKER + st_Picker_info.nPickerData[1][nPickCnt - i][Y_POS]],IO_ON);
+						}
+						//break;
 					}
 					else
 					{
-						FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[6 + st_Picker_info.nPickerData[1][i][Y_POS]],IO_ON);
-						break;
+
 					}
 				}
 			}
@@ -1045,7 +1246,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 						//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
 						//kwlee 2017.0204
 						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-						if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 						{
 							FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
 						}
@@ -1062,7 +1263,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 							//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 4 - i],IO_ON);
 							//kwlee 2017.0204
 							//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-							if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+							if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
 							{
 								FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 3 - i],IO_ON);
 							}
@@ -1083,7 +1284,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 							//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
 							//kwlee 2017.0204
 							//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-							if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+							if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 							{
 								FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);
 							}
@@ -1097,7 +1298,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 							//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT - i],IO_ON);
 							//kwlee 2017.0204
 							//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-							if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+							if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
 							{
 								FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT - i -1],IO_ON);
 							}
@@ -1116,7 +1317,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 							//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);	
 							//kwlee 2017.0204
 							//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-							if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+							if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 							{
 								FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[i],IO_ON);	
 							}
@@ -1130,7 +1331,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 							//FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 3 - i],IO_ON);
 							//kwlee 2017.0204
 							//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-							if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+							if (st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][EXIST] == YES)
 							{
 								FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[PICKCNT + 3 - i],IO_ON);
 							}
@@ -1147,7 +1348,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 	}
 	else //OnOff == IO_OFF
 	{
-		for (int i =0; i<nPickCnt; i++ )
+		for (int i =0; i<TOTAL_PICK; i++ )
 		{
 			if(m_bSecondPos == false)
 			{
@@ -1261,7 +1462,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 // 	}
 // }
 
-void CRunRobot::OnGetPickCheck(int nPickCnt)
+void CRunRobot::OnGetPickCheck(int nMode,int nPickCnt)
 {
 	int i;
 	for (i =0; i<PICKCNT; i++ )
@@ -1270,48 +1471,22 @@ void CRunRobot::OnGetPickCheck(int nPickCnt)
 	}
 
 	//for (int i =0; i<PICKCNT; i++)
-	for (i =0; i<nPickCnt; i++)
+	for (i =0; i<TOTAL_PICK; i++)
 	{
-		if (st_basic_info.nPcbType == UDIMM_10)
+		if (nMode == 1)
 		{
-			if(i<5)
-			{
-				//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
-				//kwlee 2017.0204
-				//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-				if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
-				{
-					clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
-				}
-				else
-				{
-					clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_NO;
-				}
-			}
-			else
-			{
-				//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
-				//if (st_Buffer_info.nBufferData[1][10 - i][BIN] == GOOD)
-				if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
-				{
-					clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
-				}
-				else
-				{
-					clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_NO;
-				}
-			}
+
 		}
 		else
 		{
-			if (st_basic_info.nPcbType == RDIMM)
+			if (st_basic_info.nPcbType == UDIMM_10)
 			{
-				if (i < 3)
+				if(i<5)
 				{
 					//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 					//kwlee 2017.0204
 					//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
-					if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
+					if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
 					{
 						clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 					}
@@ -1322,44 +1497,77 @@ void CRunRobot::OnGetPickCheck(int nPickCnt)
 				}
 				else
 				{
-					//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_YES;	
-					//kwlee 2017.0204
-					if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
+					//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
+					//if (st_Buffer_info.nBufferData[1][10 - i][BIN] == GOOD)
+					if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
 					{
-						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_YES;
-					}
-					else
-					{
-						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_NO;
-					}
-				}
-			}
-			else //Sodimm, Udimm_9
-			{
-				if (i <5)
-				{
-					//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
-					//kwlee 2017.0204
-					if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD && st_Buffer_info.nBufferData[0][i][EXIST] == YES)
-					{
-						clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
-					}
-					else
-					{
-						clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_NO;
-					}
-				}
-				else
-				{
-					//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 5 - i] = CTL_YES;	
-					//kwlee 2017.0204
-					if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info.nBufferData[1][nPickCnt - i][EXIST] == YES)
-					{
-						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
+						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
 					}
 					else
 					{
 						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_NO;
+					}
+				}
+			}
+			else
+			{
+				if (st_basic_info.nPcbType == RDIMM)
+				{
+					if (i < 3)
+					{
+						//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
+						//kwlee 2017.0204
+						//if (st_Buffer_info.nBufferData[0][i][BIN] == GOOD)
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
+						}
+						else
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_NO;
+						}
+					}
+					else
+					{
+						//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_YES;	
+						//kwlee 2017.0204
+						if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_YES;
+						}
+						else
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i] = CTL_NO;
+						}
+					}
+				}
+				else //Sodimm, Udimm_9
+				{
+					if (i <5)
+					{
+						//clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
+						//kwlee 2017.0204
+						if (st_Buffer_info[PICK].nBufferData[0][i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[0][i][EXIST] == YES)
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
+						}
+						else
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_NO;
+						}
+					}
+					else
+					{
+						//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 5 - i] = CTL_YES;	
+						//kwlee 2017.0204
+						if (st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - i][EXIST] == YES)
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
+						}
+						else
+						{
+							clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_NO;
+						}
 					}
 				}
 			}
@@ -1645,7 +1853,7 @@ void CRunRobot::OnRobotRun()
 {
 	//return;//Test 이후 해제
 
-	int nRet_1, nRet_2=0, nRet_3=0, nRect[12]={0,},nCnt = 0;
+	int nRet_1, nRet_2=0, nRet_3=0, nRect[12]={0,};
 	int nRet;
 	double dCurrentPos = 0;
 	CString str;
@@ -1666,15 +1874,16 @@ void CRunRobot::OnRobotRun()
 		m_nPickCnt = st_basic_info.nColCnt * st_basic_info.nRowCnt;
 	}
 	//m_nPickCnt = st_basic_info.nPcbCnt;
-	if (FAS_IO.get_in_bit(st_io_info.i_LfAlarmChk,IO_ON) == IO_ON)
-	{	
-		//507151 1 A "Label Feeder LF_ALARM On Check Error."
-		m_strAlarmCode.Format(_T("507151"));
-		CTL_Lib.Alarm_Error_Occurrence(600, dWARNING, m_strAlarmCode);
-	//	m_nRunStep = 0;
-
-		return;
-	}
+	//kwlee 2017.0209
+// 	if (FAS_IO.get_in_bit(st_io_info.i_LfAlarmChk,IO_ON) == IO_ON)
+// 	{	
+// 		//507151 1 A "Label Feeder LF_ALARM On Check Error."
+// 		m_strAlarmCode.Format(_T("507151"));
+// 		CTL_Lib.Alarm_Error_Occurrence(600, dWARNING, m_strAlarmCode);
+// 	//	m_nRunStep = 0;
+// 
+// 		return;
+// 	}
 // 	if(st_sync_info.TurnConvJobReady[CONVEYOR] == CTL_COMPLETE)
 // 		st_sync_info.TurnConvJobReady[ROBOT] = CTL_NONE;
 
@@ -1873,7 +2082,6 @@ void CRunRobot::OnRobotRun()
 		//kwlee 2017.0116
 		m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST];
 		m_dpTargetPosList[1] = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST];
-		////
 
 		//label pick 위치 이동
 		nRet_1 = CTL_Lib.Linear_Move(ONLY_MOVE_START, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
@@ -1911,24 +2119,42 @@ void CRunRobot::OnRobotRun()
 		//kwlee 2017.0119 
 		//1. Print 출력 Cnt 증가.
 		//2. Serial Data 무조건 저장.
-		//3. 로봇이 다른 작업 중 출력 할수 있도록 수정.
+		//3. 로봇이 다른 작업 중 출력 할수 있도록 수정 해야함.
+		//4. Fail 시 Buffer 관리 추가 해야 함.
 	case 3100:
-		nRet = OnPrinterFeeder(m_nPrintOutPutCnt);
+// 		if( m_nLabelFailCheck == TRUE)
+// 		{
+			//m_nRunStep = 3200;
+		//kwlee 2017.0204 
+		
+		nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck);
 		if (nRet == RET_GOOD)
 		{
 			m_nPrintOutPutCnt++;
-			st_Buffer_info.nOutPutCnt = m_nPrintOutPutCnt;
-			m_nRunStep = 3200;
+			//st_Buffer_info[PICK].nOutPutCnt = m_nPrintOutPutCnt;
 		}
+		if ( m_nLabelFailCheck == TRUE)
+		{			
+			if (st_Picker_info.nPickerFailCnt != 1)
+			{
+				OnBufferDataTransfer();
+			}
+		}
+		m_nRunStep = 3200;
 		break;
 
 		//kwlee 2017.0119 Barcode Read
 		//1. 바코드 Read
 		//2. 양품인지 확인.
 	case 3200:
-		if (FAS_IO.get_in_bit(st_io_info.i_LabelFeederProductChk1,IO_ON) && m_nPrintOutPutCnt >= 16)
+		//if (FAS_IO.get_in_bit(st_io_info.i_LabelFeederProductChk1,IO_ON) && m_nPrintOutPutCnt >= 16)
+		//kwlee 2017.0204
+		nRet = FAS_IO.get_in_bit(st_io_info.i_LabelFeederProductChk1,IO_ON);
+		if ((m_nLabelFailCheck == TRUE && st_Picker_info.nPickerFailCnt == 1) || 
+			(nRet && m_nPrintOutPutCnt >= 16))
 		{	
 			m_dwTimeCheck[0] = GetCurrentTime();
+			//st_Buffer_info[PICK].nBufferFailCnt = 0;
 			m_nRunStep = 4000;
 		}
 		else
@@ -1948,18 +2174,43 @@ void CRunRobot::OnRobotRun()
 		if( m_dwTimeCheck[2] <= 0 ) m_dwTimeCheck[0] = GetCurrentTime();
 		if( m_dwTimeCheck[2] >  1000 )
 		{
-			nRet = OnBarcodeReadCheck();
-			if (nRet == RET_GOOD)
+// 			//Label Pick 동작..
+// 			OnSetLabelPick(0,m_nPickCnt); 
+// 			clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
+// 			m_nRunStep = 5000;
+			//kwlee 2017.0204
+			if (m_nLabelFailCheck == TRUE )
 			{
-				
+				//Label Pick 동작..
+				if (st_Picker_info.nPickerFailCnt == 1)
+				{
+					OnSetLabelPick(1,m_nPickCnt); 
+					clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
+				}
+				else
+				{
+					OnBarcodeReadCheck();
+					OnSetLabelPick(1,m_nPickCnt); 
+					clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
+					
+				}
 			}
 			else
 			{
-				m_nLabelFailCheck = TRUE;
+			//	nRet = OnBarcodeReadCheck();
+// 				if (nRet == RET_GOOD)
+// 				{
+// 
+// 				}
+// 				else
+// 				{
+// 					//m_nLabelFailCheck = TRUE;
+// 				}
+				//Label Pick 동작..
+				OnBarcodeReadCheck();
+				OnSetLabelPick(0,m_nPickCnt); 
+				clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
 			}
-			//Label Pick 동작..
-			OnSetLabelPick(0,m_nPickCnt); 
-			clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
 			m_nRunStep = 5000;
 		}
 		break;
@@ -1967,7 +2218,16 @@ void CRunRobot::OnRobotRun()
 	case 5000:
 		//2017.0116
 		//vaccum On
-		OnVaccummSet(0,m_nPickCnt,IO_ON);
+		//OnVaccummSet(0,m_nPickCnt,IO_ON);
+		//kwlee 2017.0204
+		if (m_nLabelFailCheck == TRUE)
+		{
+			OnVaccummSet(1,m_nPickCnt,IO_ON);
+		}
+		else
+		{
+			OnVaccummSet(0,m_nPickCnt,IO_ON);
+		}
 		m_nRunStep = 6000;
 		break;
 
@@ -1975,7 +2235,7 @@ void CRunRobot::OnRobotRun()
 		//함수호출
 		nRet_1 = COMI.Check_MotPosRange(M_PICKERRBT_X,st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST],st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST] + st_motor_info[M_PICKERRBT_X].d_allow);
 		nRet_2 = COMI.Check_MotPosRange(M_PICKERRBT_Y, st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST],st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST] + st_motor_info[M_PICKERRBT_Y].d_allow);
-
+	
 		if (nRet_1 == BD_GOOD && nRet_2 == BD_GOOD)
 		{
 			nRet_3 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_PICKERRBT_Z, st_motor_info[M_PICKERRBT_Z].d_pos[ROBOT_FEEDER_PICK_FIRST], COMI.mn_runspeed_rate);
@@ -2005,7 +2265,7 @@ void CRunRobot::OnRobotRun()
 
 	case 7000:
 		//picker down
-		OnGetPickCheck(m_nPickCnt);
+		//OnGetPickCheck(m_nPickCnt); //kwlee 2017.0204
 		nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_DN,clsRunRobot.m_npTemp_Picker_YesNo);
 		if(nRet_1 == RET_GOOD)
 		{
@@ -2018,7 +2278,6 @@ void CRunRobot::OnRobotRun()
 		{
 			CTL_Lib.Alarm_Error_Occurrence(750, dWARNING, m_strAlarmCode);
 		}
-		
 		break;
 
 // 	case 7010:
@@ -2105,10 +2364,18 @@ void CRunRobot::OnRobotRun()
 // 			}
 // 		}
 // 		//////////////////
-	
+// 		if (mn_Retry >= 3)
+// 		{
+// 			CTL_Lib.Alarm_Error_Occurrence(700, dWARNING, m_strAlarmCode);
+// 			mn_Retry = 0;
+// 		}
+// 		else
+// 		{
 		m_nRunStep = 7110;
+		clsRunRobot.OnSetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
 		m_dwTimeCheck[0] = GetCurrentTime();
-		mn_Retry = 0;
+	//	}
+		//mn_Retry = 0;
 		//}
 		break;
 
@@ -2118,16 +2385,28 @@ void CRunRobot::OnRobotRun()
 		if( m_dwTimeCheck[2] <= 0 ) m_dwTimeCheck[0] = GetCurrentTime();
 		if( m_dwTimeCheck[2] >  st_wait_info.dOnWaitTime[WAIT_PICKER_VACCUM] )
 		{
-			clsRunRobot.OnSetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
-			m_nRunStep = 7120;
+			//clsRunRobot.OnSetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
+			//m_nRunStep = 7120;
+			nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
+
+			if(nRet_1 == RET_GOOD)
+			{
+				m_nRunStep = 7300;
+				mn_Retry = 0;
+			}
+// 			else
+// 			{
+// 				m_nRunStep = 7100;
+// 				mn_Retry++;
+// 			}
 		}
 		break;
 
-	case 7120:
-		nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
-
-		if(nRet_1 == RET_GOOD)
-		{
+	//case 7120:
+// 		nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
+// 
+// 		if(nRet_1 == RET_GOOD)
+// 		{
 // 			if (st_basic_info.nPcbType == UDIMM_10)
 // 			{
 // 				if( m_nPickerNum < 5)
@@ -2196,10 +2475,10 @@ void CRunRobot::OnRobotRun()
 // 				}
 // 			}
 			/*OnFeederReq(COM_START);//label Pick &발행 요청.*/
-			m_nRunStep = 7300;
-			m_dwTimeCheck[0] = GetCurrentTime();
-		}
-		break;
+// 			m_dwTimeCheck[0] = GetCurrentTime();
+// 			m_nRunStep = 7300;
+// 		}
+// 		break;
 
 		// 		case 7200:
 		// 			//picker up
@@ -2260,7 +2539,6 @@ void CRunRobot::OnRobotRun()
 		// 			}
 		// 
 		// 			break;
-
 	case 7300:	
 		//z축 up
 		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_PICKERRBT_Z, st_motor_info[M_PICKERRBT_Z].d_pos[ROBOT_SAFETY], COMI.mn_runspeed_rate);
@@ -2305,76 +2583,164 @@ void CRunRobot::OnRobotRun()
 // 			}
 // 		}
 		//m_nRunStep = 7320;
-		//kwlee 2017.0204	
-		
-		nRet = OnGetVaccumgmCheck(IO_ON,m_nPickCnt);
-		if (nRet == RET_ERROR)
-		{
-			CTL_Lib.Alarm_Error_Occurrence(770, dWARNING, m_strAlarmCode);
-			break;
-		}
-		m_nPrintOutPutCnt = m_nPrintOutPutCnt - 5;
-		OnDataExchange(PICK);
-		for ( int i =0; i< 2; i++)
-		{
-			for (int j =0; j< MAX_PICKER; j++)
-			{
-				if (st_Picker_info.nPickerData[i][j][BIN] == FAIL && st_Picker_info.nPickerData[i][j][EXIST] == NO)
-				{
-					st_Picker_info.nPickerData[i][j][X_POS] = i;
-					st_Picker_info.nPickerData[i][j][Y_POS] = j;
-					st_Picker_info.nPickerData[i][j][FAILPICK] = YES;
-					nCnt++;
-				}
-			}
-		}
-		if (nCnt > 0)
-		{
-			st_Picker_info.nPickerFailCnt = nCnt;
-		}
+// 		if (nCnt > 0)
+// 		{
+// 			st_Picker_info.nPickerFailCnt = nCnt;
+// 		}
 
 		//1.정면 오른쪽 첫번째 Label 확인 
 		//2.정상이면 Pick Up 후 Label 출력 요청
 		//3. 아니면 그냥 출력 요청.
-		if (m_nLabelFailCheck == TRUE && nCnt > 0)
-		{
-			if (st_Buffer_info.nBufferData[1][0][BIN] == GOOD && st_Buffer_info.nBufferData[1][0][EXIST] == YES)
+		//BD_GOOD, EXIST == YES 이면
+		//kwlee 2017.0204
+		
+// 		if (m_nLabelFailCheck == TRUE)
+// 		{
+// 			nRet = OnGetVaccumgmCheck(IO_ON,m_nPickCnt);
+// 			if (nRet == RET_GOOD)
+// 			{
+// 				m_nLabelFailCheck = FALSE;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			nRet = OnGetVaccumgmCheck(IO_ON,m_nPickCnt);
+// 			if (nRet == RET_ERROR)
+// 			{
+// 				CTL_Lib.Alarm_Error_Occurrence(770, dWARNING, m_strAlarmCode);
+// 				break;
+// 			}
+// 		}
+		
+// 		if (nRet == RET_ERROR)
+// 		{
+			//CTL_Lib.Alarm_Error_Occurrence(770, dWARNING, m_strAlarmCode);
+			//break;
+// 		}
+// 		else
+// 		{
+// 
+// 		}
+		
+
+	//	nCnt = 0;
+// 		for ( int i =0; i< 2; i++)
+// 		{
+			//for (int j =0; j< MAX_PICKER; j++)
+		//kwlee 2017.0209
+// 			for (int j =0; j< TOTAL_PICK; j++)
+// 			{
+// 				if (j < 5)
+// 				{
+// 					if (st_Buffer_info[PICK].nBufferData[0][j][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[0][j][EXIST] == NO)
+// 					{
+// 						st_Buffer_info[PICK].nBufferData[0][j][X_POS] = LEFT;
+// 						st_Buffer_info[PICK].nBufferData[0][j][Y_POS] = j;
+// 						st_Buffer_info[PICK].nBufferData[0][j][FAILPICK] = YES;
+// 					}
+// 					nCnt++;
+// 				}
+// 				else
+// 				{
+// 					if (st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - j][BIN] == FAIL && st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - j][EXIST] == NO)
+// 					{
+// 						st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - j][X_POS] = RIGHT;
+// 						st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - j][Y_POS] = j;
+// 						st_Buffer_info[PICK].nBufferData[1][TOTAL_PICK - j][FAILPICK] = YES;
+// 					}
+// 					nCnt++;
+// 				}
+// 			}
+		//////////////
+		//}
+		///////////////////
+		//kwlee 2017.0209
+// 		nRet = OnGetVaccumgmCheck(IO_ON,m_nPickCnt);
+// 		if (nRet == RET_GOOD)
+// 		{
+// 			m_nLabelFailCheck = FALSE;
+// // 			OnDataExchange(PICK,m_nLabelFailCheck);
+// // 			m_nRunStep = 7340;
+// 		}
+// 		else
+// 		{
+// 			m_nLabelFailCheck = TRUE;
+// 			//st_Buffer_info[PICK].nBufferFailCnt = nCnt;
+// 			m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;
+// 			OnDataExchange(PICK,m_nLabelFailCheck);
+//   		}
+		////////
+			//if(nCnt == 0)
+// 			if(m_nLabelFailCheck == FALSE)
+// 			{
+// 				m_nLabelFailCheck = FALSE;
+// 				OnDataExchange(PICK,m_nLabelFailCheck);
+// 				m_nRunStep = 7340;
+			//}
+			
+			//if(m_nLabelFailCheck == FALSE)
+			nRet = OnGetVaccumgmCheck(IO_ON,m_nPickCnt);
+
+			if(nRet == RET_GOOD)
 			{
-				for (int i = 0; i< 2; i++)
-				{
-					for (int j = 0; j < MAX_PICKER; j++)
-					{
-						if (st_Picker_info.nPickerData[i][j][BIN] == FAIL && st_Picker_info.nPickerData[i][j][EXIST] == NO)
+				m_nLabelFailCheck = FALSE;
+				OnDataExchange(PICK,m_nLabelFailCheck);
+				m_nRunStep = 7340;
+			}
+			else
+			{
+				m_nLabelFailCheck = TRUE;
+				//st_Buffer_info[PICK].nBufferFailCnt = nCnt;
+				m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;
+				OnDataExchange(PICK,m_nLabelFailCheck);
+
+				if (st_Buffer_info[PICK].nBufferData[1][0][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][0][EXIST] == YES)
+				{	
+	// 				for (int i = 0; i< 2; i++)
+	// 				{
+						//for (int j = 0; j < MAX_PICKER; j++)
+						for (int j = 0; j < MAX_PICKER; j++)
 						{
-							if (st_Picker_info.nPickerData[i][j][X_POS] == 0)
+							//if (st_Buffer_info.nBufferData[i][j][BIN] == FAIL && st_Buffer_info.nBufferData[i][j][EXIST] == NO)
+							//{
+							 if (st_Buffer_info[PICK].nBufferData[0][j][X_POS] == LEFT)
 							{
 								m_dpTargetPosList[1] = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_END];
 								m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST]  - (st_Picker_info.nPickerData[0][j][Y_POS] * m_dPitch_Y);
+								//m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST]  - (st_Buffer_info[PICK].nBufferData[i][j][Y_POS] * m_dPitch_Y);
+								//m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST]  - (st_Buffer_info[PICK].nBufferData[0][j][Y_POS] * m_dPitch_Y);
+								break;
+							}
+							else if (st_Buffer_info[PICK].nBufferData[1][j][X_POS] == RIGHT)
+							{
+								m_dpTargetPosList[1] = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST];
+								m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST]  - (st_Picker_info.nPickerData[1][MAX_PICKER - j][Y_POS] * m_dPitch_Y);
+								//m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST]  - (st_Buffer_info[PICK].nBufferData[1][m_nPickCnt - j][Y_POS] * m_dPitch_Y);
 								break;
 							}
 							else
 							{
-								m_dpTargetPosList[1] = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST];
-								m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST]  - (st_Picker_info.nPickerData[1][j][Y_POS] * m_dPitch_Y);
-								break;
-							}
-						}
-					}
-				}
-				m_nRunStep = 7320;
-			}
-			else
-			{
-				//Label 출력 요청 한다.
 
+							}
+							//}
+						}
+					//}
+					m_nRunStep = 7320;
+				}
+				else
+				{
+					m_nRunStep = 3100;
+				}
 			}
-		}
-		else
-		{
-			//Label Fail 없으므로 정상 진행.
-			//m_nRunStep = 7320;
-			m_nRunStep = 7500;
-		}
+		//}
+// 		else
+// 		{
+// 			
+// 			//Label Fail 없으므로 정상 진행.
+// 			//m_nRunStep = 7320;
+// 			m_nLabelFailCheck = FALSE; 
+// 			m_nRunStep = 7500;
+// 		}		
 		break;
 
 // 	case 7320:
@@ -2435,39 +2801,46 @@ void CRunRobot::OnRobotRun()
 			break;
 
 		case 7340:
-			OnSetLabelPick(1, m_nPickCnt);
-			clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
-			m_nRunStep = 7350;
-			break;
-
-		case 7350:
-			OnVaccummSet(1,m_nPickCnt,IO_ON);
-			break;
-
-		case 7360:
-			// picker up 체크
-			OnGetPickCheck(m_nPickCnt);
-			//nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_UP,clsRunRobot.m_npTemp_Picker_YesNo);
-			nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_DN,clsRunRobot.m_npTemp_Picker_YesNo);
-			if(nRet_1 == RET_GOOD)
+			// 			OnSetLabelPick(1, m_nPickCnt);
+			// 			clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
+			// 			m_nRunStep = 7350;
+			//kwlee 2017.0204
+			if (m_nLabelFailCheck == TRUE)
 			{
+				//m_nRunStep = 3100;
+				m_nRunStep = 2000;
+			}
+			else
+			{
+				//모두 집었다.
+				//정상 이다.
 				//m_nRunStep = 7500;
-				m_nRunStep = 7370;
-			}
-			else if(nRet_1 == RET_ERROR)
-			{
-				CTL_Lib.Alarm_Error_Occurrence(800, dWARNING, m_strAlarmCode);
+				m_nRunStep = 9000;
 			}
 			break;
 
-		case 7400:
-			
-			break;
+// 		case 7350:
+// 			OnVaccummSet(1,m_nPickCnt,IO_ON);
+// 			m_nRunStep = 7360;
+// 			break;
 
-	case 7410:
+// 		case 7360:
+// 			// picker up 체크
+// 		//	OnGetPickCheck(m_nPickCnt);
+// 			//nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_UP,clsRunRobot.m_npTemp_Picker_YesNo);
+// 			nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_DN,clsRunRobot.m_npTemp_Picker_YesNo);
+// 			if(nRet_1 == RET_GOOD)
+// 			{
+// 				//m_nRunStep = 7500;
+// 				m_nRunStep = 7370;
+// 			}
+// 			else if(nRet_1 == RET_ERROR)
+// 			{
+// 				CTL_Lib.Alarm_Error_Occurrence(800, dWARNING, m_strAlarmCode);
+// 			}
+// 			break;
 
-		break;
-
+	
 	case 7500:
 // 		if (st_basic_info.nPcbType == UDIMM_9 || st_basic_info.nPcbType == UDIMM_10 || 
 // 			st_basic_info.nPcbType == SODIMM || st_basic_info.nPcbType == RDIMM)
@@ -2502,8 +2875,10 @@ void CRunRobot::OnRobotRun()
 			//m_nPickerNum++;
 
 			//kwlee 2017.0111
-			m_nRunStep = 9000;
-			OnFeederReq(COM_CLEAR);
+			
+			//m_nRunStep = 9000;
+			//m_nLabelFailCheck = FALSE;
+		///	OnFeederReq(COM_CLEAR);
 		//}
 		break;
 

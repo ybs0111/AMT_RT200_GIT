@@ -2995,7 +2995,68 @@ void CScreenMain::OnBnClickedBtnMidConvReq()
 void CScreenMain::OnBnClickedBtnCvInPos2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//kwlee 2017.0209 test..
+	st_handler_info.nRunStatus = dRUN;
+	st_work_info.nSimulationMode = 1;
+	st_sync_info.nInitPickerRbt = INIT_COMPLETE;
+	st_Buffer_info[PICK].strBufferSerial[0][0] = _T("111_0");
+	st_Buffer_info[PICK].strBufferSerial[0][2] = _T("111_2");
+	st_Buffer_info[PICK].strBufferSerial[0][4] = _T("111_4");
+	st_Buffer_info[PICK].strBufferSerial[0][6] = _T("111_6");
+	st_Buffer_info[PICK].strBufferSerial[0][8] = _T("111_8");
+	st_Buffer_info[PICK].strBufferSerial[0][10] = _T("111_10");
+	st_Buffer_info[PICK].strBufferSerial[0][12] = _T("111_12");
+	st_Buffer_info[PICK].strBufferSerial[0][14] = _T("111_14");
+	st_Buffer_info[PICK].strBufferSerial[0][16] = _T("111_16");
+	st_Buffer_info[PICK].strBufferSerial[0][18] = _T("111_18");
+	st_Buffer_info[PICK].strBufferSerial[0][20] = _T("111_20");
+	st_Buffer_info[PICK].strBufferSerial[0][22] = _T("111_22");
+	st_Buffer_info[PICK].strBufferSerial[0][24] = _T("111_24");
+	st_Buffer_info[PICK].strBufferSerial[0][26] = _T("111_26");
+	st_Buffer_info[PICK].strBufferSerial[0][28] = _T("111_28");
+
 	
+	st_Buffer_info[PICK].strBufferSerial[1][0] = _T("222_0");
+	st_Buffer_info[PICK].strBufferSerial[1][1] = _T("222_1");
+	st_Buffer_info[PICK].strBufferSerial[1][3] = _T("222_3");
+	st_Buffer_info[PICK].strBufferSerial[1][5] = _T("222_5");
+	st_Buffer_info[PICK].strBufferSerial[1][7] = _T("222_7");
+	st_Buffer_info[PICK].strBufferSerial[1][9] = _T("222_9");
+	st_Buffer_info[PICK].strBufferSerial[1][11] = _T("222_11");
+	st_Buffer_info[PICK].strBufferSerial[1][13] = _T("222_13");
+	st_Buffer_info[PICK].strBufferSerial[1][15] = _T("222_15");
+	st_Buffer_info[PICK].strBufferSerial[1][17] = _T("222_17");
+	st_Buffer_info[PICK].strBufferSerial[1][19] = _T("222_19");
+	st_Buffer_info[PICK].strBufferSerial[1][21] = _T("222_21");
+	st_Buffer_info[PICK].strBufferSerial[1][23] = _T("222_23");
+	st_Buffer_info[PICK].strBufferSerial[1][25] = _T("222_25");
+	st_Buffer_info[PICK].strBufferSerial[1][27] = _T("222_27");
+	st_Buffer_info[PICK].strBufferSerial[1][29] = _T("222_29");
+	
+	clsRunRobot.m_nRunStep = 4000;
+	clsRunRobot.m_nPrintOutPutCnt = 16;
+
+	for (int i =0; i<2; i++)
+	{
+		for (int j = 0; j<MAX_BUFFER; j++)
+		{
+			if (st_Buffer_info[PICK].strBufferSerial[i][j] != _T(""))
+			{
+				st_Buffer_info[PICK].nBufferData[i][j][BIN] = GOOD;
+
+			}
+			else
+			{
+				st_Buffer_info[PICK].nBufferData[i][j][BIN] = FAIL;
+			}
+		}
+	}
+
+	m_thread[5] = AfxBeginThread(OnThreadRobot, this);  
+	if (m_thread[5] != NULL)	
+	{
+		m_thrHandle[5] = m_thread[5]->m_hThread;
+	}
 }
 
 
@@ -3016,6 +3077,10 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw3()
 void CScreenMain::OnBnClickedBtnCvInPos3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//kwlee 2017.0209 test..
+	st_handler_info.nRunStatus = dRUN;
+	return;
+	///
 	st_sync_info.nSmema_Rear = CTL_REQ;
 	clsRunConveyor.m_nRunStep[CONV_OUT] = 1300;
 }
