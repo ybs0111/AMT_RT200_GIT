@@ -616,9 +616,9 @@ void CZebraPrint::OnPrintAnswerMode(int nMethod, int nMode, int nPort)//2014.110
 	if(nPort == CLS_BCR_PRINTER1)
 	{
 		if (nMode == 0)
-		strPrint = _T("^XA^SXK,D,Y,Y,192.168.0.16,9100^XZ");	 // print 응답 확인 
+		strPrint = _T("^XA^SXK,D,Y,Y,192.168.0.100,9100^XZ");	 // print 응답 확인 
 		else 
-		strPrint = _T("^XA^SXK,D,N,N,192.168.0.16,9100^XZ");	 // print 응답 확인 
+		strPrint = _T("^XA^SXK,D,N,N,192.168.0.100,9100^XZ");	 // print 응답 확인 
 	}
 
 
@@ -645,7 +645,7 @@ void CZebraPrint::OnPrintAnswerMode(int nMethod, int nMode, int nPort)//2014.110
 	{
 		//sprintf(st_client_info[nPort].chSend,"%s",strPrint);
 		OnStringToChar( strPrint, st_client_info[nPort].chSend);
-		::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT	
+		::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, nPort); // LABEL CLIENT	
 	}
 
 	if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
@@ -834,7 +834,7 @@ void CZebraPrint::OnPrintOutput(int nMethod, int nPort, int nOffsetX, int nOffse
 	{
 		//sprintf(st_client_info[nPort].chSend,"%s",strPrint);
 		OnStringToChar( strPrint, st_client_info[nPort].chSend );
-		::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT	
+		::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, 0); // LABEL CLIENT	
 	}
 	
 	if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재

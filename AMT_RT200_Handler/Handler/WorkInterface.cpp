@@ -1364,13 +1364,13 @@ void CWorkInterface::OnBnClickedBtnClientIp3()
 
 	if (strKey == _T("")) return;
 
-	m_strClientIp[2][1] = strKey;
+	m_strClientIp[PRINTER_NETWORK][1] = strKey;
 
-	m_strClientIp[2][1].MakeUpper();
-	m_strClientIp[2][1].TrimLeft(' ');               
-	m_strClientIp[2][1].TrimRight(' ');
+	m_strClientIp[PRINTER_NETWORK][1].MakeUpper();
+	m_strClientIp[PRINTER_NETWORK][1].TrimLeft(' ');               
+	m_strClientIp[PRINTER_NETWORK][1].TrimRight(' ');
 
-	OnInterfaceIpAddress(m_strClientIp[2][1]);
+	OnInterfaceIpAddress(m_strClientIp[PRINTER_NETWORK][1]);
 
 	m_clientIp3.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
 }
@@ -1380,11 +1380,11 @@ void CWorkInterface::OnBnClickedBtnClientPort3()
 {
 	CString strTemp;
 
-	int nKey = m_nClientPort[2][1];
+	int nKey = m_nClientPort[PRINTER_NETWORK][1];
 
 	KeyPadI(1, 100000, &nKey);
 
-	m_nClientPort[2][1] = nKey;
+	m_nClientPort[PRINTER_NETWORK][1] = nKey;
 	strTemp.Format(_T("%d"), nKey);
 
 	m_editClientPort3.SetWindowText(strTemp);
@@ -2068,14 +2068,18 @@ void CWorkInterface::OnBnClickedButton6()
 	{
 		 (clsFunc.m_pZebra[0])->m_nPrintStatusBin = NVR_NONE;
 
+		 (clsFunc.m_pZebra[0])->OnPrintAnswerMode(2, 0, CLS_BCR_PRINTER1);
+		 //CString strFormat = _T("^XA^FO100,100^BY3^B2Nm150,Y,N,N^FD123^FO560,100^BY3^B2Nm150,Y,N,N^FD456^XZ");
 		 CString strFormat = _T("^XA^FO100,100^BY3^B2Nm150,Y,N,N^FD123^FO560,100^BY3^B2Nm150,Y,N,N^FD456^XZ");
+		// ^XA^FO100,100^BY3^B1N,N,150,Y,N,^FD123^XZ
 
 		 (clsFunc.m_pZebra[0])->OnPrintOutput(2, PRINTER_NETWORK, 0, 0,  strFormat);
+
 	}
 }
 
 
 void CWorkInterface::OnBnClickedButtonConnect()
 {
-	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG + PRINTER_NETWORK, CLIENT_CONNECT, 0);
+	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_CONNECT, 0);
 }
