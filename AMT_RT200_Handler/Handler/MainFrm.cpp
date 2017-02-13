@@ -2646,6 +2646,8 @@ LRESULT CMainFrame::OnClientZebraPrint(WPARAM wParam, LPARAM lParam)
 				return 0;
 			}
 
+			st_client_info[PRINTER_NETWORK].nConnect = YES;
+
 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 			{
 				clsMem.OnNormalMessageWrite(_T("[TCP/IP] PRINTER_CLIENT_NETWORK Client Connect Success."));

@@ -2068,7 +2068,7 @@ void CWorkInterface::OnBnClickedButton6()
 	{
 		 (clsFunc.m_pZebra[0])->m_nPrintStatusBin = NVR_NONE;
 
-		 CString strFormat = _T("^XA^FO100,100^BY3^B2Nm150,Y,N,N^FD123^FO560,100^BY3^B2Nm150,Y,N,N^FD456^XZ");
+		 CString strFormat = _T("^XA^LH200,047^FO100,100^BY3^B3N,N,150,Y,N^FD123^FS^FO560,100^BY3^B2Nm150,Y,N,N^FD456^FS^XZ");
 
 		 (clsFunc.m_pZebra[0])->OnPrintOutput(2, PRINTER_NETWORK, 0, 0,  strFormat);
 	}
