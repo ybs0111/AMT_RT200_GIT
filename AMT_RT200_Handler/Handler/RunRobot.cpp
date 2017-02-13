@@ -58,20 +58,7 @@ CRunRobot::CRunRobot(void)
 	// 		}
 	// 	}
 	
-<<<<<<< HEAD
-	for (int i = 0; i<2; i++)
-	{
-		for (int j =0; j<MAX_PICKER; j++)
-		{
-			for (int k =0; k< MAX_INFO; k++)
-			{
-				st_Picker_info.nPickerData[i][j][k]  = -1;
-			}
-		}
-	}
-=======
 
->>>>>>> dbf831b9c97e835a432de50d6c706fa8fe0cc6c3
 }
 
 
