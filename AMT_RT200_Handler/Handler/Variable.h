@@ -1436,7 +1436,8 @@ struct tagIO_INFO
 	//kwlee 2017.0210
 	int		o_LabelFeederClmpOff;							// S0701
 	int		o_LabelFeederClmpOn;							// S0702
-	// S0703
+	int     o_LabelStopperCylinder;                        // S0703
+
 	int		o_PcReady;										//S0704
 	int		o_PcComplete;									//S0705
 	int		o_TableTurnCylFor;								//S0706
@@ -1444,7 +1445,7 @@ struct tagIO_INFO
 
 	int		i_LabelFeederProductChk1;						//PS0700
 	int		i_LabelFeederProductChk2;						//PS0701
-	//PS0702
+	int     i_LabelStopperCylinderChk;                       //PS0702
 	int		i_LabelFeederStopperChk1;						//PS0703
 	//PS0704
 	int		i_LfReqChk;										//PS0705

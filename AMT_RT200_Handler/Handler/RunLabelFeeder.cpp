@@ -19,7 +19,10 @@ CRunLabelFeeder::~CRunLabelFeeder(void)
 {
 }
 
+void CRunLabelFeeder::OnRunFeeder()
+{
 
+}
 void CRunLabelFeeder::OnRunInit()
 {
 
@@ -86,8 +89,6 @@ void CRunLabelFeeder::OnRunInit()
 	
 }
 
-
-
 void CRunLabelFeeder::OnThreadRUN()
 {
 	
@@ -96,11 +97,10 @@ void CRunLabelFeeder::OnThreadRUN()
 
 	case dINIT:
 		OnRunInit();
-
 		break;
 
 	case dRUN:
-		
+		OnRunFeeder();
 		break;
 	}
 //	OnFeederInterface();

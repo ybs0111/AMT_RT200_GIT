@@ -115,7 +115,6 @@ void CRunConveyor::Smema_Front()
 			{
 				FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_ON);
 				m_lWait_Smema[0] = GetCurrentTime();
-
 				m_nSmemaStep = 200;
 			}
 		break;
@@ -125,7 +124,6 @@ void CRunConveyor::Smema_Front()
 			m_lWait_Smema[1] = GetCurrentTime();
 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
 
-			
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
 
 			if (nRet[0] == IO_ON || st_sync_info.nSmema_Front == CTL_READY)
@@ -152,15 +150,20 @@ void CRunConveyor::Smema_Front()
 		case 300:
 			m_lWait_Smema[1] = GetCurrentTime();
 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontComplete,IO_ON);
+			//nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontComplete,IO_ON);
+			//kwlee 2017.0216
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_OFF);
 			
-			if (nRet[0] == IO_ON || st_sync_info.nSmema_Front == CTL_COMPLETE)
+			//if (nRet[0] == IO_ON || st_sync_info.nSmema_Front == CTL_COMPLETE)
+			//kwlee 2017.0216
+			if (nRet[0] == IO_OFF && FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON || st_sync_info.nSmema_Front == CTL_COMPLETE )
 			{
 				if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
 				{
 					FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF);
-					m_lWait_Smema[0] = GetCurrentTime();
-					m_nSmemaStep = 400;
+				//	m_lWait_Smema[0] = GetCurrentTime();
+					//m_nSmemaStep = 400;
+					m_nSmemaStep = 0;
 				}
 				else
 				{
@@ -171,36 +174,42 @@ void CRunConveyor::Smema_Front()
 			{
 				m_lWait_Smema[0] = GetCurrentTime();
 			}
-			break;
-
-		case 400:
-			m_lWait_Smema[1] = GetCurrentTime();
-			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-			if (st_sync_info.nSmema_Tray_Input_Req == CONV_CLR)
+			else
 			{
-				if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
-				{
-					FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_ON);
-					m_lWait_Smema[0] = GetCurrentTime();
-					m_nSmemaStep = 500;
-				}
-				else
-				{
-					m_nSmemaStep = 0;
-				}
+
 			}
 			break;
 
-		case 500:
-			m_lWait_Smema[1] = GetCurrentTime();
-			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
 
-			if (m_lWait_Smema[2] > 500)
-			{
-				FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_OFF);
-				m_nSmemaStep = 0;
-			}
-			break;
+
+// 		case 400:
+// 			m_lWait_Smema[1] = GetCurrentTime();
+// 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
+// 			if (st_sync_info.nSmema_Tray_Input_Req == CONV_CLR)
+// 			{
+// 				if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
+// 				{
+// 					FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_ON);
+// 					m_lWait_Smema[0] = GetCurrentTime();
+// 					m_nSmemaStep = 500;
+// 				}
+// 				else
+// 				{
+// 					m_nSmemaStep = 0;
+// 				}
+// 			}
+// 			break;
+// 
+// 		case 500:
+// 			m_lWait_Smema[1] = GetCurrentTime();
+// 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
+// 
+// 			if (m_lWait_Smema[2] > 500)
+// 			{
+// 				FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_OFF);
+// 				m_nSmemaStep = 0;
+// 			}
+// 			break;
 
 		case  600:
 			m_nSmemaStep = -1;
@@ -1274,7 +1283,6 @@ void CRunConveyor::OnFrontConvRunMove()
 					//501091 1 A "IN CONV Position On Check Error."
 					//501100 1 A "IN CONV Position Up Off Check Error."
 					//501101 1 A "IN CONV Position Up On Check Error."
-
 					if	   (nRet[0] == IO_ON) m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvInChk, IO_OFF); //
 					else if(nRet[1] == IO_ON) m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
 					else if(nRet[2] == IO_ON) m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosUpChk, IO_OFF);
@@ -1504,8 +1512,7 @@ void CRunConveyor::OnFrontConvRunMove()
 			}
 			break;
 
-		case 5000:
-			break;
+	
 	}
 }
 
@@ -1935,7 +1942,6 @@ void CRunConveyor::OnTurnConvMove()
 
 	case 2700:
 		//Motor Cylinder For
-		
 		OnSetTableMotorCylOnOff(IO_RUN_MODE,IO_ON);
 		m_nRunStep[CONV_MID] = 2800;
 		break;
@@ -2653,8 +2659,8 @@ void CRunConveyor::OnRearConvMove()
 		}
 		break;
 
-	case 5000:
-		break;
+// 	case 5000:
+// 		break;
 	}
 
 }

@@ -13,7 +13,11 @@ public:
 	int				m_nInitStep;
 	int				m_nRdimmJobState;
 	bool			m_bPickUpDnFlag[2];
+	bool			m_bRejectCylUpDnFlag[2];
+
 	DWORD			m_dwPickUpDnWaitTime[2][3];
+	DWORD			m_dwCylWaitTime[2][3]; //kwlee 2017.0216
+
 	int				m_npTemp_Picker_YesNo[MAX_PICKCNT]; 
 	int				m_nLinearMove_Index;
 	int             m_nPickCnt;
@@ -55,6 +59,8 @@ public:
 	void    OnRobotRun();
 	void	OnSetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo);
 	int		OnGetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo);
+	void    OnSetRejectCylUpDn(int nMode, int nUpDn);
+	int     OnGetRejectCylUpDn(int nMode, int nUpDn);
 	int	    OnFeederInterface();
 	void    OnFeederReq(int nStep);
 	void    OnSelectPickType(int nType);
@@ -62,7 +68,7 @@ public:
 	void    SetInterfaceStep(int mStep) { m_nInterFaceStep = mStep; }
 	
 	void    OnSetLabelPick(int nMode, int nPickCnt);
-	void    OnSetPickerUpDn(int nPickCnt);
+	void    OnSetLabelPlace(int nPickCnt);
 	void    OnVaccummSet(int nMode, int nPickCnt,int OnOff);
 	//void    OnBlowSet(int OnOff);
 	void    OnBlowSet(int nMode, int OnOff);
