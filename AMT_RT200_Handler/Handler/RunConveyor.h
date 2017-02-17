@@ -33,6 +33,8 @@ public:
 	DWORD			m_dwCylWaitTime[2][3];
 	DWORD			m_dwWaitTime[3];
 
+	bool			m_bSensorOnFlag;
+
 public:
 	void	OnThreadRUN();
 	void	OnFrontConvRunMove();

@@ -6,17 +6,18 @@ class CRunRobot
 public:
 	CRunRobot(void);
 	~CRunRobot(void);
-
+	
+	
 public:
 	int				m_nRunStep;
 	int             m_nFeederStep;
 	int				m_nInitStep;
 	int				m_nRdimmJobState;
 	bool			m_bPickUpDnFlag[2];
-	bool			m_bRejectCylUpDnFlag[2];
+	bool			m_bCylFlag[2];
 
 	DWORD			m_dwPickUpDnWaitTime[2][3];
-	DWORD			m_dwCylWaitTime[2][3]; //kwlee 2017.0216
+	DWORD			m_dwWRejectCylWaitTime[2][3]; //kwlee 2017.0216
 
 	int				m_npTemp_Picker_YesNo[MAX_PICKCNT]; 
 	int				m_nLinearMove_Index;
@@ -68,10 +69,11 @@ public:
 	void    SetInterfaceStep(int mStep) { m_nInterFaceStep = mStep; }
 	
 	void    OnSetLabelPick(int nMode, int nPickCnt);
+	//void    OnSetLabelPlace(int nPickCnt);
 	void    OnSetLabelPlace(int nPickCnt);
 	void    OnVaccummSet(int nMode, int nPickCnt,int OnOff);
 	//void    OnBlowSet(int OnOff);
-	void    OnBlowSet(int nMode, int OnOff);
+	void    OnBlowSet(int nMode, int nPickCnt , int OnOff);
 	void    OnGetPickCheck(int nMode, int nPickCnt);
 	
 	int     OnGetVaccumgmCheck(int OnOff,int nPickCnt);

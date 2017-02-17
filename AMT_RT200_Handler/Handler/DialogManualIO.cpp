@@ -516,7 +516,7 @@ int CDialogManualIO::OnCylinderExcution()
 				break;
 			}
 			//		st_wait_inf0o.nLimitWaitTime
-			if (m_lWaitTime[2] > st_wait_info.dLimitWaitTime[WAIT_CONV_TURN])
+			if (m_lWaitTime[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_TURN])
 			{
 				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 				{
@@ -538,7 +538,7 @@ int CDialogManualIO::OnCylinderExcution()
 			m_lWaitTime[0] = GetTickCount();
 			break;
 		}
-		if (m_lWaitTime[2] > st_wait_info.dOnWaitTime[WAIT_CONV_TURN])
+		if (m_lWaitTime[2] > st_wait_info.nOnWaitTime[WAIT_CONV_TURN])
 		{
 			m_nManualStep = 300;
 		}
@@ -573,7 +573,7 @@ int CDialogManualIO::OnCylinderExcution()
 				break;
 			}
 			//		st_wait_info.nLimitWaitTime
-			if (m_lWaitTime[2] > st_wait_info.dLimitWaitTime[WAIT_CONV_TURN])
+			if (m_lWaitTime[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_TURN])
 			{
 				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 				{
@@ -596,7 +596,7 @@ int CDialogManualIO::OnCylinderExcution()
 			m_lWaitTime[0] = GetTickCount();
 			break;
 		}
-		if (m_lWaitTime[2] > st_wait_info.dOnWaitTime[WAIT_CONV_TURN])
+		if (m_lWaitTime[2] > st_wait_info.nOnWaitTime[WAIT_CONV_TURN])
 		{
 			m_nManualStep = 600;
 		}
@@ -1622,7 +1622,7 @@ int CDialogManualIO::OnRobotRelayMove()
 			m_dwTimeCheck[1] = GetCurrentTime();
 			m_dwTimeCheck[2] = m_dwTimeCheck[1] - m_dwTimeCheck[0];
 			if( m_dwTimeCheck[2] <= 0 ) m_dwTimeCheck[0] = GetCurrentTime();
-			if( m_dwTimeCheck[2] >  st_wait_info.dOnWaitTime[WAIT_PICKER_UP_DN] )
+			if( m_dwTimeCheck[2] >  st_wait_info.nOnWaitTime[WAIT_PICKER_UP_DN] )
 			{
 				clsRunRobot.OnSetPickerUpDn(0, PICKER_UP, clsRunRobot.m_npTemp_Picker_YesNo);
 				//kwlee 2017.0202
@@ -1978,23 +1978,21 @@ int CDialogManualIO::OnRobotRelayMove()
 			//붙이는 작업 
 		case 16100:
 			//for (int i =0; i<PICKCNT; i++ )
-			for (int i =0; i < TOTAL_PICK; i++ )
+			for (int i =0; i < m_nPickCnt; i++ )
 			{
 				if(m_bSecondPos == false)
 				{
-					if (i < 6)
+					if (i < 5)
 					{
 						clsRunRobot.m_npTemp_Picker_YesNo[i] = CTL_YES;
 					}
 				}
 				else
 				{
-					if(m_nPickCnt >= (PICKCNT - 6 + i)) 
+					if (i > 4)
 					{
-						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - 6 + i] = CTL_YES;	
-						//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - i ] = CTL_YES;	
+						clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT - 3 + i] = CTL_YES;	
 					}
-					
 				}	
 			}
 			clsRunRobot.OnSetPickerUpDn(0, PICKER_DN, clsRunRobot.m_npTemp_Picker_YesNo);
@@ -2033,7 +2031,7 @@ int CDialogManualIO::OnRobotRelayMove()
 			break;
 
 		case 19000:
-			for (int i =0; i<TOTAL_PICK; i++ )
+			for (int i =0; i<m_nPickCnt; i++ )
 			{
 				if(m_bSecondPos == false)
 				{
@@ -2141,7 +2139,7 @@ int CDialogManualIO::OnRobotRelayMove()
 			m_lVaccumOffTime[1] = GetCurrentTime();
 			m_lVaccumOffTime[2] = m_lVaccumOffTime[1] - m_lVaccumOffTime[0];
 
-			if (m_lVaccumOffTime[2] > st_wait_info.dOffWaitTime[WAIT_PICKER_VACCUM])
+			if (m_lVaccumOffTime[2] > st_wait_info.nOffWaitTime[WAIT_PICKER_VACCUM])
 			{
 				for (int i =0; i<m_nPickCnt; i++ )
 				{
@@ -3057,7 +3055,7 @@ int CDialogManualIO::OnFeederInterface()
 					m_lFeederWaitTime[1] = GetCurrentTime();
 					m_lFeederWaitTime[2] = m_lFeederWaitTime[1] - m_lFeederWaitTime[0];
 
-					if (m_lFeederWaitTime[2]> st_wait_info.dLimitWaitTime[WAIT_FEEDER_REPLY])
+					if (m_lFeederWaitTime[2]> st_wait_info.nLimitWaitTime[WAIT_FEEDER_REPLY])
 					{
 						//507141 1 A "Label Feeder LF_COMPLETE On Check Error."
 						m_strAlarmCode.Format(_T("507141")); 
@@ -3091,7 +3089,7 @@ int CDialogManualIO::OnFeederInterface()
 				m_lFeederWaitTime[1] = GetCurrentTime();
 				m_lFeederWaitTime[2] = m_lFeederWaitTime[1] - m_lFeederWaitTime[0];
 
-				if (m_lFeederWaitTime[2]> st_wait_info.dLimitWaitTime[WAIT_FEEDER_REPLY])
+				if (m_lFeederWaitTime[2]> st_wait_info.nLimitWaitTime[WAIT_FEEDER_REPLY])
 				{
 					//507140 1 A "Label Feeder LF_COMPLETE Off Check Error."
 					m_strAlarmCode.Format(_T("507140")); 

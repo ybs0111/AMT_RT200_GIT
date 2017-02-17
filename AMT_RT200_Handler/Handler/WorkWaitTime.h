@@ -21,9 +21,9 @@ public:
 	CString						m_strWaitTimeLabel[100];
 
 	int							m_nWaitTimeMaxCnt;
-	double						m_dOnWaitTime[100][2];
-	double						m_dOffWaitTime[100][2];
-	double						m_dLimitWaitTime[100][2];
+	int							m_nOnWaitTime[100][2];
+	int							m_nOffWaitTime[100][2];
+	int							m_nLimitWaitTime[100][2];
 /*
 	CXTPButton					m_btnApply;
 	CXTPButton					m_btnReload;

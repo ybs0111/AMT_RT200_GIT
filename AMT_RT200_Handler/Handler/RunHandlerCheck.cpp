@@ -67,10 +67,16 @@ void CRunHandlerCheck::OnStartCheck()
 			// [STOP] 상태에서만 [START] 가능하도록 제한한다
 			if (st_handler_info.nRunStatus == dSTOP)
 			{
-				if (FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_OFF) == IO_ON)
+				int nRet1,nRet2;
+				nRet1 = FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_OFF);
+
+				//if (FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_OFF) == IO_ON)
+				if (nRet1 == IO_ON)
 				{
+					nRet2 = FAS_IO.get_in_bit(st_io_info.i_StopChk, IO_OFF);
 					// 만일 STOP 버튼이 함께 눌린 경우에는 무시한다
-					if (FAS_IO.get_in_bit(st_io_info.i_StopChk, IO_OFF) == IO_ON)
+					//if (FAS_IO.get_in_bit(st_io_info.i_StopChk, IO_OFF) == IO_ON)
+					if (nRet2 == IO_ON)
 					{
 						break;
 					}
@@ -93,7 +99,7 @@ void CRunHandlerCheck::OnStartCheck()
 			break;
 
 		case 100: 
-			if (FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_OFF) == IO_ON)
+			if (FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_ON) == IO_ON)
 			{
 				m_dwStartWaitTime[1] = GetCurrentTime();
 				m_dwStartWaitTime[2] = m_dwStartWaitTime[1] - m_dwStartWaitTime[0];
@@ -101,10 +107,8 @@ void CRunHandlerCheck::OnStartCheck()
 				if (m_dwStartWaitTime[2] <= 0)
 				{
 					m_dwStartWaitTime[0] = GetCurrentTime();
-					break;
 				}
-
-				if (m_dwStartWaitTime[2] > (DWORD)100)
+				else if (m_dwStartWaitTime[2] > (DWORD)100)
 				{
 					m_dwStartWaitTime[0] = GetCurrentTime();
 					m_nStartStep = 200;
@@ -126,23 +130,26 @@ void CRunHandlerCheck::OnStartCheck()
 		m_dwStartWaitTime[1] = GetCurrentTime();
 		m_dwStartWaitTime[2] = m_dwStartWaitTime[1] - m_dwStartWaitTime[0];
 
-
-		if(m_dwStartWaitTime[2] > 10)
+		if(m_dwStartWaitTime[2] > 100)
 		{
-			if(FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_ON) == IO_OFF)
+			if(FAS_IO.get_in_bit(st_io_info.i_StartChk, IO_OFF) == IO_OFF)
 			{
 				m_nStartStep = 300;
 			}
-			else
-			{
-				m_nStartStep = 0;
-			}
+// 			else
+// 			{
+// 				m_nStartStep = 0;
+// 			}
 		}//2012,1220
 		else if(m_dwStartWaitTime[2] < 0)
 		{
 			m_dwStartWaitTime[0] = GetCurrentTime();
 		}
 
+		if(m_dwStartWaitTime[2] > 3000)
+		{
+			m_nStartStep = 0;
+		}
 		break;
 
 		case 300:

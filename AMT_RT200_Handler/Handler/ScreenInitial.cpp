@@ -368,7 +368,8 @@ int CScreenInitial::OnInitExcution()
 				OnInitChangeStatus(2);	// I/O Board 초기화 완료
 
 				m_nProcessStep += 8;
-				
+
+				PostMessage(WM_WORK_COMMAND, INIT_INITIALIZE_COMMAND, 0);
 				m_nInitStep = 1200;
 			}
 			else

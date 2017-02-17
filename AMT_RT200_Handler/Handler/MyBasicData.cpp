@@ -315,19 +315,19 @@ void CMyBasicData::OnWaitTime_Data_Load()
 		:: GetPrivateProfileString(_T("ON_WAIT_TIME"), strOnName, _T("100"), (LPWSTR)chData, 10, st_path_info.strFileBasic);
 		strTemp.Format(_T("%s"), chData);
 		nChk = _wtoi(strTemp);
-		st_wait_info.dOnWaitTime[i] = nChk;
+		st_wait_info.nOnWaitTime[i] = nChk;
 		
 		strOffName.Format(_T("%s_OFF"), strHead);
 		:: GetPrivateProfileString(_T("OFF_WAIT_TIME"), strOffName, _T("100"), (LPWSTR)chData, 10, st_path_info.strFileBasic);
 		strTemp.Format(_T("%s"), chData);
 		nChk = _wtoi(strTemp);
-		st_wait_info.dOffWaitTime[i] = nChk;
+		st_wait_info.nOffWaitTime[i] = nChk;
 		
 		strLimitName.Format(_T("%s_LIMIT"), strHead);
 		:: GetPrivateProfileString(_T("LIMIT_TIME"), strLimitName, _T("100"), (LPWSTR)chData, 10, st_path_info.strFileBasic);
 		strTemp.Format(_T("%s"), chData);
 		nChk = _wtoi(strTemp);
-		st_wait_info.dLimitWaitTime[i] = nChk;
+		st_wait_info.nLimitWaitTime[i] = nChk;
 	}
 }
 
@@ -344,15 +344,15 @@ void CMyBasicData::OnWaitTime_Data_Save()
 		strTemp.Format(_T("TIME_[%02d]"), i);
 		
 		strOnName.Format(_T("%s_ON"), strTemp);
-		strData.Format(_T("%d"), st_wait_info.dOnWaitTime[i]);
+		strData.Format(_T("%d"), st_wait_info.nOnWaitTime[i]);
 		:: WritePrivateProfileString(_T("ON_WAIT_TIME"), strOnName, LPCTSTR(strData), st_path_info.strFileBasic);
 		
 		strOffName.Format(_T("%s_OFF"), strTemp);
-		strData.Format(_T("%d"), st_wait_info.dOffWaitTime[i]);
+		strData.Format(_T("%d"), st_wait_info.nOffWaitTime[i]);
 		:: WritePrivateProfileString(_T("OFF_WAIT_TIME"), strOffName, LPCTSTR(strData), st_path_info.strFileBasic);
 		
 		strLimitName.Format(_T("%s_LIMIT"), strTemp);
-		strData.Format(_T("%d"), st_wait_info.dLimitWaitTime[i]);
+		strData.Format(_T("%d"), st_wait_info.nLimitWaitTime[i]);
 		:: WritePrivateProfileString(_T("LIMIT_TIME"), strLimitName, LPCTSTR(strData), st_path_info.strFileBasic);	
 	}
 }

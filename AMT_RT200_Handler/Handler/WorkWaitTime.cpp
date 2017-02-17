@@ -129,24 +129,24 @@ void CWorkWaitTime::OnDataHistoryLog()
 
 	for(i=0; i<m_nWaitTimeMaxCnt; i++)
 	{
-		if(m_dOnWaitTime[i][0]		!= m_dOnWaitTime[i][1])
+		if(m_nOnWaitTime[i][0]		!= m_nOnWaitTime[i][1])
 		{
 			strMsg.Format(_T("[%s] On WaitTime Change %d -> %d"), m_strWaitTimeLabel[i],
-																  m_dOnWaitTime[i][0], m_dOnWaitTime[i][1]);
+																  m_nOnWaitTime[i][0], m_nOnWaitTime[i][1]);
 			clsFunc.OnLogFileAdd(0, strMsg);
 		}
 
-		if(m_dOffWaitTime[i][0]		!= m_dOffWaitTime[i][1])
+		if(m_nOffWaitTime[i][0]		!= m_nOffWaitTime[i][1])
 		{
 			strMsg.Format(_T("[%s] Off WaitTime Change %d -> %d"), m_strWaitTimeLabel[i],
-																  m_dOffWaitTime[i][0], m_dOffWaitTime[i][1]);
+																  m_nOffWaitTime[i][0], m_nOffWaitTime[i][1]);
 			clsFunc.OnLogFileAdd(0, strMsg);
 		}
 
-		if(m_dLimitWaitTime[i][0]	!= m_dLimitWaitTime[i][1])
+		if(m_nLimitWaitTime[i][0]	!= m_nLimitWaitTime[i][1])
 		{
 			strMsg.Format(_T("[%s] Limit WaitTime Change %d -> %d"), m_strWaitTimeLabel[i],
-																  m_dLimitWaitTime[i][0], m_dLimitWaitTime[i][1]);
+																  m_nLimitWaitTime[i][0], m_nLimitWaitTime[i][1]);
 			clsFunc.OnLogFileAdd(0, strMsg);
 		}
 	}
@@ -159,9 +159,9 @@ void CWorkWaitTime::OnDataRecovery()
 
 	for(i=0; i<m_nWaitTimeMaxCnt; i++)
 	{
-		m_dOnWaitTime[i][1]		= m_dOnWaitTime[i][0];
-		m_dOffWaitTime[i][1]	= m_dOffWaitTime[i][0];
-		m_dLimitWaitTime[i][1]	= m_dLimitWaitTime[i][0];
+		m_nOnWaitTime[i][1]		= m_nOnWaitTime[i][0];
+		m_nOffWaitTime[i][1]	= m_nOffWaitTime[i][0];
+		m_nLimitWaitTime[i][1]	= m_nLimitWaitTime[i][0];
 	}
 }
 
@@ -172,9 +172,9 @@ int	CWorkWaitTime::OnDataComparison()
 
 	for(i=0; i<m_nWaitTimeMaxCnt; i++)
 	{
-		if(m_dOnWaitTime[i][0]		!= m_dOnWaitTime[i][1])		return RET_ERROR;
-		if(m_dOffWaitTime[i][0]		!= m_dOffWaitTime[i][1])	return RET_ERROR;
-		if(m_dLimitWaitTime[i][0]	!= m_dLimitWaitTime[i][1])  return RET_ERROR;
+		if(m_nOnWaitTime[i][0]		!= m_nOnWaitTime[i][1])		return RET_ERROR;
+		if(m_nOffWaitTime[i][0]		!= m_nOffWaitTime[i][1])	return RET_ERROR;
+		if(m_nLimitWaitTime[i][0]	!= m_nLimitWaitTime[i][1])  return RET_ERROR;
 	}
 
 	return RET_GOOD;
@@ -187,9 +187,9 @@ void CWorkWaitTime::OnDataApply()
 
 	for(i=0; i<m_nWaitTimeMaxCnt; i++)
 	{
-		st_wait_info.dOnWaitTime[i]		= m_dOnWaitTime[i][1];
-		st_wait_info.dOffWaitTime[i]	= m_dOffWaitTime[i][1];
-		st_wait_info.dLimitWaitTime[i]	= m_dLimitWaitTime[i][1];
+		st_wait_info.nOnWaitTime[i]		= m_nOnWaitTime[i][1];
+		st_wait_info.nOffWaitTime[i]	= m_nOffWaitTime[i][1];
+		st_wait_info.nLimitWaitTime[i]	= m_nLimitWaitTime[i][1];
 	}
 }
 
@@ -200,9 +200,9 @@ void CWorkWaitTime::OnDataBackup()
 
 	for(i=0; i<m_nWaitTimeMaxCnt; i++)
 	{
-		m_dOnWaitTime[i][0]		= m_dOnWaitTime[i][1];
-		m_dOffWaitTime[i][0]	= m_dOffWaitTime[i][1];
-		m_dLimitWaitTime[i][0]	= m_dLimitWaitTime[i][1];
+		m_nOnWaitTime[i][0]		= m_nOnWaitTime[i][1];
+		m_nOffWaitTime[i][0]	= m_nOffWaitTime[i][1];
+		m_nLimitWaitTime[i][0]	= m_nLimitWaitTime[i][1];
 	}
 }
 
@@ -217,9 +217,9 @@ void CWorkWaitTime::OnDataInit()
 	{
 		m_strWaitTimeLabel[i]	= clsExcel.m_strWaitTimeLabel[i];
 
-		m_dOnWaitTime[i][1]		= st_wait_info.dOnWaitTime[i];
-		m_dOffWaitTime[i][1]	= st_wait_info.dOffWaitTime[i];
-		m_dLimitWaitTime[i][1]	= st_wait_info.dLimitWaitTime[i];
+		m_nOnWaitTime[i][1]		= st_wait_info.nOnWaitTime[i];
+		m_nOffWaitTime[i][1]	= st_wait_info.nOffWaitTime[i];
+		m_nLimitWaitTime[i][1]	= st_wait_info.nLimitWaitTime[i];
 	}
 	OnDataBackup();
 }
@@ -347,7 +347,7 @@ void CWorkWaitTime::OnInitGridWaitTime()
 						{
 							m_pGridWaitTime.SetItemBkColour(i, j, GREEN_L, BLACK_C);
 							m_pGridWaitTime.SetItemFont(i, j, &clsFunc.OnLogFont(17));
-							strTmp.Format(_T("%0.2f"), m_dOnWaitTime[i - 1][1]);
+							strTmp.Format(_T("%d"), m_nOnWaitTime[i - 1][1]);
 							m_pGridWaitTime.SetItemText(i, j, strTmp);
 						}
 						else
@@ -363,7 +363,7 @@ void CWorkWaitTime::OnInitGridWaitTime()
 						{
 							m_pGridWaitTime.SetItemBkColour(i, j, RED_L, BLACK_C);
 							m_pGridWaitTime.SetItemFont(i, j, &clsFunc.OnLogFont(17));
-							strTmp.Format(_T("%0.2f"), m_dOffWaitTime[i - 1][1]);
+							strTmp.Format(_T("%d"), m_nOffWaitTime[i - 1][1]);
 							m_pGridWaitTime.SetItemText(i, j, strTmp);
 						}
 						else
@@ -379,7 +379,7 @@ void CWorkWaitTime::OnInitGridWaitTime()
 						{
 							m_pGridWaitTime.SetItemBkColour(i, j, YELLOW_L, BLACK_C);
 							m_pGridWaitTime.SetItemFont(i, j, &clsFunc.OnLogFont(17));
-							strTmp.Format(_T("%0.2f"), m_dLimitWaitTime[i - 1][1]);
+							strTmp.Format(_T("%d"), m_nLimitWaitTime[i - 1][1]);
 							m_pGridWaitTime.SetItemText(i, j, strTmp);
 						}
 						else
@@ -401,7 +401,7 @@ void CWorkWaitTime::OnCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 {
 	int nRow, nCol;
 	int i;
-	double dKey;
+	int nKey;
 
 	CString strTmp;
 	CString strMsg;
@@ -418,43 +418,43 @@ void CWorkWaitTime::OnCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 		switch (nCol)
 		{
 			case 1:
-				dKey = m_dOnWaitTime[0][1];
+				nKey = m_nOnWaitTime[0][1];
 
-				KeyPadD(0, 5000, &dKey);
+				KeyPadI(0, 5000, &nKey);
 
 				for (i=0; i<m_nWaitTimeMaxCnt; i++)
 				{
-					m_dOnWaitTime[i][1] = dKey;
+					m_nOnWaitTime[i][1] = nKey;
 
-					strTmp.Format(_T("%0.2f"), dKey);
+					strTmp.Format(_T("%0.2f"), nKey);
 					m_pGridWaitTime.SetItemText(i + 1, nCol, strTmp);
 				}
 				break;
 
 			case 2:
-				dKey = m_dOffWaitTime[0][1];
+				nKey = m_nOffWaitTime[0][1];
 
-				KeyPadD(0, 5000, &dKey);
+				KeyPadI(0, 5000, &nKey);
 
 				for (i=0; i<m_nWaitTimeMaxCnt; i++)
 				{
-					m_dOffWaitTime[i][1] = dKey;
+					m_nOffWaitTime[i][1] = nKey;
 
-					strTmp.Format(_T("%0.2f"), dKey);
+					strTmp.Format(_T("%d"), nKey);
 					m_pGridWaitTime.SetItemText(i + 1, nCol, strTmp);
 				}
 				break;
 
 			case 3:
-				dKey = m_dLimitWaitTime[0][1];
+				nKey = m_nLimitWaitTime[0][1];
 
-				KeyPadD(0, 20000, &dKey);
+				KeyPadI(0, 20000, &nKey);
 
 				for (i=0; i<m_nWaitTimeMaxCnt; i++)
 				{
-					m_dLimitWaitTime[i][1] = dKey;
+					m_nLimitWaitTime[i][1] = nKey;
 
-					strTmp.Format(_T("%0.2f"), dKey);
+					strTmp.Format(_T("%d"), nKey);
 					m_pGridWaitTime.SetItemText(i + 1, nCol, strTmp);
 				}
 				break;
@@ -467,13 +467,13 @@ void CWorkWaitTime::OnCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 			case 1:
 				if(clsExcel.m_nOnUsed[nRow -1] != 0)
 				{
-					dKey = m_dOnWaitTime[nRow - 1][1];
+					nKey = m_nOnWaitTime[nRow - 1][1];
 
-					KeyPadD(0, 5000, &dKey);
+					KeyPadI(0, 5000, &nKey);
 
-					m_dOnWaitTime[nRow - 1][1] = dKey;
+					m_nOnWaitTime[nRow - 1][1] = nKey;
 
-					strTmp.Format(_T("%0.2f"), dKey);
+					strTmp.Format(_T("%d"), nKey);
 					m_pGridWaitTime.SetItemText(nRow, nCol, strTmp);
 				}
 				break;
@@ -481,13 +481,13 @@ void CWorkWaitTime::OnCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 			case 2:
 				if(clsExcel.m_nOffUsed[nRow -1] != 0)
 				{
-					dKey = m_dOffWaitTime[nRow - 1][1];
+					nKey = m_nOffWaitTime[nRow - 1][1];
 
-					KeyPadD(0, 5000, &dKey);
+					KeyPadI(0, 5000, &nKey);
 
-					m_dOffWaitTime[nRow - 1][1] = dKey;
+					m_nOffWaitTime[nRow - 1][1] = nKey;
 
-					strTmp.Format(_T("%0.2f"), dKey);
+					strTmp.Format(_T("%d"), nKey);
 					m_pGridWaitTime.SetItemText(nRow, nCol, strTmp);
 				}
 				break;
@@ -495,13 +495,13 @@ void CWorkWaitTime::OnCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 			case 3:
 				if(clsExcel.m_nLimitUsed[nRow - 1] != 0)
 				{
-					dKey = m_dLimitWaitTime[nRow - 1][1];
+					nKey = m_nLimitWaitTime[nRow - 1][1];
 
-					KeyPadD(0, 20000, &dKey);
+					KeyPadI(0, 20000, &nKey);
 
-					m_dLimitWaitTime[nRow - 1][1] = dKey;
+					m_nLimitWaitTime[nRow - 1][1] = nKey;
 
-					strTmp.Format(_T("%0.2f"), dKey);
+					strTmp.Format(_T("%d"), nKey);
 					m_pGridWaitTime.SetItemText(nRow, nCol, strTmp);
 				}
 				break;
