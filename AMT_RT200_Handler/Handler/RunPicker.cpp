@@ -32,12 +32,6 @@ void CRunPicker::OnThreadRUN()
 
 		OnPickerRun();
 		break;
-
-	
-
-
-	default:
-		break;
 	}
 }
 void CRunPicker::OnRunInit()

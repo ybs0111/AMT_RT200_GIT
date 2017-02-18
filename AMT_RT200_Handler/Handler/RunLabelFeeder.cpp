@@ -107,43 +107,44 @@ void CRunLabelFeeder::OnRunInit()
 
 	case 2100:
 		
-// 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_ON);
-// 		m_dwWFeederWaitTime[0] = GetCurrentTime();
-		//m_nInitStep = 2200;
-		//kwlee 2017.0217 test
+		FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_ON);
+		m_dwWFeederWaitTime[0] = GetCurrentTime();
 		m_nInitStep = 2200;
+		//kwlee 2017.0217 test
+		//m_nInitStep = 2200;
 		break;
 
 	case 2200:
-// 		m_dwWFeederWaitTime[1] = GetCurrentTime();
-// 		m_dwWFeederWaitTime[2] = m_dwWFeederWaitTime[1] - m_dwWFeederWaitTime[0];
-// 
-// 		if (m_dwWFeederWaitTime[2] <= 0)
-// 		{
-// 			m_dwWFeederWaitTime[0] = GetCurrentTime();
-// 		}
-// 
-// 		if (m_dwWFeederWaitTime[2] > 3000)
-// 		{
-// 			FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_OFF);
-// 			m_nInitStep = 2300;
-// 		}
+		m_dwWFeederWaitTime[1] = GetCurrentTime();
+		m_dwWFeederWaitTime[2] = m_dwWFeederWaitTime[1] - m_dwWFeederWaitTime[0];
+
+		if (m_dwWFeederWaitTime[2] <= 0)
+		{
+			m_dwWFeederWaitTime[0] = GetCurrentTime();
+		}
+
+		if (m_dwWFeederWaitTime[2] > 3000)
+		{
+			FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_OFF);
+			m_nInitStep = 2300;
+		}
 		//kwlee 2017.0217 test
-		m_nInitStep = 2300;
+	//	m_nInitStep = 2300;
 		break;
 
-// 	case 2300:
-// 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOff,IO_OFF);
-// 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOn,IO_ON);
-// 		m_nInitStep =2400;
-// 		break;
-// 
-// 	case 2400:
-// 		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_ON);
-// 		m_nInitStep = 2500;
-// 		break;
-	//case 2500:
-		case 2300:
+	case 2300:
+		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOff,IO_OFF);
+		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOn,IO_ON);
+		m_nInitStep =2400;
+		break;
+
+	case 2400:
+		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_ON);
+		m_nInitStep = 2500;
+		break;
+
+	case 2500:
+		//case 2300:
 		st_sync_info.nInitLabel = INIT_READY;
 		m_nInitStep = 0;
 		break;

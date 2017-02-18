@@ -28,6 +28,7 @@
 #define TM_REAR_SMEMA		200
 #define TM_INTERFACE		300
 #define TM_DOOR				400
+#define TM_BUFFER_DATA		500
 
 
 IMPLEMENT_DYNCREATE(CScreenMain, CFormView)
@@ -99,6 +100,7 @@ void CScreenMain::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CUSTOM_TM, m_GridTm);
 	DDX_Control(pDX, IDC_CUSTOM_TM2, m_GridTm_2);
 	DDX_Control(pDX, IDC_CUSTOM_TM3, m_GridTm_3);
+	DDX_Control(pDX, IDC_CUSTOM_BUFFER_DATA, m_pGridBufferData);
 }
 
 BEGIN_MESSAGE_MAP(CScreenMain, CFormView)
@@ -179,11 +181,11 @@ void CScreenMain::OnInitialUpdate()
 	OnInitGridYieldDaily();
 	OnInitGridFrontSmema();
 	OnInitGridRearSmema();
-
 	OninitTrayMove();
-	
+	OnInitGridBufferData();
 	SetTimer(TM_FRONT_SMEMA, 500, NULL);
 	SetTimer(TM_REAR_SMEMA, 500, NULL);
+	SetTimer(TM_BUFFER_DATA, 1000, NULL);
 	st_handler_info.cWndMain = this;
 }
 
@@ -193,7 +195,7 @@ void CScreenMain::OnMainDisplay()
 	OnMainCountDisplay();
 	OnMainTimeDisplay();
 	OnMainLotDisplay();
-
+	
 	if (st_handler_info.cWndTitle != NULL)
 	{
 		st_handler_info.cWndTitle->PostMessage(WM_STATUS_CHANGE, DEVICE_MODE, st_basic_info.nModeDevice);			// Device Mode
@@ -716,6 +718,7 @@ void CScreenMain::OnInitGridPickerTurnPos()
 
 BOOL CScreenMain::DestroyWindow()
 {
+	KillTimer(TM_BUFFER_DATA); //kwlee 2017.0218
 	KillTimer(TM_FRONT_SMEMA);
 	KillTimer(TM_REAR_SMEMA);
 	KillTimer(TM_INTERFACE);
@@ -1712,6 +1715,10 @@ void CScreenMain::OnTimer(UINT_PTR nIDEvent)
 	case TM_REAR_SMEMA:
 		OnMainDisplayRearSmema();
 		break;
+
+	case TM_BUFFER_DATA:
+		OnMainBufferDisplay();
+		break;
 	}
 
 	CFormView::OnTimer(nIDEvent);
@@ -2277,6 +2284,98 @@ void CScreenMain::OnInitGridYieldDaily()
 	m_pGridYieldD.SetItemFont(row, 2, &clsFunc.OnLogFont(16));
 	m_pGridYieldD.SetItemText(row, 2, _T("0"));
 }
+
+void CScreenMain::OnInitGridBufferData()
+{
+	int   i, j;
+	int	  max_row, max_col;
+	int   row;
+
+	CString strTmp;
+	CRect rect;
+
+	max_row = 40; // unloader tray y count
+	max_col = 3;
+
+	m_pGridBufferData.SetFrameFocusCell(FALSE);
+	m_pGridBufferData.SetTrackFocusCell(FALSE);
+	m_pGridBufferData.EnableSelection(FALSE);
+
+	m_pGridBufferData.SetGridLineColor(BLACK_C);
+	m_pGridBufferData.SetGridLines(1);
+
+	m_pGridBufferData.SetRowCount(max_row);
+	m_pGridBufferData.SetColumnCount(max_col);
+
+	m_pGridBufferData.SetFixedRowCount(0);
+	m_pGridBufferData.SetFixedColumnCount(0);
+	m_pGridBufferData.SetFixedBkColor(RGB(0,0,200));
+	m_pGridBufferData.SetFixedBkColor(RGB(200,200,255));
+	m_pGridBufferData.SetTextBkColor(RGB(150,150,200));
+
+	for (i=0; i<max_row; i++) 
+	{
+		strTmp.Format(_T("%d"),i + 1);
+		m_pGridBufferData.SetRowHeight(i, 17);
+		m_pGridBufferData.SetItemText(i + 1, 0, strTmp);
+
+		for (j=0; j<max_col; j++) 
+		{
+			if (j == 0)
+			{
+				m_pGridBufferData.SetColumnWidth(j, 40);
+			}
+			else
+			{
+				m_pGridBufferData.SetColumnWidth(j, 105);
+			}
+		
+			m_pGridBufferData.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
+			m_pGridBufferData.SetItemState(i, j, GVIS_READONLY);
+			m_pGridBufferData.SetItemBkColour(i, j, WHITE_C, CLR_DEFAULT);
+		}
+	}
+
+	row = 0;
+	m_pGridBufferData.SetItemBkColour(row, 0, RGB(219, 229, 241), BLACK_C);
+	m_pGridBufferData.SetItemFont(row, 0, &clsFunc.OnLogFont(13));
+	m_pGridBufferData.SetItemText(row, 0, _T("No"));
+
+	
+	m_pGridBufferData.SetItemBkColour(row, 1, RGB(219, 229, 241), BLACK_C);
+	m_pGridBufferData.SetItemFont(row, 1, &clsFunc.OnLogFont(13));
+	m_pGridBufferData.SetItemText(row, 1, _T("Left"));
+
+	
+	m_pGridBufferData.SetItemBkColour(row, 2, RGB(219, 229, 241), BLACK_C);
+	m_pGridBufferData.SetItemFont(row, 2, &clsFunc.OnLogFont(13));
+	m_pGridBufferData.SetItemText(row, 2, _T("Right"));
+
+	m_pGridBufferData.Invalidate(FALSE);
+}
+
+void CScreenMain::OnMainBufferDisplay()
+{
+	int   i, j;
+	int	  max_row, max_col;
+	int   row;
+
+	CString strTmp;
+	CRect rect;
+
+	max_row = 40; // unloader tray y count
+	max_col = 3;
+
+	for (int i = 0; i<MAX_BUFFER; i++)
+	{
+		for (int j = 0; j<2; j++)
+		{
+			m_pGridBufferData.SetItemText(i+ 1,j + 1, st_Buffer_info[0].strBufferSerial[j][i]);
+		}
+	}
+	m_pGridBufferData.Invalidate(FALSE);
+}
+
 void CScreenMain::OnMainLotDisplay()
 {
 	CString strTemp;
@@ -2358,7 +2457,6 @@ void CScreenMain::OnInitGridFrontSmema()
 			m_pGridFrontSmema.SetItemBkColour(i, j, WHITE_C, CLR_DEFAULT);
 		}
 	}
-
 	nRow = 0;
 	m_pGridFrontSmema.SetItemBkColour(nRow, 0, GREEN_D, BLACK_C);
 	m_pGridFrontSmema.SetItemFont(nRow, 0, &clsFunc.OnLogFont(18));
@@ -2999,42 +3097,91 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 	//st_handler_info.nRunStatus = dRUN;
 	//st_work_info.nSimulationMode = 1;
 	//st_sync_info.nInitPickerRbt = INIT_COMPLETE;
-	st_Buffer_info[PICK].strBufferSerial[0][0] = _T("111_0");
-	st_Buffer_info[PICK].strBufferSerial[0][2] = _T("111_2");
-	st_Buffer_info[PICK].strBufferSerial[0][4] = _T("111_4");
-	st_Buffer_info[PICK].strBufferSerial[0][6] = _T("111_6");
-	st_Buffer_info[PICK].strBufferSerial[0][8] = _T("111_8");
-	st_Buffer_info[PICK].strBufferSerial[0][10] = _T("111_10");
-	st_Buffer_info[PICK].strBufferSerial[0][12] = _T("111_12");
-	st_Buffer_info[PICK].strBufferSerial[0][14] = _T("111_14");
-	st_Buffer_info[PICK].strBufferSerial[0][16] = _T("111_16");
-	st_Buffer_info[PICK].strBufferSerial[0][18] = _T("111_18");
-	st_Buffer_info[PICK].strBufferSerial[0][20] = _T("111_20");
-	st_Buffer_info[PICK].strBufferSerial[0][22] = _T("111_22");
-	st_Buffer_info[PICK].strBufferSerial[0][24] = _T("111_24");
-	st_Buffer_info[PICK].strBufferSerial[0][26] = _T("111_26");
-	st_Buffer_info[PICK].strBufferSerial[0][28] = _T("111_28");
+	st_Buffer_info[PICK].strBufferSerial[0][0] = _T("0000_0");
+	st_Buffer_info[PICK].strBufferSerial[0][1] = _T("0000_1");
+	st_Buffer_info[PICK].strBufferSerial[0][2] = _T("0000_2");
+	st_Buffer_info[PICK].strBufferSerial[0][3] = _T("0000_3");
+	st_Buffer_info[PICK].strBufferSerial[0][4] = _T("0000_4");
+	st_Buffer_info[PICK].strBufferSerial[0][5] = _T("0000_5");
+	st_Buffer_info[PICK].strBufferSerial[0][6] = _T("0000_6");
+	st_Buffer_info[PICK].strBufferSerial[0][7] = _T("0000_7");
+	st_Buffer_info[PICK].strBufferSerial[0][8] = _T("0000_8");
+	st_Buffer_info[PICK].strBufferSerial[0][9] = _T("0000_9");
+	st_Buffer_info[PICK].strBufferSerial[0][10] = _T("0000_10");
+	st_Buffer_info[PICK].strBufferSerial[0][11] = _T("0000_11");
+	st_Buffer_info[PICK].strBufferSerial[0][12] = _T("0000_12");
+	st_Buffer_info[PICK].strBufferSerial[0][13] = _T("0000_13");
+	st_Buffer_info[PICK].strBufferSerial[0][14] = _T("0000_14");
+	st_Buffer_info[PICK].strBufferSerial[0][15] = _T("0000_15");
+	st_Buffer_info[PICK].strBufferSerial[0][16] = _T("0000_16");
+	st_Buffer_info[PICK].strBufferSerial[0][17] = _T("0000_17");
+	st_Buffer_info[PICK].strBufferSerial[0][18] = _T("0000_18");
+	st_Buffer_info[PICK].strBufferSerial[0][19] = _T("0000_19");
+	st_Buffer_info[PICK].strBufferSerial[0][20] = _T("0000_20");
+	st_Buffer_info[PICK].strBufferSerial[0][21] = _T("0000_21");
+	st_Buffer_info[PICK].strBufferSerial[0][22] = _T("0000_22");
+	st_Buffer_info[PICK].strBufferSerial[0][23] = _T("0000_23");
+	st_Buffer_info[PICK].strBufferSerial[0][24] = _T("0000_24");
+	st_Buffer_info[PICK].strBufferSerial[0][25] = _T("0000_25");
+	st_Buffer_info[PICK].strBufferSerial[0][26] = _T("0000_26");
+	st_Buffer_info[PICK].strBufferSerial[0][27] = _T("0000_27");
+	st_Buffer_info[PICK].strBufferSerial[0][28] = _T("0000_28");
+	st_Buffer_info[PICK].strBufferSerial[0][29] = _T("0000_29");
+	st_Buffer_info[PICK].strBufferSerial[0][30] = _T("0000_30");
+	st_Buffer_info[PICK].strBufferSerial[0][31] = _T("0000_31");
+	st_Buffer_info[PICK].strBufferSerial[0][32] = _T("0000_32");
+	st_Buffer_info[PICK].strBufferSerial[0][33] = _T("0000_33");
+	st_Buffer_info[PICK].strBufferSerial[0][34] = _T("0000_34");
+	st_Buffer_info[PICK].strBufferSerial[0][35] = _T("0000_35");
+	st_Buffer_info[PICK].strBufferSerial[0][36] = _T("0000_36");
+	st_Buffer_info[PICK].strBufferSerial[0][37] = _T("0000_37");
+	st_Buffer_info[PICK].strBufferSerial[0][38] = _T("0000_38");
+
+	st_Buffer_info[PICK].strBufferSerial[1][0] = _T("1111_0");
+	st_Buffer_info[PICK].strBufferSerial[1][1] = _T("1111_1");
+	st_Buffer_info[PICK].strBufferSerial[1][2] = _T("1111_2");
+	st_Buffer_info[PICK].strBufferSerial[1][3] = _T("1111_3");
+	st_Buffer_info[PICK].strBufferSerial[1][4] = _T("1111_4");
+	st_Buffer_info[PICK].strBufferSerial[1][5] = _T("1111_5");
+	st_Buffer_info[PICK].strBufferSerial[1][6] = _T("1111_6");
+	st_Buffer_info[PICK].strBufferSerial[1][7] = _T("1111_7");
+	st_Buffer_info[PICK].strBufferSerial[1][8] = _T("1111_8");
+	st_Buffer_info[PICK].strBufferSerial[1][9] = _T("1111_9");
+	st_Buffer_info[PICK].strBufferSerial[1][10] = _T("1111_10");
+	st_Buffer_info[PICK].strBufferSerial[1][11] = _T("1111_11");
+	st_Buffer_info[PICK].strBufferSerial[1][12] = _T("1111_12");
+	st_Buffer_info[PICK].strBufferSerial[1][13] = _T("1111_13");
+	st_Buffer_info[PICK].strBufferSerial[1][14] = _T("1111_14");
+	st_Buffer_info[PICK].strBufferSerial[1][15] = _T("1111_15");
+	st_Buffer_info[PICK].strBufferSerial[1][16] = _T("1111_16");
+	st_Buffer_info[PICK].strBufferSerial[1][17] = _T("1111_17");
+	st_Buffer_info[PICK].strBufferSerial[1][18] = _T("1111_18");
+	st_Buffer_info[PICK].strBufferSerial[1][19] = _T("1111_19");
+	st_Buffer_info[PICK].strBufferSerial[1][20] = _T("1111_20");
+	st_Buffer_info[PICK].strBufferSerial[1][21] = _T("1111_21");
+	st_Buffer_info[PICK].strBufferSerial[1][22] = _T("1111_22");
+	st_Buffer_info[PICK].strBufferSerial[1][23] = _T("1111_23");
+	st_Buffer_info[PICK].strBufferSerial[1][24] = _T("1111_24");
+	st_Buffer_info[PICK].strBufferSerial[1][25] = _T("1111_25");
+	st_Buffer_info[PICK].strBufferSerial[1][26] = _T("1111_26");
+	st_Buffer_info[PICK].strBufferSerial[1][27] = _T("1111_27");
+	st_Buffer_info[PICK].strBufferSerial[1][28] = _T("1111_28");
+	st_Buffer_info[PICK].strBufferSerial[1][29] = _T("1111_29");
+	st_Buffer_info[PICK].strBufferSerial[1][30] = _T("1111_30");
+	st_Buffer_info[PICK].strBufferSerial[1][31] = _T("1111_31");
+	st_Buffer_info[PICK].strBufferSerial[1][32] = _T("1111_32");
+	st_Buffer_info[PICK].strBufferSerial[1][33] = _T("1111_33");
+	st_Buffer_info[PICK].strBufferSerial[1][34] = _T("1111_34");
+	st_Buffer_info[PICK].strBufferSerial[1][35] = _T("1111_35");
+	st_Buffer_info[PICK].strBufferSerial[1][36] = _T("1111_36");
+	st_Buffer_info[PICK].strBufferSerial[1][37] = _T("1111_37");
+	st_Buffer_info[PICK].strBufferSerial[1][38] = _T("1111_38");
+
 
 	
-	st_Buffer_info[PICK].strBufferSerial[1][0] = _T("222_0");
-	st_Buffer_info[PICK].strBufferSerial[1][1] = _T("222_1");
-	st_Buffer_info[PICK].strBufferSerial[1][3] = _T("222_3");
-	st_Buffer_info[PICK].strBufferSerial[1][5] = _T("222_5");
-	st_Buffer_info[PICK].strBufferSerial[1][7] = _T("222_7");
-	st_Buffer_info[PICK].strBufferSerial[1][9] = _T("222_9");
-	st_Buffer_info[PICK].strBufferSerial[1][11] = _T("222_11");
-	st_Buffer_info[PICK].strBufferSerial[1][13] = _T("222_13");
-	st_Buffer_info[PICK].strBufferSerial[1][15] = _T("222_15");
-	st_Buffer_info[PICK].strBufferSerial[1][17] = _T("222_17");
-	st_Buffer_info[PICK].strBufferSerial[1][19] = _T("222_19");
-	st_Buffer_info[PICK].strBufferSerial[1][21] = _T("222_21");
-	st_Buffer_info[PICK].strBufferSerial[1][23] = _T("222_23");
-	st_Buffer_info[PICK].strBufferSerial[1][25] = _T("222_25");
-	st_Buffer_info[PICK].strBufferSerial[1][27] = _T("222_27");
-	st_Buffer_info[PICK].strBufferSerial[1][29] = _T("222_29");
 	
 	//clsRunRobot.m_nRunStep = 4000;
-	clsRunRobot.m_nPrintOutPutCnt = 16;
+//	clsRunRobot.m_nPrintOutPutCnt = 16;
 	for (int i =0; i<2; i++)
 	{
 		for (int j = 0; j<MAX_BUFFER; j++)

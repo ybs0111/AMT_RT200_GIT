@@ -458,6 +458,7 @@ LRESULT CMainFrame::OnViewChangeMode(WPARAM wParam,LPARAM lParam)
 			break;
 
 		default:
+
 			break;
 	}
 
