@@ -524,6 +524,8 @@ void CMyJamData::OnAlarmDisplay()
  			// 모션 보드 함수에서 RUN 상태일 경우에만 위치값 저장하게 되어 있다
  			// 헌데, 현재 설비 상태를 설정해주는 곳이 없어 이곳에 추가한다
  			COMI.mn_run_status = st_handler_info.nRunStatus;
+
+			clsFunc.OnMCStop();
  		}
  	}
 }

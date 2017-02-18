@@ -6,6 +6,8 @@
 #include "CtlBd_Library.h"
 #include "Ctlbd_Variable.h"
 
+#include "AlgMemory.h"
+
 CRunConveyor clsRunConveyor;
 
 CRunConveyor::CRunConveyor(void)
@@ -107,107 +109,162 @@ void CRunConveyor::Smema_Front()
 			FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_OFF);
 			st_sync_info.nSmema_Front = CTL_NONE;
 			m_nSmemaStep = 100;
-		break;
+			break;
+
+		case 10:
+			m_lWait_Smema[1] = GetCurrentTime();
+			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
+			if (m_lWait_Smema[2] < 0)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+			}
+
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
+			if(nRet[0] == IO_ON)
+			{
+				if (m_lWait_Smema[2] > 100)
+				{
+					if (st_sync_info.nSmema_Tray_Input_Req == CONV_REQ)
+					{
+						//
+						FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_ON);
+						m_nSmemaStep = 200;
+					}
+				}
+			}
+			else
+			{
+				m_nSmemaStep = 100;
+			}
+			break;
 
 		case 100:
 			//설비에서 Front로 요청
-			if (st_sync_info.nSmema_Tray_Input_Req == CONV_REQ)
+			if( FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON) == IO_ON)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 10;
+			}
+			else if (st_sync_info.nSmema_Tray_Input_Req == CONV_REQ)
 			{
 				FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_ON);
-				m_lWait_Smema[0] = GetCurrentTime();
-
 				m_nSmemaStep = 200;
 			}
-		break;
+			break;
 
 		case 200:
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
+			if( nRet[0] == IO_ON)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 210;
+			}
+			if( st_basic_info.nModeDevice == WITHOUT_DVC)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 210;
+			}
+			break;
+
+		case 210:
 			//보낼 준비가 되면 Ready On
 			m_lWait_Smema[1] = GetCurrentTime();
 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-
-			
-			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
-
-			if (nRet[0] == IO_ON || st_sync_info.nSmema_Front == CTL_READY)
+			if (m_lWait_Smema[2] < 0)
 			{
-				if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
+				m_lWait_Smema[0] = GetCurrentTime();
+			}
+
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
+			if(nRet[0] == IO_OFF)
+			{
+				m_nSmemaStep = 200;
+			}
+			else if( nRet[0] == IO_ON  || st_sync_info.nSmema_Front == CTL_READY)
+			{
+				if (m_lWait_Smema[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 				{
-					//nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
-					//Ready On이면 모터 On
 					st_sync_info.nSmema_Tray_Input_Req = CONV_READY;
 					m_lWait_Smema[0] = GetCurrentTime();
 					m_nSmemaStep = 300;
 				}
-				else
-				{
-					m_nSmemaStep = 0;
-				}
 			}
-			else if (m_lWait_Smema[2] < 0)
+			if( st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
+				st_sync_info.nSmema_Tray_Input_Req = CONV_READY;
 				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 300;
 			}
 			break;
 
 		case 300:
 			m_lWait_Smema[1] = GetCurrentTime();
 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontComplete,IO_ON);
-			
-			if (nRet[0] == IO_ON || st_sync_info.nSmema_Front == CTL_COMPLETE)
-			{
-				if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
-				{
-					FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF);
-					m_lWait_Smema[0] = GetCurrentTime();
-					m_nSmemaStep = 400;
-				}
-				else
-				{
-					m_nSmemaStep = 0;
-				}
-			}
-			else if (m_lWait_Smema[2] < 0)
+			if (m_lWait_Smema[2] < 0)
 			{
 				m_lWait_Smema[0] = GetCurrentTime();
+			}
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_OFF);
+			
+			if (nRet[0] == IO_ON)
+			{
+				m_nSmemaStep = 200;
+			}
+			else if (st_basic_info.nModeDevice == WITHOUT_DVC || 
+				( nRet[0] == IO_OFF && FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON || st_sync_info.nSmema_Front == CTL_COMPLETE ) )
+			{
+				if (m_lWait_Smema[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
+				{
+					FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF);
+					m_nSmemaStep = 400;
+				}
 			}
 			break;
 
 		case 400:
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_OFF);
+			if( nRet[0] == IO_OFF)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 410;
+			}
+			if( st_basic_info.nModeDevice == WITHOUT_DVC)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 410;
+			}
+			break;
+
+		case 410:
 			m_lWait_Smema[1] = GetCurrentTime();
 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-			if (st_sync_info.nSmema_Tray_Input_Req == CONV_CLR)
+			if (m_lWait_Smema[2] < 0)
 			{
-				if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
-				{
-					FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_ON);
-					m_lWait_Smema[0] = GetCurrentTime();
-					m_nSmemaStep = 500;
-				}
-				else
+				m_lWait_Smema[0] = GetCurrentTime();
+			}
+
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_OFF);
+			if(nRet[0] == IO_ON)
+			{
+				m_nSmemaStep = 400;
+			}
+			else if( nRet[0] == IO_OFF || st_basic_info.nModeDevice == WITHOUT_DVC)
+			{
+				if (m_lWait_Smema[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 				{
 					m_nSmemaStep = 0;
 				}
 			}
 			break;
 
-		case 500:
-			m_lWait_Smema[1] = GetCurrentTime();
-			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-
-			if (m_lWait_Smema[2] > 500)
-			{
-				FAS_IO.set_out_bit(st_io_info.o_Front_LabelComplete,IO_OFF);
-				m_nSmemaStep = 0;
+		default:
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{ 
+				//CString str;
+				//clsMem.OnNormalMessageWrite(_T("I/O Board Initialized Success..."));
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);
 			}
 			break;
-
-		case  600:
-			m_nSmemaStep = -1;
-			break;
-
-		default:
-		break;
 	}
 }
 void  CRunConveyor::Smema_Rear()
@@ -260,7 +317,7 @@ void  CRunConveyor::Smema_Rear()
 		m_lWait_Smema[1] = GetCurrentTime();
 		m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
 
-		if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
+		if (m_lWait_Smema[2] < st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 		{
 			if (st_sync_info.nSmema_Tray_Output_Req == CONV_CLR)
 			{
@@ -275,7 +332,7 @@ void  CRunConveyor::Smema_Rear()
 		m_lWait_Smema[1] = GetCurrentTime();
 		m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
 
-		if (m_lWait_Smema[2] < st_wait_info.dLimitWaitTime[WAIT_CONV_REQ])
+		if (m_lWait_Smema[2] < st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 		{
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_ON);
 
@@ -316,7 +373,7 @@ int CRunConveyor::OnConvWaitTime(int nConv, int nWaitMode)
 		m_dwConveyorWaitTime[nConv][0] = GetCurrentTime();
 	}
 
-	if (m_dwConveyorWaitTime[nConv][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitMode])
+	if (m_dwConveyorWaitTime[nConv][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitMode])
 	{
 		return RET_ERROR;
 	}
@@ -369,7 +426,7 @@ int CRunConveyor::OnGetInConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -385,7 +442,7 @@ int CRunConveyor::OnGetInConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosUpChk, nUpDn); 
@@ -415,7 +472,7 @@ int CRunConveyor::OnGetInConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if(m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if(m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -431,7 +488,7 @@ int CRunConveyor::OnGetInConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosUpChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(305, dWARNING, strAlarm);
@@ -490,7 +547,7 @@ int CRunConveyor::OnGetTurnConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -506,7 +563,7 @@ int CRunConveyor::OnGetTurnConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnPosUpChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(304, dWARNING, strAlarm);
@@ -537,7 +594,7 @@ int CRunConveyor::OnGetTurnConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if(m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if(m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -553,7 +610,7 @@ int CRunConveyor::OnGetTurnConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnPosDwChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(305, dWARNING, strAlarm);
@@ -611,7 +668,7 @@ int CRunConveyor::OnGetOutConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -627,7 +684,7 @@ int CRunConveyor::OnGetOutConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				//502020  "OUT CONV Position Stopper Up-Sol Error."
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_OutConvPosUpChk, nUpDn); 
@@ -658,7 +715,7 @@ int CRunConveyor::OnGetOutConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if(m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if(m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -674,7 +731,7 @@ int CRunConveyor::OnGetOutConvStopperUpDn(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwWStopperWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				//502020  "OUT CONV Position Stopper Up-Sol Error."
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_OutConvPosUpChk, nUpDn); 
@@ -740,7 +797,7 @@ int CRunConveyor::OnGetTableMotorCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -756,7 +813,7 @@ int CRunConveyor::OnGetTableMotorCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvStopperBackChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(304, dWARNING, strAlarm);
@@ -787,7 +844,7 @@ int CRunConveyor::OnGetTableMotorCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if(m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if(m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -803,7 +860,7 @@ int CRunConveyor::OnGetTableMotorCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvStopperForChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(305, dWARNING, strAlarm);
@@ -868,7 +925,7 @@ int CRunConveyor::OnGetTableTurnCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -884,7 +941,7 @@ int CRunConveyor::OnGetTableTurnCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnRotatCylBackChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(304, dWARNING, strAlarm);
@@ -915,7 +972,7 @@ int CRunConveyor::OnGetTableTurnCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if(m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dOnWaitTime[nWaitTime])
+			if(m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nOnWaitTime[nWaitTime])
 			{
 				return RET_GOOD;
 			}
@@ -931,7 +988,7 @@ int CRunConveyor::OnGetTableTurnCylOnOff(int nMode, int nUpDn)
 				return RET_PROCEED;
 			}
 
-			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.dLimitWaitTime[nWaitTime])
+			if (m_dwCylWaitTime[nMode][2] > (DWORD)st_wait_info.nLimitWaitTime[nWaitTime])
 			{
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnRotatCylForChk, nUpDn); 
 				//CTL_Lib.Alarm_Error_Occurrence(305, dWARNING, strAlarm);
@@ -1065,13 +1122,14 @@ void CRunConveyor::OnRunInit()
 			m_lMotorOnTimeCheck[1] = GetCurrentTime();
 			m_lMotorOnTimeCheck[2] = m_lMotorOnTimeCheck[1] - m_lMotorOnTimeCheck[0];
 
+			if (m_lMotorOnTimeCheck[2] <= 0)
+			{
+				m_lMotorOnTimeCheck[0] = GetCurrentTime();
+			}
+
 			if (m_lMotorOnTimeCheck[2] > 5000)
 			{
-				if (m_lMotorOnTimeCheck[2] <= 0)
-				{
-					m_lMotorOnTimeCheck[0] = GetCurrentTime();
-				}
-
+				
 				if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_ON)
 				{						
 					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
@@ -1274,7 +1332,6 @@ void CRunConveyor::OnFrontConvRunMove()
 					//501091 1 A "IN CONV Position On Check Error."
 					//501100 1 A "IN CONV Position Up Off Check Error."
 					//501101 1 A "IN CONV Position Up On Check Error."
-
 					if	   (nRet[0] == IO_ON) m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvInChk, IO_OFF); //
 					else if(nRet[1] == IO_ON) m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
 					else if(nRet[2] == IO_ON) m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosUpChk, IO_OFF);
@@ -1313,33 +1370,50 @@ void CRunConveyor::OnFrontConvRunMove()
 			break;
 
 		case 1100:
-			if (st_sync_info.nSmema_Tray_Input_Req == CONV_READY)
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 				m_nRunStep[CONV_IN] = 1200;
 			}
+			else
+			{
+				if (st_sync_info.nSmema_Tray_Input_Req == CONV_READY)
+				{
+					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
+					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
+					m_nRunStep[CONV_IN] = 1200;
+				}
+			}
 			break;
 
 		case 1200:
-			if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON )
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
-				st_sync_info.nSmema_Tray_Input_Req = CONV_CLR;
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();				
 				m_nRunStep[CONV_IN] = 1300;
 			}
 			else
 			{
-				nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_IN);
-				if(nRet_1 == RET_ERROR)
+				if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON )
 				{
-					//501090 1 A "IN CONV Position Off Check Error."
-					//501091 1 A "IN CONV Position On Check Error."
-					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
-					CTL_Lib.Alarm_Error_Occurrence(320, dWARNING, m_strAlarmCode);
+					st_sync_info.nSmema_Tray_Input_Req = CONV_CLR;
+					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();				
+					m_nRunStep[CONV_IN] = 1300;
+				}
+				else
+				{
+					nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_IN);
+					if(nRet_1 == RET_ERROR)
+					{
+						//501090 1 A "IN CONV Position Off Check Error."
+						//501091 1 A "IN CONV Position On Check Error."
+						m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
+						CTL_Lib.Alarm_Error_Occurrence(320, dWARNING, m_strAlarmCode);
 
-					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
-					m_nRunStep[CONV_IN] = 1100;
+						FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
+						m_nRunStep[CONV_IN] = 1100;
+					}
 				}
 			}
 			break;
@@ -1352,9 +1426,9 @@ void CRunConveyor::OnFrontConvRunMove()
 			{
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 			}
-			if (m_dwConveyorWaitTime[CONV_IN][2] > (DWORD)st_wait_info.dOnWaitTime[WAIT_CONV_IN])
+			if (m_dwConveyorWaitTime[CONV_IN][2] > (DWORD)st_wait_info.nOnWaitTime[WAIT_CONV_IN])
 			{
-				if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON)
+				if (st_basic_info.nModeDevice == WITHOUT_DVC)
 				{
 					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
 					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
@@ -1362,7 +1436,16 @@ void CRunConveyor::OnFrontConvRunMove()
 				}
 				else
 				{
-					m_nRunStep[CONV_IN] = 1200;
+					if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON)
+					{
+						FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
+						m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
+						m_nRunStep[CONV_IN] = 1400;
+					}
+					else
+					{
+						m_nRunStep[CONV_IN] = 1200;
+					}
 				}
 			}
 			break;
@@ -1375,7 +1458,7 @@ void CRunConveyor::OnFrontConvRunMove()
 			{
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 			}
-			if (m_dwConveyorWaitTime[CONV_IN][2] > (DWORD)st_wait_info.dOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
+			if (m_dwConveyorWaitTime[CONV_IN][2] > (DWORD)st_wait_info.nOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
 			{
 				m_nRunStep[CONV_IN] = 1500;
 			}
@@ -1404,26 +1487,48 @@ void CRunConveyor::OnFrontConvRunMove()
 			break;
 
 		case 1700:
-			if (st_sync_info.nMidTrayIn == CTL_REQ) //Middle 에서 Conv 투입 준비 신호
-			{      
-				FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
-				m_nRunStep[CONV_IN] = 1710;
-			}
-			else
+// 			if (st_sync_info.nMidTrayIn == CTL_REQ) //Middle 에서 Conv 투입 준비 신호
+// 			{      
+// 				FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
+// 				m_nRunStep[CONV_IN] = 1710;
+// 			}
+// 			else
+// 			{
+// 				nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_REQ);
+// 				if(nRet_1 == RET_ERROR)
+// 				{
+// 					//501090 1 A "IN CONV Position Off Check Error."
+// 					//501091 1 A "IN CONV Position On Check Error."
+// 					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
+// 					CTL_Lib.Alarm_Error_Occurrence(340, dWARNING, m_strAlarmCode);
+// 					m_nRunStep[CONV_IN] = 1600;
+// 				}
+// 			}
+			//kwlee 2017.0217
+			if (st_sync_info.TurnConvJobReady[CONVEYOR] !=  CTL_READY)
 			{
-				nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_REQ);
-				if(nRet_1 == RET_ERROR)
+				if (st_sync_info.nMidTrayIn == CTL_REQ) //Middle 에서 Conv 투입 준비 신호
+				{      
+					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
+					m_nRunStep[CONV_IN] = 1710;
+				}
+				else
 				{
-					//501090 1 A "IN CONV Position Off Check Error."
-					//501091 1 A "IN CONV Position On Check Error."
-					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
-					CTL_Lib.Alarm_Error_Occurrence(340, dWARNING, m_strAlarmCode);
-					m_nRunStep[CONV_IN] = 1600;
+					nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_REQ);
+					if(nRet_1 == RET_ERROR)
+					{
+						//501090 1 A "IN CONV Position Off Check Error."
+						//501091 1 A "IN CONV Position On Check Error."
+						m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_OFF);
+						CTL_Lib.Alarm_Error_Occurrence(340, dWARNING, m_strAlarmCode);
+						m_nRunStep[CONV_IN] = 1600;
+					}
 				}
 			}
 			break;
 
 		case 1710:
+
 			if( FAS_IO.get_in_bit(st_io_info.i_InConvPosUpChk,IO_OFF)	== IO_OFF )
 			{
 				m_nRunStep[CONV_IN] = 1900;
@@ -1458,23 +1563,31 @@ void CRunConveyor::OnFrontConvRunMove()
 			break;
 
 		case 2000:
-			if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_OFF)
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 				m_nRunStep[CONV_IN] = 3000;
 			}
 			else
 			{
-				nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_OUT);
-				if(nRet_1 == RET_ERROR)
+				if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_OFF)
 				{
-					//501090 1 A "IN CONV Position Off Check Error."
-					//501091 1 A "IN CONV Position On Check Error."
-					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_ON);
-					CTL_Lib.Alarm_Error_Occurrence(360, dWARNING, m_strAlarmCode);
+					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
+					m_nRunStep[CONV_IN] = 3000;
+				}
+				else
+				{
+					nRet_1 = OnConvWaitTime(CONV_IN,WAIT_CONV_OUT);
+					if(nRet_1 == RET_ERROR)
+					{
+						//501090 1 A "IN CONV Position Off Check Error."
+						//501091 1 A "IN CONV Position On Check Error."
+						m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvPosChk, IO_ON);
+						CTL_Lib.Alarm_Error_Occurrence(360, dWARNING, m_strAlarmCode);
 
-					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
-				//	m_nRunStep[CONV_IN] = 0;
+						FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
+						//	m_nRunStep[CONV_IN] = 0;
+					}
 				}
 			}
 			break;
@@ -1490,22 +1603,31 @@ void CRunConveyor::OnFrontConvRunMove()
 
 			if (m_dwConveyorWaitTime[CONV_IN][2] < 1000)
 			{
-				if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON)
-				{
-					m_nRunStep[CONV_IN] = 2000;
-				}
-				else
+				if (st_basic_info.nModeDevice == WITHOUT_DVC)
 				{
 					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
 					st_sync_info.nFrontTrayIn = CTL_NO;
 					st_sync_info.nMidTrayIn = CTL_NO;
 					m_nRunStep[CONV_IN] = 0;
 				}
+				else
+				{
+					if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON)
+					{
+						m_nRunStep[CONV_IN] = 2000;
+					}
+					else
+					{
+						FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
+						st_sync_info.nFrontTrayIn = CTL_NO;
+						st_sync_info.nMidTrayIn = CTL_NO;
+						m_nRunStep[CONV_IN] = 0;
+					}
+				}
 			}
 			break;
 
-		case 5000:
-			break;
+	
 	}
 }
 
@@ -1513,9 +1635,10 @@ void CRunConveyor::OnFrontConvRunMove()
 void CRunConveyor::OnTurnConvMove()
 {
 	int nRet[7] = {0,};
-	int nRet_1,nRet_2;
+	int nRet_1;
 	double d_CurPos[30] = {0,};
 
+	
 
 
 	switch(m_nRunStep[CONV_MID])
@@ -1592,6 +1715,7 @@ void CRunConveyor::OnTurnConvMove()
 
 
 	case 1200:
+
 		nRet[0] = OnGetTurnConvStopperUpDn(IO_RUN_MODE, IO_OFF);
 		if(nRet[0] == RET_GOOD)
 		{
@@ -1648,6 +1772,7 @@ void CRunConveyor::OnTurnConvMove()
 		break;
 
 	case 1600:
+		
 		nRet[0] = OnGetTurnConvStopperUpDn(IO_RUN_MODE, IO_ON);
 
 		if(nRet[0] == RET_GOOD)
@@ -1663,6 +1788,7 @@ void CRunConveyor::OnTurnConvMove()
 			//	m_strAlarmCode.Format(_T("5%d%04d"), IO_ON, st_io_info.i_InConvPosUpChk);
 			CTL_Lib.Alarm_Error_Occurrence(440, dWARNING, m_strAlarmCode);
 		}
+		
 		break;
 		//////////////////////////////////////////
 		//MOTOR CYLINDER FORWARD 
@@ -1698,27 +1824,35 @@ void CRunConveyor::OnTurnConvMove()
 
 	case 2000:
 		//Turn Conv Pos 센서 확인
-		if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();				
 			m_nRunStep[CONV_MID] = 2100;
 		}
 		else
 		{
-		//	m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
-			//m_nRunStep[CONV_MID] = 2010;
-
-			nRet_1 = OnConvWaitTime(CONV_MID,WAIT_CONV_IN);
-
-			if(nRet_1 == RET_ERROR)
+			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
 			{
-				//502110 1 A "TURN CONV  Position Sensor Off Check Error."
-				//502111 1 A "TURN CONV  Position Sensor On Check Error."
-				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
-			//	CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, m_strAlarmCode);
-				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
-				m_nErrorStep = m_nRunStep[CONV_MID];
-				m_nRunStep[CONV_MID] = 5000;
+				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();				
+				m_nRunStep[CONV_MID] = 2100;
+			}
+			else
+			{
+				//	m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
+				//m_nRunStep[CONV_MID] = 2010;
+
+				nRet_1 = OnConvWaitTime(CONV_MID,WAIT_CONV_IN);
+
+				if(nRet_1 == RET_ERROR)
+				{
+					//502110 1 A "TURN CONV  Position Sensor Off Check Error."
+					//502111 1 A "TURN CONV  Position Sensor On Check Error."
+					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
+					//	CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, m_strAlarmCode);
+					m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
+					m_nErrorStep = m_nRunStep[CONV_MID];
+					m_nRunStep[CONV_MID] = 5000;
+				}
 			}
 		}
 		break;
@@ -1733,21 +1867,31 @@ void CRunConveyor::OnTurnConvMove()
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 		}
 		//Turn Pos 감지 시간 확인
-		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.dOnWaitTime[WAIT_CONV_IN])
+		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.nOnWaitTime[WAIT_CONV_IN])
 		{
-			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
-				
 				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
-				
 				m_nRunStep[CONV_MID] = 2200;
-
 				st_sync_info.nMidTrayIn = CTL_NO;
 			}
 			else
 			{
-				m_nRunStep[CONV_MID] = 2000;
+				if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+				{
+					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
+
+					m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
+
+					m_nRunStep[CONV_MID] = 2200;
+
+					st_sync_info.nMidTrayIn = CTL_NO;
+				}
+				else
+				{
+					m_nRunStep[CONV_MID] = 2000;
+				}
 			}
 		}
 		break;
@@ -1760,7 +1904,7 @@ void CRunConveyor::OnTurnConvMove()
 		{
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 		}
-		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.dOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
+		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.nOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
 		{
 			m_nRunStep[CONV_MID] = 2300;
 		}
@@ -1839,25 +1983,39 @@ void CRunConveyor::OnTurnConvMove()
 	case 2610:
 		nRet_1 = OnTurnConvPosCheck();
 
-		if (nRet_1 == RET_RETRY)
+		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
-			m_nRunStep[CONV_MID] = 1500;
-		}
-		else if (nRet_1 == RET_GOOD)
-		{
-			if (st_sync_info.TurnConvJobReady[ROBOT] == CTL_READY)
+			if (nRet_1 == RET_GOOD)
 			{
-				OnSetTableTurnCylOnOff(IO_RUN_MODE,IO_OFF);
-				m_nRunStep[CONV_MID] = 2630;
+				if (st_sync_info.TurnConvJobReady[ROBOT] == CTL_READY)
+				{
+					OnSetTableTurnCylOnOff(IO_RUN_MODE,IO_OFF);
+					m_nRunStep[CONV_MID] = 2630;
+				}
 			}
 		}
 		else
 		{
-			m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
-			CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, m_strAlarmCode);
-// 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
-// 			m_nErrorStep = m_nRunStep[CONV_MID];
-// 			m_nRunStep[CONV_MID] = 5000;
+			if (nRet_1 == RET_RETRY)
+			{
+				m_nRunStep[CONV_MID] = 1500;
+			}
+			else if (nRet_1 == RET_GOOD)
+			{
+				if (st_sync_info.TurnConvJobReady[ROBOT] == CTL_READY)
+				{
+					OnSetTableTurnCylOnOff(IO_RUN_MODE,IO_OFF);
+					m_nRunStep[CONV_MID] = 2630;
+				}
+			}
+			else
+			{
+				//m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
+				CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, st_alarm_info.strCode);
+				// 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
+				// 			m_nErrorStep = m_nRunStep[CONV_MID];
+				// 			m_nRunStep[CONV_MID] = 5000;
+			}
 		}
 		break;
 
@@ -1935,7 +2093,6 @@ void CRunConveyor::OnTurnConvMove()
 
 	case 2700:
 		//Motor Cylinder For
-		
 		OnSetTableMotorCylOnOff(IO_RUN_MODE,IO_ON);
 		m_nRunStep[CONV_MID] = 2800;
 		break;
@@ -1971,23 +2128,31 @@ void CRunConveyor::OnTurnConvMove()
 
 	case 2820:
 		//Turn Conv Pos 센서 확인
-		if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();				
 			m_nRunStep[CONV_MID] = 2830;
 		}
 		else
 		{
-			nRet_1 = OnConvWaitTime(CONV_MID,WAIT_CONV_IN);
-			if(nRet_1 == RET_ERROR)
+			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
 			{
-				//502110 1 A "TURN CONV  Position Sensor Off Check Error."
-				//502111 1 A "TURN CONV  Position Sensor On Check Error."
-				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
-			//	CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, m_strAlarmCode);
-				m_nErrorStep = m_nRunStep[CONV_MID];
-				m_nRunStep[CONV_MID] = 5000;
-				//m_nRunStep[CONV_MID] = 5000;
+				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();				
+				m_nRunStep[CONV_MID] = 2830;
+			}
+			else
+			{
+				nRet_1 = OnConvWaitTime(CONV_MID,WAIT_CONV_IN);
+				if(nRet_1 == RET_ERROR)
+				{
+					//502110 1 A "TURN CONV  Position Sensor Off Check Error."
+					//502111 1 A "TURN CONV  Position Sensor On Check Error."
+					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
+					//	CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, m_strAlarmCode);
+					m_nErrorStep = m_nRunStep[CONV_MID];
+					m_nRunStep[CONV_MID] = 5000;
+					//m_nRunStep[CONV_MID] = 5000;
+				}
 			}
 		}
 		break;
@@ -2001,9 +2166,9 @@ void CRunConveyor::OnTurnConvMove()
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 		}
 		//Turn Pos 감지 시간 확인
-		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.dOnWaitTime[WAIT_CONV_IN])
+		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.nOnWaitTime[WAIT_CONV_IN])
 		{
-			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
@@ -2012,7 +2177,17 @@ void CRunConveyor::OnTurnConvMove()
 			}
 			else
 			{
-				m_nRunStep[CONV_MID] = 2820;
+				if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+				{
+					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
+					m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
+					//st_sync_info.nMidTrayIn = CTL_NO;
+					m_nRunStep[CONV_MID] = 2840;
+				}
+				else
+				{
+					m_nRunStep[CONV_MID] = 2820;
+				}
 			}
 		}
 		break;
@@ -2025,7 +2200,7 @@ void CRunConveyor::OnTurnConvMove()
 		{
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 		}
-		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.dOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
+		if (m_dwConveyorWaitTime[CONV_MID][2] > (DWORD)st_wait_info.nOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
 		{
 			m_nRunStep[CONV_MID] = 2850;
 		}
@@ -2114,8 +2289,8 @@ void CRunConveyor::OnTurnConvMove()
 		}
 		else
 		{
-			m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
-			CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, m_strAlarmCode);
+			//m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_OFF);
+			CTL_Lib.Alarm_Error_Occurrence(460, dWARNING, st_alarm_info.strCode);
 // 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 // 			m_nErrorStep = m_nRunStep[CONV_MID];
 // 			m_nRunStep[CONV_MID] = 5000;
@@ -2236,22 +2411,30 @@ void CRunConveyor::OnTurnConvMove()
 		break;
 
 	case 3200:
-		if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_OFF)
+		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 			m_nRunStep[CONV_MID] = 3300;
 		}
 		else
 		{
-			nRet_1 = OnConvWaitTime(CONV_MID,WAIT_CONV_OUT);
-			if(nRet_1 == RET_ERROR)
+			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_OFF)
 			{
-				//502110 1 A "TURN CONV  Position Sensor Off Check Error."
-				//502111 1 A "TURN CONV  Position Sensor On Check Error."
-				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_ON);
-				//CTL_Lib.Alarm_Error_Occurrence(490, dWARNING, m_strAlarmCode);
-				m_nErrorStep = m_nRunStep[CONV_MID];
-				m_nRunStep[CONV_MID] = 5000;
+				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
+				m_nRunStep[CONV_MID] = 3300;
+			}
+			else
+			{
+				nRet_1 = OnConvWaitTime(CONV_MID,WAIT_CONV_OUT);
+				if(nRet_1 == RET_ERROR)
+				{
+					//502110 1 A "TURN CONV  Position Sensor Off Check Error."
+					//502111 1 A "TURN CONV  Position Sensor On Check Error."
+					m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_ON);
+					//CTL_Lib.Alarm_Error_Occurrence(490, dWARNING, m_strAlarmCode);
+					m_nErrorStep = m_nRunStep[CONV_MID];
+					m_nRunStep[CONV_MID] = 5000;
+				}
 			}
 		}
 		break;
@@ -2267,16 +2450,26 @@ void CRunConveyor::OnTurnConvMove()
 
 		if (m_dwConveyorWaitTime[CONV_MID][2] > 1000)
 		{
-			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
-			{
-				m_nRunStep[CONV_MID] = 3200;
-			}
-			else
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				st_sync_info.nRearTrayIn = CTL_NO;
 				FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 				st_sync_info.nMidTrayIn = CTL_NO;
 				m_nRunStep[CONV_MID] = 0;
+			}
+			else
+			{
+				if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
+				{
+					m_nRunStep[CONV_MID] = 3200;
+				}
+				else
+				{
+					st_sync_info.nRearTrayIn = CTL_NO;
+					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
+					st_sync_info.nMidTrayIn = CTL_NO;
+					m_nRunStep[CONV_MID] = 0;
+				}
 			}
 		}
 		break;
@@ -2489,7 +2682,7 @@ void CRunConveyor::OnRearConvMove()
 		{
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 		}
-		if (m_dwConveyorWaitTime[CONV_OUT][2] > (DWORD)st_wait_info.dOnWaitTime[WAIT_CONV_IN])
+		if (m_dwConveyorWaitTime[CONV_OUT][2] > (DWORD)st_wait_info.nOnWaitTime[WAIT_CONV_IN])
 		{
 			if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_ON)
 			{
@@ -2515,7 +2708,7 @@ void CRunConveyor::OnRearConvMove()
 		{
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 		}
-		if (m_dwConveyorWaitTime[CONV_OUT][2] > (DWORD)st_wait_info.dOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
+		if (m_dwConveyorWaitTime[CONV_OUT][2] > (DWORD)st_wait_info.nOffWaitTime[WAIT_CONV_IN]/*[IO_OFF]*/)
 		{
 			m_nRunStep[CONV_OUT] = 1500;
 		}
@@ -2606,7 +2799,7 @@ void CRunConveyor::OnRearConvMove()
 		m_dwConveyorWaitTime[CONV_OUT][1] = GetCurrentTime();
 
 		m_dwConveyorWaitTime[CONV_OUT][2] = m_dwConveyorWaitTime[CONV_OUT][1] - m_dwConveyorWaitTime[CONV_OUT][0];
-		if (m_dwConveyorWaitTime[CONV_OUT][2] < st_wait_info.dLimitWaitTime[WAIT_CONV_OUT])
+		if (m_dwConveyorWaitTime[CONV_OUT][2] < (double)st_wait_info.nLimitWaitTime[WAIT_CONV_OUT])
 		{
 			if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_OFF)
 			{
@@ -2653,8 +2846,8 @@ void CRunConveyor::OnRearConvMove()
 		}
 		break;
 
-	case 5000:
-		break;
+// 	case 5000:
+// 		break;
 	}
 
 }

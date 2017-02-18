@@ -3052,8 +3052,8 @@ void CFastechPublic_IO::Initialize_Map()
 		//kwlee 2017.0210
 		st_io_info.o_LabelFeederClmpOff			= 701;		// S0701
 		st_io_info.o_LabelFeederClmpOn			= 702;		// S0702
+		st_io_info.o_LabelStopperCylinder		= 703;		// S0703
 
-	// 	// S0703
 	 	st_io_info.o_PcReady					= 704;		//S0704
 	 	st_io_info.o_PcComplete					= 705;		//S0705		
 	 	st_io_info.o_TableTurnCylFor			= 706;		//S0706		
@@ -3061,7 +3061,7 @@ void CFastechPublic_IO::Initialize_Map()
 	// 
 	 	st_io_info.i_LabelFeederProductChk1		= 708;						//PS0700
 	 	st_io_info.i_LabelFeederProductChk2		= 709;						//PS0701
-	// 	//PS0702
+	 	st_io_info.i_LabelStopperCylinderChk    = 710;                      //PS0702
 	 	st_io_info.i_LabelFeederStopperChk1		= 711;						//PS0703
 	// 	//PS0704
 	 	st_io_info.i_LfReqChk					= 713;		//PS0705

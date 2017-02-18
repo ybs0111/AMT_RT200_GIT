@@ -223,8 +223,9 @@ CMainFrame::CMainFrame()
 	{
 		FAS_IO.Initialize_Map();
 	}
-
-	// jtkim 20150713
+	//kwlee 2017.0216
+	CTL_Lib.Initialize_motor_board(1,  _T("C:\\AMT_RT200\\Setting\\Label.cme2"));	
+	//
 
 	// jtkim 20150721
 //	st_basic_info.nSocketCount = 100000;
@@ -232,7 +233,21 @@ CMainFrame::CMainFrame()
 	st_work_info.nTsiteCycleYesNo	= YES;
 	st_handler_info.nInitialSuccess = NO;
 	st_handler_info.nInitialError = NO;
-	
+
+	//kwlee 2017.0216 프로그램 시작 시 Turn 방지
+	FAS_IO.set_out_bit(st_io_info.o_TableTurnCylFor,IO_ON);
+	FAS_IO.set_out_bit(st_io_info.o_TableTurnCylBack,IO_ON);
+
+	FAS_IO.set_out_bit(st_io_info.o_InConvPosStopperDw,IO_ON);
+	FAS_IO.set_out_bit(st_io_info.o_InConvPosStopperUp,IO_OFF);
+
+	FAS_IO.set_out_bit(st_io_info.o_TurnPosDw,IO_ON);
+	FAS_IO.set_out_bit(st_io_info.o_TurnPosUp,IO_OFF);
+
+	FAS_IO.set_out_bit(st_io_info.o_OutPosStopperDw,IO_ON);
+	FAS_IO.set_out_bit(st_io_info.o_OutPosStopperUp,IO_OFF);
+	////
+
 	st_count_info.nHourSocket = st_count_info.nSocketStart;
 	if (st_count_info.nHourSocket <= 0)
 	{
@@ -277,7 +292,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	st_handler_info.m_TitleBackBitmap.LoadBitmap(/*IDB_BITMAP_BACK_GROUND1*/IDB_BITMAP_TITLE_BACKGROUND); 
 	st_handler_info.m_BackBitmap.LoadBitmap(/*IDB_BITMAP_BACK_GROUND1*/IDB_BITMAP_BACK_GROUND);   
 	st_handler_info.m_BackDlgBitmap.LoadBitmap(/*IDB_BITMAP_BACK_GROUND1*/IDB_BITMAP_DLG_BACK_GROUND);   
-
+		
 	m_wndToolBar.SetBorders(1, 1, 1, 1);
 	if (!m_wndToolBar.Create(this, WS_CHILD | WS_VISIBLE | CBRS_TOP
 		| CBRS_GRIPPER | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||

@@ -2996,9 +2996,9 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//kwlee 2017.0209 test..
-	st_handler_info.nRunStatus = dRUN;
-	st_work_info.nSimulationMode = 1;
-	st_sync_info.nInitPickerRbt = INIT_COMPLETE;
+	//st_handler_info.nRunStatus = dRUN;
+	//st_work_info.nSimulationMode = 1;
+	//st_sync_info.nInitPickerRbt = INIT_COMPLETE;
 	st_Buffer_info[PICK].strBufferSerial[0][0] = _T("111_0");
 	st_Buffer_info[PICK].strBufferSerial[0][2] = _T("111_2");
 	st_Buffer_info[PICK].strBufferSerial[0][4] = _T("111_4");
@@ -3033,9 +3033,8 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 	st_Buffer_info[PICK].strBufferSerial[1][27] = _T("222_27");
 	st_Buffer_info[PICK].strBufferSerial[1][29] = _T("222_29");
 	
-	clsRunRobot.m_nRunStep = 4000;
+	//clsRunRobot.m_nRunStep = 4000;
 	clsRunRobot.m_nPrintOutPutCnt = 16;
-
 	for (int i =0; i<2; i++)
 	{
 		for (int j = 0; j<MAX_BUFFER; j++)
@@ -3052,11 +3051,11 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 		}
 	}
 
-	m_thread[5] = AfxBeginThread(OnThreadRobot, this);  
-	if (m_thread[5] != NULL)	
-	{
-		m_thrHandle[5] = m_thread[5]->m_hThread;
-	}
+// 	m_thread[5] = AfxBeginThread(OnThreadRobot, this);  
+// 	if (m_thread[5] != NULL)	
+// 	{
+// 		m_thrHandle[5] = m_thread[5]->m_hThread;
+// 	}
 }
 
 

@@ -1356,8 +1356,9 @@ void CScreenAlarm::OnBnClickedBtnAlarmClean()
 	if (st_handler_info.nRunStatus != dSTOP)
 	{
 		clsFunc.OnSound(IO_OFF);
+		clsFunc.OnMCStop();
 
-		st_handler_info.nRunStatus = dSTOP;
+		//st_handler_info.nRunStatus = dSTOP;
 	}
 
 	if (st_alarm_info.strCode != _T(""))

@@ -1436,7 +1436,8 @@ struct tagIO_INFO
 	//kwlee 2017.0210
 	int		o_LabelFeederClmpOff;							// S0701
 	int		o_LabelFeederClmpOn;							// S0702
-	// S0703
+	int     o_LabelStopperCylinder;                        // S0703
+
 	int		o_PcReady;										//S0704
 	int		o_PcComplete;									//S0705
 	int		o_TableTurnCylFor;								//S0706
@@ -1444,7 +1445,7 @@ struct tagIO_INFO
 
 	int		i_LabelFeederProductChk1;						//PS0700
 	int		i_LabelFeederProductChk2;						//PS0701
-	//PS0702
+	int     i_LabelStopperCylinderChk;                       //PS0702
 	int		i_LabelFeederStopperChk1;						//PS0703
 	//PS0704
 	int		i_LfReqChk;										//PS0705
@@ -1476,7 +1477,7 @@ struct tagIO_INFO
 	int     i_RearComplete;                 //PS1005 
 	//kwlee 2017.0210
 	int     i_LabelRejectCylinderDnCheck;   //PS1006
-	int     i_LabelRejectCylinderUpCheck;   //PS1006
+	int     i_LabelRejectCylinderUpCheck;   //PS1007
 
 	int     o_HeadCylUpDn[PICKCNT];
 	int     i_HeadVaccumCheck[PICKCNT];
@@ -1484,8 +1485,6 @@ struct tagIO_INFO
 	int     o_HeadVaccumOff[PICKCNT];
 
 	int		oMotPwr[MAXMOTOR];
-
-	
 };
 extern  tagIO_INFO  st_io_info;
 // *****************************************************************************
@@ -2391,9 +2390,9 @@ enum WAIT_TIME
 // *************************************************************************
 struct tagWAIT_INFO
 {
-	double dOnWaitTime[MAX_WAIT_TIME];
-	double dOffWaitTime[MAX_WAIT_TIME];
-	double dLimitWaitTime[MAX_WAIT_TIME];
+	int nOnWaitTime[MAX_WAIT_TIME];
+	int nOffWaitTime[MAX_WAIT_TIME];
+	int nLimitWaitTime[MAX_WAIT_TIME];
 
 	int nGripOnOffWaitTime;
 	int nPickUpDnWaitTime;
@@ -2632,7 +2631,7 @@ enum CONV_WAIT_TIME
 
 enum LABEL_FEEDER_1_POS
 {
-	LABEL_FEEDER_1_SAFETY		  = 0,
+	LABEL_FEEDER_1_READY		  = 0,
 	LABEL_FEEDER_1_WORK		, 
 	 
 };

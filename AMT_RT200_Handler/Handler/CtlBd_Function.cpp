@@ -87,7 +87,7 @@ int CCtlBd_Function::Alarm_Error_Occurrence(int n_Count, int n_Type, int n_Statu
      st_alarm_info.nCountMode		= n_Count; 
 	 st_alarm_info.nTypeMode		= n_Type; 
 	 st_alarm_info.strCode			= s_JamCode; 
-//	 st_handler_info.nRunStatus		= n_Status; 
+	 st_handler_info.nRunStatus		= n_Status; 
 	  
 //	  MyJamData.On_Alarm_Info_Set_to_Variable(alarm.str_code);
 	  
