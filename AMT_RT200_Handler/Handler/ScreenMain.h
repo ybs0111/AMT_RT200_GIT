@@ -14,6 +14,7 @@
 #include "GradientStatic.h"
 #include "MyBasicData.h"
 #include "afxwin.h"
+#include "d:\work\source\amt_rt200_handler\handler\union\grid\gridctrl.h"
 
 
 
@@ -115,11 +116,13 @@ public:
 	void                OnInitGridPickerTurnPos();
 	void				OnInitGridYieldLot();
 	void				OnInitGridYieldDaily();
+	void				OnInitGridBufferData();
+
 
 	void                OnMainRobotLeftTurnDisplay();
 	void                OnMainRobotRightTurnDisplay();
 	void                OnMainRobotCenterDisplay();
-
+	void                OnMainBufferDisplay();
 	void                OnMainLotDisplay();
 
 	void                OnInitGridFrontSmema();
@@ -134,6 +137,7 @@ public:
 	void                OninitTrayMove();
 	void				SetIO_OnOff(int nID,int Onoff);
 	int                 GetCustomTrayMove(int iIdx);
+	               
 	int                 m_nTemp;
 	bool                mbTurn;
 protected:
@@ -193,6 +197,7 @@ public:
 	afx_msg void OnBnClickedBtnOutPosUpDw3();
 	afx_msg void OnBnClickedBtnCvInPos3();
 	afx_msg void OnBnClickedBtnOutPosUpDw5();
+	CGridCtrl m_pGridBufferData;
 };
 
 

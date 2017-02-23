@@ -33,6 +33,7 @@ public:
 	int             m_nRobot_P;
 	int             m_nRobot_X;
 	int             m_nRobot_Y;
+	int             m_nCntBcrNum;
 	int             m_nMove_Flag[5];
 	int             m_nJobNextPos; //kwlee 2016.1229
 	//kwlee 2017.0204

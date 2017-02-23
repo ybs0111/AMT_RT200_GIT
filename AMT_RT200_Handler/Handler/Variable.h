@@ -737,7 +737,7 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define MAX_PICKER                      5
 #define TOTAL_PICK                      10
 #define MAX_INFO                        5
-#define MAX_BUFFER                      30
+#define MAX_BUFFER                      40
 
 
 #define BUFF_PICK_POS	                0
@@ -1723,6 +1723,9 @@ struct tagSYNC_INFO
 
 	int         nSmema_Front;
 	int         nSmema_Rear;
+	int         nBcrReq;
+
+	int         nPrinterStatus; //kwlee 2017.0218
 
 	
 };
