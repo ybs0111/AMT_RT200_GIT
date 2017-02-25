@@ -96,6 +96,17 @@ int CRunConveyor::OnConvPcvCheck()
 	}
 	return RET_ERROR;
 }
+
+void CRunConveyor::OnPcbDataReset()
+{
+	for (int i = 0; i<2; i++)
+	{
+		for (int j = 0; j< PCB_CNT; j++)
+		{
+			st_Pcb_info.strPcbSerial[i][j] =_T("");
+		}
+	}
+}
 void CRunConveyor::Smema_Front()
 {
 	int nRet[2] = {0,};
@@ -398,8 +409,7 @@ void CRunConveyor::OnSetInConvStopperUpDn(int nMode, int nUpDn)
 	if (nUpDn == IO_ON)
 	{
 		FAS_IO.set_out_bit(st_io_info.o_InConvPosStopperUp, nUpDn); //S0105 Up
-		FAS_IO.set_out_bit(st_io_info.o_InConvPosStopperDw, !nUpDn);
-		
+		FAS_IO.set_out_bit(st_io_info.o_InConvPosStopperDw, !nUpDn);	
 	}
 	else
 	{
@@ -1353,12 +1363,14 @@ void CRunConveyor::OnFrontConvRunMove()
 			
 			if (st_sync_info.TurnConvJobReady[CONVEYOR] == CTL_NONE )
 			{
+				//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_IN_MOVE_DRAW_MAIN,CONV_IN_READY,0); //kwlee 2017.0220
 				st_sync_info.nSmema_Tray_Input_Req = CONV_REQ; //Front 설비 투입 요청에 대한 응답
 				m_nRunStep[CONV_IN] = 120;
 			}
 			break;
 
 		case 120:
+			
 			OnSetInConvStopperUpDn(IO_RUN_MODE, IO_ON);
 			m_nRunStep[CONV_IN] = 1000;
 	
@@ -1385,6 +1397,7 @@ void CRunConveyor::OnFrontConvRunMove()
 		case 1100:
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_IN_MOVE_DRAW_MAIN,CONV_IN_READY,0); //kwlee 2017.0220
 				FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 				m_nRunStep[CONV_IN] = 1200;
@@ -1393,6 +1406,7 @@ void CRunConveyor::OnFrontConvRunMove()
 			{
 				if (st_sync_info.nSmema_Tray_Input_Req == CONV_READY)
 				{
+					st_handler_info.cWndMain->PostMessage(WM_PCB_CV_IN_MOVE_DRAW_MAIN,CONV_IN_READY,0); //kwlee 2017.0220
 					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
 					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 					m_nRunStep[CONV_IN] = 1200;
@@ -1403,6 +1417,7 @@ void CRunConveyor::OnFrontConvRunMove()
 		case 1200:
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_IN_MOVE_DRAW_MAIN,CONV_PCB_IN_ING,0); //kwlee 2017.0220
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();				
 				m_nRunStep[CONV_IN] = 1300;
 			}
@@ -1410,6 +1425,7 @@ void CRunConveyor::OnFrontConvRunMove()
 			{
 				if (FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_ON )
 				{
+					st_handler_info.cWndMain->PostMessage(WM_PCB_CV_IN_MOVE_DRAW_MAIN,CONV_PCB_IN_ING,0); //kwlee 2017.0220
 					st_sync_info.nSmema_Tray_Input_Req = CONV_CLR;
 					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();				
 					m_nRunStep[CONV_IN] = 1300;
@@ -1443,6 +1459,7 @@ void CRunConveyor::OnFrontConvRunMove()
 			{
 				if (st_basic_info.nModeDevice == WITHOUT_DVC)
 				{
+					
 					FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_OFF);
 					m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 					m_nRunStep[CONV_IN] = 1400;
@@ -1505,7 +1522,8 @@ void CRunConveyor::OnFrontConvRunMove()
 				if (st_basic_info.nModeDevice == WITHOUT_DVC)
 				{
 					if (st_sync_info.nMidTrayIn == CTL_REQ) //Middle 에서 Conv 투입 준비 신호
-					{      
+					{    
+						
 						FAS_IO.set_out_bit(st_io_info.o_InConvMotorOn,IO_ON);
 						m_nRunStep[CONV_IN] = 1710;
 					}
@@ -1574,6 +1592,7 @@ void CRunConveyor::OnFrontConvRunMove()
 		case 2000:
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
+				//
 				m_dwConveyorWaitTime[CONV_IN][0] = GetCurrentTime();
 				m_nRunStep[CONV_IN] = 3000;
 			}
@@ -1818,7 +1837,7 @@ void CRunConveyor::OnTurnConvMove()
 		FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_ON);
 		FAS_IO.set_out_bit(st_io_info.o_TablePcbMovCcw,IO_ON);
 		FAS_IO.set_out_bit(st_io_info.o_TablePcbMovCw,IO_OFF);
-
+		//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_IN_MOVE_DRAW_MAIN,TURN_PCB_CONV_IN,0); //kwlee 2017.0220
 		m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 
 		m_nRunStep[CONV_MID] = 2000;
@@ -1873,6 +1892,7 @@ void CRunConveyor::OnTurnConvMove()
 		{
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_WORK_POS,0); //kwlee 2017.0220
 				FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 				m_nRunStep[CONV_MID] = 2200;
@@ -1882,10 +1902,11 @@ void CRunConveyor::OnTurnConvMove()
 			{
 				if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
 				{
+					
 					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 
 					m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
-
+					st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_WORK_POS,0); //kwlee 2017.0220
 					m_nRunStep[CONV_MID] = 2200;
 
 					st_sync_info.nMidTrayIn = CTL_NO;
@@ -1922,9 +1943,10 @@ void CRunConveyor::OnTurnConvMove()
 		if (nRet_1 == BD_GOOD) //좌측으로 이동
 		{
 			//nRet_2 = OnTurnConvPosCheck();
-		
+			st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_TURN_POS,0);
 			st_sync_info.TurnConvJobReady[CONVEYOR] = CTL_READY;
 			m_nRunStep[CONV_MID] = 2310;
+			
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
 		{
@@ -1991,6 +2013,8 @@ void CRunConveyor::OnTurnConvMove()
 			{
 				if (st_sync_info.TurnConvJobReady[ROBOT] == CTL_READY)
 				{
+					st_sync_info.nConvTurnCheck = TRUE; //kwlee 2017.0220
+					st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_TURN,0); //kwlee 2017.0220
 					OnSetTableTurnCylOnOff(IO_RUN_MODE,IO_OFF);
 					m_nRunStep[CONV_MID] = 2630;
 				}
@@ -2029,6 +2053,7 @@ void CRunConveyor::OnTurnConvMove()
 			if (st_basic_info.nPcbTurnEnable == PCB_TURN || st_basic_info.nPcbType == UDIMM_10 || 
 				st_basic_info.nPcbType == SODIMM || st_basic_info.nPcbType == RDIMM)
 			{
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_REVERSE,0); //kwlee 2017.0220
 				st_sync_info.TurnConvJobReady[CONVEYOR] = CTL_COMPLETE;
 				m_nRunStep[CONV_MID] = 2640;
 			}
@@ -2132,6 +2157,7 @@ void CRunConveyor::OnTurnConvMove()
 		//Turn Conv Pos 센서 확인
 		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
+			//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_WORK_POS,0);
 			m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();				
 			m_nRunStep[CONV_MID] = 2830;
 		}
@@ -2139,6 +2165,7 @@ void CRunConveyor::OnTurnConvMove()
 		{
 			if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
 			{
+				//
 				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();				
 				m_nRunStep[CONV_MID] = 2830;
 			}
@@ -2172,6 +2199,8 @@ void CRunConveyor::OnTurnConvMove()
 		{
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
+				//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_REVERSE,0);
+				//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_WORK_POS,0); //kwlee 2017.0220
 				FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 				m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 				//st_sync_info.nMidTrayIn = CTL_NO;
@@ -2181,6 +2210,8 @@ void CRunConveyor::OnTurnConvMove()
 			{
 				if (FAS_IO.get_in_bit(st_io_info.i_TurnConvPosChk,IO_ON) == IO_ON)
 				{
+					//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_WORK_POS,0);
+					//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_REVERSE,0);
 					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 					m_dwConveyorWaitTime[CONV_MID][0] = GetCurrentTime();
 					//st_sync_info.nMidTrayIn = CTL_NO;
@@ -2275,7 +2306,7 @@ void CRunConveyor::OnTurnConvMove()
 		//Conv Turn Forward
 		/*m_TurnConvPosCheck[SECOND] = CTL_NO;*/
 		nRet_1 = OnTurnConvPosCheck();
-
+		
 		if (nRet_1 == RET_RETRY)
 		{
 			m_nRunStep[CONV_MID] = 2650;
@@ -2284,6 +2315,8 @@ void CRunConveyor::OnTurnConvMove()
 		{
 			if (st_sync_info.TurnConvJobReady[ROBOT] == CTL_READY)
 			{
+				st_sync_info.nConvTurnCheck = FALSE; //kwlee 2017.0220
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,TURN_PCB_CONV_TURN,0); //kwlee 2017.0220
 				st_sync_info.TurnConvJobReady[CONVEYOR] = CTL_COMPLETE;
 				OnSetTableTurnCylOnOff(IO_RUN_MODE,IO_ON);
 				m_nRunStep[CONV_MID] = 2910;
@@ -2321,6 +2354,7 @@ void CRunConveyor::OnTurnConvMove()
 
 		if (nRet_1 == BD_GOOD) 
 		{
+			st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,OUT_CONV_IN_ING,0); //kwlee 2017.0220
 			//m_nRunStep[CONV_MID] = 2700;
 			//m_nRunStep[CONV_MID] = 1500;
 			m_nRunStep[CONV_MID] = 2930;
@@ -2367,7 +2401,7 @@ void CRunConveyor::OnTurnConvMove()
 			FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_ON);
 			FAS_IO.set_out_bit(st_io_info.o_TablePcbMovCcw,IO_ON);
 			FAS_IO.set_out_bit(st_io_info.o_TablePcbMovCw,IO_OFF);
-			
+		
 			st_sync_info.nMidTrayIn = CTL_READY;
 			
 			m_nRunStep[CONV_MID] = 3000;
@@ -2467,6 +2501,7 @@ void CRunConveyor::OnTurnConvMove()
 				}
 				else
 				{
+					//	st_handler_info.cWndMain->PostMessage(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,CONV_IN_READY,0); //kwlee 2017.0220
 					st_sync_info.nRearTrayIn = CTL_NO;
 					FAS_IO.set_out_bit(st_io_info.o_TurnMotorDirection,IO_OFF);
 					st_sync_info.nMidTrayIn = CTL_NO;
@@ -2679,13 +2714,14 @@ void CRunConveyor::OnRearConvMove()
 		FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_ON);
 
 		m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
-
+		st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,OUT_CONV_OUT_POS,0); //kwlee 2017.0220
 		m_nRunStep[CONV_OUT] = 1200;
 		break;
 
 	case 1200:
 		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
+			st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,OUT_CONV_OUT_POS,0); //kwlee 2017.0220
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();				
 			m_nRunStep[CONV_OUT] = 1300;
 		}
@@ -2693,6 +2729,7 @@ void CRunConveyor::OnRearConvMove()
 		{
 			if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_ON)
 			{
+				
 				m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();				
 				m_nRunStep[CONV_OUT] = 1300;
 			}
@@ -2727,7 +2764,7 @@ void CRunConveyor::OnRearConvMove()
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				st_sync_info.nSmema_Tray_Output_Req = CTL_REQ;
-
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,OUT_CONV_OUT,0); //kwlee 2017.0220
 				FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_OFF);
 				m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 				m_nRunStep[CONV_OUT] = 1400;
@@ -2738,7 +2775,7 @@ void CRunConveyor::OnRearConvMove()
 				{
 					// Rear Conv 보낼 준비 완료
 					st_sync_info.nSmema_Tray_Output_Req = CTL_REQ;
-
+					st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,OUT_CONV_OUT,0); //kwlee 2017.0220
 					FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_OFF);
 					m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 					m_nRunStep[CONV_OUT] = 1400;
@@ -2788,14 +2825,18 @@ void CRunConveyor::OnRearConvMove()
 	case 1700:
 		if (st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
+			st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,CONV_IN_READY,0);
 			FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_ON);
 			m_nRunStep[CONV_OUT] = 2000;
+			OnPcbDataReset();
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 		}
 		else
 		{
 			if (st_sync_info.nSmema_Tray_Output_Req == CONV_READY) // 뒷설비에서 PCB 투입 요청 신호
 			{
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,CONV_IN_READY,0);
+				OnPcbDataReset();
 				FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_ON);
 				m_nRunStep[CONV_OUT] = 2000;
 				m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
@@ -2863,6 +2904,7 @@ void CRunConveyor::OnRearConvMove()
 		{
 			if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_OFF)
 			{
+				
 				m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 				st_sync_info.nSmema_Tray_Output_Req = CONV_CLR;
 				m_nRunStep[CONV_OUT] = 3000;
@@ -2899,6 +2941,7 @@ void CRunConveyor::OnRearConvMove()
 			}
 			else
 			{
+				//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,CONV_IN_READY,0);
 				FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_OFF);
 				st_sync_info.nRearTrayIn = CTL_NO;
 				m_nRunStep[CONV_OUT] = 0;

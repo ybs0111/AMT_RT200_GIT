@@ -28,7 +28,7 @@
 #define TM_REAR_SMEMA		200
 #define TM_INTERFACE		300
 #define TM_DOOR				400
-#define TM_BUFFER_DATA		500
+#define TM_DATA_DISPLAY		500
 
 
 IMPLEMENT_DYNCREATE(CScreenMain, CFormView)
@@ -101,6 +101,7 @@ void CScreenMain::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CUSTOM_TM2, m_GridTm_2);
 	DDX_Control(pDX, IDC_CUSTOM_TM3, m_GridTm_3);
 	DDX_Control(pDX, IDC_CUSTOM_BUFFER_DATA, m_pGridBufferData);
+	DDX_Control(pDX, IDC_CUSTOM_PCB_DATA, m_pGridPcbData);
 }
 
 BEGIN_MESSAGE_MAP(CScreenMain, CFormView)
@@ -145,6 +146,7 @@ BEGIN_MESSAGE_MAP(CScreenMain, CFormView)
 	ON_BN_CLICKED(IDC_BTN_OUT_POS_UP_DW3, &CScreenMain::OnBnClickedBtnOutPosUpDw3)
 	ON_BN_CLICKED(IDC_BTN_CV_IN_POS3, &CScreenMain::OnBnClickedBtnCvInPos3)
 	ON_BN_CLICKED(IDC_BTN_OUT_POS_UP_DW5, &CScreenMain::OnBnClickedBtnOutPosUpDw5)
+	ON_BN_CLICKED(IDC_BTN_OUT_POS_UP_DW4, &CScreenMain::OnBnClickedBtnOutPosUpDw4)
 END_MESSAGE_MAP()
 
 
@@ -182,11 +184,14 @@ void CScreenMain::OnInitialUpdate()
 	OnInitGridFrontSmema();
 	OnInitGridRearSmema();
 	OninitTrayMove();
+	OnInitGridPcbData();
 	OnInitGridBufferData();
 	SetTimer(TM_FRONT_SMEMA, 500, NULL);
 	SetTimer(TM_REAR_SMEMA, 500, NULL);
-	SetTimer(TM_BUFFER_DATA, 1000, NULL);
+	SetTimer(TM_DATA_DISPLAY, 1000, NULL);
+	
 	st_handler_info.cWndMain = this;
+
 }
 
 
@@ -599,6 +604,145 @@ void CScreenMain::OnMainRobotRightTurnDisplay()
 	
 }
 
+void CScreenMain::OnInitGridPcbData()
+{
+	int   i, j;
+	int	  nMaxRow, nMaxCol;
+	int   nRow;
+	CString strTmp;
+
+	nMaxRow = 4; // unloader tray y count
+	nMaxCol = 10;
+
+	m_pGridPcbData.SetFrameFocusCell(FALSE);
+	m_pGridPcbData.SetTrackFocusCell(FALSE);
+	m_pGridPcbData.EnableSelection(FALSE);
+
+	m_pGridPcbData.SetGridLineColor(BLACK_C);
+	m_pGridPcbData.SetGridLines(1);
+
+	m_pGridPcbData.SetRowCount(nMaxRow);
+	m_pGridPcbData.SetColumnCount(nMaxCol);
+
+	m_pGridPcbData.SetFixedRowCount(0);
+	m_pGridPcbData.SetFixedColumnCount(0);
+	m_pGridPcbData.SetFixedBkColor(RGB(0,0,200));
+	m_pGridPcbData.SetFixedBkColor(RGB(200,200,255));
+	m_pGridPcbData.SetTextBkColor(RGB(150,150,200));
+
+	for (i=0; i<nMaxRow; i++) 
+	{
+		m_pGridPcbData.SetRowHeight(i, 30);
+
+		for (j=0; j<nMaxCol; j++) 
+		{
+		
+			if (j == 0)
+			{
+				m_pGridPcbData.SetColumnWidth(j,55);
+			}
+			else
+			{
+				m_pGridPcbData.SetColumnWidth(j,66);
+			}
+
+			m_pGridPcbData.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
+			m_pGridPcbData.SetItemState(i, j, GVIS_READONLY);
+			m_pGridPcbData.SetItemBkColour(i, j, WHITE_C, CLR_DEFAULT);
+		}
+	}
+
+	nRow = 0;
+	m_pGridPcbData.MergeCells(nRow,0,nRow + 1,0);
+	m_pGridPcbData.SetItemBkColour(nRow, 0, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 0, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 0, _T("Top"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 1, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 1, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 1, _T("1"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 2, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 2, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 2, _T("2"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 3, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 3, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 3, _T("3"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 4, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 4, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 4, _T("4"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 5, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 5, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 5, _T("5"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 6, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 6, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 6, _T("6"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 7, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 7, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 7, _T("7"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 8, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 8, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 8, _T("8"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 9, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 9, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 9, _T("9"));
+	
+
+	nRow = 2;
+	m_pGridPcbData.MergeCells(nRow,0,nRow + 1,0);
+	m_pGridPcbData.SetItemBkColour(nRow, 0, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 0, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 0, _T("Bottom"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 1, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 1, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 1, _T("9"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 2, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 2, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 2, _T("8"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 3, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 3, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 3, _T("7"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 4, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 4, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 4, _T("6"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 5, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 5, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 5, _T("5"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 6, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 6, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 6, _T("4"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 7, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 7, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 7, _T("3"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 8, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 8, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 8, _T("2"));
+
+	m_pGridPcbData.SetItemBkColour(nRow, 9, RGB(219, 229, 241), BLACK_L);
+	m_pGridPcbData.SetItemFont(nRow, 9, &clsFunc.OnLogFont(15));
+	m_pGridPcbData.SetItemText(nRow, 9, _T("1"));
+
+
+
+	m_pGridPcbData.Refresh();
+	m_pGridPcbData.Invalidate(FALSE);
+}
+
 void CScreenMain::OnInitGridPickerTurnPos()
 {
 	int   i, j;
@@ -607,7 +751,7 @@ void CScreenMain::OnInitGridPickerTurnPos()
 	CString strTmp;
 
 	nMaxRow = 4; // unloader tray y count
-	nMaxCol = 7;
+	nMaxCol = 6;
 
 	m_pGridRobotTurnPos.SetFrameFocusCell(FALSE);
 	m_pGridRobotTurnPos.SetTrackFocusCell(FALSE);
@@ -627,7 +771,7 @@ void CScreenMain::OnInitGridPickerTurnPos()
 
 	for (i=0; i<nMaxRow; i++) 
 	{
-		m_pGridRobotTurnPos.SetRowHeight(i, 40);
+		m_pGridRobotTurnPos.SetRowHeight(i, 31);
 
 		for (j=0; j<nMaxCol; j++) 
 		{
@@ -637,7 +781,7 @@ void CScreenMain::OnInitGridPickerTurnPos()
 // 			}
 // 			else
 // 			{
-				m_pGridRobotTurnPos.SetColumnWidth(j,83);
+				m_pGridRobotTurnPos.SetColumnWidth(j,103);
 	//		}
 
 			m_pGridRobotTurnPos.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
@@ -647,33 +791,34 @@ void CScreenMain::OnInitGridPickerTurnPos()
 	}
 
 	nRow = 0;
+	m_pGridRobotTurnPos.MergeCells(nRow,0,nRow + 1,0);
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 0, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 0, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 0, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 0, _T("LEFT"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 1, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 1, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 1, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 1, _T("1"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 2, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 2, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 2, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 2, _T("2"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 3, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 3, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 3, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 3, _T("3"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 4, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 4, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 4, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 4, _T("4"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 5, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 5, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 5, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 5, _T("5"));
 
-	m_pGridRobotTurnPos.SetItemBkColour(nRow, 6, RGB(219, 229, 241), BLACK_L);
-	m_pGridRobotTurnPos.SetItemFont(nRow, 6, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 6, _T("_"));
+// 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 6, RGB(219, 229, 241), BLACK_L);
+// 	m_pGridRobotTurnPos.SetItemFont(nRow, 6, &clsFunc.OnLogFont(18));
+// 	m_pGridRobotTurnPos.SetItemText(nRow, 6, _T("6"));
 
 //  	nRow = 1;
 //  	m_pGridRobotTurnPos.SetItemBkColour(nRow, 0, RGB(219, 229, 241), BLACK_L);
@@ -681,33 +826,34 @@ void CScreenMain::OnInitGridPickerTurnPos()
 //  	m_pGridRobotTurnPos.SetItemText(nRow, 0, _T("_"));
 
 	nRow = 2;
+	m_pGridRobotTurnPos.MergeCells(nRow,0,nRow + 1,0);
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 0, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 0, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 0, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 0, _T("RIGHT"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 1, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 1, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 1, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 1, _T("6"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 2, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 2, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 2, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 2, _T("7"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 3, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 3, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 3, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 3, _T("8"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 4, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 4, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 4, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 4, _T("9"));
 
 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 5, RGB(219, 229, 241), BLACK_L);
 	m_pGridRobotTurnPos.SetItemFont(nRow, 5, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 5, _T("_"));
+	m_pGridRobotTurnPos.SetItemText(nRow, 5, _T("10"));
 
-	m_pGridRobotTurnPos.SetItemBkColour(nRow, 6, RGB(219, 229, 241), BLACK_L);
-	m_pGridRobotTurnPos.SetItemFont(nRow, 6, &clsFunc.OnLogFont(18));
-	m_pGridRobotTurnPos.SetItemText(nRow, 6, _T("_"));
+// 	m_pGridRobotTurnPos.SetItemBkColour(nRow, 6, RGB(219, 229, 241), BLACK_L);
+// 	m_pGridRobotTurnPos.SetItemFont(nRow, 6, &clsFunc.OnLogFont(18));
+// 	m_pGridRobotTurnPos.SetItemText(nRow, 6, _T("_"));
 
 
 	m_pGridRobotTurnPos.Refresh();
@@ -718,7 +864,7 @@ void CScreenMain::OnInitGridPickerTurnPos()
 
 BOOL CScreenMain::DestroyWindow()
 {
-	KillTimer(TM_BUFFER_DATA); //kwlee 2017.0218
+	KillTimer(TM_DATA_DISPLAY); //kwlee 2017.0218
 	KillTimer(TM_FRONT_SMEMA);
 	KillTimer(TM_REAR_SMEMA);
 	KillTimer(TM_INTERFACE);
@@ -1282,45 +1428,104 @@ LRESULT CScreenMain::OnMainCvOutMoveDisplay(WPARAM wParam, LPARAM lParam)
 
 void CScreenMain::SetTrayPos(int iIdx)
 {
-
+	
 	RECT rt;
 	switch( iIdx )
 	{
-	case 0:				rt.left = 0;	rt.top = 0;		rt.right = 0;									rt.bottom = 0;				break;
-	case 1:				rt.left = 10;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//inConveyor_Position
-	case 2:				rt.left = 50;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; 
-	case 3:				rt.left = 150;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
-	case 4:				rt.left = 250;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
-	case 5:				rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Turn Conveyor Turn 위치
-	
-	case 6:				OnMainPcbWork(); 
-						rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Turn Conveyor Turn 위치
-	
-	case 7:				if (st_basic_info.nPcbTurnEnable == TRUE)
+// 	case 0:				rt.left = 0;	rt.top = 0;		rt.right = 0;									rt.bottom = 0;				break;
+// 	case 1:				rt.left = 10;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//inConveyor_Position
+// 	case 2:				rt.left = 50;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; 
+// 	case 3:				rt.left = 150;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 	case 4:				rt.left = 250;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 	case 5:				rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Turn Conveyor Turn 위치
+// 	
+// 	case 6:				OnMainPcbWork(); 
+// 						rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Turn Conveyor Turn 위치
+// 	
+// 	case 7:				if (st_basic_info.nPcbTurnEnable == TRUE)
+// 						{
+// 							OnMainPcbWork(); 
+// 							m_nTemp= 10;
+// 							rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 							
+// 							break;
+// 						}
+// 						TurnPositionGrid();
+// 						rt.left = 410;	rt.top = 570;	rt.right = rt.left + 85;	rt.bottom = rt.top + st_basic_info.nLeftSize;	break; //Turn
+// 
+// 	case 8:	
+// 		
+// 						ReversePositionGrid();
+// 						rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
+// 
+// 	case 9:
+// 		
+// 						OnMainPcbWork();
+// 						rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
+// 
+// 	case 10:			rt.left = 450;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 	case 11:            rt.left = 550;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 	case 12:			rt.left = 650;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;    break;	
+// 	case 13:			rt.left = 770;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//out_Conveyor_Postion
+
+	//kwlee 2017.0220
+	case 0:				rt.left = 0;	rt.top = 0;		rt.right = 0;									rt.bottom = 0;				break; //Ready
+	case 1:				rt.left = 350;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//inConveyor_Position
+	case 2:				rt.left = 450;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//Turn Conv 진입
+	case 3:				rt.left = 550;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;////Turn Conveyor Turn 위치
+	case 4:				OnMainPcbWork(); 
+		 				rt.left = 550;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+	case 5:				if (st_basic_info.nPcbTurnEnable == TRUE)
 						{
 							OnMainPcbWork(); 
 							m_nTemp= 10;
-							rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
-							
+							rt.left = 550;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+
 							break;
 						}
 						TurnPositionGrid();
-						rt.left = 410;	rt.top = 570;	rt.right = rt.left + 85;	rt.bottom = rt.top + st_basic_info.nLeftSize;	break; //Turn
-
-	case 8:	
-		
+						rt.left = 610;	rt.top = 380;	rt.right = rt.left + 85;	rt.bottom = rt.top + st_basic_info.nLeftSize;	break; //Turn
+	
+	case 6:	
 						ReversePositionGrid();
-						rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
-
-	case 9:
-		
+						rt.left = 550;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
+	
+	case 7:
 						OnMainPcbWork();
-						rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
+						rt.left = 550;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
 
-	case 10:			rt.left = 450;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
-	case 11:            rt.left = 550;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
-	case 12:			rt.left = 650;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;    break;	
-	case 13:			rt.left = 770;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//out_Conveyor_Postion
+	case 8:				rt.left = 650;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+	case 9:				rt.left = 750;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Out Conveyor Turn 위치
+	case 10:			rt.left = 900;	rt.top = 460;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Out Conveyor Turn 위치
+
+// 	case 6:				OnMainPcbWork(); 
+// 		rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //Turn Conveyor Turn 위치
+// 
+// 	case 7:				if (st_basic_info.nPcbTurnEnable == TRUE)
+// 						{
+// 							OnMainPcbWork(); 
+// 							m_nTemp= 10;
+// 							rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 
+// 							break;
+// 						}
+// 						TurnPositionGrid();
+// 						rt.left = 410;	rt.top = 570;	rt.right = rt.left + 85;	rt.bottom = rt.top + st_basic_info.nLeftSize;	break; //Turn
+// 
+// 	case 8:	
+// 
+// 		ReversePositionGrid();
+// 		rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
+// 
+// 	case 9:
+// 
+// 		OnMainPcbWork();
+// 		rt.left = 350;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break; //reverse
+// 
+// 	case 10:			rt.left = 450;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 	case 11:            rt.left = 550;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;
+// 	case 12:			rt.left = 650;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;    break;	
+// 	case 13:			rt.left = 770;	rt.top = 610;	rt.right = rt.left + st_basic_info.nLeftSize;	rt.bottom = rt.top + 80;	break;//out_Conveyor_Postion
 	}
 
 	GetDlgItem( GetCustomTrayMove(iIdx) )->MoveWindow( &rt );	
@@ -1716,8 +1921,11 @@ void CScreenMain::OnTimer(UINT_PTR nIDEvent)
 		OnMainDisplayRearSmema();
 		break;
 
-	case TM_BUFFER_DATA:
+	
+	case TM_DATA_DISPLAY:
 		OnMainBufferDisplay();
+		OnMainPickerDisplay();
+		OnMainPcbDataDisplay();
 		break;
 	}
 
@@ -2290,11 +2498,11 @@ void CScreenMain::OnInitGridBufferData()
 	int   i, j;
 	int	  max_row, max_col;
 	int   row;
-
+	int   nCnt;
 	CString strTmp;
 	CRect rect;
 
-	max_row = 40; // unloader tray y count
+	max_row = 41; // unloader tray y count
 	max_col = 3;
 
 	m_pGridBufferData.SetFrameFocusCell(FALSE);
@@ -2313,10 +2521,13 @@ void CScreenMain::OnInitGridBufferData()
 	m_pGridBufferData.SetFixedBkColor(RGB(200,200,255));
 	m_pGridBufferData.SetTextBkColor(RGB(150,150,200));
 
+	nCnt = max_row - 1;
+
 	for (i=0; i<max_row; i++) 
 	{
-		strTmp.Format(_T("%d"),i + 1);
-		m_pGridBufferData.SetRowHeight(i, 17);
+		//strTmp.Format(_T("%d"),i + 1);
+		strTmp.Format(_T("%d"),nCnt--);
+		m_pGridBufferData.SetRowHeight(i, 16);
 		m_pGridBufferData.SetItemText(i + 1, 0, strTmp);
 
 		for (j=0; j<max_col; j++) 
@@ -2356,25 +2567,84 @@ void CScreenMain::OnInitGridBufferData()
 
 void CScreenMain::OnMainBufferDisplay()
 {
-	int   i, j;
 	int	  max_row, max_col;
-	int   row;
+
 
 	CString strTmp;
 	CRect rect;
 
-	max_row = 40; // unloader tray y count
+	max_row = MAX_BUFFER + 1; // unloader tray y count
 	max_col = 3;
 
 	for (int i = 0; i<MAX_BUFFER; i++)
 	{
 		for (int j = 0; j<2; j++)
 		{
-			m_pGridBufferData.SetItemText(i+ 1,j + 1, st_Buffer_info[0].strBufferSerial[j][i]);
+			m_pGridBufferData.SetItemText(i + 1,j + 1, st_Buffer_info.strBufferSerial[j][i]);
 		}
 	}
 	m_pGridBufferData.Invalidate(FALSE);
 }
+
+void CScreenMain::OnMainPickerDisplay()
+{
+//	int   j;
+	int	  /*max_row,*/ max_col;
+	
+
+	CString strTmp;
+	CRect rect;
+	max_col = 3;
+
+
+		for (int j = 0; j<MAX_PICKER; j++)
+		{
+			if (st_Picker_info.nPickerData[0][j][BIN] == FAIL )
+			{
+				m_pGridRobotTurnPos.SetItemBkColour(1, j + 1, RED_C, BLACK_L);
+			}
+			else if (st_Picker_info.nPickerData[0][j][BIN] == -1 )
+			{
+				m_pGridRobotTurnPos.SetItemBkColour(1, j + 1, WHITE_C, BLACK_L);
+			}
+
+			if (st_Picker_info.nPickerData[1][j][BIN] == FAIL)
+			{
+				m_pGridRobotTurnPos.SetItemBkColour(3, j + 1, RED_C, BLACK_L);
+			}
+			else if (st_Picker_info.nPickerData[1][j][BIN] == -1 )
+			{
+				m_pGridRobotTurnPos.SetItemBkColour(3, j + 1, WHITE_C, BLACK_L);
+			}
+
+			m_pGridRobotTurnPos.SetItemText(1,j + 1, st_Picker_info.strPickerSerial[0][j]);
+			m_pGridRobotTurnPos.SetItemText(3,j + 1, st_Picker_info.strPickerSerial[1][j]);
+	  }
+		
+	m_pGridRobotTurnPos.Invalidate(FALSE);
+}
+
+void CScreenMain::OnMainPcbDataDisplay()
+{
+//	int   j;
+	int	 /* max_row,*/ max_col;
+
+
+	CString strTmp;
+	CRect rect;
+	max_col = 3;
+
+
+	for (int j = 0; j<PCB_CNT; j++)
+	{
+		m_pGridPcbData.SetItemText(1, j + 1, st_Pcb_info.strPcbSerial[1][j]);
+		m_pGridPcbData.SetItemText(3,9 - j , st_Pcb_info.strPcbSerial[0][j]);
+	}
+
+	m_pGridPcbData.Invalidate(FALSE);
+}
+
+
 
 void CScreenMain::OnMainLotDisplay()
 {
@@ -2559,11 +2829,11 @@ void CScreenMain::OnBnClickedBtnStart()
 	int pos;
 	
 
-	if ( m_nTemp< 4 )
+	if ( m_nTemp < 3 )
 	{
 		pos = WM_PCB_CV_IN_MOVE_DRAW_MAIN;
 	}
-	else if ( m_nTemp<10)
+	else if ( m_nTemp > 2)
 	{
 		
 // 		if (m_nTemp == 5)
@@ -2581,10 +2851,9 @@ void CScreenMain::OnBnClickedBtnStart()
 		pos =  WM_PCB_CV_TURN_MOVE_DRAW_MAIN;
 		
 	}
-	else if (m_nTemp<14)
+	else if (m_nTemp<18)
 	{
-		pos =  WM_PCB_CV_OUT_MOVE_DRAW_MAIN;
-		
+		pos =  WM_PCB_CV_OUT_MOVE_DRAW_MAIN;	
 	}
 	else
 	{
@@ -2601,7 +2870,6 @@ void CScreenMain::OnBnClickedBtnStart()
 
 void CScreenMain::OnBnClickedBtnCvIn()
 {
-   int i;	
    // clsRunRobot.OnFeederReq(COM_CLEAR);
 
 	st_handler_info.nRunStatus = dRUN;
@@ -2847,7 +3115,7 @@ void CScreenMain::OnMainPcbWork()
 	{
 		for (i=0; i<nRow; i++) 
 		{
-			//nTemp = nCol;
+			nTemp = nCol;
 			m_GridTm_2.SetRowHeight(i, 74/nRow);
 
 			for (j=0; j<nCol; j++) 
@@ -2856,7 +3124,8 @@ void CScreenMain::OnMainPcbWork()
 				{
 					mn_Size = mn_Size +18;
 				}
-				strTmp.Format(_T("%d"), j+1);
+				//strTmp.Format(_T("%d"), j+1);
+				strTmp.Format(_T("%d"), nTemp--);
 				m_GridTm_2.SetColumnWidth(j, 19);
 				m_GridTm_2.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
 				m_GridTm_2.SetItemState(i, j, GVIS_READONLY);
@@ -2870,16 +3139,15 @@ void CScreenMain::OnMainPcbWork()
 					m_GridTm_2.SetItemBkColour(i, j, RGB(128,255,255), CLR_DEFAULT);
 					
 			//	}
-
-
-				m_GridTm_2.SetItemText(i, j, strTmp);
+				m_GridTm_2.SetItemText(i, j, strTmp);	
+				
+				
 			}
 		}
 		mbTurn = false;
 	}
 	else
 	{
-
 		for (i=0; i<nRow; i++) 
 		{
 			nTemp = nCol;
@@ -2936,7 +3204,6 @@ void CScreenMain::TurnPositionGrid()
 	m_GridTm_2.SetFixedBkColor(RGB(0,0,200));
 	m_GridTm_2.SetFixedBkColor(RGB(200,200,255));
 	m_GridTm_2.SetTextBkColor(RGB(150,150,200));
-
 
 	for (i=0; i<nRow; i++) 
 	{
@@ -3094,88 +3361,99 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//kwlee 2017.0209 test..
-	//st_handler_info.nRunStatus = dRUN;
+	st_handler_info.nRunStatus = dRUN;
+	st_sync_info.nInitPickerRbt = INIT_COMPLETE;
+	st_work_info.nSimulationMode = 1;
+	clsRunRobot.m_nRunStep = 3100;
+	st_sync_info.nConvTurnCheck = 1;
+	m_thread[5] = AfxBeginThread(OnThreadRobot, this);  
+	if (m_thread[5] != NULL)	
+	{
+		m_thrHandle[5] = m_thread[5]->m_hThread;
+	}
+
+	return;
 	//st_work_info.nSimulationMode = 1;
 	//st_sync_info.nInitPickerRbt = INIT_COMPLETE;
-	st_Buffer_info[PICK].strBufferSerial[0][0] = _T("0000_0");
-	st_Buffer_info[PICK].strBufferSerial[0][1] = _T("0000_1");
-	st_Buffer_info[PICK].strBufferSerial[0][2] = _T("0000_2");
-	st_Buffer_info[PICK].strBufferSerial[0][3] = _T("0000_3");
-	st_Buffer_info[PICK].strBufferSerial[0][4] = _T("0000_4");
-	st_Buffer_info[PICK].strBufferSerial[0][5] = _T("0000_5");
-	st_Buffer_info[PICK].strBufferSerial[0][6] = _T("0000_6");
-	st_Buffer_info[PICK].strBufferSerial[0][7] = _T("0000_7");
-	st_Buffer_info[PICK].strBufferSerial[0][8] = _T("0000_8");
-	st_Buffer_info[PICK].strBufferSerial[0][9] = _T("0000_9");
-	st_Buffer_info[PICK].strBufferSerial[0][10] = _T("0000_10");
-	st_Buffer_info[PICK].strBufferSerial[0][11] = _T("0000_11");
-	st_Buffer_info[PICK].strBufferSerial[0][12] = _T("0000_12");
-	st_Buffer_info[PICK].strBufferSerial[0][13] = _T("0000_13");
-	st_Buffer_info[PICK].strBufferSerial[0][14] = _T("0000_14");
-	st_Buffer_info[PICK].strBufferSerial[0][15] = _T("0000_15");
-	st_Buffer_info[PICK].strBufferSerial[0][16] = _T("0000_16");
-	st_Buffer_info[PICK].strBufferSerial[0][17] = _T("0000_17");
-	st_Buffer_info[PICK].strBufferSerial[0][18] = _T("0000_18");
-	st_Buffer_info[PICK].strBufferSerial[0][19] = _T("0000_19");
-	st_Buffer_info[PICK].strBufferSerial[0][20] = _T("0000_20");
-	st_Buffer_info[PICK].strBufferSerial[0][21] = _T("0000_21");
-	st_Buffer_info[PICK].strBufferSerial[0][22] = _T("0000_22");
-	st_Buffer_info[PICK].strBufferSerial[0][23] = _T("0000_23");
-	st_Buffer_info[PICK].strBufferSerial[0][24] = _T("0000_24");
-	st_Buffer_info[PICK].strBufferSerial[0][25] = _T("0000_25");
-	st_Buffer_info[PICK].strBufferSerial[0][26] = _T("0000_26");
-	st_Buffer_info[PICK].strBufferSerial[0][27] = _T("0000_27");
-	st_Buffer_info[PICK].strBufferSerial[0][28] = _T("0000_28");
-	st_Buffer_info[PICK].strBufferSerial[0][29] = _T("0000_29");
-	st_Buffer_info[PICK].strBufferSerial[0][30] = _T("0000_30");
-	st_Buffer_info[PICK].strBufferSerial[0][31] = _T("0000_31");
-	st_Buffer_info[PICK].strBufferSerial[0][32] = _T("0000_32");
-	st_Buffer_info[PICK].strBufferSerial[0][33] = _T("0000_33");
-	st_Buffer_info[PICK].strBufferSerial[0][34] = _T("0000_34");
-	st_Buffer_info[PICK].strBufferSerial[0][35] = _T("0000_35");
-	st_Buffer_info[PICK].strBufferSerial[0][36] = _T("0000_36");
-	st_Buffer_info[PICK].strBufferSerial[0][37] = _T("0000_37");
-	st_Buffer_info[PICK].strBufferSerial[0][38] = _T("0000_38");
+	st_Buffer_info.strBufferSerial[0][0] = _T("0000_0");
+	st_Buffer_info.strBufferSerial[0][1] = _T("0000_1");
+	st_Buffer_info.strBufferSerial[0][2] = _T("0000_2");
+	st_Buffer_info.strBufferSerial[0][3] = _T("0000_3");
+	st_Buffer_info.strBufferSerial[0][4] = _T("0000_4");
+	st_Buffer_info.strBufferSerial[0][5] = _T("0000_5");
+	st_Buffer_info.strBufferSerial[0][6] = _T("0000_6");
+	st_Buffer_info.strBufferSerial[0][7] = _T("0000_7");
+	st_Buffer_info.strBufferSerial[0][8] = _T("0000_8");
+	st_Buffer_info.strBufferSerial[0][9] = _T("0000_9");
+	st_Buffer_info.strBufferSerial[0][10] = _T("0000_10");
+	st_Buffer_info.strBufferSerial[0][11] = _T("0000_11");
+	st_Buffer_info.strBufferSerial[0][12] = _T("0000_12");
+	st_Buffer_info.strBufferSerial[0][13] = _T("0000_13");
+	st_Buffer_info.strBufferSerial[0][14] = _T("0000_14");
+	st_Buffer_info.strBufferSerial[0][15] = _T("0000_15");
+	st_Buffer_info.strBufferSerial[0][16] = _T("0000_16");
+	st_Buffer_info.strBufferSerial[0][17] = _T("0000_17");
+	st_Buffer_info.strBufferSerial[0][18] = _T("0000_18");
+	st_Buffer_info.strBufferSerial[0][19] = _T("0000_19");
+	st_Buffer_info.strBufferSerial[0][20] = _T("0000_20");
+	st_Buffer_info.strBufferSerial[0][21] = _T("0000_21");
+	st_Buffer_info.strBufferSerial[0][22] = _T("0000_22");
+	st_Buffer_info.strBufferSerial[0][23] = _T("0000_23");
+	st_Buffer_info.strBufferSerial[0][24] = _T("0000_24");
+	st_Buffer_info.strBufferSerial[0][25] = _T("0000_25");
+	st_Buffer_info.strBufferSerial[0][26] = _T("0000_26");
+	st_Buffer_info.strBufferSerial[0][27] = _T("0000_27");
+	st_Buffer_info.strBufferSerial[0][28] = _T("0000_28");
+	st_Buffer_info.strBufferSerial[0][29] = _T("0000_29");
+	st_Buffer_info.strBufferSerial[0][30] = _T("0000_30");
+	st_Buffer_info.strBufferSerial[0][31] = _T("0000_31");
+	st_Buffer_info.strBufferSerial[0][32] = _T("0000_32");
+	st_Buffer_info.strBufferSerial[0][33] = _T("0000_33");
+	st_Buffer_info.strBufferSerial[0][34] = _T("0000_34");
+	st_Buffer_info.strBufferSerial[0][35] = _T("0000_35");
+	st_Buffer_info.strBufferSerial[0][36] = _T("0000_36");
+	st_Buffer_info.strBufferSerial[0][37] = _T("0000_37");
+	st_Buffer_info.strBufferSerial[0][38] = _T("0000_38");
 
-	st_Buffer_info[PICK].strBufferSerial[1][0] = _T("1111_0");
-	st_Buffer_info[PICK].strBufferSerial[1][1] = _T("1111_1");
-	st_Buffer_info[PICK].strBufferSerial[1][2] = _T("1111_2");
-	st_Buffer_info[PICK].strBufferSerial[1][3] = _T("1111_3");
-	st_Buffer_info[PICK].strBufferSerial[1][4] = _T("1111_4");
-	st_Buffer_info[PICK].strBufferSerial[1][5] = _T("1111_5");
-	st_Buffer_info[PICK].strBufferSerial[1][6] = _T("1111_6");
-	st_Buffer_info[PICK].strBufferSerial[1][7] = _T("1111_7");
-	st_Buffer_info[PICK].strBufferSerial[1][8] = _T("1111_8");
-	st_Buffer_info[PICK].strBufferSerial[1][9] = _T("1111_9");
-	st_Buffer_info[PICK].strBufferSerial[1][10] = _T("1111_10");
-	st_Buffer_info[PICK].strBufferSerial[1][11] = _T("1111_11");
-	st_Buffer_info[PICK].strBufferSerial[1][12] = _T("1111_12");
-	st_Buffer_info[PICK].strBufferSerial[1][13] = _T("1111_13");
-	st_Buffer_info[PICK].strBufferSerial[1][14] = _T("1111_14");
-	st_Buffer_info[PICK].strBufferSerial[1][15] = _T("1111_15");
-	st_Buffer_info[PICK].strBufferSerial[1][16] = _T("1111_16");
-	st_Buffer_info[PICK].strBufferSerial[1][17] = _T("1111_17");
-	st_Buffer_info[PICK].strBufferSerial[1][18] = _T("1111_18");
-	st_Buffer_info[PICK].strBufferSerial[1][19] = _T("1111_19");
-	st_Buffer_info[PICK].strBufferSerial[1][20] = _T("1111_20");
-	st_Buffer_info[PICK].strBufferSerial[1][21] = _T("1111_21");
-	st_Buffer_info[PICK].strBufferSerial[1][22] = _T("1111_22");
-	st_Buffer_info[PICK].strBufferSerial[1][23] = _T("1111_23");
-	st_Buffer_info[PICK].strBufferSerial[1][24] = _T("1111_24");
-	st_Buffer_info[PICK].strBufferSerial[1][25] = _T("1111_25");
-	st_Buffer_info[PICK].strBufferSerial[1][26] = _T("1111_26");
-	st_Buffer_info[PICK].strBufferSerial[1][27] = _T("1111_27");
-	st_Buffer_info[PICK].strBufferSerial[1][28] = _T("1111_28");
-	st_Buffer_info[PICK].strBufferSerial[1][29] = _T("1111_29");
-	st_Buffer_info[PICK].strBufferSerial[1][30] = _T("1111_30");
-	st_Buffer_info[PICK].strBufferSerial[1][31] = _T("1111_31");
-	st_Buffer_info[PICK].strBufferSerial[1][32] = _T("1111_32");
-	st_Buffer_info[PICK].strBufferSerial[1][33] = _T("1111_33");
-	st_Buffer_info[PICK].strBufferSerial[1][34] = _T("1111_34");
-	st_Buffer_info[PICK].strBufferSerial[1][35] = _T("1111_35");
-	st_Buffer_info[PICK].strBufferSerial[1][36] = _T("1111_36");
-	st_Buffer_info[PICK].strBufferSerial[1][37] = _T("1111_37");
-	st_Buffer_info[PICK].strBufferSerial[1][38] = _T("1111_38");
+	st_Buffer_info.strBufferSerial[1][0] = _T("1111_0");
+	st_Buffer_info.strBufferSerial[1][1] = _T("1111_1");
+	st_Buffer_info.strBufferSerial[1][2] = _T("1111_2");
+	st_Buffer_info.strBufferSerial[1][3] = _T("1111_3");
+	st_Buffer_info.strBufferSerial[1][4] = _T("1111_4");
+	st_Buffer_info.strBufferSerial[1][5] = _T("1111_5");
+	st_Buffer_info.strBufferSerial[1][6] = _T("1111_6");
+	st_Buffer_info.strBufferSerial[1][7] = _T("1111_7");
+	st_Buffer_info.strBufferSerial[1][8] = _T("1111_8");
+	st_Buffer_info.strBufferSerial[1][9] = _T("1111_9");
+	st_Buffer_info.strBufferSerial[1][10] = _T("1111_10");
+	st_Buffer_info.strBufferSerial[1][11] = _T("1111_11");
+	st_Buffer_info.strBufferSerial[1][12] = _T("1111_12");
+	st_Buffer_info.strBufferSerial[1][13] = _T("1111_13");
+	st_Buffer_info.strBufferSerial[1][14] = _T("1111_14");
+	st_Buffer_info.strBufferSerial[1][15] = _T("1111_15");
+	st_Buffer_info.strBufferSerial[1][16] = _T("1111_16");
+	st_Buffer_info.strBufferSerial[1][17] = _T("1111_17");
+	st_Buffer_info.strBufferSerial[1][18] = _T("1111_18");
+	st_Buffer_info.strBufferSerial[1][19] = _T("1111_19");
+	st_Buffer_info.strBufferSerial[1][20] = _T("1111_20");
+	st_Buffer_info.strBufferSerial[1][21] = _T("1111_21");
+	st_Buffer_info.strBufferSerial[1][22] = _T("1111_22");
+	st_Buffer_info.strBufferSerial[1][23] = _T("1111_23");
+	st_Buffer_info.strBufferSerial[1][24] = _T("1111_24");
+	st_Buffer_info.strBufferSerial[1][25] = _T("1111_25");
+	st_Buffer_info.strBufferSerial[1][26] = _T("1111_26");
+	st_Buffer_info.strBufferSerial[1][27] = _T("1111_27");
+	st_Buffer_info.strBufferSerial[1][28] = _T("1111_28");
+	st_Buffer_info.strBufferSerial[1][29] = _T("1111_29");
+	st_Buffer_info.strBufferSerial[1][30] = _T("1111_30");
+	st_Buffer_info.strBufferSerial[1][31] = _T("1111_31");
+	st_Buffer_info.strBufferSerial[1][32] = _T("1111_32");
+	st_Buffer_info.strBufferSerial[1][33] = _T("1111_33");
+	st_Buffer_info.strBufferSerial[1][34] = _T("1111_34");
+	st_Buffer_info.strBufferSerial[1][35] = _T("1111_35");
+	st_Buffer_info.strBufferSerial[1][36] = _T("1111_36");
+	st_Buffer_info.strBufferSerial[1][37] = _T("1111_37");
+	st_Buffer_info.strBufferSerial[1][38] = _T("1111_38");
 
 
 	
@@ -3186,36 +3464,136 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 	{
 		for (int j = 0; j<MAX_BUFFER; j++)
 		{
-			if (st_Buffer_info[PICK].strBufferSerial[i][j] != _T(""))
+			if (st_Buffer_info.strBufferSerial[i][j] != _T(""))
 			{
-				st_Buffer_info[PICK].nBufferData[i][j][BIN] = GOOD;
+				st_Buffer_info.nBufferData[i][j][BIN] = GOOD;
 
 			}
 			else
 			{
-				st_Buffer_info[PICK].nBufferData[i][j][BIN] = FAIL;
+				st_Buffer_info.nBufferData[i][j][BIN] = FAIL;
 			}
 		}
 	}
 
-// 	m_thread[5] = AfxBeginThread(OnThreadRobot, this);  
-// 	if (m_thread[5] != NULL)	
-// 	{
-// 		m_thrHandle[5] = m_thread[5]->m_hThread;
-// 	}
+
 }
 
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	st_sync_info.nSmema_Front = CTL_READY;
+	
+		st_Buffer_info.nBufferData[0][3][BIN] = FAIL;
+		st_Buffer_info.nBufferData[0][3][EXIST] = NO;
+	
+		st_Buffer_info.nBufferData[0][1][BIN] = FAIL;
+		st_Buffer_info.nBufferData[0][1][EXIST] = NO;
+	return;
+
+	st_Buffer_info.strBufferSerial[0][1] = _T("0000_1");
+	st_Buffer_info.strBufferSerial[0][2] = _T("0000_2");
+	st_Buffer_info.strBufferSerial[0][3] = _T("0000_3");
+	st_Buffer_info.strBufferSerial[0][4] = _T("0000_4");
+	st_Buffer_info.strBufferSerial[0][5] = _T("0000_5");
+	st_Buffer_info.strBufferSerial[0][6] = _T("0000_6");
+	st_Buffer_info.strBufferSerial[0][7] = _T("0000_7");
+	st_Buffer_info.strBufferSerial[0][8] = _T("0000_8");
+	st_Buffer_info.strBufferSerial[0][9] = _T("0000_9");
+	st_Buffer_info.strBufferSerial[0][10] = _T("0000_10");
+	st_Buffer_info.strBufferSerial[0][11] = _T("0000_11");
+	st_Buffer_info.strBufferSerial[0][12] = _T("0000_12");
+	st_Buffer_info.strBufferSerial[0][13] = _T("0000_13");
+	st_Buffer_info.strBufferSerial[0][14] = _T("0000_14");
+	st_Buffer_info.strBufferSerial[0][15] = _T("0000_15");
+	st_Buffer_info.strBufferSerial[0][16] = _T("0000_16");
+	st_Buffer_info.strBufferSerial[0][17] = _T("0000_17");
+	st_Buffer_info.strBufferSerial[0][18] = _T("0000_18");
+	st_Buffer_info.strBufferSerial[0][19] = _T("0000_19");
+	st_Buffer_info.strBufferSerial[0][20] = _T("0000_20");
+	st_Buffer_info.strBufferSerial[0][21] = _T("0000_21");
+	st_Buffer_info.strBufferSerial[0][22] = _T("0000_22");
+	st_Buffer_info.strBufferSerial[0][23] = _T("0000_23");
+	st_Buffer_info.strBufferSerial[0][24] = _T("0000_24");
+	st_Buffer_info.strBufferSerial[0][25] = _T("0000_25");
+	st_Buffer_info.strBufferSerial[0][26] = _T("0000_26");
+	st_Buffer_info.strBufferSerial[0][27] = _T("0000_27");
+	st_Buffer_info.strBufferSerial[0][28] = _T("0000_28");
+	st_Buffer_info.strBufferSerial[0][29] = _T("0000_29");
+	st_Buffer_info.strBufferSerial[0][30] = _T("0000_30");
+	st_Buffer_info.strBufferSerial[0][31] = _T("0000_31");
+	st_Buffer_info.strBufferSerial[0][32] = _T("0000_32");
+	st_Buffer_info.strBufferSerial[0][33] = _T("0000_33");
+	st_Buffer_info.strBufferSerial[0][34] = _T("0000_34");
+	st_Buffer_info.strBufferSerial[0][35] = _T("0000_35");
+	st_Buffer_info.strBufferSerial[0][36] = _T("0000_36");
+	st_Buffer_info.strBufferSerial[0][37] = _T("0000_37");
+	st_Buffer_info.strBufferSerial[0][38] = _T("0000_38");
+
+	st_Buffer_info.strBufferSerial[1][0] = _T("1111_0");
+	st_Buffer_info.strBufferSerial[1][1] = _T("1111_1");
+	st_Buffer_info.strBufferSerial[1][2] = _T("1111_2");
+	st_Buffer_info.strBufferSerial[1][3] = _T("1111_3");
+	st_Buffer_info.strBufferSerial[1][4] = _T("1111_4");
+	st_Buffer_info.strBufferSerial[1][5] = _T("1111_5");
+	st_Buffer_info.strBufferSerial[1][6] = _T("1111_6");
+	st_Buffer_info.strBufferSerial[1][7] = _T("1111_7");
+	st_Buffer_info.strBufferSerial[1][8] = _T("1111_8");
+	st_Buffer_info.strBufferSerial[1][9] = _T("1111_9");
+	st_Buffer_info.strBufferSerial[1][10] = _T("1111_10");
+	st_Buffer_info.strBufferSerial[1][11] = _T("1111_11");
+	st_Buffer_info.strBufferSerial[1][12] = _T("1111_12");
+	st_Buffer_info.strBufferSerial[1][13] = _T("1111_13");
+	st_Buffer_info.strBufferSerial[1][14] = _T("1111_14");
+	st_Buffer_info.strBufferSerial[1][15] = _T("1111_15");
+	st_Buffer_info.strBufferSerial[1][16] = _T("1111_16");
+	st_Buffer_info.strBufferSerial[1][17] = _T("1111_17");
+	st_Buffer_info.strBufferSerial[1][18] = _T("1111_18");
+	st_Buffer_info.strBufferSerial[1][19] = _T("1111_19");
+	st_Buffer_info.strBufferSerial[1][20] = _T("1111_20");
+	st_Buffer_info.strBufferSerial[1][21] = _T("1111_21");
+	st_Buffer_info.strBufferSerial[1][22] = _T("1111_22");
+	st_Buffer_info.strBufferSerial[1][23] = _T("1111_23");
+	st_Buffer_info.strBufferSerial[1][24] = _T("1111_24");
+	st_Buffer_info.strBufferSerial[1][25] = _T("1111_25");
+	st_Buffer_info.strBufferSerial[1][26] = _T("1111_26");
+	st_Buffer_info.strBufferSerial[1][27] = _T("1111_27");
+	st_Buffer_info.strBufferSerial[1][28] = _T("1111_28");
+	st_Buffer_info.strBufferSerial[1][29] = _T("1111_29");
+	st_Buffer_info.strBufferSerial[1][30] = _T("1111_30");
+	st_Buffer_info.strBufferSerial[1][31] = _T("1111_31");
+	st_Buffer_info.strBufferSerial[1][32] = _T("1111_32");
+	st_Buffer_info.strBufferSerial[1][33] = _T("1111_33");
+	st_Buffer_info.strBufferSerial[1][34] = _T("1111_34");
+	st_Buffer_info.strBufferSerial[1][35] = _T("1111_35");
+	st_Buffer_info.strBufferSerial[1][36] = _T("1111_36");
+	st_Buffer_info.strBufferSerial[1][37] = _T("1111_37");
+	st_Buffer_info.strBufferSerial[1][38] = _T("1111_38");
+	return;
+	//st_sync_info.nSmema_Front = CTL_READY;
 }
 
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	if(st_Buffer_info.nBufferData[0][37][EXIST] == YES)
+		st_Buffer_info.nBufferData[0][37][BIN] = FAIL; 
+//	st_Buffer_info.nBufferData[0][37][EXIST] = YES;
+// 	st_Buffer_info.nBufferData[0][37][X_POS] = 0;
+// 	st_Buffer_info.nBufferData[0][37][Y_POS] = 1;
+//	st_Buffer_info.nBufferData[0][37][FAILPICK] = YES;
+
+	if(st_Buffer_info.nBufferData[1][38][EXIST] == YES)
+		st_Buffer_info.nBufferData[1][38][BIN] = FAIL; 
+//	st_Buffer_info.nBufferData[1][38][EXIST] = YES;
+// 	st_Buffer_info.nBufferData[1][38][X_POS] = 1;
+// 	st_Buffer_info.nBufferData[1][38][Y_POS] = 1;
+//	st_Buffer_info.nBufferData[1][38][FAILPICK] = YES;
+	if(st_Buffer_info.nBufferData[0][36][EXIST] == YES)
+		st_Buffer_info.nBufferData[0][36][BIN] = FAIL; 
+	return;
 	st_sync_info.nSmema_Front = CTL_COMPLETE;
 }
 
@@ -3224,7 +3602,7 @@ void CScreenMain::OnBnClickedBtnCvInPos3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//kwlee 2017.0209 test..
-	st_handler_info.nRunStatus = dRUN;
+	st_handler_info.nRunStatus = dSTOP;
 	return;
 	///
 	st_sync_info.nSmema_Rear = CTL_REQ;
@@ -3236,4 +3614,13 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw5()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	st_sync_info.nSmema_Rear = CTL_COMPLETE;
+}
+
+
+void CScreenMain::OnBnClickedBtnOutPosUpDw4()
+{
+	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
+	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
+	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;
+	st_Picker_info.nPickerData[1][2][FAILPICK] = YES;
 }

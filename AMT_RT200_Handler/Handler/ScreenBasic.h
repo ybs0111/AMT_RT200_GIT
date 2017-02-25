@@ -40,6 +40,7 @@ public:
 	int                 m_RobotPickPos[2];
 	int                 m_RobotPlacePos[2];
 	int                 m_nVisionErrorCnt[2]; //kwlee 2017.0202
+	int                 m_nBarCodeReadPos[2];
 
 	int                 mn_Size;
 	int					m_nPcbTurn;
@@ -174,6 +175,9 @@ public:
 	CDigit m_dgtVisionErrorCnt;
 	afx_msg void OnStnClickedDgtVisionErrorCnt();
 	CGradientStatic m_msgVisionErrorCnt;
+	CGradientStatic m_msgBarcodeReadPos;
+	CDigit m_dgtBarcodeReadPos;
+	afx_msg void OnStnClickedDgtBarcodeReadPos();
 };
 
 

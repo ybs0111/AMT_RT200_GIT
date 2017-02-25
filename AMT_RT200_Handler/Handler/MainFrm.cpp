@@ -73,7 +73,7 @@ tagLOT_HISTORY_INFO			st_lot_history_info;
 tagPART_INFO				st_part_info;
 tagTYPE_INFO				st_type_info;
 tagPICKER_DATA_INFO			st_Picker_info; //kwlee 2017.0204
-tagBUFFER_DATA_INFO			st_Buffer_info[3];
+tagBUFFER_DATA_INFO			st_Buffer_info;
 /* 2015.0108
 // loader picker 구조체
 tagLD_PICKER_INFO			st_ld_picker_info[MAX_PICKER];
@@ -233,6 +233,7 @@ CMainFrame::CMainFrame()
 	st_work_info.nTsiteCycleYesNo	= YES;
 	st_handler_info.nInitialSuccess = NO;
 	st_handler_info.nInitialError = NO;
+	st_sync_info.nConvTurnCheck = FALSE; //kwlee 2017.0220
 
 	//kwlee 2017.0216 프로그램 시작 시 Turn 방지
 	FAS_IO.set_out_bit(st_io_info.o_TableTurnCylFor,IO_ON);
