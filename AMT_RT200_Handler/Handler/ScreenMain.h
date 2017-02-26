@@ -14,7 +14,7 @@
 #include "GradientStatic.h"
 #include "MyBasicData.h"
 #include "afxwin.h"
-#include "d:\work\source\amt_rt200_handler\handler\union\grid\gridctrl.h"
+
 
 
 
@@ -90,6 +90,8 @@ public:
 	CGridCtrl m_GridTm;
 	CGridCtrl m_GridTm_2;
 	CGridCtrl m_GridTm_3;
+	CGridCtrl m_pGridBufferData;
+	CGridCtrl m_pGridPcbData;
 
 	CImageList			*m_pImagelist;
 
@@ -117,12 +119,16 @@ public:
 	void				OnInitGridYieldLot();
 	void				OnInitGridYieldDaily();
 	void				OnInitGridBufferData();
-
+	void                OnInitGridPcbData();
 
 	void                OnMainRobotLeftTurnDisplay();
 	void                OnMainRobotRightTurnDisplay();
 	void                OnMainRobotCenterDisplay();
+	//kwlee 2017.0219
 	void                OnMainBufferDisplay();
+	void                OnMainPickerDisplay();
+	void                OnMainPcbDataDisplay();
+	//
 	void                OnMainLotDisplay();
 
 	void                OnInitGridFrontSmema();
@@ -150,15 +156,11 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnPaint();
 	afx_msg LRESULT OnMainWorkInfoDisplay(WPARAM wParam, LPARAM lParam);  // 화면 데이터 갱신용 사용자 메시지
-	afx_msg LRESULT	OnMainWorkInfoCommand(WPARAM wParam, LPARAM lParam);
-	
+	afx_msg LRESULT	OnMainWorkInfoCommand(WPARAM wParam, LPARAM lParam);	
 
 	afx_msg LRESULT	OnMainCvInMoveDisplay(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT	OnMainCvTurnMoveDisplay(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT	OnMainCvOutMoveDisplay(WPARAM wParam, LPARAM lParam);
-
-	
-	
 
 	afx_msg LRESULT	OnMainIODisplay(WPARAM wParam, LPARAM lParam); 
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
@@ -172,8 +174,6 @@ public:
 	afx_msg void OnTimeCellClick(NMHDR *pNotifyStruct, LRESULT* pResult);
 	afx_msg void OnWorkInfoCurrCellClick(NMHDR *pNotifyStruct, LRESULT* pResult);
 	
-
-
 	afx_msg void OnBnClickedBtnStart();
 	afx_msg void OnBnClickedBtnCvIn();
 	afx_msg void OnBnClickedBtnCvInPos();
@@ -197,7 +197,8 @@ public:
 	afx_msg void OnBnClickedBtnOutPosUpDw3();
 	afx_msg void OnBnClickedBtnCvInPos3();
 	afx_msg void OnBnClickedBtnOutPosUpDw5();
-	CGridCtrl m_pGridBufferData;
+	
+	afx_msg void OnBnClickedBtnOutPosUpDw4();
 };
 
 

@@ -1519,7 +1519,6 @@ int CDialogManualIO::OnRobotRelayMove()
 // 				{
 					clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 5 - m_nPickerNum] = CTL_YES;
 					//picker down			
-					
 					nRet_1 = clsRunRobot.OnGetPickerUpDn(0, PICKER_DN,clsRunRobot.m_npTemp_Picker_YesNo);
 				
 //				}

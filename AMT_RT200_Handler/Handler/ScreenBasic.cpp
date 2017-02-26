@@ -72,6 +72,8 @@ void CScreenBasic::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CUSTOM_PICKER_SELECT, m_GridPickerSelect);
 	DDX_Control(pDX, IDC_DGT_VISION_ERROR_CNT, m_dgtVisionErrorCnt);
 	DDX_Control(pDX, IDC_MSG_VISION_ERROR_CNT, m_msgVisionErrorCnt);
+	DDX_Control(pDX, IDC_MSG_BARCODE_READ_POS, m_msgBarcodeReadPos);
+	DDX_Control(pDX, IDC_DGT_BARCODE_READ_POS, m_dgtBarcodeReadPos);
 }
 
 BEGIN_MESSAGE_MAP(CScreenBasic, CFormView)
@@ -106,6 +108,7 @@ BEGIN_MESSAGE_MAP(CScreenBasic, CFormView)
 	ON_COMMAND(IDC_RADIO_BASIC_PLACE_RIGHT, &CScreenBasic::OnRadioBasicPlaceRight)
 	ON_COMMAND(IDC_RADIO_BASIC_PLACE_LEFT, &CScreenBasic::OnRadioBasicPlaceLeft)
 	ON_STN_CLICKED(IDC_DGT_VISION_ERROR_CNT, &CScreenBasic::OnStnClickedDgtVisionErrorCnt)
+	ON_STN_CLICKED(IDC_DGT_BARCODE_READ_POS, &CScreenBasic::OnStnClickedDgtBarcodeReadPos)
 END_MESSAGE_MAP()
 
 
@@ -240,6 +243,13 @@ void CScreenBasic::OnInitLabel()
 	m_msgVisionErrorCnt.SetColor(WHITE_C);
 	m_msgVisionErrorCnt.SetGradientColor(ORANGE_C);
 	m_msgVisionErrorCnt.SetTextColor(BLACK_C);
+
+	m_msgBarcodeReadPos.SetFont(clsFunc.m_pFont[5]);
+	m_msgBarcodeReadPos.SetWindowText(_T("Barcode Read Pos"));
+	m_msgBarcodeReadPos.SetCenterText();
+	m_msgBarcodeReadPos.SetColor(WHITE_C);
+	m_msgBarcodeReadPos.SetGradientColor(ORANGE_C);
+	m_msgBarcodeReadPos.SetTextColor(BLACK_C);
 }
 
 
@@ -254,6 +264,10 @@ void CScreenBasic::OnInitDigit()
 
 	m_dgtVisionErrorCnt.SetStyle(CDigit::DS_INT, 2, CDigit::DC_BGREEN, CDigit::DC_BDISABLE);
 	m_dgtVisionErrorCnt.SetVal(m_nVisionErrorCnt[1]);
+
+	//kwlee 2017.0220
+	m_dgtBarcodeReadPos.SetStyle(CDigit::DS_INT, 2, CDigit::DC_BGREEN, CDigit::DC_BDISABLE);
+	m_dgtBarcodeReadPos.SetVal(m_nBarCodeReadPos[1]);
 }
 void CScreenBasic::OnInitPickerSelect()
 {
@@ -1392,8 +1406,8 @@ void CScreenBasic::OnDataApply()
 	m_nPcbTurn                      = st_basic_info.nPcbTurnEnable;
 	st_basic_info.nLeftSize           = mn_Size;
 	st_basic_info.nVisionErrorCnt   = m_nVisionErrorCnt[1];//kwlee 2017.0202
+	st_basic_info.nBarcodeReadPos   = m_nBarCodeReadPos[1];//kwlee 2017.0220
 	
-
 	st_basic_info.nRobotPickPos      =   m_RobotPickPos[1];                
 	st_basic_info.nRobotPlacePos     =  m_RobotPlacePos[1];
 
@@ -1465,6 +1479,8 @@ void CScreenBasic::OnDataInit()
 	st_Pcb_info.nPcbType                     = st_basic_info.nPcbType;
 	m_nPcbTurn								= st_basic_info.nPcbTurnEnable;
 	m_nVisionErrorCnt[1]                    = st_basic_info.nVisionErrorCnt; //kwlee 2017.0202
+	m_nBarCodeReadPos[1]                    = st_basic_info.nBarcodeReadPos; //kwlee 2017.0220
+
 	m_nRobotPickMode                       = st_basic_info.nRobotPickPos;
 	m_nRobotPlaceMode                       = st_basic_info.nRobotPlacePos;
 
@@ -2066,7 +2082,7 @@ void CScreenBasic::OnBnClickedBtnSodimm()
 		{
 			if (i == 0)
 			{
-				//st_Pcb_info.nPcbSerial[i][j] = TRUE;
+				
 				st_Pcb_info.nPcbSelect[i][j] = TRUE;
 				m_GridPcbType.SetItemBkColour(i, j, GREEN_C, CLR_DEFAULT);
 				
@@ -2144,7 +2160,7 @@ void CScreenBasic::OnBnClickedBtnRdimm()
 
 			if (j >= 3)
 			{
-				//st_Pcb_info.nPcbSerial[i][j] = TRUE;
+				
 				st_Pcb_info.nPcbSelect[i][j] = TRUE;
 				m_GridPcbType.SetItemBkColour(i, j, GREEN_C, CLR_DEFAULT);
 				
@@ -2205,7 +2221,6 @@ void CScreenBasic::OnBnClickedBtnUdimm9()
 				mn_Size = mn_Size +18;
 			}
 
-			//st_Pcb_info.nPcbSerial[i][j] = TRUE;
 			st_Pcb_info.nPcbSelect[i][j] = TRUE;
 			m_GridPcbType.SetColumnWidth(j, 19);
 			m_GridPcbType.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
@@ -2272,7 +2287,6 @@ void CScreenBasic::OnBnClickedBtnUdimm10()
 
 			if (j >= 5)
 			{
-				//st_Pcb_info.nPcbSerial[i][j] = TRUE;
 				st_Pcb_info.nPcbSelect[i][j] = TRUE;
 				m_GridPcbType.SetItemBkColour(i, j, GREEN_C, CLR_DEFAULT);
 			}
@@ -2350,5 +2364,22 @@ void CScreenBasic::OnStnClickedDgtVisionErrorCnt()
 	{
 		m_nVisionErrorCnt[1] = _wtoi(dlgKeyPad.m_strNewVal);
 		m_dgtVisionErrorCnt.SetVal(m_nVisionErrorCnt[1]);
+	}
+}
+
+
+void CScreenBasic::OnStnClickedDgtBarcodeReadPos()
+{
+	CDialog_KeyPad dlgKeyPad;
+
+	dlgKeyPad.m_nKeypadMode			= 0;
+	dlgKeyPad.m_strKeypadLowLimit	= _T("0");
+	dlgKeyPad.m_strKeypadHighLimit	= _T("10");
+	dlgKeyPad.m_strKeypadVal.Format(_T("%d"), m_nBarCodeReadPos[1]);
+
+	if (dlgKeyPad.DoModal() == IDOK)
+	{
+		m_nBarCodeReadPos[1] = _wtoi(dlgKeyPad.m_strNewVal);
+		m_dgtVisionErrorCnt.SetVal(m_nBarCodeReadPos[1]);
 	}
 }

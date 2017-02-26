@@ -1187,6 +1187,12 @@ void CMyBasicData::OnBasic_Data_Load(int nMode)
 	st_basic_info.nVisionErrorCnt = _wtoi(str_temp);
 	///////
 
+	//kwlee 2017.0220
+	GetPrivateProfileString(_T("BASIC_SCREEN"), _T("nBarcodeReadPos"), _T("0"), chr_data, sizeof(chr_data), st_path_info.strFileBasic);
+	str_temp.Format(_T("%s"), chr_data);
+	st_basic_info.nBarcodeReadPos = _wtoi(str_temp);
+	///////
+
 	GetPrivateProfileString(_T("BASIC_SCREEN"), _T("ModelName"), _T("MDX_MSATA"), chr_data, sizeof(chr_data), str_load_file);
 	st_basic_info.strModelName = (LPCTSTR)chr_data;
 
@@ -1928,7 +1934,7 @@ void CMyBasicData::OnBasic_Data_Save()
 	CString str_pos, str_tmp;
 	COleDateTime time_cur;
 
-	int i, j, k;
+	int i, j;
 
 	/* ************************************************************************** */
 	/*  데이터 저장할 파일 설정한다 [파일 확장자 검사]                               */
@@ -2006,6 +2012,9 @@ void CMyBasicData::OnBasic_Data_Save()
 	//kwlee 2017.0202
 	mstr_temp.Format(_T("%d"), st_basic_info.nVisionErrorCnt);
 	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nVisionErrorCnt"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
+
+	mstr_temp.Format(_T("%d"), st_basic_info.nBarcodeReadPos);
+	:: WritePrivateProfileString(_T("BASIC_SCREEN"), _T("nBarcodeReadPos"), LPCTSTR(mstr_temp), st_path_info.strFileBasic);
 	//
 
 	//kwlee 2016.0323

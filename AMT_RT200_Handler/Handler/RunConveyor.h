@@ -44,7 +44,7 @@ public:
 	void    Smema_Front();
 	int    OnTurnConvPosCheck();
 	int    OnConvPcvCheck();
-	
+	void   OnPcbDataReset();
 
 	void    OnRunInit();
 	void    OnPcbType(int nType);

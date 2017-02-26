@@ -301,13 +301,15 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 
 #define  BIN               0
 #define  EXIST             1
-#define  X_POS             2
-#define  Y_POS             3
+#define  X_FAIL_POS		   2	
+#define  Y_FAIL_POS        3
 #define  FAILPICK          4
 
 #define  LEFT              0
 #define  RIGHT             1
 
+#define NORMAL_MODE        0
+#define REJECT_MODE        1
 
 
 
@@ -736,7 +738,9 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 
 #define MAX_PICKER                      5
 #define TOTAL_PICK                      10
+#define PCB_CNT                         10  
 #define MAX_INFO                        5
+
 #define MAX_BUFFER                      40
 
 
@@ -773,6 +777,22 @@ enum PICKERUPDN
 {
 	PICKER_UP = 0,
 	PICKER_DN,
+};
+
+
+enum CONVEYOR_POS
+{
+	CONV_IN_READY = 0,
+	CONV_PCB_IN_ING,
+	TURN_PCB_CONV_IN,
+	TURN_PCB_CONV_WORK_POS,
+	TURN_PCB_CONV_TURN_POS,
+	TURN_PCB_CONV_TURN,
+	TURN_PCB_CONV_REVERSE,
+	OUT_CONV_IN_ING,
+	OUT_CONV_OUT_POS,
+	OUT_CONV_OUT,
+	OUT_CONV_OUT_ING,
 };
 
 enum NET_BCRPRINT_RECEIVED
@@ -1141,7 +1161,7 @@ struct tagBASIC_INFO
 	int nRowCnt;
 	int nColCnt;
 	int nVisionErrorCnt; //kwlee 2017.0202
-
+	int nBarcodeReadPos; //kwlee 2017.0220
 	int nPcbType;
 	int nPcbTurnEnable;
 	int nRobotPickPos;
@@ -1269,7 +1289,7 @@ struct tagPICKER_DATA_INFO
 	int nPickerData[2][MAX_PICKER][MAX_INFO]; //0 : BinData 1 : Yes/No 2: X_Pos 3: y: Pos
 	int nPickerFailCnt;
 
-	CString strPickerSerial[2][30];
+	CString strPickerSerial[2][MAX_PICKER];
 };
 extern tagPICKER_DATA_INFO  st_Picker_info;
 //
@@ -1282,7 +1302,7 @@ struct tagBUFFER_DATA_INFO
 	int nBufferFailCnt;
 	
 };
-extern tagBUFFER_DATA_INFO  st_Buffer_info[3];
+extern tagBUFFER_DATA_INFO  st_Buffer_info;
 
 enum LAMP_CTRL
 {
@@ -1720,7 +1740,7 @@ struct tagSYNC_INFO
 	int 		nMidTrayIn;
 	int 		nRearTrayIn;
 	int         TurnConvJobReady[4];
-
+	int         nConvTurnCheck;
 	int         nSmema_Front;
 	int         nSmema_Rear;
 	int         nBcrReq;
@@ -1986,7 +2006,6 @@ struct tagPCB_INFO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct PCB_info
 {
-	int nPcbSerial[2][10];
 	int nPcbType;
 	int	nPcbTurn;
 	int nPcbSelect[2][10];

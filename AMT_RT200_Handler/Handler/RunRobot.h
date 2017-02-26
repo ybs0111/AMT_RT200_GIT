@@ -36,6 +36,7 @@ public:
 	int             m_nCntBcrNum;
 	int             m_nMove_Flag[5];
 	int             m_nJobNextPos; //kwlee 2016.1229
+	
 	//kwlee 2017.0204
 	int             m_nPrintOutPutCnt;
 	int             m_nEmptyCntBufferCnt;
@@ -54,7 +55,7 @@ public:
 	long            m_lFeederWaitTime[3];
 	long            m_lVaccumOffTime[3];
 	long            m_lTurnConvWaitTime[3];
-
+	
 public:
 	void	OnThreadRUN();
 	void	OnRunInit();
@@ -78,11 +79,13 @@ public:
 	void    OnGetPickCheck(int nMode, int nPickCnt);
 	
 	int     OnGetVaccumgmCheck(int OnOff,int nPickCnt);
-	void    OnDataExchange(int nPickPlace,int nFailCheck);
+	//void    OnDataExchange(int nPickPlace);
+	void    OnDataExchange(int nMode, int nPickPlace);
 	int     OnPrinterFeeder(int nCnt, int nFailCheck);
-    void    OnBufferDataTransfer();
+    int    OnBufferDataTransfer(int nCnt);
 	int     OnFailLabelCheck();
 	void    OnBarcodeReadCheck();
+	void    OnResetRejectData();
 };
 
 extern CRunRobot	clsRunRobot;

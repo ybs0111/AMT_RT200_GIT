@@ -3071,11 +3071,12 @@ void CFastechPublic_IO::Initialize_Map()
 	// 	///////////////////////////////////////////////////////////////////////////////////////////////
 	// 	// Module No 10
 	// 	///////////////////////////////////////////////////////////////////////////////////////////////
-	 	st_io_info.o_Front_LabelReq						= 1000;		// S1000	
-	 	st_io_info.o_Front_LabelComplete				= 1001;		// S1001
-	 	st_io_info.o_Rear_Label_Ready					= 1002;		// S1002
-		st_io_info.o_Rear_Label_Complete				= 1003;		// S1003
-	 	st_io_info.o_LabelInterface5					= 1004;		// S1004
+	 	
+	 	//st_io_info.o_Rear_Label_Ready					= 1002;		// S1000
+		//st_io_info.o_Rear_Label_Complete				= 1003;		// S1001
+		st_io_info.o_Front_LabelReq						= 1002;		// S1002	
+		st_io_info.o_Front_LabelComplete				= 1003;		// S1003
+		st_io_info.o_LabelInterface5					= 1004;		// S1004
 	 	st_io_info.o_LabelInterface6					= 1005;		// S1005
 	 	//st_io_info.o_LabelInterface7					= 1006;		// S1006
 		//kwlee 2017.0210
