@@ -140,7 +140,8 @@ public:
 	afx_msg LRESULT OnRobotRightTurnUI(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnConVeyorUI(WPARAM wParam, LPARAM lParam);
 	//kwlee 2017.0204
-	afx_msg LRESULT OnBarcode(WPARAM wParam, LPARAM lParam); 
+	afx_msg LRESULT OnBarcode_1(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnBarcode_2(WPARAM wParam, LPARAM lParam); 
 	afx_msg LRESULT OnPrinterServer(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnPrinterClient(WPARAM wParam, LPARAM lParam);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);

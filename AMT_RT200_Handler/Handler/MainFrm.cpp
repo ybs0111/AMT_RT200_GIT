@@ -24,14 +24,14 @@
 #include "MyJamData.h"
 #include "Dialog_Message.h"
 #include "Dialog_About.h"
-//#include "Dialog_Door_Open.h"
 #include "ClientSocket.h"
 #include "ServerSocket.h"
 #include "ClientGms.h"
 #include "XgemClient.h"
 #include "AlgMemory.h"
 #include "ClientEcFirst.h"
-
+// #include "BarcodeUnLoadA.h"
+// #include "BarcodeUnLoadB.h"
 #include "ClientGms.h"
 #include "ClientRfid.h"
 #include "ServerFront.h"
@@ -41,6 +41,7 @@
 #include "ACriticalSection.h"
 #include "CtlBd_Library.h"
 #include "ZebraPrint.h"
+#include "RunRobot.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -167,7 +168,9 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_MESSAGE(WM_LEFT_POS, OnRobotLeftTurnUI)
 	ON_MESSAGE(WM_RIGHT_POS, OnRobotRightTurnUI)
 	ON_MESSAGE(WM_CONV_STATE, OnConVeyorUI)
-	ON_MESSAGE(WM_BARCODE_MSG, OnBarcode) //kwlee 2017.0204
+	ON_MESSAGE(WM_CLIENT_MSG_8, OnBarcode_1) //kwlee 2017.0204
+	ON_MESSAGE(WM_CLIENT_MSG_9, OnBarcode_2) //kwlee 2017.0204
+	
 
 	ON_WM_NCLBUTTONDBLCLK()
 	ON_WM_NCLBUTTONDOWN()
@@ -350,7 +353,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     /* ************************************************************************** */
 	::PostMessage(st_handler_info.hWnd, WM_FORM_CHANGE, 1, 3);  // 초기화 진행 화면 전환
 	/* ************************************************************************** */
-
+	
 // 	SendMessage(WM_SERVER_MSG_3, SERVER_CONNECT);
 // 	SendMessage(WM_SERVER_MSG_4, SERVER_CONNECT);
 // 	SendMessage(WM_SERVER_MSG_8, SERVER_CONNECT);
@@ -1765,7 +1768,6 @@ LRESULT CMainFrame::OnClientEcFirst(WPARAM wParam, LPARAM lParam)
 						clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] EC_FIRST_NETWORK Client Connect Error."));
 						st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
 					}
-
 					return 0;
 				}
 
@@ -2501,9 +2503,319 @@ LRESULT CMainFrame::OnConVeyorUI(WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
-LRESULT CMainFrame::OnBarcode(WPARAM wParam, LPARAM lParam)
+LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 {
+	CString strMsg, sRcv, sTmp, strTemp;
 
+	int nLength;
+
+	switch(wParam)
+	{
+	case CLIENT_CONNECT:
+		if (m_pClient[BCR1_NETWORK] != NULL)
+		{
+			if (st_client_info[BCR1_NETWORK].nConnect == YES) 
+			{
+				st_client_info[BCR1_NETWORK].nConnect = NO;
+
+				delete m_pClient[BCR1_NETWORK];
+				m_pClient[BCR1_NETWORK] = NULL;
+			}
+
+			m_pClient[BCR1_NETWORK] = new CClientSocket();
+			m_pClient[BCR1_NETWORK]->Create();
+
+			m_pClient[BCR1_NETWORK]->OnOpen(this, BCR1_NETWORK);
+			if (m_pClient[BCR1_NETWORK]->Connect(st_client_info[BCR1_NETWORK].strIp, st_client_info[BCR1_NETWORK].nPort))
+			{
+				delete m_pClient[BCR1_NETWORK];
+				m_pClient[BCR1_NETWORK] = NULL;
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR1_NETWORK Client Connect Error."));
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
+				}
+
+				return 0;
+			}
+
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				clsMem.OnNormalMessageWrite(_T("[TCP/IP] BCR1_NETWORK Client Connect Success."));
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+			}
+		}
+		else
+		{
+			st_client_info[BCR1_NETWORK].nConnect = NO;
+
+			m_pClient[BCR1_NETWORK] = new CClientSocket();
+			m_pClient[BCR1_NETWORK]->Create();
+
+			m_pClient[BCR1_NETWORK]->OnOpen(this, BCR1_NETWORK);
+			if (m_pClient[BCR1_NETWORK]->Connect(st_client_info[BCR1_NETWORK].strIp, st_client_info[BCR1_NETWORK].nPort))
+			{
+				delete m_pClient[BCR1_NETWORK];
+				m_pClient[BCR1_NETWORK] = NULL;
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR1_NETWORK Client Connect Error."));
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
+				}
+
+				return 0;
+			}
+
+			st_client_info[BCR1_NETWORK].nConnect = YES;
+
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				clsMem.OnNormalMessageWrite(_T("[TCP/IP] BCR1_NETWORK Client Connect Success."));
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+			}
+		}
+		break;
+
+	case CLIENT_CLOSE:
+		if (m_pClient[BCR1_NETWORK] != NULL)
+		{
+			st_client_info[BCR1_NETWORK].nConnect = NO;
+
+			delete m_pClient[BCR1_NETWORK];
+			m_pClient[BCR1_NETWORK] = NULL;
+		}
+		break;
+
+	case CLIENT_SEND:
+		if (st_client_info[BCR1_NETWORK].nConnect == YES)
+		{
+			if (m_pClient[BCR1_NETWORK] == NULL) return 0;
+
+			//clsFunc.OnStringToChar(st_client_info[PRINTER_NETWORK].strSend, st_client_info[PRINTER_NETWORK].chSend);
+
+			//st_client_info[BCR1_NETWORK].strSend.Format(_T("%s"),st_client_info[BCR1_NETWORK].chSend);
+			//kwlee 2017.0302
+
+
+			strTemp.Format(_T("%cR%c"), 0x02, 0x03);
+			st_client_info[BCR1_NETWORK].strSend = strTemp;
+
+			clsFunc.OnStringToChar(st_client_info[BCR1_NETWORK].strSend, st_client_info[BCR1_NETWORK].chSend);
+			nLength = st_client_info[BCR1_NETWORK].strSend.GetLength();
+			
+			m_pClient[BCR1_NETWORK]->Send(st_client_info[BCR1_NETWORK].chSend, nLength);
+
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				strMsg.Format(_T("[BCR1_NETWORK] %s"), st_client_info[BCR1_NETWORK].strSend);
+				clsMem.OnNormalMessageWrite(strMsg);
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+			}
+		}
+		break;
+
+	case CLIENT_REV:
+		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_NETWORK].strRev);
+		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
+		//sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
+		//kwlee 2017.0228
+		//st_Buffer_info.strBufferSerial[0][0].Format(_T("%s"),strMsg);
+		
+		clsRunRobot.m_strBarcode[0] = strMsg;
+		clsRunRobot.m_nBarcodeReadCheck[0] = TRUE;
+		
+		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+		{
+			//strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strRev);
+			//clsMem.OnNormalMessageWrite(strMsg);
+			strTemp.Format(_T("BCR1 RCV : %s"),clsRunRobot.m_strBarcode[0]);
+			clsMem.OnNormalMessageWrite(strTemp);
+			st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+		}
+		break;
+
+	case CLIENT_ACCEPT:
+		if (lParam != 0)
+		{
+			st_client_info[BCR1_NETWORK].nConnect = NO;
+
+			delete m_pClient[BCR1_NETWORK];
+			m_pClient[BCR1_NETWORK] = NULL;
+
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR1_NETWORK Client Accept Fail."));
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
+			}
+
+			return 0;
+		}
+
+		st_client_info[BCR1_NETWORK].nConnect = YES;
+		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+		{
+			clsMem.OnNormalMessageWrite(_T("[TCP/IP] BCR1_NETWORK Client Accept Success."));
+			st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+		}
+		break;
+	}
+	return 0;
+}
+
+LRESULT CMainFrame::OnBarcode_2(WPARAM wParam, LPARAM lParam)
+{
+	CString strMsg, sRcv, sTmp,strTemp;
+
+	int nLength;
+
+	switch(wParam)
+	{
+		case CLIENT_CONNECT:
+			if (m_pClient[BCR2_NETWORK] != NULL)
+			{
+				if (st_client_info[BCR2_NETWORK].nConnect == YES) 
+				{
+					st_client_info[BCR2_NETWORK].nConnect = NO;
+
+					delete m_pClient[BCR2_NETWORK];
+					m_pClient[BCR2_NETWORK] = NULL;
+				}
+
+				m_pClient[BCR2_NETWORK] = new CClientSocket();
+				m_pClient[BCR2_NETWORK]->Create();
+
+				m_pClient[BCR2_NETWORK]->OnOpen(this, BCR2_NETWORK);
+				if (m_pClient[BCR2_NETWORK]->Connect(st_client_info[BCR2_NETWORK].strIp, st_client_info[BCR2_NETWORK].nPort))
+				{
+					delete m_pClient[BCR2_NETWORK];
+					m_pClient[BCR2_NETWORK] = NULL;
+
+					if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+					{
+						clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR2_NETWORK Client Connect Error."));
+						st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
+					}
+
+					return 0;
+				}
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					clsMem.OnNormalMessageWrite(_T("[TCP/IP] BCR2_NETWORK Client Connect Success."));
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+				}
+			}
+			else
+			{
+				st_client_info[BCR2_NETWORK].nConnect = NO;
+
+				m_pClient[BCR2_NETWORK] = new CClientSocket();
+				m_pClient[BCR2_NETWORK]->Create();
+
+				m_pClient[BCR2_NETWORK]->OnOpen(this, BCR2_NETWORK);
+				if (m_pClient[BCR2_NETWORK]->Connect(st_client_info[BCR2_NETWORK].strIp, st_client_info[BCR2_NETWORK].nPort))
+				{
+					delete m_pClient[BCR2_NETWORK];
+					m_pClient[BCR2_NETWORK] = NULL;
+
+					if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+					{
+						clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR2_NETWORK Client Connect Error."));
+						st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
+					}
+
+					return 0;
+				}
+
+				st_client_info[BCR2_NETWORK].nConnect = YES;
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					clsMem.OnNormalMessageWrite(_T("[TCP/IP] BCR2_NETWORK Client Connect Success."));
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+				}
+			}
+			break;
+
+		case CLIENT_CLOSE:
+			if (m_pClient[BCR2_NETWORK] != NULL)
+			{
+				st_client_info[BCR2_NETWORK].nConnect = NO;
+
+				delete m_pClient[BCR2_NETWORK];
+				m_pClient[BCR2_NETWORK] = NULL;
+			}
+			break;
+
+		case CLIENT_SEND:
+			if (st_client_info[BCR2_NETWORK].nConnect == YES)
+			{
+				if (m_pClient[BCR2_NETWORK] == NULL) return 0;
+
+				//clsFunc.OnStringToChar(st_client_info[PRINTER_NETWORK].strSend, st_client_info[PRINTER_NETWORK].chSend);
+
+				//st_client_info[BCR2_NETWORK].strSend.Format(_T("%s"),st_client_info[BCR2_NETWORK].chSend);
+				//kwlee 2017.0302
+				strTemp.Format(_T("%cR%c"), 0x02, 0x03);
+				st_client_info[BCR2_NETWORK].strSend = strTemp;
+
+				clsFunc.OnStringToChar(st_client_info[BCR2_NETWORK].strSend, st_client_info[BCR2_NETWORK].chSend);
+				nLength = st_client_info[BCR2_NETWORK].strSend.GetLength();
+				m_pClient[BCR2_NETWORK]->Send(st_client_info[BCR2_NETWORK].chSend, nLength);
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					strMsg.Format(_T("[BCR2_NETWORK] %s"), st_client_info[BCR2_NETWORK].strSend);
+					clsMem.OnNormalMessageWrite(strMsg);
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+				}
+			}
+			break;
+
+		case CLIENT_REV:
+			strMsg.Format(_T("%s"), st_client_info[BCR2_NETWORK].strRev);
+			sRcv = sTmp.Mid(0, st_client_info[BCR2_NETWORK].nRevLength);
+
+			clsRunRobot.m_strBarcode[1] = strMsg;
+			clsRunRobot.m_nBarcodeReadCheck[1] = TRUE;
+
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				//strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strRev);
+				//clsMem.OnNormalMessageWrite(strMsg);
+				strTemp.Format(_T("BCR2 RCV : %s"),clsRunRobot.m_strBarcode[1]);
+				clsMem.OnNormalMessageWrite(strTemp);
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+			}
+			break;
+
+		case CLIENT_ACCEPT:
+			if (lParam != 0)
+			{
+				st_client_info[BCR2_NETWORK].nConnect = NO;
+
+				delete m_pClient[BCR2_NETWORK];
+				m_pClient[BCR2_NETWORK] = NULL;
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR2_NETWORK Client Accept Fail."));
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
+				}
+
+				return 0;
+			}
+
+			st_client_info[BCR2_NETWORK].nConnect = YES;
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				clsMem.OnNormalMessageWrite(_T("[TCP/IP] BCR2_NETWORK Client Accept Success."));
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+			}
+			break;
+		}
 	return 0;
 }
 
