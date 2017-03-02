@@ -1720,16 +1720,14 @@ int CRunRobot::OnPrinterFeeder(int nCnt, int nFailCheck)
 	{
 		return RET_GOOD;
 	}
-	m_nCntBcrNum++;
-
 	if( nCnt > 0  && nCnt <= 39)
 	{
 		for (int i =0; i<2; i++)
 		{
 			for (int j = 39; j>= 1; j--)
 			{
-	 			if (st_Buffer_info.strBufferSerial[i][j - 1] != _T(""))
-	 			{
+				if (st_Buffer_info.strBufferSerial[i][j - 1] != _T(""))
+				{
 					st_Buffer_info.strBufferSerial[i][j] = st_Buffer_info.strBufferSerial[i][j - 1];
 					st_Buffer_info.nBufferData[i][j][EXIST] = st_Buffer_info.nBufferData[i][j - 1][EXIST];
 					st_Buffer_info.nBufferData[i][j][BIN] = st_Buffer_info.nBufferData[i][j - 1][BIN];
@@ -1738,28 +1736,15 @@ int CRunRobot::OnPrinterFeeder(int nCnt, int nFailCheck)
 		}
 	}
 
-	  if (nCnt <= 39)
-	  {
-		  st_Buffer_info.strBufferSerial[0][0].Format(_T("1111_%d"),m_nCntBcrNum);
-		  st_Buffer_info.strBufferSerial[1][0].Format(_T("2222_%d"),m_nCntBcrNum);
-		  m_nPrintOutCheck = TRUE; //kwlee 2017.0302
-	  }
-	  if (st_basic_info.nModeDevice == WITHOUT_DVC)
-	  {
-		  st_Buffer_info.nBufferData[0][0][EXIST] = YES;
-		  st_Buffer_info.nBufferData[1][0][EXIST] = YES;
+	if (nCnt <= 39)
+	{
+		m_nCntBcrNum++;
+		st_Buffer_info.strBufferSerial[0][0].Format(_T("1111_%d"),m_nCntBcrNum);
+		st_Buffer_info.strBufferSerial[1][0].Format(_T("2222_%d"),m_nCntBcrNum);
+		m_nPrintOutCheck = TRUE; //kwlee 2017.0302
+	}
 
-// 		  st_Buffer_info.nBufferData[0][39][EXIST] = YES;
-// 		  st_Buffer_info.nBufferData[1][39][EXIST] = YES;
-	  }   
-	
-	  
-	//kwlee 2017.0220
-// 	st_Buffer_info.strBufferSerial[0][39].Format(_T("1111_%d"),m_nCntBcrNum);
-// 	st_Buffer_info.strBufferSerial[1][39].Format(_T("2222_%d"),m_nCntBcrNum);
-
-	//}
-	return RET_GOOD;
+	  return RET_GOOD;
 }
 
 void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
@@ -2300,35 +2285,34 @@ int CRunRobot::OnFeederInterface()
 		//BCR Read
 		if (m_nPrintOutCheck == TRUE)
 		{
+
+			if (st_basic_info.nModeDevice == WITHOUT_DVC)
+			{
+				st_Buffer_info.nBufferData[0][0][EXIST] = YES;
+				st_Buffer_info.nBufferData[1][0][EXIST] = YES;
+			}
+	
 			m_nPrintOutCheck = FALSE;
 
 			nRet = FAS_IO.get_in_bit(st_io_info.i_LabelFeederProductChk1,IO_ON);
 
-			if (nRet == IO_ON && m_nPrintOutPutCnt >= 39)
+			if (1/*nRet == IO_ON && m_nPrintOutPutCnt >= 39*/)
 			{
 				if (m_nPrintOutPutCnt < 40)
-				{
 					m_nPrintOutPutCnt++;
-				}
 
 				if (m_nPrintOutPutCnt > st_basic_info.nBarcodeReadPos)
 				{
 					::PostMessage(st_handler_info.hWnd, WM_CLIENT_MSG + BCR1_NETWORK, CLIENT_SEND, 0);
 					::PostMessage(st_handler_info.hWnd, WM_CLIENT_MSG + BCR2_NETWORK, CLIENT_SEND, 0);
-
-// 					if (st_basic_info.nModeDevice == WITHOUT_DVC)
-// 					{
-// 						// 					st_Buffer_info.nBufferData[0][16][BIN] = GOOD;
-// 						// 					st_Buffer_info.nBufferData[1][16][BIN] = GOOD;
-// 						//kwlee 2017.0302
-// 						st_Buffer_info.nBufferData[0][st_basic_info.nBarcodeReadPos][BIN] = GOOD;
-// 						st_Buffer_info.nBufferData[1][st_basic_info.nBarcodeReadPos][BIN] = GOOD;
-// 
-// 					}
+					if (st_basic_info.nModeDevice == WITHOUT_DVC)
+					{
+						m_nBarcodeReadCheck[0] = TRUE;
+						m_nBarcodeReadCheck[1] = TRUE;
+						m_strBarcode[0] = st_Buffer_info.strBufferSerial[0][st_basic_info.nBarcodeReadPos];
+						m_strBarcode[1] = st_Buffer_info.strBufferSerial[1][st_basic_info.nBarcodeReadPos];
+					}
 				}
-				
-			//	m_dwTimeCheck[0] = GetCurrentTime();
-				//m_nInterFaceStep = 2000;
 			}
 			else
 			{
@@ -2336,16 +2320,15 @@ int CRunRobot::OnFeederInterface()
 				{
 					::PostMessage(st_handler_info.hWnd, WM_CLIENT_MSG + BCR1_NETWORK, CLIENT_SEND, 0);
 					::PostMessage(st_handler_info.hWnd, WM_CLIENT_MSG + BCR2_NETWORK, CLIENT_SEND, 0);
-
-// 					if (st_basic_info.nModeDevice == WITHOUT_DVC)
-// 					{
-// 						st_Buffer_info.nBufferData[0][st_basic_info.nBarcodeReadPos][BIN] = GOOD;
-// 						st_Buffer_info.nBufferData[1][st_basic_info.nBarcodeReadPos][BIN] = GOOD;
-// 					}
+					if (st_basic_info.nModeDevice == WITHOUT_DVC)
+					{
+						m_nBarcodeReadCheck[0] = TRUE;
+						m_nBarcodeReadCheck[1] = TRUE;
+						m_strBarcode[0] = st_Buffer_info.strBufferSerial[0][st_basic_info.nBarcodeReadPos];
+						m_strBarcode[1] = st_Buffer_info.strBufferSerial[1][st_basic_info.nBarcodeReadPos];
+					}
 				}
 				m_nPrintOutPutCnt++;
-				//m_nInterFaceStep = 200;
-				//m_nInterFaceStep = 1100;
 			}
 			m_nInterFaceStep = 1100;
 		}
