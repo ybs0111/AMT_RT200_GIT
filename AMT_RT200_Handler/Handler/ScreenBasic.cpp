@@ -1104,7 +1104,7 @@ void CScreenBasic::OnModelCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 		OnDeviceColorChange(nRow, nCol);
 
 		// jtkim 20150929
-		::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + FTP_NETWORK, 1, 0);
+	//	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + FTP_NETWORK, 1, 0);
 
 		m_pGridModel.Refresh();// .Invalidate();
 	}
@@ -2373,13 +2373,13 @@ void CScreenBasic::OnStnClickedDgtBarcodeReadPos()
 	CDialog_KeyPad dlgKeyPad;
 
 	dlgKeyPad.m_nKeypadMode			= 0;
-	dlgKeyPad.m_strKeypadLowLimit	= _T("0");
-	dlgKeyPad.m_strKeypadHighLimit	= _T("10");
+	dlgKeyPad.m_strKeypadLowLimit	= _T("1");
+	dlgKeyPad.m_strKeypadHighLimit	= _T("30");
 	dlgKeyPad.m_strKeypadVal.Format(_T("%d"), m_nBarCodeReadPos[1]);
 
 	if (dlgKeyPad.DoModal() == IDOK)
 	{
 		m_nBarCodeReadPos[1] = _wtoi(dlgKeyPad.m_strNewVal);
-		m_dgtVisionErrorCnt.SetVal(m_nBarCodeReadPos[1]);
+		m_dgtBarcodeReadPos.SetVal(m_nBarCodeReadPos[1]);
 	}
 }

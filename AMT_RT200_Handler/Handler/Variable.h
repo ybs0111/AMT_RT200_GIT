@@ -105,7 +105,8 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define WM_RIGHT_POS			WM_USER + 601
 #define WM_LEFT_POS				WM_USER + 602
 #define WM_CONV_STATE			WM_USER + 603
-#define WM_BARCODE_MSG 		    WM_USER + 604 
+#define WM_BARCODE1_MSG 		WM_USER + 604 
+#define WM_BARCODE2_MSG 		WM_USER + 605
 
 #define CLIENT_CONNECT			0
 #define CLIENT_CLOSE			1
@@ -1744,7 +1745,7 @@ struct tagSYNC_INFO
 	int         nSmema_Front;
 	int         nSmema_Rear;
 	int         nBcrReq;
-
+	int         nBcrTestStart[2];
 	int         nPrinterStatus; //kwlee 2017.0218
 
 	
@@ -2786,8 +2787,9 @@ enum NETWORK_NUM
 	REAR_NETWORK					,
 	RFID_NETWORK					,
 	FTP_NETWORK						,
+	BCR1_NETWORK					,
+	BCR2_NETWORK					,
 	GMS_NETWORK						,
-	EC_SECOND_NETWORK				,
 	//PRINTER_NETWORK ,
 };
 

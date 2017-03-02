@@ -36,7 +36,10 @@ public:
 	int             m_nCntBcrNum;
 	int             m_nMove_Flag[5];
 	int             m_nJobNextPos; //kwlee 2016.1229
-	
+	CString         m_strBarcode[2];
+	int             m_nPrintOutCheck;
+	int             m_nBarcodeReadCheck[2];
+	int             m_nBcrRetryCnt[2];
 	//kwlee 2017.0204
 	int             m_nPrintOutPutCnt;
 	int             m_nEmptyCntBufferCnt;
@@ -48,6 +51,7 @@ public:
 	long			m_lAxisCnt;              //현재의 IndexNum에서 사용 가능한 모터 수량 최대 4개  
 	long			m_lpAxisNum[4];	         //현재의 IndexNum에서 사용하는 모터 실재 번호를 가진다 
 	DWORD           m_dwTimeCheck[3];
+	DWORD           m_dwBcrTime[3];
 	bool            m_bSecondPos;
 	bool            m_PickSecondPOs;
 	int             m_nInterFaceStep;

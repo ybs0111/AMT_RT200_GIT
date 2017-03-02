@@ -13,6 +13,7 @@
 #include "Comm.h"
 #include ".\\Ctrl\\KeyBoard.h"
 
+#include "AlgMemory.h"
 // CWorkInterface 대화 상자입니다.
 #define TM_BARCODE			100
 
@@ -128,6 +129,12 @@ void CWorkInterface::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BTN_CLIENT_PORT_6,			m_btnClientPortSet[5]);
 	DDX_Control(pDX, IDC_BTN_CLIENT_IP_7,			m_btnClientIpSet[6]);
 	DDX_Control(pDX, IDC_BTN_CLIENT_PORT_7,			m_btnClientPortSet[6]);
+	//kwlee 2017.0302
+	DDX_Control(pDX, IDC_BTN_BCR_1_CLIENT_IP,			m_btnBcrIP[0]);
+	DDX_Control(pDX, IDC_BTN_BCR_1_CLIENT_PORT,			m_btnBcrPort[0]);
+	DDX_Control(pDX, IDC_BTN_BCR_2_CLIENT_IP,			m_btnBcrIP[1]);
+	DDX_Control(pDX, IDC_BTN_BCR_2_CLIENT_PORT,			m_btnBcrPort[1]);
+	//
 	DDX_Control(pDX, IDC_BTN_SERVER_PORT_1,			m_btnServerPortSet[0]);
 	DDX_Control(pDX, IDC_CHECK_UNLOAD_BARCODE_A,	m_btnUnldBcr[0]);
 	DDX_Control(pDX, IDC_CHECK_UNLOAD_BARCODE_B,	m_btnUnldBcr[1]);
@@ -136,6 +143,16 @@ void CWorkInterface::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BTN_BCODE_TRIGGER_ON2,		m_btnBcodeOn[1]);
 	DDX_Control(pDX, IDC_BTN_BCODE_TRIGGER_ON3,		m_btnBcodeOn[2]);
 	DDX_Control(pDX, IDC_BTN_BCODE_TRIGGER_OFF,		m_btnBcodeOff);
+	DDX_Control(pDX, IDC_GROUP_BCR_NETWORK_1, m_groupBcr1);
+	DDX_Control(pDX, IDC_GROUP_BCR_2_NETWORK, m_groupBcr2);
+	DDX_Control(pDX, IDC_MSG_BCR_1_CLIENT_IP, m_msgBcrIp_1);
+	DDX_Control(pDX, IDC_MSG_BCR_2_CLIENT_IP, m_msgBcrIp_2);
+	DDX_Control(pDX, IDC_BCR_1_CLIENT_IP, m_clientBcrIP1);
+	DDX_Control(pDX, IDC_BCR_2_CLIENT_IP, m_clientBcrIP2);
+	DDX_Control(pDX, IDC_MSG_BCR_1_CLIENT_PORT, m_msgBcrPort1);
+	DDX_Control(pDX, IDC_MSG_BCR_2_CLIENT_PORT, m_msgBcrPort2);
+	DDX_Control(pDX, IDC_EDIT_BCR_1_CLIENT_PORT, m_editBcrPort1);
+	DDX_Control(pDX, IDC_EDIT_BCR_2_CLIENT_PORT, m_editBcrPort2);
 }
 
 
@@ -174,6 +191,14 @@ BEGIN_MESSAGE_MAP(CWorkInterface, CDialog)
 	ON_BN_CLICKED(IDC_CHECK_UNLOAD_BARCODE_B, &CWorkInterface::OnBnClickedCheckUnloadBarcodeB)
 	ON_BN_CLICKED(IDC_BUTTON6, &CWorkInterface::OnBnClickedButton6)
 	ON_BN_CLICKED(IDC_BUTTON_CONNECT, &CWorkInterface::OnBnClickedButtonConnect)
+	ON_BN_CLICKED(IDC_BUTTON_READ_1, &CWorkInterface::OnBnClickedButtonRead1)
+	ON_BN_CLICKED(IDC_BUTTON_READ_2, &CWorkInterface::OnBnClickedButtonRead2)
+	ON_BN_CLICKED(IDC_BUTTON_BCR1, &CWorkInterface::OnBnClickedButtonBcr1)
+	ON_BN_CLICKED(IDC_BUTTON_BCR2, &CWorkInterface::OnBnClickedButtonBcr2)
+	ON_BN_CLICKED(IDC_BTN_BCR_1_CLIENT_IP, &CWorkInterface::OnBnClickedBtnBcr1ClientIp)
+	ON_BN_CLICKED(IDC_BTN_BCR_2_CLIENT_IP, &CWorkInterface::OnBnClickedBtnBcr2ClientIp)
+	ON_BN_CLICKED(IDC_BTN_BCR_1_CLIENT_PORT, &CWorkInterface::OnBnClickedBtnBcr1ClientPort)
+	ON_BN_CLICKED(IDC_BTN_BCR_2_CLIENT_PORT, &CWorkInterface::OnBnClickedBtnBcr2ClientPort)
 END_MESSAGE_MAP()
 
 
@@ -291,6 +316,19 @@ void CWorkInterface::OnInitGroupBox()
 	m_groupUnldBcrB.SetBorderColor(ORANGE_C);
 	m_groupUnldBcrB.SetBackgroundColor(WINDOW_UP1);
 	m_groupUnldBcrB.SetFontBold(TRUE);
+
+	m_groupBcr1.SetFont(clsFunc.OnLogFont(16));
+	m_groupBcr1.SetCatptionTextColor(BLUE_C);
+	m_groupBcr1.SetBorderColor(ORANGE_C);
+	m_groupBcr1.SetBackgroundColor(WINDOW_UP1);
+	m_groupBcr1.SetFontBold(TRUE);
+
+	m_groupBcr2.SetFont(clsFunc.OnLogFont(16));
+	m_groupBcr2.SetCatptionTextColor(BLUE_C);
+	m_groupBcr2.SetBorderColor(ORANGE_C);
+	m_groupBcr2.SetBackgroundColor(WINDOW_UP1);
+	m_groupBcr2.SetFontBold(TRUE);
+
 }
 
 void CWorkInterface::OnInitLabel()
@@ -437,6 +475,35 @@ void CWorkInterface::OnInitLabel()
 	m_msgServerPort1.SetColor(WHITE_C);
 	m_msgServerPort1.SetGradientColor(ORANGE_C);
 	m_msgServerPort1.SetTextColor(BLACK_C);
+
+	//kwlee 2017.0302
+	m_msgBcrIp_1.SetFont(clsFunc.m_pFont[1]);
+	m_msgBcrIp_1.SetWindowText(_T("IP"));
+	m_msgBcrIp_1.SetCenterText();
+	m_msgBcrIp_1.SetColor(WHITE_C);
+	m_msgBcrIp_1.SetGradientColor(ORANGE_C);
+	m_msgBcrIp_1.SetTextColor(BLACK_C);
+
+	m_msgBcrPort1.SetFont(clsFunc.m_pFont[1]);
+	m_msgBcrPort1.SetWindowText(_T("Port"));
+	m_msgBcrPort1.SetCenterText();
+	m_msgBcrPort1.SetColor(WHITE_C);
+	m_msgBcrPort1.SetGradientColor(ORANGE_C);
+	m_msgBcrPort1.SetTextColor(BLACK_C);
+
+	m_msgBcrIp_2.SetFont(clsFunc.m_pFont[1]);
+	m_msgBcrIp_2.SetWindowText(_T("IP"));
+	m_msgBcrIp_2.SetCenterText();
+	m_msgBcrIp_2.SetColor(WHITE_C);
+	m_msgBcrIp_2.SetGradientColor(ORANGE_C);
+	m_msgBcrIp_2.SetTextColor(BLACK_C);
+
+	m_msgBcrPort2.SetFont(clsFunc.m_pFont[1]);
+	m_msgBcrPort2.SetWindowText(_T("Port"));
+	m_msgBcrPort2.SetCenterText();
+	m_msgBcrPort2.SetColor(WHITE_C);
+	m_msgBcrPort2.SetGradientColor(ORANGE_C);
+	m_msgBcrPort2.SetTextColor(BLACK_C);
 }
 
 
@@ -652,6 +719,48 @@ void CWorkInterface::OnInitButton()
 	m_btnServerPortSet[0].SetFont(clsFunc.m_pFont[1]);
 	m_btnServerPortSet[0].SetTooltipText(_T("Server Port"));
 
+	//kwlee 2017.0302
+	m_btnBcrIP[0].SetBitmaps(IDC_BTN_BCR_1_CLIENT_IP, IDB_BITMAP_RECIPE1, WINDOW_DN1, IDB_BITMAP_RECIPE1, WINDOW_UP1);
+	m_btnBcrIP[0].SetColor(CButtonST::BTNST_COLOR_BK_IN, WINDOW_DN1);
+	m_btnBcrIP[0].SetColor(CButtonST::BTNST_COLOR_BK_OUT, WINDOW_UP1);
+	m_btnBcrIP[0].SetColor(CButtonST::BTNST_COLOR_BK_FOCUS, WINDOW_UP1);
+	m_btnBcrIP[0].SetColor(CButtonST::BTNST_COLOR_FG_IN, BLACK_C);
+	m_btnBcrIP[0].SetColor(CButtonST::BTNST_COLOR_FG_OUT, BLUE_C);
+	m_btnBcrIP[0].SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, BLUE_C);
+	m_btnBcrIP[0].SetFont(clsFunc.m_pFont[1]);
+	m_btnBcrIP[0].SetTooltipText(_T("Client IP Address"));
+
+	m_btnBcrPort[0].SetBitmaps(IDC_BTN_BCR_1_CLIENT_PORT, IDB_BITMAP_RECIPE1, WINDOW_DN1, IDB_BITMAP_RECIPE1, WINDOW_UP1);
+	m_btnBcrPort[0].SetColor(CButtonST::BTNST_COLOR_BK_IN, WINDOW_DN1);
+	m_btnBcrPort[0].SetColor(CButtonST::BTNST_COLOR_BK_OUT, WINDOW_UP1);
+	m_btnBcrPort[0].SetColor(CButtonST::BTNST_COLOR_BK_FOCUS, WINDOW_UP1);
+	m_btnBcrPort[0].SetColor(CButtonST::BTNST_COLOR_FG_IN, BLACK_C);
+	m_btnBcrPort[0].SetColor(CButtonST::BTNST_COLOR_FG_OUT, BLUE_C);
+	m_btnBcrPort[0].SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, BLUE_C);
+	m_btnBcrPort[0].SetFont(clsFunc.m_pFont[1]);
+	m_btnBcrPort[0].SetTooltipText(_T("Client Port"));
+
+	m_btnBcrIP[1].SetBitmaps(IDC_BTN_BCR_2_CLIENT_IP, IDB_BITMAP_RECIPE1, WINDOW_DN1, IDB_BITMAP_RECIPE1, WINDOW_UP1);
+	m_btnBcrIP[1].SetColor(CButtonST::BTNST_COLOR_BK_IN, WINDOW_DN1);
+	m_btnBcrIP[1].SetColor(CButtonST::BTNST_COLOR_BK_OUT, WINDOW_UP1);
+	m_btnBcrIP[1].SetColor(CButtonST::BTNST_COLOR_BK_FOCUS, WINDOW_UP1);
+	m_btnBcrIP[1].SetColor(CButtonST::BTNST_COLOR_FG_IN, BLACK_C);
+	m_btnBcrIP[1].SetColor(CButtonST::BTNST_COLOR_FG_OUT, BLUE_C);
+	m_btnBcrIP[1].SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, BLUE_C);
+	m_btnBcrIP[1].SetFont(clsFunc.m_pFont[1]);
+	m_btnBcrIP[1].SetTooltipText(_T("Client IP Address"));
+
+	m_btnBcrPort[1].SetBitmaps(IDC_BTN_BCR_2_CLIENT_PORT, IDB_BITMAP_RECIPE1, WINDOW_DN1, IDB_BITMAP_RECIPE1, WINDOW_UP1);
+	m_btnBcrPort[1].SetColor(CButtonST::BTNST_COLOR_BK_IN, WINDOW_DN1);
+	m_btnBcrPort[1].SetColor(CButtonST::BTNST_COLOR_BK_OUT, WINDOW_UP1);
+	m_btnBcrPort[1].SetColor(CButtonST::BTNST_COLOR_BK_FOCUS, WINDOW_UP1);
+	m_btnBcrPort[1].SetColor(CButtonST::BTNST_COLOR_FG_IN, BLACK_C);
+	m_btnBcrPort[1].SetColor(CButtonST::BTNST_COLOR_FG_OUT, BLUE_C);
+	m_btnBcrPort[1].SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, BLUE_C);
+	m_btnBcrPort[1].SetFont(clsFunc.m_pFont[1]);
+	m_btnBcrPort[1].SetTooltipText(_T("Client Port"));
+	////
+
 	m_btnApply.SetBitmaps(IDC_BTN_APPLY, IDB_BITMAP_APPLY_DN1, WINDOW_DN1, IDB_BITMAP_APPLY_UP1, WINDOW_UP1);
 	m_btnApply.SetColor(CButtonST::BTNST_COLOR_BK_IN, WINDOW_DN1);
 	m_btnApply.SetColor(CButtonST::BTNST_COLOR_BK_OUT, WINDOW_UP1);
@@ -728,6 +837,8 @@ void CWorkInterface::OnInitButton()
 	m_btnUnldBcr[1].SetFont(clsFunc.m_pFont[7]);
 	m_btnUnldBcr[1].SetCheck(st_recipe_info.bUnldBcrFlag[1]);
 
+	
+
 	if (st_recipe_info.bUnldBcrFlag[0]) m_btnUnldBcr[0].SetWindowTextW(_T("Unload Barcode A Enable"));
 	else m_btnUnldBcr[0].SetWindowTextW(_T("Unload Barcode A Disable"));
 
@@ -778,6 +889,21 @@ void CWorkInterface::OnInterface_Display()
 	m_clientIp6.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
 	str_tmp.Format(_T("%d"), m_nClientPort[6][1]);
 	m_editClientPort6.SetWindowText(str_tmp);
+
+	//kwlee 2017.0302
+	OnInterfaceIpAddress(m_strClientIp[BCR1_NETWORK][1]);
+	m_clientBcrIP1.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
+
+	str_tmp.Format(_T("%d"), m_nClientPort[BCR1_NETWORK][1]);
+	m_editBcrPort1.SetWindowText(str_tmp);
+
+	OnInterfaceIpAddress(m_strClientIp[BCR2_NETWORK][1]);
+	m_clientBcrIP2.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
+
+	str_tmp.Format(_T("%d"), m_nClientPort[BCR2_NETWORK][1]);
+	m_editBcrPort2.SetWindowText(str_tmp);
+	//
+
 
 	//OnInterfaceIpAddress(m_strClientIp[7][1]);
 	//m_clientIp7.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
@@ -1282,6 +1408,7 @@ int CWorkInterface::ConverterToPos(int mode, int data)
 void CWorkInterface::OnBnClickedBtnSerialConnect1()
 {
 	// jtkim 20150626
+
 	st_serial_info.nSerialPort[0]		= ConverterToData(COM_PORT, m_nPort[0][1]);
 	st_serial_info.nSerialData[0]		= ConverterToData(COM_DATA, m_nData[0][1]);
 	st_serial_info.nSerialStop[0]		= ConverterToData(COM_STOP, m_nStop[0][1]);
@@ -1297,7 +1424,7 @@ void CWorkInterface::OnBnClickedBtnClientIp1()
 	KeyBoard(&strKey);
 
 	if (strKey == _T("")) return;
-
+	m_strClientIp[0][1] = strKey;
 	m_strClientIp[0][1].MakeUpper();
 	m_strClientIp[0][1].TrimLeft(' ');               
 	m_strClientIp[0][1].TrimRight(' ');
@@ -1331,6 +1458,7 @@ void CWorkInterface::OnBnClickedBtnClientIp2()
 
 	if (strKey == _T("")) return;
 
+	m_strClientIp[1][1] = strKey;
 	m_strClientIp[1][1].MakeUpper();
 	m_strClientIp[1][1].TrimLeft(' ');               
 	m_strClientIp[1][1].TrimRight(' ');
@@ -1630,15 +1758,200 @@ int	CWorkInterface::OnBarcodeLoader()
 }
 
 
-int	CWorkInterface::OnBarcodeUnLoaderA()
-{
-	return RET_PROCEED;
-}
-
-int	CWorkInterface::OnBarcodeUnLoaderB()
-{
-	return RET_PROCEED;
-}
+// int	CWorkInterface::OnBarcodeUnLoaderA()
+// {
+// 	BYTE byData[100];
+// 
+// 	int nLength;
+// 
+// 	CString strTemp;
+// 	CString strBarcode;
+// 
+// 	switch (m_nBarcodeStep)
+// 	{
+// 	case 0:
+// 		if (clsBcrUnLdA.m_bConnect)
+// 		{
+// 			m_nBarcodeStep = 100;
+// 		}
+// 		else
+// 		{
+// 			if (clsBcrUnLdA.OnOpen(st_serial_info.nSerialPort[UNLD_BCR_A_PORT],		st_serial_info.nSerialBaudrate[UNLD_BCR_A_PORT],
+// 				st_serial_info.nSerialParity[UNLD_BCR_A_PORT],	st_serial_info.nSerialData[UNLD_BCR_A_PORT],
+// 				st_serial_info.nSerialStop[UNLD_BCR_A_PORT],		0x0d))
+// 			{
+// 				m_nBarcodeStep = 100;
+// 			}
+// 			else
+// 			{
+// 				m_nBarcodeStep = 0;
+// 				m_listBarcode.AddString(_T("Not Connected"));
+// 
+// 				return RET_ERROR;
+// 			}
+// 		}
+// 		break;
+// 
+// 	case 100:
+// 		m_dwWaitTime[0] = GetTickCount();
+// 
+// 		strTemp.Format(_T("LON%02d"), st_recipe_info.nBcrBank);
+// 		clsBcrUnLdA.OnDataSend(strTemp);
+// 
+// 		m_nBarcodeStep = 200;
+// 		break;
+// 
+// 	case 200:
+// 		if (clsBcrUnLdA.m_pCom->m_bRevFlag)
+// 		{
+// 			nLength = clsBcrUnLdA.m_pCom->m_nLength;
+// 			if (nLength > 0 )
+// 			{
+// 				if (nLength > 100)
+// 				{
+// 					clsBcrUnLdA.m_pCom->Empty();
+// 
+// 					m_nBarcodeStep = 100;
+// 					break;
+// 				}
+// 				clsBcrUnLdA.m_pCom->ReadData(byData, nLength);
+// 				strTemp		= clsFunc.OnCharToString((char*)byData, sizeof(byData));
+// 				strBarcode	= strTemp.Mid(0, nLength -1);
+// 
+// 				m_listBarcode.AddString(strBarcode);
+// 
+// 				m_nBarcodeStep = 0;
+// 
+// 				return RET_GOOD;
+// 			}
+// 			else
+// 			{
+// 				m_nBarcodeStep = 0;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			m_dwWaitTime[1] = GetTickCount();
+// 			m_dwWaitTime[2] = m_dwWaitTime[1] - m_dwWaitTime[0];
+// 
+// 			if (m_dwWaitTime[2] <= 0)
+// 			{
+// 				m_dwWaitTime[0] = GetTickCount();
+// 
+// 				break;
+// 			}
+// 
+// 			if (m_dwWaitTime[2] > (DWORD) 5000)
+// 			{
+// 				m_nBarcodeStep = 0;
+// 				m_listBarcode.AddString(_T("Barcode Receive Fail"));
+// 
+// 				return RET_ERROR;
+// 			}
+// 		}
+// 		break;
+// 	}
+// 	return RET_PROCEED;
+// }
+// 
+// 
+// 	
+// int	CWorkInterface::OnBarcodeUnLoaderB()
+// {
+// 	BYTE byData[100];
+// 
+// 	int nLength;
+// 
+// 	CString strTemp;
+// 	CString strBarcode;
+// 
+// 	switch (m_nBarcodeStep)
+// 	{
+// 	case 0:
+// 		if (clsBcrUnLdA.m_bConnect)
+// 		{
+// 			m_nBarcodeStep = 100;
+// 		}
+// 		else
+// 		{
+// 			if (clsBcrUnLdB.OnOpen(st_serial_info.nSerialPort[UNLD_BCR_B_PORT],		st_serial_info.nSerialBaudrate[UNLD_BCR_B_PORT],
+// 				st_serial_info.nSerialParity[UNLD_BCR_B_PORT],	st_serial_info.nSerialData[UNLD_BCR_B_PORT],
+// 				st_serial_info.nSerialStop[UNLD_BCR_B_PORT],		0x0d))
+// 			{
+// 				m_nBarcodeStep = 100;
+// 			}
+// 			else
+// 			{
+// 				m_nBarcodeStep = 0;
+// 				m_listBarcode.AddString(_T("Not Connected"));
+// 
+// 				return RET_ERROR;
+// 			}
+// 		}
+// 		break;
+// 
+// 	case 100:
+// 		m_dwWaitTime[0] = GetTickCount();
+// 
+// 		//strTemp.Format(_T("LON%02d"), st_recipe_info.nBcrBank);
+// 		strTemp.Format(_T("%cR%c"), 0x02, 0x03);
+// 		clsBcrUnLdB.OnDataSend(strTemp);
+// 		clsMem.OnNormalMessageWrite(strTemp);
+// 		m_nBarcodeStep = 200;
+// 		break;
+// 
+// 	case 200:
+// 		if (clsBcrUnLdB.m_pCom->m_bRevFlag)
+// 		{
+// 			nLength = clsBcrUnLdB.m_pCom->m_nLength;
+// 			if (nLength > 0 )
+// 			{
+// 				if (nLength > 100)
+// 				{
+// 					clsBcrUnLdB.m_pCom->Empty();
+// 
+// 					m_nBarcodeStep = 100;
+// 					break;
+// 				}
+// 				clsBcrUnLdB.m_pCom->ReadData(byData, nLength);
+// 				strTemp		= clsFunc.OnCharToString((char*)byData, sizeof(byData));
+// 				strBarcode	= strTemp.Mid(0, nLength -1);
+// 
+// 				m_listBarcode.AddString(strBarcode);
+// 				m_nBarcodeStep = 0;
+// 
+// 				return RET_GOOD;
+// 			}
+// 			else
+// 			{
+// 				m_nBarcodeStep = 0;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			m_dwWaitTime[1] = GetTickCount();
+// 			m_dwWaitTime[2] = m_dwWaitTime[1] - m_dwWaitTime[0];
+// 
+// 			if (m_dwWaitTime[2] <= 0)
+// 			{
+// 				m_dwWaitTime[0] = GetTickCount();
+// 
+// 				break;
+// 			}
+// 
+// 			if (m_dwWaitTime[2] > (DWORD) 5000)
+// 			{
+// 				m_nBarcodeStep = 0;
+// 				m_listBarcode.AddString(_T("Barcode Receive Fail"));
+// 
+// 				return RET_ERROR;
+// 			}
+// 		}
+// 		break;
+// 	}
+// 
+// 	return RET_PROCEED;
+// }
 
 int	CWorkInterface::OnRfidRead()
 {
@@ -1859,16 +2172,12 @@ void CWorkInterface::OnTimer(UINT_PTR nIDEvent)
 		case TM_BARCODE:
 			switch (m_nBarcodePos)
 			{
-				case 0:
-					nRet = OnBarcodeLoader();
-					break;
-
 				case 1:
-					nRet = OnBarcodeUnLoaderA();
+				//	nRet = OnBarcodeUnLoaderA();
 					break;
 
 				case 2:
-					nRet = OnBarcodeUnLoaderB();
+				//	nRet = OnBarcodeUnLoaderB();
 					break;
 			}
 
@@ -1910,11 +2219,19 @@ void CWorkInterface::OnBnClickedBtnSerialApply2()
 
 void CWorkInterface::OnBnClickedBtnSerialConnect2()
 {
+//	if (clsBcrUnLdA.m_bConnect) return;
+
 	st_serial_info.nSerialPort[1]		= ConverterToData(COM_PORT, m_nPort[1][1]);
 	st_serial_info.nSerialData[1]		= ConverterToData(COM_DATA, m_nData[1][1]);
 	st_serial_info.nSerialStop[1]		= ConverterToData(COM_STOP, m_nStop[1][1]);
 	st_serial_info.nSerialBaudrate[1]	= ConverterToData(COM_BAUDRATE, m_nRate[1][1]);
 	st_serial_info.nSerialParity[1]		= ConverterToData(COM_PARITY, m_nParity[1][1]);
+
+	//clsBcrUnLdA.OnClose();
+
+// 	//clsBcrUnLdA.OnOpen(st_serial_info.nSerialPort[UNLD_BCR_A_PORT],		st_serial_info.nSerialBaudrate[UNLD_BCR_A_PORT],
+// 		st_serial_info.nSerialParity[UNLD_BCR_A_PORT],	st_serial_info.nSerialData[UNLD_BCR_A_PORT],
+// 		st_serial_info.nSerialStop[UNLD_BCR_A_PORT],		0x0d);
 }
 
 
@@ -1932,11 +2249,19 @@ void CWorkInterface::OnBnClickedBtnSerialApply3()
 
 void CWorkInterface::OnBnClickedBtnSerialConnect3()
 {
+	//if (clsBcrUnLdB.m_bConnect) return;
+
 	st_serial_info.nSerialPort[2]		= ConverterToData(COM_PORT, m_nPort[2][1]);
 	st_serial_info.nSerialData[2]		= ConverterToData(COM_DATA, m_nData[2][1]);
 	st_serial_info.nSerialStop[2]		= ConverterToData(COM_STOP, m_nStop[2][1]);
 	st_serial_info.nSerialBaudrate[2]	= ConverterToData(COM_BAUDRATE, m_nRate[2][1]);
 	st_serial_info.nSerialParity[2]		= ConverterToData(COM_PARITY, m_nParity[2][1]);
+
+	//clsBcrUnLdB.OnClose();
+
+// 	clsBcrUnLdB.OnOpen(st_serial_info.nSerialPort[UNLD_BCR_B_PORT],		st_serial_info.nSerialBaudrate[UNLD_BCR_B_PORT],
+// 		st_serial_info.nSerialParity[UNLD_BCR_B_PORT],	st_serial_info.nSerialData[UNLD_BCR_B_PORT],
+// 		st_serial_info.nSerialStop[UNLD_BCR_B_PORT],		0x0d);
 }
 
 
@@ -1950,6 +2275,8 @@ void CWorkInterface::OnBnClickedBtnBcodeTriggerOn2()
 	m_nBarcodeStep	= 0;
 
 	SetTimer(TM_BARCODE, 100, NULL);
+
+	
 }
 
 
@@ -1963,6 +2290,8 @@ void CWorkInterface::OnBnClickedBtnBcodeTriggerOn3()
 	m_nBarcodeStep	= 0;
 
 	SetTimer(TM_BARCODE, 100, NULL);
+
+
 }
 
 
@@ -2081,4 +2410,104 @@ void CWorkInterface::OnBnClickedButton6()
 void CWorkInterface::OnBnClickedButtonConnect()
 {
 	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_CONNECT, 0);
+}
+
+
+void CWorkInterface::OnBnClickedButtonRead1()
+{
+	CString strTemp;
+
+// 	strTemp.Format(_T("%cR%c"), 0x02, 0x03);
+// 	st_client_info[EC_FIRST_NETWORK].strSend = strTemp;
+	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_8, CLIENT_SEND, 0);	
+}
+
+
+void CWorkInterface::OnBnClickedButtonRead2()
+{
+	CString strTemp;
+
+// 	strTemp.Format(_T("%cR%c"), 0x02, 0x03);
+// 	st_client_info[XGEM_NETWORK].strSend = strTemp;
+	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_9, CLIENT_SEND, 0);	
+}
+
+
+void CWorkInterface::OnBnClickedButtonBcr1()
+{
+	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_8, CLIENT_CONNECT, 0);
+}
+
+
+void CWorkInterface::OnBnClickedButtonBcr2()
+{
+	::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_9, CLIENT_CONNECT, 0);
+}
+
+
+void CWorkInterface::OnBnClickedBtnBcr1ClientIp()
+{
+	CString strKey;
+
+	KeyBoard(&strKey);
+
+	if (strKey == _T("")) return;
+
+	m_strClientIp[BCR1_NETWORK][1] = strKey;
+	m_strClientIp[BCR1_NETWORK][1].MakeUpper();
+	m_strClientIp[BCR1_NETWORK][1].TrimLeft(' ');               
+	m_strClientIp[BCR1_NETWORK][1].TrimRight(' ');
+
+	OnInterfaceIpAddress(m_strClientIp[BCR1_NETWORK][1]);
+
+	m_clientBcrIP1.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
+}
+
+
+void CWorkInterface::OnBnClickedBtnBcr2ClientIp()
+{
+	CString strKey;
+
+	KeyBoard(&strKey);
+
+	if (strKey == _T("")) return;
+
+	m_strClientIp[BCR2_NETWORK][1] = strKey;
+	m_strClientIp[BCR2_NETWORK][1].MakeUpper();
+	m_strClientIp[BCR2_NETWORK][1].TrimLeft(' ');               
+	m_strClientIp[BCR2_NETWORK][1].TrimRight(' ');
+
+	OnInterfaceIpAddress(m_strClientIp[BCR2_NETWORK][1]);
+
+	m_clientBcrIP2.SetAddress(m_byIp[0], m_byIp[1], m_byIp[2], m_byIp[3]);
+}
+
+
+void CWorkInterface::OnBnClickedBtnBcr1ClientPort()
+{
+	CString strTemp;
+
+	int nKey = m_nClientPort[BCR1_NETWORK][1];
+
+	KeyPadI(1, 100000, &nKey);
+
+	m_nClientPort[BCR1_NETWORK][1] = nKey;
+	strTemp.Format(_T("%d"), nKey);
+
+	m_editBcrPort1.SetWindowText(strTemp);
+}
+
+
+void CWorkInterface::OnBnClickedBtnBcr2ClientPort()
+{
+	CString strTemp;
+
+	int nKey = m_nClientPort[BCR2_NETWORK][1];
+
+	KeyPadI(1, 100000, &nKey);
+
+	m_nClientPort[BCR2_NETWORK][1] = nKey;
+	strTemp.Format(_T("%d"), nKey);
+
+	m_editBcrPort2.SetWindowText(strTemp);
 }

@@ -13,75 +13,75 @@ CFtpComm::~CFtpComm(void)
 {
 }
 
-BOOL CFtpComm::OnRecipeDownload(CString strPath)
-{
-	CString strData;
-	CString strFtpName	= _T("D:\\AMT8562\\");
-	CString strFilename = _T("RECIPE_RULE.TXT");
+ BOOL CFtpComm::OnRecipeDownload(CString strPath)
+ {
+// 	CString strData;
+// 	CString strFtpName	= _T("D:\\AMT8562\\");
+// 	CString strFilename = _T("RECIPE_RULE.TXT");
+// 
+// 	strFtpName += strFilename;
+// 	// jtkim 20150929
+//     DeleteFile(strFtpName);
+// 	
+// 	if (m_pFtp.Open(st_client_info[FTP_NETWORK].strIp, 
+// 					st_basic_info.strFtpUser,
+// 					st_basic_info.strFtpPass,
+// 					st_client_info[FTP_NETWORK].nPort))
+// 	{ 
+// 		strData.Format(_T("%s/%s"), strPath, strFilename);
+// 
+// 		m_pFtp.DownLoad(strData, strFtpName);
+// 
+// 		m_pFtp.Close();
+// 
+// 		return TRUE;
+// 	}
+// 
+// 	m_pFtp.Close();
+// 
+ 	return FALSE;
+ }
 
-	strFtpName += strFilename;
-	// jtkim 20150929
-    DeleteFile(strFtpName);
-	
-	if (m_pFtp.Open(st_client_info[FTP_NETWORK].strIp, 
-					st_basic_info.strFtpUser,
-					st_basic_info.strFtpPass,
-					st_client_info[FTP_NETWORK].nPort))
-	{ 
-		strData.Format(_T("%s/%s"), strPath, strFilename);
-
-		m_pFtp.DownLoad(strData, strFtpName);
-
-		m_pFtp.Close();
-
-		return TRUE;
-	}
-
-	m_pFtp.Close();
-
-	return FALSE;
-}
-
-BOOL CFtpComm::OnScrapCodeDownload(int nMode, CString strPath, CString strFilename)
-{
-	CString strData;
-	CString strFtpName = _T("D:\\AMT8562\\");
-
-	int i, j;
-
-	strFtpName += strFilename;
-	DeleteFile(strFtpName);
-
-	st_code_info[nMode].m_nScrapBin = BD_NONE;
-
-	for (i=0; i<10000; i++)
-	{
-		for (j=0; j<2; j++)
-		{
-			st_code_info[nMode].m_nScrapCode[i][j] = st_recipe_info.nTestRetest_Count;
-		}
-	}
-	
-	if (m_pFtp.Open(st_client_info[FTP_NETWORK].strIp, 
-					st_basic_info.strFtpUser,
-					st_basic_info.strFtpPass,
-					st_client_info[FTP_NETWORK].nPort))
-	{ 
-		strData.Format(_T("%s/%s"), strPath, strFilename);
-
-		m_pFtp.DownLoad(strData, strFtpName);
-
-		m_pFtp.Close();
-		st_code_info[nMode].m_nScrapBin = BD_DATA_GOOD;
-
-		return TRUE;
-	}
-
-	m_pFtp.Close();
-	st_code_info[nMode].m_nScrapBin = BD_DATA_REJECT;
-
-	return FALSE;
-}
+ BOOL CFtpComm::OnScrapCodeDownload(int nMode, CString strPath, CString strFilename)
+ {
+// 	CString strData;
+// 	CString strFtpName = _T("D:\\AMT8562\\");
+// 
+// 	int i, j;
+// 
+// 	strFtpName += strFilename;
+// 	DeleteFile(strFtpName);
+// 
+// 	st_code_info[nMode].m_nScrapBin = BD_NONE;
+// 
+// 	for (i=0; i<10000; i++)
+// 	{
+// 		for (j=0; j<2; j++)
+// 		{
+// 			st_code_info[nMode].m_nScrapCode[i][j] = st_recipe_info.nTestRetest_Count;
+// 		}
+// 	}
+// 	
+// 	if (m_pFtp.Open(st_client_info[FTP_NETWORK].strIp, 
+// 					st_basic_info.strFtpUser,
+// 					st_basic_info.strFtpPass,
+// 					st_client_info[FTP_NETWORK].nPort))
+// 	{ 
+// 		strData.Format(_T("%s/%s"), strPath, strFilename);
+// 
+// 		m_pFtp.DownLoad(strData, strFtpName);
+// 
+// 		m_pFtp.Close();
+// 		st_code_info[nMode].m_nScrapBin = BD_DATA_GOOD;
+// 
+// 		return TRUE;
+// 	}
+// 
+// 	m_pFtp.Close();
+// 	st_code_info[nMode].m_nScrapBin = BD_DATA_REJECT;
+// 
+ 	return FALSE;
+ }
 
 void CFtpComm::OnScrapCodeFind(int nMode, CString strLoadFile)
 {

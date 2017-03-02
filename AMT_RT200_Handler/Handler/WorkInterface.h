@@ -7,6 +7,8 @@
 #include "xShadeButton.h"	// 조그 버튼 생성 클래스 추가
 #include "GradientStatic.h"  // 그라데이션 라벨 클래스
 #include "BtnST.h"
+#include "afxcmn.h"
+#include "afxwin.h"
 
 class CWorkInterface : public CDialog
 {
@@ -39,7 +41,8 @@ public:
 	int				ConverterToPos(int nMode, int Ndata);
 	int				OnBarcodeLoader();
 	int				OnBarcodeUnLoaderA();
-	int				OnBarcodeUnLoaderB();
+ 	int				OnBarcodeUnLoaderB();
+
 	int				OnRfidRead();
 	int				OnRfidWrite();
 	void			OnInitGroupBox();
@@ -81,6 +84,8 @@ public:
 	CXPGroupBox		m_groupLdBcr;
 	CXPGroupBox		m_groupUnldBcrA;
 	CXPGroupBox		m_groupUnldBcrB;
+	CXPGroupBox		m_groupBcr1;
+	CXPGroupBox		m_groupBcr2;
 
 	CGradientStatic m_msgPort[5];
 	CGradientStatic m_msgRate[5];
@@ -103,7 +108,11 @@ public:
 	CGradientStatic m_msgClientIp7;
 	CGradientStatic m_msgClientPort7;
 	CGradientStatic m_msgServerPort1;
-
+	//kwlee 2017.0302
+	CGradientStatic m_msgBcrIp_1;
+	CGradientStatic m_msgBcrIp_2;
+	CGradientStatic m_msgBcrPort1;
+	CGradientStatic m_msgBcrPort2;
 
 	CButtonST		m_btnSerialApply[5];
 	CButtonST		m_btnSerialConvet[5];
@@ -115,6 +124,9 @@ public:
 	CButtonST		m_btnBcodeOn[3];
 	CButtonST		m_btnBcodeOff;
 	CButtonST		m_btnUnldBcr[2];
+	//kwlee 2017.0302
+	CButtonST       m_btnBcrIP[2];
+	CButtonST       m_btnBcrPort[2];
 	
 	CListBox		m_listBarcode;
 
@@ -131,6 +143,8 @@ public:
 	CIPAddressCtrl	m_clientIp5;
 	CIPAddressCtrl	m_clientIp6;
 	CIPAddressCtrl	m_clientIp7;
+	CIPAddressCtrl m_clientBcrIP1;
+	CIPAddressCtrl m_clientBcrIP2;
 
 	CEdit			m_editClientPort1;
 	CEdit			m_editClientPort2;
@@ -140,6 +154,8 @@ public:
 	CEdit			m_editClientPort6;
 	CEdit			m_editClientPort7;
 	CEdit			m_editServerPort1;
+	CEdit			m_editBcrPort1;
+	CEdit			m_editBcrPort2;
 
 	afx_msg void OnBnClickedBtnSerialApply1();
 	afx_msg void OnBnClickedBtnSerialConnect1();
@@ -175,4 +191,13 @@ public:
 	afx_msg void OnBnClickedCheckUnloadBarcodeB();
 	afx_msg void OnBnClickedButton6();
 	afx_msg void OnBnClickedButtonConnect();
+	afx_msg void OnBnClickedButtonRead1();
+	afx_msg void OnBnClickedButtonRead2();
+	afx_msg void OnBnClickedButtonBcr1();
+	afx_msg void OnBnClickedButtonBcr2();
+	
+	afx_msg void OnBnClickedBtnBcr1ClientIp();
+	afx_msg void OnBnClickedBtnBcr2ClientIp();
+	afx_msg void OnBnClickedBtnBcr1ClientPort();
+	afx_msg void OnBnClickedBtnBcr2ClientPort();
 };

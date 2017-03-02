@@ -54,7 +54,7 @@ void CBarcode_2D::OnDataSend(CString strData)
 	m_nBin = m_nCommand = BD_NONE;
 	m_strTrigger = strData;
 
-	::SendMessage(st_handler_info.hWnd, WM_BARCODE_MSG, BARCODE_TRIGGER_1, 0);
+	//::SendMessage(st_handler_info.hWnd, WM_BARCODE_MSG, BARCODE_TRIGGER_1, 0);
 }
 
 void CBarcode_2D::OnDataRevice(CString strData)
