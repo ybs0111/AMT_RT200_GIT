@@ -359,7 +359,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 // 	SendMessage(WM_SERVER_MSG_8, SERVER_CONNECT);
 
 	SendMessage(WM_SERVER_MSG_3, SERVER_CONNECT);
-
+	//SendMessage(WM_CLIENT_MSG_3, SERVER_CONNECT);
+	
 	SetTimer(TM_MAIN_REFRESH, 500, NULL);  // 리스트 파일 생성 타이머
 	SetTimer(TM_FILE_CREATE, 500, NULL);
 	//SetTimer(TM_GMS, 200, NULL);
@@ -1063,9 +1064,9 @@ void CMainFrame::OnMainVarDefaultSet()
 	//2017.0209
 		clsZebra.SetDarkness_TCP(0);
 		clsZebra.LabelTop_TCP(0);
-		clsZebra.OnPrintAnswerMode(2, 0, CLS_BCR_PRINTER1);
+	//	clsZebra.OnPrintAnswerMode(2, 0, CLS_BCR_PRINTER1);
 		clsZebra.Rewind_Mode_TCP(0);
-	
+// 	
 
 //	char chr_data[50];
 
@@ -2619,7 +2620,7 @@ LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 	case CLIENT_REV:
 		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_NETWORK].strRev);
 		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
-		//sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
+		sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
 		//kwlee 2017.0228
 		//st_Buffer_info.strBufferSerial[0][0].Format(_T("%s"),strMsg);
 		
@@ -3004,7 +3005,9 @@ LRESULT CMainFrame::OnClientZebraPrint(WPARAM wParam, LPARAM lParam)
 
 			//clsFunc.OnStringToChar(st_client_info[PRINTER_NETWORK].strSend, st_client_info[PRINTER_NETWORK].chSend);
 			
-			st_client_info[PRINTER_NETWORK].strSend.Format(_T("%s"),st_client_info[PRINTER_NETWORK].chSend);
+			//st_client_info[PRINTER_NETWORK].strSend.Format(_T("%s"),st_client_info[PRINTER_NETWORK].chSend);
+
+			st_client_info[PRINTER_NETWORK].strSend = st_client_info[PRINTER_NETWORK].chSend;
 			nLength = st_client_info[PRINTER_NETWORK].strSend.GetLength();
 
 			m_pClient[PRINTER_NETWORK]->Send(st_client_info[PRINTER_NETWORK].chSend, nLength);

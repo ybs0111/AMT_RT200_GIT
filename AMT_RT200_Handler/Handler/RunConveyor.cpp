@@ -2729,7 +2729,7 @@ void CRunConveyor::OnRearConvMove()
 		{
 			if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_ON)
 			{
-				
+				st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,OUT_CONV_OUT_POS,0); //kwlee 2017.0220
 				m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();				
 				m_nRunStep[CONV_OUT] = 1300;
 			}

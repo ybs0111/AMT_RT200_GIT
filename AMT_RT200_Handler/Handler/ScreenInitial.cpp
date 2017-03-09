@@ -105,7 +105,7 @@ void CScreenInitial::OnInitialUpdate()
 	OnInitButton();
 	OnInitProgress();
 	OnInitRadio();
-
+	clsZebra.OnPrintAnswerMode(2, 0, CLS_BCR_PRINTER1); //kwlee 2017.0309
 	OnInitChangeStatus(0);
 	
 	

@@ -1747,7 +1747,7 @@ struct tagSYNC_INFO
 	int         nBcrReq;
 	int         nBcrTestStart[2];
 	int         nPrinterStatus; //kwlee 2017.0218
-
+	int         nLabelCheckReq;
 	
 };
 extern tagSYNC_INFO	st_sync_info;

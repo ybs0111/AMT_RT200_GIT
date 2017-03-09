@@ -35,7 +35,7 @@ public:
 
 	CString			m_strClientIp[10][2];
 	CString			m_strRfidData[20];
-
+	int             m_nCntBcrNum;
 	void			OnInterfaceIpAddress(CString strIp);
 	int				ConverterToData(int nMode, int nPos);
 	int				ConverterToPos(int nMode, int Ndata);

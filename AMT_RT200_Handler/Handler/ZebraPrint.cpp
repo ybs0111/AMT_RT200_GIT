@@ -122,13 +122,14 @@ bool CZebraPrint::OnPrintStatus(CString strCheckData, int nPort)
 void CZebraPrint::Rewind_Mode_TCP(int port)
 {
 	CString str;
-	str = "^XA^MMT^XZ";
+	str = "^XA^MMTA^XZ";
 	//sprintf(st_client_info[port].chSend,"^XA^MMT^XZ");//2015,0109
 
 	OnStringToChar(str,st_client_info[port].chSend);
 
-
-	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + port, CLIENT_SEND, port); // LABEL CLIENT	
+//	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + port, CLIENT_SEND, port); // LABEL CLIENT	
+	//kwlee 2017.0308
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, port); // LABEL CLIENT	
 }
 
 void CZebraPrint::Print_Complete_Set_TCP(int port)
@@ -630,7 +631,9 @@ void CZebraPrint::OnPrintAnswerMode(int nMethod, int nMode, int nPort)//2014.110
 // 	{
 // 		strPrint = "^XA^SXK,D,N,N,192.168.1.16,9101^XZ";	// print AA´a E®AI ¾ECO.
 // 	}
-	
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_CONNECT, nPort); // LABEL CLIENT	
+	::Sleep(500);
+
 	if (nMethod == 0)
 	{
 		clsZebra.OnOutLptPort(strPrint);
@@ -644,18 +647,18 @@ void CZebraPrint::OnPrintAnswerMode(int nMethod, int nMode, int nPort)//2014.110
 	else
 	{
 		//sprintf(st_client_info[nPort].chSend,"%s",strPrint);
-		OnStringToChar( strPrint, st_client_info[nPort].chSend);
+		OnStringToChar( strPrint, st_client_info[PRINTER_NETWORK].chSend);
 		::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, nPort); // LABEL CLIENT	
 	}
 
-	if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
-	{
+	//if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+//	{
 // 		sprintf(st_msg.c_normal_msg,"[PRINT_Answer] %s", strPrint);
 // 		st_handler_info.cWndList->PostMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력 요청
 
 		strMsg.Format(_T("[PRINT_Answer] %s"), strPrint);
 		clsMem.OnNormalMessageWrite(strMsg);
-	}
+	//}
 }
 
 
@@ -804,7 +807,7 @@ CString	CZebraPrint::OnPrintLabelOffset(int nOffsetX, int nOffsetY, CString strT
 	nY = _wtoi(strOld.Mid(6, 3));
 
 	strNew.Format(_T("LH%03d,%03d"), nX + nOffsetX, nY + nOffsetY);
-	strNew = strNew + _T("^MMT");
+	strNew = strNew + _T("^MMTA,-120"); //kwlee 2017.0308
 	strData.Replace(strOld, strNew);
 
 	return strData;
@@ -846,7 +849,7 @@ void CZebraPrint::OnPrintOutput(int nMethod, int nPort, int nOffsetX, int nOffse
 // 		Func.On_LogFile_Add(LOG_TOTAL, sTmp);
 
 		strMsg.Format(_T("[PRINT_Output] %s"), strPrint);
-		clsMem.OnNormalMessageWrite(strMsg);
+		clsMem.OnAbNormalMessagWrite(strMsg);
 
 	}
 }
@@ -929,8 +932,11 @@ void CZebraPrint::SetDarkness_TCP(int nPort)
 	str_print_data = "";
 
 	mstr_data[0] = "~SD";
-
-	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_CONNECT, nPort); // LABEL CLIENT	
+	
+	//::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_CONNECT, nPort); // LABEL CLIENT
+	//kwlee 2017.0308
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_CONNECT, nPort); // LABEL CLIENT	
+	
 	::Sleep(500);
 	if(nPort == CLS_BCR_PRINTER1)
 	{
@@ -941,7 +947,9 @@ void CZebraPrint::SetDarkness_TCP(int nPort)
 		OnStringToChar( mstr_data[1], st_client_info[nPort].chSend );
 	}
 
-	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT	
+	//::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT
+	//kwlee 2017.0308
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, nPort); // LABEL CLIENT	
 
 }
 
@@ -959,7 +967,9 @@ void CZebraPrint::LabelTop_TCP(int nPort)
 	
 	mstr_data[0] = "^XA^LT";
 		
-	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_CONNECT, nPort); // LABEL CLIENT	
+	//::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_CONNECT, nPort); // LABEL CLIENT
+	//kwlee 2017.0308
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_CONNECT, nPort); // LABEL CLIENT	
 	::Sleep(500);
 	if(nPort == CLS_BCR_PRINTER1)
 	{
@@ -971,7 +981,9 @@ void CZebraPrint::LabelTop_TCP(int nPort)
 	}
 
 	
-	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT	
+	//::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT
+	//kwlee 2017.0306
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, nPort); // LABEL CLIENT	
 	
 }
 
@@ -999,7 +1011,9 @@ void CZebraPrint::LabelHome_TCP(int nPort)
 	}
 
 	
-	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT	
+	//::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG + nPort, CLIENT_SEND, nPort); // LABEL CLIENT	
+	//kwlee 2017.0308
+	::SendMessage(st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_SEND, nPort); // LABEL CLIENT	
 	
 }
 ////

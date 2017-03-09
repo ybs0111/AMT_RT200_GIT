@@ -23,7 +23,7 @@ CWorkInterface::CWorkInterface(CWnd* pParent /*=NULL*/)
 	: CDialog(CWorkInterface::IDD, pParent)
 {
 //	int i;
-
+	m_nCntBcrNum = 0;
 	m_nBarcodePos = 0;
 }
 
@@ -215,6 +215,7 @@ BOOL CWorkInterface::DestroyWindow()
 		OnDataApply();
 	}
 */
+	
 	return CDialog::DestroyWindow();
 }
 
@@ -2393,17 +2394,30 @@ void CWorkInterface::OnBnClickedCheckUnloadBarcodeB()
 
 void CWorkInterface::OnBnClickedButton6()
 {
+	CString strFormat;
+	CString strTmp1,strTmp2;
+
+	
+	
+
 	if (st_client_info[PRINTER_NETWORK].nConnect == CTL_YES)
 	{
-		 (clsFunc.m_pZebra[0])->m_nPrintStatusBin = NVR_NONE;
+		m_nCntBcrNum++;
 
+		 (clsFunc.m_pZebra[0])->m_nPrintStatusBin = NVR_NONE; 
+		// CString strFormat = _T("^XA^LH500,047^FO10,10^BY3^B3N,N,150,Y,N^FD123^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD456^FS^XZ");//2Nm150,Y,N,N^FD456^FS^XZ");
+		 //kwlee 2017.0306
+		 strTmp1.Format(_T("A%d"),m_nCntBcrNum);
+		 strTmp2.Format(_T("B%d"),m_nCntBcrNum);
 
-		 CString strFormat = _T("^XA^LH200,047^FO100,100^BY3^B3N,N,150,Y,N^FD123^FS^FO560,100^BY3^B2Nm150,Y,N,N^FD456^FS^XZ");
+		 //strFormat.Format(_T("^XA^LH500,045^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
+		 //kwlee
+		 strFormat.Format(_T("^XA^LH500,045^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
+		
 
-
+		 //strFormat = _T("^XA^SEE:UHANGUL.DAT^FS^CWJ,E:KFONT3.FNT^FS^CI26^FO110,110,^FD123YBS^FS^FO110,10^FS^FDABCYOON^FS^PQ1^XZ");
 		 (clsFunc.m_pZebra[0])->OnPrintOutput(2, PRINTER_NETWORK, 0, 0,  strFormat);
-
-	}
+	}	
 }
 
 
