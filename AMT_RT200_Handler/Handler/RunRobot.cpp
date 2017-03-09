@@ -2274,7 +2274,7 @@ int CRunRobot::OnFeederInterface()
 		break;
 
 	case 300:
-		if( st_sync_info.nLabelRecv == CTL_YES )
+		if( 1 || st_sync_info.nLabelRecv == CTL_YES )
 		{
 			m_nPrintOutCheck = TRUE;
 			st_sync_info.nLabelCheckReq = CTL_REQ;
@@ -2292,7 +2292,7 @@ int CRunRobot::OnFeederInterface()
 		break;
 
 	case 500:
-		if( st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY)
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_READY)
 		{
 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR;
 			m_nInterFaceStep = 600;
@@ -2300,9 +2300,10 @@ int CRunRobot::OnFeederInterface()
 		break;
 
 	case 600: //모터 이동을 완료했으니 모터 전원을 ON하자
+		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
 		if( OnBcrConveyorOnOff( IO_ON ) == RET_GOOD )
 		{
-			m_nInterFaceStep = 200;
+			m_nInterFaceStep = 1000;
 		}
 		break;
 
@@ -2384,8 +2385,8 @@ int CRunRobot::OnFeederInterface()
 			{
 				if (m_nBarcodeReadCheck[i] == TRUE)
 				{
-					if (st_Buffer_info.strBufferSerial[i][st_basic_info.nBarcodeReadPos] == m_strBarcode[i] && 
-						st_Buffer_info.strBufferSerial[i][st_basic_info.nBarcodeReadPos] !=_T("") && m_strBarcode[i] != _T(""))
+					if (1 || st_Buffer_info.strBufferSerial[i][st_basic_info.nBarcodeReadPos] == m_strBarcode[i] && 
+						 st_Buffer_info.strBufferSerial[i][st_basic_info.nBarcodeReadPos] !=_T("") && m_strBarcode[i] != _T(""))
 					{
 						st_Buffer_info.nBufferData[i][st_basic_info.nBarcodeReadPos][BIN] = GOOD;
 					}
@@ -3389,9 +3390,10 @@ void CRunRobot::OnRobotRun()
 
 		//일단 AC파워를 켜고 PITCH를 움직이자
 	case 7010:
+		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
 		if( OnBcrConveyorOnOff( IO_ON ) == RET_GOOD )
 		{
-			m_nInterFaceStep = 7020;
+			m_nRunStep = 7020;
 		}
 		break;
 
@@ -3399,14 +3401,14 @@ void CRunRobot::OnRobotRun()
 		st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_REQ;
 		st_sync_info.nLabelRbt_Dvc_Req[1] = BCR_UNLOAD;
 		st_sync_info.nLabelRbt_Dvc_Req[2] = 5;
-		m_nInterFaceStep = 7030;
+		m_nRunStep = 7030;
 		break;
 
 	case 7030:
 		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_READY )
 		{
 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR;
-			m_nInterFaceStep = 7100;
+			m_nRunStep = 7100;
 		}
 		break;
 

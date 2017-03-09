@@ -208,15 +208,14 @@ void CRunLabelFeeder::OnRunFeeder()
 		break;
 
 	case 2000:
-		if( ( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) >= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] - st_motor_info[M_LABEL_PITCH].d_allow )  && 
+		if(( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) >= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] - st_motor_info[M_LABEL_PITCH].d_allow )  && 
 			( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) <= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
 		{
-			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
 			m_nRunStep = 2200;
 		}
 		else//로드일때는 무조건 한칸씩만 움직인다.
 		{
-			m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK];
+			m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) - st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK];
 			m_nRunStep = 2100;
 		}
 		break;
@@ -242,6 +241,7 @@ void CRunLabelFeeder::OnRunFeeder()
 
 		if (nRet_1 == BD_GOOD) //좌측으로 이동
 		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
 			m_nRunStep = 3000;
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
@@ -261,10 +261,9 @@ void CRunLabelFeeder::OnRunFeeder()
 		break;
 
 	case 4000:
-		if( ( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) >= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] - st_motor_info[M_LABEL_PITCH].d_allow )  && 
+		if( 0 && ( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) >= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] - st_motor_info[M_LABEL_PITCH].d_allow )  && 
 			( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) <= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
 		{
-			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
 			m_nRunStep = 4200;
 		}
 		else//로드일때는 무조건 한칸씩만 움직인다.
@@ -316,6 +315,7 @@ void CRunLabelFeeder::OnRunFeeder()
 
 		if (nRet_1 == BD_GOOD) //좌측으로 이동
 		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
 			m_nRunStep = 5000;
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
