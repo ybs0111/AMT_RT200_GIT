@@ -2877,6 +2877,8 @@ LRESULT CMainFrame::OnServerZebraPrinter(WPARAM wParam, LPARAM lParam)
 		strMsg.Format(_T("%s"), st_server_info[PRINTER_NETWORK].strRev);
 		//sRcv = sTmp.Mid(0, st_client_info[PRINTER_NETWORK].nRevLength);
 
+		st_sync_info.nLabelRecv = CTL_YES;
+
 		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
 		{
 			//strMsg.Format(_T("[PRINTER_CLIENT_NETWORK] %s"), st_client_info[PRINTER_NETWORK].strRev);

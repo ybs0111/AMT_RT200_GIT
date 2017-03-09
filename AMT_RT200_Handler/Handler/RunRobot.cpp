@@ -1717,6 +1717,7 @@ int CRunRobot::OnPrinterFeeder(int nCnt, int nFailCheck)
 {
 	int nRet = 0;
 	CString strFormat;
+	int nFuncRet = RET_PROCEED;
 
 	int max = MAX_BUFFER;
 
@@ -1741,35 +1742,20 @@ int CRunRobot::OnPrinterFeeder(int nCnt, int nFailCheck)
   		st_Buffer_info.strBufferSerial[0][0].Format(_T("%d"),m_nCntBcrNum);
   		st_Buffer_info.strBufferSerial[1][0].Format(_T("%d"),m_nCntBcrNum);
 
-		//kwlee 2017.0306
-// 		if (st_client_info[PRINTER_NETWORK].nConnect == CTL_YES)
-// 		{
-		
-		(clsFunc.m_pZebra[0])->m_nPrintStatusBin = NVR_NONE; 
+		st_sync_info.nLabelRecv = CTL_NO;
 
 		strFormat.Format(_T("^XA^LH500,047^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),st_Buffer_info.strBufferSerial[0][0],st_Buffer_info.strBufferSerial[1][0]);
 		(clsFunc.m_pZebra[0])->OnPrintOutput(2, PRINTER_NETWORK, 0, 0,  strFormat);
-		m_nCntBcrNum++;
-		
-		m_nPrintOutCheck = TRUE; //kwlee 2017.0302 임시 변수. 추후. Data 받아서 Complete 확인 후 변수 셋팅.
-		return RET_GOOD;
-//		}
-// 		else
-// 		{
-// 			::SendMessage( st_handler_info.hWnd, WM_CLIENT_MSG_3, CLIENT_CONNECT, 0);
-// 		}
+		m_nCntBcrNum++;		
+		nFuncRet = RET_GOOD;
 	}
 	else if (nCnt >= 39)
-	{
-		
-		m_nPrintOutCheck = TRUE; //kwlee 2017.0302
-		return RET_GOOD;
+	{		
+		st_sync_info.nLabelRecv = CTL_YES;
+		nFuncRet = RET_GOOD;
 	}
-	else
-	{
 
-	}
-	return RET_PROCEED;
+	return nFuncRet;
 }
 void CRunRobot::OnLabelSensorCheck()
 {
@@ -2346,6 +2332,7 @@ int CRunRobot::OnFeederInterface()
 		//kwlee 2017.0302
 		if(st_sync_info.nBcrReq == CTL_REQ)
 		{
+
 			if ( 0 && st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				m_dwBcrTime[0] = GetTickCount();
@@ -2363,6 +2350,7 @@ int CRunRobot::OnFeederInterface()
 				}
 				m_dwBcrTime[0] = GetTickCount();
 				m_nInterFaceStep = 110;
+
 			}
 		}
 		break;
@@ -2380,7 +2368,7 @@ int CRunRobot::OnFeederInterface()
 				st_client_info[PRINTER_NETWORK].nConnect == YES)
 			{
 				st_sync_info.nBcrReq = CTL_READY;
-				m_nInterFaceStep = 200;
+				m_nInterFaceStep = 120;
 			}
 			else 
 			{
@@ -2401,20 +2389,56 @@ int CRunRobot::OnFeederInterface()
 		}
 		break;
 
+	case 120:
+		if( OnBcrConveyorOnOff( IO_OFF) == RET_GOOD )
+		{
+			m_nInterFaceStep = 200;
+		}
+		break;
+
 	case 200:
 		//Printer 출력
 		nRet = OnPrinterFeeder(m_nPrintOutPutCnt,m_nLabelFailCheck); //Buffer 저장.
 		if (nRet == RET_GOOD)
 		{
-			//kwlee 2017.0307
-			st_sync_info.nLabelCheckReq = CTL_REQ;
-			//
-
-			m_nInterFaceStep = 1000;
+			m_nInterFaceStep = 300;
 		}
 		else if (nRet == RET_ERROR)
 		{
 			CTL_Lib.Alarm_Error_Occurrence(720, dWARNING, m_strAlarmCode);
+		}
+		break;
+
+	case 300:
+		if( st_sync_info.nLabelRecv == CTL_YES )
+		{
+			m_nPrintOutCheck = TRUE;
+			st_sync_info.nLabelCheckReq = CTL_REQ;
+			m_nInterFaceStep = 400;
+		}
+		break;
+
+		//모터를 끄고 라벨을 출력완료했으니
+		//피더를움직이자
+
+	case 400:
+		st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_REQ;
+		st_sync_info.nLabelRbt_Dvc_Req[1] = BCR_LOAD;
+		m_nInterFaceStep = 500;
+		break;
+
+	case 500:
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY)
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR;
+			m_nInterFaceStep = 600;
+		}
+		break;
+
+	case 600: //모터 이동을 완료했으니 모터 전원을 ON하자
+		if( OnBcrConveyorOnOff( IO_ON ) == RET_GOOD )
+		{
+			m_nInterFaceStep = 200;
 		}
 		break;
 
@@ -2424,6 +2448,7 @@ int CRunRobot::OnFeederInterface()
 		//Print 출력후 넘어온 값 Parsing "Complete" 이면 변수 셋팅
 		if (m_nPrintOutCheck == TRUE)
 		{
+
 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
 			{
 				st_Buffer_info.nBufferData[0][0][EXIST] = YES;
@@ -2699,15 +2724,10 @@ int CRunRobot::OnGetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo)
 
 void CRunRobot::OnRobotRun()
 {
-	//return;//Test 이후 해제
-
 	int nRet_1, nRet_2=0, nRet_3=0, nRect[12]={0,};
 	int nRet,nTemp = 0;
 	double dCurrentPos = 0;
 	CString str;
-
-//	bool bOnePicker;
-	//m_nRunStep = 0;
 	
 	m_dPitch_Y = (st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST] - st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_END])/5;
 	m_dPitch_x = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST] - st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_END];
@@ -2725,17 +2745,7 @@ void CRunRobot::OnRobotRun()
 	{
 		m_nPickCnt = st_basic_info.nColCnt * st_basic_info.nRowCnt;
 	}
-	//m_nPickCnt = st_basic_info.nPcbCnt;
-	//kwlee 2017.0209
-// 	if (FAS_IO.get_in_bit(st_io_info.i_LfAlarmChk,IO_ON) == IO_ON)
-// 	{	
-// 		//507151 1 A "Label Feeder LF_ALARM On Check Error."
-// 		m_strAlarmCode.Format(_T("507151"));
-// 		CTL_Lib.Alarm_Error_Occurrence(600, dWARNING, m_strAlarmCode);
-// 	//	m_nRunStep = 0;
-// 
-// 		return;
-// 	}
+
 	if(st_sync_info.TurnConvJobReady[CONVEYOR] == CTL_COMPLETE)
 		st_sync_info.TurnConvJobReady[ROBOT] = CTL_NONE;
 
@@ -3262,7 +3272,6 @@ void CRunRobot::OnRobotRun()
 				if( st_sync_info.nBcrReq == CTL_CHANGE || st_sync_info.nBcrReq == CTL_CLEAR)
 				{
 					st_sync_info.nBcrReq = CTL_REQ;
-					FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn, IO_ON); //kwlee 2017.0309
 				}
 			}
 			m_dwTimeCheck[0] = GetCurrentTime();
@@ -3278,7 +3287,6 @@ void CRunRobot::OnRobotRun()
 		if( m_dwTimeCheck[2] >  1000)
 		{
 			m_dwTimeCheck[0] = GetCurrentTime();
-			/*FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn, IO_ON);*/
 			m_nRunStep = 3200;
 		}
 		break;
@@ -3296,7 +3304,6 @@ void CRunRobot::OnRobotRun()
 			if (st_sync_info.nPrinterStatus == BD_READY && st_sync_info.nBcrReq == CTL_CHANGE)
 			{
 				//m_nRunStep = 4000;
-				//FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn, IO_ON);
 				m_nRunStep = 3210;
 			}
 		}
@@ -3336,7 +3343,6 @@ void CRunRobot::OnRobotRun()
 			nRet = FAS_IO.get_in_bit(st_io_info.i_LabelStopperCylinderChk,IO_ON);
 			if (nRet == IO_ON)
 			{
-				FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn, IO_OFF);
 				m_nRunStep = 4000;
 			}
 			else
@@ -3514,7 +3520,7 @@ void CRunRobot::OnRobotRun()
 		if(nRet_1 == RET_GOOD)
 		{
 			mn_Retry = 0;
-			m_nRunStep = 7100;	
+			m_nRunStep = 7010;	
 		}
 		else if(nRet_1 == RET_ERROR)
 		{
@@ -3523,6 +3529,28 @@ void CRunRobot::OnRobotRun()
 		break;
 		//Label Feeder Motor 동작 추가.
 
+		//일단 AC파워를 켜고 PITCH를 움직이자
+	case 7010:
+		if( OnBcrConveyorOnOff( IO_ON ) == RET_GOOD )
+		{
+			m_nInterFaceStep = 7020;
+		}
+		break;
+
+	case 7020:
+		st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_REQ;
+		st_sync_info.nLabelRbt_Dvc_Req[1] = BCR_UNLOAD;
+		st_sync_info.nLabelRbt_Dvc_Req[2] = 5;
+		m_nInterFaceStep = 7030;
+		break;
+
+	case 7030:
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_READY )
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR;
+			m_nInterFaceStep = 7100;
+		}
+		break;
 
 	case 7100:
 		OnSetPickerUpDn(0, PICKER_UP, m_npTemp_Picker_YesNo);
@@ -4362,6 +4390,41 @@ void CRunRobot::OnRobotRun()
 	}
 	/*return RET_PROCEED;*/
 }
+
+
+int CRunRobot::OnBcrConveyorOnOff(int nOnOff)
+{
+	int nFuncRet = RET_PROCEED;
+	switch(m_nConvStep)
+	{
+	case 0:
+		FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn, nOnOff);
+		m_dwBcrConvMotorWaitTime[0] = GetTickCount();
+		m_nConvStep = 100;
+		break;
+
+	case 100:
+		m_dwBcrConvMotorWaitTime[1] = GetTickCount();
+		m_dwBcrConvMotorWaitTime[2] = m_dwBcrConvMotorWaitTime[1] - m_dwBcrConvMotorWaitTime[0];
+		if( m_dwBcrConvMotorWaitTime[2] <= 0 ) m_dwBcrConvMotorWaitTime[0] = GetTickCount();
+		if( m_dwBcrConvMotorWaitTime[2] > 2000 )
+		{
+			m_nConvStep = 200;
+		}
+		break;
+
+	case 200:
+		nFuncRet = RET_GOOD;
+		m_nConvStep = 0;
+		break;
+
+	}
+
+
+	return nFuncRet;
+}
+
+
 
 
 //kwlee 2017.0216

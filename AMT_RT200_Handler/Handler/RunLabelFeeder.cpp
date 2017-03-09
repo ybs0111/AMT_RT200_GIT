@@ -14,15 +14,29 @@ CRunLabelFeeder::CRunLabelFeeder(void)
 	
 }
 
-
 CRunLabelFeeder::~CRunLabelFeeder(void)
 {
 }
 
-void CRunLabelFeeder::OnRunFeeder()
+
+void CRunLabelFeeder::OnThreadRUN()
 {
 
+	switch(st_handler_info.nRunStatus)
+	{
+
+	case dINIT:
+		OnRunInit();
+		break;
+
+	case dRUN:
+		OnRunFeeder();
+		break;
+	}
+	//	OnFeederInterface();
 }
+
+
 void CRunLabelFeeder::OnRunInit()
 {
 
@@ -89,7 +103,7 @@ void CRunLabelFeeder::OnRunInit()
 		break;
 
 	case 2000:
-		nRet[0] = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_READY], COMI.mn_manualspeed_rate);
+		nRet[0] = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY], COMI.mn_manualspeed_rate);
 
 		if (nRet[0] == BD_GOOD) //좌측으로 이동
 		{
@@ -125,7 +139,7 @@ void CRunLabelFeeder::OnRunInit()
 
 		if (m_dwWFeederWaitTime[2] > 3000)
 		{
-			FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_OFF);
+			//FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_OFF);
 			m_nInitStep = 2300;
 		}
 		//kwlee 2017.0217 test
@@ -160,22 +174,175 @@ void CRunLabelFeeder::OnRunInit()
 	
 }
 
-void CRunLabelFeeder::OnThreadRUN()
-{
-	
-	switch(st_handler_info.nRunStatus)
-	{
 
-	case dINIT:
-		OnRunInit();
+// #define  BCR_LOAD				1//바코드 공급
+// #define  BCR_UNLOAD			2//로보트가 바코드 픽업
+void CRunLabelFeeder::OnRunFeeder()
+{
+	int nRet_1 = 0;
+	double dTemp = 0.0;
+
+	switch( m_nRunStep )
+	{
+	case 0:
+		m_nRunStep = 1000;
 		break;
 
-	case dRUN:
-		OnRunFeeder();
+	case 1000:
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_REQ )
+		{
+			if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_LOAD )
+			{
+				m_nRunStep = 2000;
+			}
+			else if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_UNLOAD )
+			{
+				m_nRunStep = 4000;
+			}
+			else
+			{
+				//error 출력
+				break;
+			}
+		}
+		break;
+
+	case 2000:
+		if( ( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) >= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] - st_motor_info[M_LABEL_PITCH].d_allow )  && 
+			( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) <= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
+			m_nRunStep = 2200;
+		}
+		else//로드일때는 무조건 한칸씩만 움직인다.
+		{
+			m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK];
+			m_nRunStep = 2100;
+		}
+		break;
+
+	case 2100:
+		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, m_dlTargetpos, COMI.mn_manualspeed_rate);
+
+		if (nRet_1 == BD_GOOD) //좌측으로 이동
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
+			m_nRunStep = 3000;
+
+		}
+		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
+		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
+			CTL_Lib.Alarm_Error_Occurrence(207, dWARNING, st_alarm_info.strCode);
+			m_nRunStep = 2100;
+		}
+		break;
+
+	case 2200:
+		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] , COMI.mn_manualspeed_rate);
+
+		if (nRet_1 == BD_GOOD) //좌측으로 이동
+		{
+			m_nRunStep = 3000;
+		}
+		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
+		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
+			CTL_Lib.Alarm_Error_Occurrence(207, dWARNING, st_alarm_info.strCode);
+			m_nRunStep = 2100;
+		}
+		break;
+
+
+	case 3000:
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_CLEAR )
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_NO;
+			m_nRunStep = 1000;
+		}
+		break;
+
+	case 4000:
+		if( ( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) >= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] - st_motor_info[M_LABEL_PITCH].d_allow )  && 
+			( COMI.Get_MotCurrentPos( M_LABEL_PITCH ) <= st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
+			m_nRunStep = 4200;
+		}
+		else//로드일때는 무조건 한칸씩만 움직인다.
+		{
+			if( st_sync_info.nLabelRbt_Dvc_Req[2] > 0 && st_sync_info.nLabelRbt_Dvc_Req[2] < 5 )
+			{
+				dTemp = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK] * st_sync_info.nLabelRbt_Dvc_Req[2];
+				if(  dTemp <= ( st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
+				{
+					m_dlTargetpos = dTemp;
+				}
+				else
+				{
+					//위치를 벗어난다. 위험 값을 비교하거나 티칭값이 잘못되어 잇는지 확인필요
+					break;
+				}
+			}
+			else if( st_sync_info.nLabelRbt_Dvc_Req[2] == 5 )
+			{
+				m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
+			}
+			else
+			{
+				//error
+				break;
+			}
+			m_nRunStep = 4100;
+		}
+		break;
+
+	case 4100:
+		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, m_dlTargetpos, COMI.mn_manualspeed_rate);
+
+		if (nRet_1 == BD_GOOD) //좌측으로 이동
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
+			m_nRunStep = 5000;
+
+		}
+		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
+		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
+			CTL_Lib.Alarm_Error_Occurrence(207, dWARNING, st_alarm_info.strCode);
+			m_nRunStep = 4100;
+		}
+		break;
+
+	case 4200:
+		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] , COMI.mn_manualspeed_rate);
+
+		if (nRet_1 == BD_GOOD) //좌측으로 이동
+		{
+			m_nRunStep = 5000;
+		}
+		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
+		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
+			CTL_Lib.Alarm_Error_Occurrence(207, dWARNING, st_alarm_info.strCode);
+			m_nRunStep = 2100;
+		}
+		break;
+
+	case 5000:
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_CLEAR )
+		{
+			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_NO;
+			m_nRunStep = 1000;
+		}
+		break;
+
+
+
+	default:
 		break;
 	}
-//	OnFeederInterface();
+
 }
+
+
+
 void CRunLabelFeeder::OnSetRejectCyl(int nMode, int nUpDn)
 {
 	if (nMode > 1) return;
@@ -201,7 +368,7 @@ void CRunLabelFeeder::OnSetRejectCyl(int nMode, int nUpDn)
 int CRunLabelFeeder::OnGetRejectCyl(int nMode, int nUpDn)
 {
 	int nWaitTime = WAIT_PICKER_UP_DN;
-	int nRet;
+
 	if (nUpDn == IO_OFF)
 	{
 		if (m_bCylFlag[nMode] == false &&
