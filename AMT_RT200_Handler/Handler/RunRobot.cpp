@@ -3503,6 +3503,12 @@ void CRunRobot::OnRobotRun()
 				//버리는 동작 .
 				if (m_nLabelFailCheck == FALSE)
 				{
+
+					//20170310
+					m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;		
+					st_sync_info.nBcrReq = CTL_REQ;
+
+
 					m_nLabelFailCheck = TRUE;
 					m_nRunStep = 510;	
 					break;
