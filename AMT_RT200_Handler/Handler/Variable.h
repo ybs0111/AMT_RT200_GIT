@@ -774,6 +774,10 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 
 #define CLS_BCR_PRINTER1			0
 
+
+#define  BCR_LOAD				1//바코드 공급
+#define  BCR_UNLOAD			2//로보트가 바코드 픽업
+
 enum PICKERUPDN
 {
 	PICKER_UP = 0,
@@ -1748,6 +1752,10 @@ struct tagSYNC_INFO
 	int         nBcrTestStart[2];
 	int         nPrinterStatus; //kwlee 2017.0218
 	int         nLabelCheckReq;
+
+	int			nLabelRecv;
+
+	int			nLabelRbt_Dvc_Req[3]; //[0] Req Ready Clear [1]:방향 정방향 역방향  [2]:로봇움직이는 거리:바코드 한개만큼인지 5개만큼인지  
 	
 };
 extern tagSYNC_INFO	st_sync_info;
@@ -2652,10 +2660,11 @@ enum CONV_WAIT_TIME
 };
 
 
-enum LABEL_FEEDER_1_POS
+enum LABEL_FEEDER_POS
 {
-	LABEL_FEEDER_1_READY		  = 0,
-	LABEL_FEEDER_1_WORK		, 
+	LABEL_FEEDER_READY		  = 0,
+	LABEL_FEEDER_5_WORK,
+	LABEL_FEEDER_1_WORK,
 	 
 };
 

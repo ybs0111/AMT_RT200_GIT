@@ -18,6 +18,7 @@ public:
 
 public:
 	int m_nInitStep;
+	int m_nRunStep;
 	int m_nLabelFeeder;
 	int m_nInterFaceStep;
 	bool m_bCylFlag[2];
@@ -27,6 +28,8 @@ public:
 	long m_lWaitInterFace[3];
 
 	CString m_strAlarmCode;
+
+	double m_dlTargetpos;
 	
 };
 

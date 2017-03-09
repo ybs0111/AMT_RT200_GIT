@@ -9,6 +9,7 @@ public:
 	
 	
 public:
+	int				m_nConvStep;
 	int				m_nRunStep;
 	int             m_nFeederStep;
 	int				m_nInitStep;
@@ -64,6 +65,7 @@ public:
 	DWORD           m_dwLabelOutTime[3]; //kwlee 2017.0307
 	DWORD           m_dwClampUpDnWaitTime[2][3];
 	DWORD           m_dwStopperCylWaitTime[3];
+	DWORD           m_dwBcrConvMotorWaitTime[3];
 
 	bool            m_bSecondPos;
 	bool            m_PickSecondPOs;
@@ -110,6 +112,7 @@ public:
 	void    OnBarcodeReadCheck();
 	void    OnResetRejectData();
 	void    OnLabelSensorCheck(); //kwlee 2017.0307
+	int OnBcrConveyorOnOff(int nOnOff);
 };
 
 extern CRunRobot	clsRunRobot;
