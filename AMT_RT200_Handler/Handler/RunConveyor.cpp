@@ -283,7 +283,6 @@ void  CRunConveyor::Smema_Rear()
 	int nRet[2];
 	CString strTemp;
 
-
 	switch(m_nRearSmemaStep)
 	{
 	case 0:
@@ -313,7 +312,6 @@ void  CRunConveyor::Smema_Rear()
 		if (m_lWait_Smema[2] > 1000)
 		{
 			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_ON);
-			//Ready 신호 On 시 모터 on
 			st_sync_info.nSmema_Tray_Output_Req = CONV_READY;
 			m_lWait_Smema[0] = GetCurrentTime();
 			
@@ -355,7 +353,6 @@ void  CRunConveyor::Smema_Rear()
 				m_nRearSmemaStep = 500;
 			}
 		}	
-	
 		break;
 
 	case 500:

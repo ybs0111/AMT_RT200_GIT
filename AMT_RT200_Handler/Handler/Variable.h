@@ -2018,6 +2018,7 @@ struct PCB_info
 	int nPcbType;
 	int	nPcbTurn;
 	int nPcbSelect[2][10];
+	int nPcbJudge[2][10]; //kwlee 2017.0310
 	int nLeftSize;
 	int m_arrayID;
 	CString strPcbSerial[2][10];
