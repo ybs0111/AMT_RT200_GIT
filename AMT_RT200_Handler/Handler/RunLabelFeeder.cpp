@@ -127,6 +127,7 @@ void CRunLabelFeeder::OnRunInit()
 		//kwlee 2017.0217 test
 		//m_nInitStep = 2200;
 		break;
+		
 
 	case 2200:
 		m_dwWFeederWaitTime[1] = GetCurrentTime();
@@ -348,8 +349,6 @@ void CRunLabelFeeder::OnRunFeeder()
 	}
 
 }
-//unstash
-//ybs
 
 void CRunLabelFeeder::OnSetRejectCyl(int nMode, int nUpDn)
 {
