@@ -3250,6 +3250,8 @@ void CRunRobot::OnRobotRun()
 		{
 			m_npTemp_Picker_YesNo[i] = CTL_NO;
 		}
+
+		m_bLabelFeederNum = false;
 			
 		if (m_nLabelFailCheck == TRUE )
 		{
@@ -3266,15 +3268,17 @@ void CRunRobot::OnRobotRun()
 						{
  							m_npTemp_Picker_YesNo[st_Picker_info.nPickerData[0][i][Y_FAIL_POS]] = CTL_YES;
 							OnSetPickerUpDn(0, PICKER_DN, m_npTemp_Picker_YesNo);
+							m_bLabelFeederNum = true;
 							break;
 						}
 						//else if ( i > 4 && st_Picker_info.nPickerData[1][m_nPickCnt - i][BIN] == FAIL && st_Picker_info.nPickerData[1][m_nPickCnt - i][EXIST] == NO)
 						else if ( i > 4 && st_Picker_info.nPickerData[1][m_nPickCnt - i][FAILPICK] == YES)
 						{
  							m_npTemp_Picker_YesNo[MAX_PICKER + st_Picker_info.nPickerData[1][m_nPickCnt - i][Y_FAIL_POS] + 1] = CTL_YES;
- 							OnSetPickerUpDn(0, PICKER_DN,m_npTemp_Picker_YesNo);	
+ 							OnSetPickerUpDn(0, PICKER_DN,m_npTemp_Picker_YesNo);
+							m_bLabelFeederNum = true;
 							break;
-						}
+						}						
 					}
 					m_nRunStep = 5000;
 				}
@@ -3288,13 +3292,15 @@ void CRunRobot::OnRobotRun()
 						{
 							m_npTemp_Picker_YesNo[st_Picker_info.nPickerData[0][i][Y_FAIL_POS]] = CTL_YES;
 							OnSetPickerUpDn(0, PICKER_DN, m_npTemp_Picker_YesNo);
+							m_bLabelFeederNum = true;
 							break;
 						}
 						//else if ( i > 4 && st_Picker_info.nPickerData[1][m_nPickCnt - i][BIN] == FAIL && st_Picker_info.nPickerData[1][m_nPickCnt - i][EXIST] == NO)
 						else if ( i > 4 && st_Picker_info.nPickerData[1][m_nPickCnt - i][FAILPICK] == YES)
 						{
 							m_npTemp_Picker_YesNo[MAX_PICKER + st_Picker_info.nPickerData[1][m_nPickCnt - i][Y_FAIL_POS] + 1] = CTL_YES;
-							OnSetPickerUpDn(0, PICKER_DN, m_npTemp_Picker_YesNo);	
+							OnSetPickerUpDn(0, PICKER_DN, m_npTemp_Picker_YesNo);
+							m_bLabelFeederNum = true;
 							break;
 						}
 					}
@@ -3400,7 +3406,8 @@ void CRunRobot::OnRobotRun()
 	case 7020:
 		st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_REQ;
 		st_sync_info.nLabelRbt_Dvc_Req[1] = BCR_UNLOAD;
-		st_sync_info.nLabelRbt_Dvc_Req[2] = 5;
+		if( m_bLabelFeederNum == true )	st_sync_info.nLabelRbt_Dvc_Req[2] = 1;
+		else											st_sync_info.nLabelRbt_Dvc_Req[2] = 5;
 		m_nRunStep = 7030;
 		break;
 
@@ -3462,9 +3469,6 @@ void CRunRobot::OnRobotRun()
 		if ( 0 && st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
 			m_nRunStep = 13000;
-//			m_nLabelFailCheck = FALSE;
-//			m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;		
-//			OnDataExchange(PICK,m_nLabelFailCheck);
 		}
 		else
 		{
@@ -3492,7 +3496,6 @@ void CRunRobot::OnRobotRun()
 				else if (((st_Buffer_info.nBufferData[1][39][BIN] == FAIL && st_Buffer_info.nBufferData[1][39][EXIST] == YES) || st_Buffer_info.nBufferData[1][39][EXIST] == NO) || 
 					((st_Buffer_info.nBufferData[0][39][BIN] == FAIL && st_Buffer_info.nBufferData[0][39][EXIST] == YES) || st_Buffer_info.nBufferData[0][39][EXIST] == NO))
 				{
-					//m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;	
 					m_nPrintOutPutCnt = m_nPrintOutPutCnt  - 1;
 					st_sync_info.nBcrReq = CTL_REQ;
 				}
@@ -3504,9 +3507,12 @@ void CRunRobot::OnRobotRun()
 				if (m_nLabelFailCheck == FALSE)
 				{
 
-					//20170310
-					m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;		
-					st_sync_info.nBcrReq = CTL_REQ;
+					if(m_bLabelFeederNum == true)
+					{
+						m_nPrintOutPutCnt = m_nPrintOutPutCnt - 1;		
+						st_sync_info.nBcrReq = CTL_REQ;
+					}
+					m_bLabelFeederNum = false;
 
 
 					m_nLabelFailCheck = TRUE;
@@ -3539,7 +3545,6 @@ void CRunRobot::OnRobotRun()
 					else if (((st_Buffer_info.nBufferData[1][39][BIN] == FAIL && st_Buffer_info.nBufferData[1][39][EXIST] == YES) || st_Buffer_info.nBufferData[1][39][EXIST] == NO) || 
 						((st_Buffer_info.nBufferData[0][39][BIN] == FAIL && st_Buffer_info.nBufferData[0][39][EXIST] == YES) || st_Buffer_info.nBufferData[0][39][EXIST] == NO))
 					{
-						//m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;	
 // 						m_nPrintOutPutCnt = m_nPrintOutPutCnt  - 1;
 // 						st_sync_info.nBcrReq = CTL_REQ;
 					}
