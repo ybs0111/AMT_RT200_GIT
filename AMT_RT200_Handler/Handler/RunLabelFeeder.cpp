@@ -79,13 +79,15 @@ void CRunLabelFeeder::OnRunInit()
 	case 210:
 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOff,IO_ON);
 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOn,IO_OFF);
-		m_nInitStep = 300;
-		break;
-
-	case 300:
-		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
+		//m_nInitStep = 300;
+		//kwlee 2017.0310
 		m_nInitStep = 1000;
 		break;
+
+// 	case 300:
+// 		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
+// 		m_nInitStep = 1000;
+// 		break;
 
 	case 1000:
 		nRet[0] = COMI.HomeCheck_Mot(M_LABEL_PITCH, MOT_SENS_ELM, MOT_TIMEOUT) ; 
@@ -149,13 +151,16 @@ void CRunLabelFeeder::OnRunInit()
 	case 2300:
 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOff,IO_OFF);
 		FAS_IO.set_out_bit(st_io_info.o_LabelFeederClmpOn,IO_ON);
-		m_nInitStep =2400;
+		//m_nInitStep =2400;
+		//kwlee 2017.0310
+		m_nInitStep =2500;
 		break;
 
-	case 2400:
-		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_ON);
-		m_nInitStep = 2500;
-		break;
+	//kwlee 2017.0310
+// 	case 2400:
+// 		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_ON);
+// 		m_nInitStep = 2500;
+// 		break;
 
 	case 2500:
 		//case 2300:
@@ -193,11 +198,17 @@ void CRunLabelFeeder::OnRunFeeder()
 		{
 			if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_LOAD )
 			{
+<<<<<<< HEAD
+=======
+				//m_nRunStep = 2000;
+				//kwlee 2017.0310
+>>>>>>> 35dcc67c1ac565c7805ea879dacba86835f9828d
 				m_nRunStep = 2200;
 			}
 			else if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_UNLOAD )
 			{
 				m_nRunStep = 4000;
+				
 			}
 			else
 			{
@@ -292,13 +303,22 @@ void CRunLabelFeeder::OnRunFeeder()
 // 			}
 			if( st_sync_info.nLabelRbt_Dvc_Req[2] == 5 )
 			{
+<<<<<<< HEAD
 				m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
+=======
+				m_dlTargetpos = st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
+>>>>>>> 35dcc67c1ac565c7805ea879dacba86835f9828d
 				m_nRunStep = 4100;
 			}
 			else
 			{
 				m_nRunStep = 4200;
+<<<<<<< HEAD
 			}			
+=======
+			}
+			
+>>>>>>> 35dcc67c1ac565c7805ea879dacba86835f9828d
 		}
 		break;
 
