@@ -3512,6 +3512,11 @@ void CRunRobot::OnRobotRun()
 						m_nPrintOutPutCnt = m_nPrintOutPutCnt - 1;		
 						st_sync_info.nBcrReq = CTL_REQ;
 					}
+					else
+					{
+						m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;		
+						st_sync_info.nBcrReq = CTL_REQ;
+					}
 					m_bLabelFeederNum = false;
 
 

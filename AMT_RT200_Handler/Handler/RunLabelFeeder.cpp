@@ -193,7 +193,7 @@ void CRunLabelFeeder::OnRunFeeder()
 		{
 			if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_LOAD )
 			{
-				m_nRunStep = 2000;
+				m_nRunStep = 2200;
 			}
 			else if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_UNLOAD )
 			{
@@ -215,7 +215,7 @@ void CRunLabelFeeder::OnRunFeeder()
 		}
 		else//로드일때는 무조건 한칸씩만 움직인다.
 		{
-			m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) - st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK];
+			m_dlTargetpos = st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];//COMI.Get_MotCurrentPos( M_LABEL_PITCH ) - st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK];
 			m_nRunStep = 2100;
 		}
 		break;
@@ -268,29 +268,37 @@ void CRunLabelFeeder::OnRunFeeder()
 		}
 		else//로드일때는 무조건 한칸씩만 움직인다.
 		{
-			if( st_sync_info.nLabelRbt_Dvc_Req[2] > 0 && st_sync_info.nLabelRbt_Dvc_Req[2] < 5 )
-			{
-				dTemp = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK] * st_sync_info.nLabelRbt_Dvc_Req[2];
-				if(  dTemp <= ( st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
-				{
-					m_dlTargetpos = dTemp;
-				}
-				else
-				{
-					//위치를 벗어난다. 위험 값을 비교하거나 티칭값이 잘못되어 잇는지 확인필요
-					break;
-				}
-			}
-			else if( st_sync_info.nLabelRbt_Dvc_Req[2] == 5 )
+// 			if( st_sync_info.nLabelRbt_Dvc_Req[2] > 0 && st_sync_info.nLabelRbt_Dvc_Req[2] < 5 )
+// 			{
+// 				dTemp = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK] * st_sync_info.nLabelRbt_Dvc_Req[2];
+// 				if(  dTemp <= ( st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
+// 				{
+// 					m_dlTargetpos = dTemp;
+// 				}
+// 				else
+// 				{
+// 					//위치를 벗어난다. 위험 값을 비교하거나 티칭값이 잘못되어 잇는지 확인필요
+// 					break;
+// 				}
+// 			}
+// 			else if( st_sync_info.nLabelRbt_Dvc_Req[2] == 5 )
+// 			{
+// 				m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
+// 			}
+// 			else
+// 			{
+// 				//error
+// 				break;
+// 			}
+			if( st_sync_info.nLabelRbt_Dvc_Req[2] == 5 )
 			{
 				m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
+				m_nRunStep = 4100;
 			}
 			else
 			{
-				//error
-				break;
-			}
-			m_nRunStep = 4100;
+				m_nRunStep = 4200;
+			}			
 		}
 		break;
 
