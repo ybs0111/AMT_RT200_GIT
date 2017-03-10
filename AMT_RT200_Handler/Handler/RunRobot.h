@@ -41,6 +41,8 @@ public:
 	int             m_nInterFaceStep;
 	int             m_nLabelReq;
 	int             m_nLabelFailCheck;
+
+	bool			m_bLabelFeederNum;
 	
 	//kwlee 2017.0307
 	int            m_nCurrLabelChk;
