@@ -198,11 +198,6 @@ void CRunLabelFeeder::OnRunFeeder()
 		{
 			if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_LOAD )
 			{
-<<<<<<< HEAD
-=======
-				//m_nRunStep = 2000;
-				//kwlee 2017.0310
->>>>>>> 35dcc67c1ac565c7805ea879dacba86835f9828d
 				m_nRunStep = 2200;
 			}
 			else if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_UNLOAD )
@@ -303,22 +298,13 @@ void CRunLabelFeeder::OnRunFeeder()
 // 			}
 			if( st_sync_info.nLabelRbt_Dvc_Req[2] == 5 )
 			{
-<<<<<<< HEAD
-				m_dlTargetpos = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
-=======
 				m_dlTargetpos = st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
->>>>>>> 35dcc67c1ac565c7805ea879dacba86835f9828d
 				m_nRunStep = 4100;
 			}
 			else
 			{
 				m_nRunStep = 4200;
-<<<<<<< HEAD
-			}			
-=======
 			}
-			
->>>>>>> 35dcc67c1ac565c7805ea879dacba86835f9828d
 		}
 		break;
 
