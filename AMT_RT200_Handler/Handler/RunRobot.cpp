@@ -2284,7 +2284,6 @@ int CRunRobot::OnFeederInterface()
 
 		//모터를 끄고 라벨을 출력완료했으니
 		//피더를움직이자
-
 	case 400:
 		st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_REQ;
 		st_sync_info.nLabelRbt_Dvc_Req[1] = BCR_LOAD;
@@ -3387,7 +3386,6 @@ void CRunRobot::OnRobotRun()
 		}
 		break;
 		//Label Feeder Motor 동작 추가.
-
 		//일단 AC파워를 켜고 PITCH를 움직이자
 	case 7010:
 		FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
@@ -3507,7 +3505,6 @@ void CRunRobot::OnRobotRun()
 					//20170310
 					m_nPrintOutPutCnt = m_nPrintOutPutCnt - MAX_PICKER;		
 					st_sync_info.nBcrReq = CTL_REQ;
-
 
 					m_nLabelFailCheck = TRUE;
 					m_nRunStep = 510;	
