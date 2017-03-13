@@ -3352,6 +3352,10 @@ void CScreenMain::OnBnClickedBtnCvInPos2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//kwlee 2017.0209 test..
+
+	st_sync_info.nSmema_Tray_Input_Req = CTL_REQ;
+	return;
+
 	st_handler_info.nRunStatus = dRUN;
 	st_sync_info.nInitPickerRbt = INIT_COMPLETE;
 	st_work_info.nSimulationMode = 1;
