@@ -2363,11 +2363,15 @@ int CRunRobot::OnFeederInterface()
 		//Print 출력후 넘어온 값 Parsing "Complete" 이면 변수 셋팅
 		if (m_nPrintOutCheck == TRUE)
 		{
-			if (st_basic_info.nModeDevice == WITHOUT_DVC)
-			{
-				st_Buffer_info.nBufferData[0][0][EXIST] = YES;
-				st_Buffer_info.nBufferData[1][0][EXIST] = YES;
-			}
+// 			if (st_basic_info.nModeDevice == WITHOUT_DVC)
+// 			{
+// 				st_Buffer_info.nBufferData[0][0][EXIST] = YES;
+// 				st_Buffer_info.nBufferData[1][0][EXIST] = YES;
+// 			}
+			//kwlee 2017.0313
+			st_Buffer_info.nBufferData[0][0][EXIST] = YES;
+			st_Buffer_info.nBufferData[1][0][EXIST] = YES;
+
 			m_nPrintOutCheck = FALSE;
 			m_dwLabelOutTime[0] = GetTickCount(); //kwlee 2017.0307
 
@@ -3121,10 +3125,11 @@ void CRunRobot::OnRobotRun()
 		if (nRet == RET_GOOD)
 		{
 			m_dwStopperCylWaitTime[0] = GetCurrentTime();
-			FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder, IO_OFF);
+			//FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder, IO_OFF);
 			//m_nRunStep = 3100;
 			//kwlee 2017.0307
-			m_nRunStep = 3030;
+			//m_nRunStep = 3030;
+			m_nRunStep = 3100;
 		}
 		else if (nRet == RET_ERROR)
 		{
@@ -3229,7 +3234,8 @@ void CRunRobot::OnRobotRun()
 			m_dwStopperCylWaitTime[0] = GetCurrentTime();
 			//kwlee 2017.0310
 			//FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder, IO_ON);
-			m_nRunStep = 3230;
+			//m_nRunStep = 3230;
+			m_nRunStep = 4000;
 		}
 		else if (nRet == RET_ERROR)
 		{
