@@ -68,7 +68,7 @@ public:
 	DWORD           m_dwClampUpDnWaitTime[2][3];
 	DWORD           m_dwStopperCylWaitTime[3];
 	DWORD           m_dwBcrConvMotorWaitTime[3];
-
+	
 	bool            m_bSecondPos;
 	bool            m_PickSecondPOs;
 	bool			m_bPickUpDnFlag[2];

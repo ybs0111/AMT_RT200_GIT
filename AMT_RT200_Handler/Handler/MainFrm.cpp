@@ -250,6 +250,8 @@ CMainFrame::CMainFrame()
 
 	FAS_IO.set_out_bit(st_io_info.o_OutPosStopperDw,IO_ON);
 	FAS_IO.set_out_bit(st_io_info.o_OutPosStopperUp,IO_OFF);
+	//kwlee 2017.0310
+	FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
 	////
 
 	st_count_info.nHourSocket = st_count_info.nSocketStart;
@@ -2621,8 +2623,6 @@ LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_NETWORK].strRev);
 		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
 		sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
-		//kwlee 2017.0228
-		//st_Buffer_info.strBufferSerial[0][0].Format(_T("%s"),strMsg);
 		
 		clsRunRobot.m_strBarcode[0] = strMsg;
 		clsRunRobot.m_nBarcodeReadCheck[0] = TRUE;

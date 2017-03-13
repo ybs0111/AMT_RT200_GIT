@@ -3130,15 +3130,8 @@ void CScreenMain::OnMainPcbWork()
 				m_GridTm_2.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
 				m_GridTm_2.SetItemState(i, j, GVIS_READONLY);
 
-// 				if (st_Pcb_info.nPcbSelect[i][j] == FALSE)
-// 				{
-// 					m_GridTm_2.SetItemBkColour(i, j, RGB(255,255,128), CLR_DEFAULT);
-// 				}
-// 				else
-// 				{
-					m_GridTm_2.SetItemBkColour(i, j, RGB(128,255,255), CLR_DEFAULT);
+				m_GridTm_2.SetItemBkColour(i, j, RGB(128,255,255), CLR_DEFAULT);
 					
-			//	}
 				m_GridTm_2.SetItemText(i, j, strTmp);	
 				
 				
@@ -3174,8 +3167,6 @@ void CScreenMain::OnMainPcbWork()
 				{
 					m_GridTm_2.SetItemBkColour(i, j, RGB(255,255,128), CLR_DEFAULT);
 				}
-
-
 				m_GridTm_2.SetItemText(i, j, strTmp);
 			}
 		}	
@@ -3593,6 +3584,9 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw3()
 //	st_Buffer_info.nBufferData[1][38][FAILPICK] = YES;
 	if(st_Buffer_info.nBufferData[0][36][EXIST] == YES)
 		st_Buffer_info.nBufferData[0][36][BIN] = FAIL; 
+
+	if(st_Buffer_info.nBufferData[1][36][EXIST] == YES)
+		st_Buffer_info.nBufferData[1][36][BIN] = FAIL; 
 	return;
 	st_sync_info.nSmema_Front = CTL_COMPLETE;
 }
