@@ -160,7 +160,7 @@ void CRunConveyor::Smema_Front()
 			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);	
 			if( nRet[0] == IO_ON || nRet[1] == IO_ON )
 			{
-				if (m_lWait_Smema[2] > 30 )
+				if (m_lWait_Smema[2] > 30)
 				{
 					m_nSmemaStep = 1100;
 				}
@@ -194,6 +194,7 @@ void CRunConveyor::Smema_Front()
 			m_lWait_Smema[1] = GetCurrentTime();
 			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
 			if (m_lWait_Smema[2] <= 0)  m_lWait_Smema[0] = GetCurrentTime();
+
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON);
 			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);	
 			if( nRet[0] == IO_ON || nRet[1] == IO_ON || st_sync_info.nSmema_Front == CTL_READY)
@@ -212,11 +213,6 @@ void CRunConveyor::Smema_Front()
 
 		case 2000:
 	       /////check check
-
-
-
-	
-			
 			if (m_lWait_Smema[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 			{
 				//FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF); //kwlee 2017.0315
@@ -224,8 +220,7 @@ void CRunConveyor::Smema_Front()
 				m_lWait_Smema[0] = GetCurrentTime();
 				m_nSmemaStep = 300;
 			}
-
-
+			break;
 
 		case 210:
 			//보낼 준비가 되면 Ready On
@@ -310,7 +305,6 @@ void CRunConveyor::Smema_Front()
 			{
 				m_lWait_Smema[0] = GetCurrentTime();
 			}
-
 			//nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_OFF);
 			//kwlee 2017.0315
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_OFF);
