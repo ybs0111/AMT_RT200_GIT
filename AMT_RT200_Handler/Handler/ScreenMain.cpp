@@ -2827,7 +2827,7 @@ void CScreenMain::OnBnClickedBtnStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int pos;
-	
+	st_sync_info.TurnConvJobReady[ROBOT] = CTL_READY;
 
 	if ( m_nTemp < 3 )
 	{
@@ -3479,6 +3479,9 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	
+	st_sync_info.nSmema_Front = CTL_READY;
+	return;
+
 		st_Buffer_info.nBufferData[0][3][BIN] = FAIL;
 		st_Buffer_info.nBufferData[0][3][EXIST] = NO;
 	
@@ -3565,14 +3568,15 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw2()
 	st_Buffer_info.strBufferSerial[1][37] = _T("1111_37");
 	st_Buffer_info.strBufferSerial[1][38] = _T("1111_38");
 	return;
-	//st_sync_info.nSmema_Front = CTL_READY;
+	st_sync_info.nSmema_Front = CTL_READY;
 }
 
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-
+	st_sync_info.nSmema_Front = CTL_COMPLETE;
+	return;
 	if(st_Buffer_info.nBufferData[0][37][EXIST] == YES)
 		st_Buffer_info.nBufferData[0][37][BIN] = FAIL; 
 //	st_Buffer_info.nBufferData[0][37][EXIST] = YES;
@@ -3600,8 +3604,8 @@ void CScreenMain::OnBnClickedBtnCvInPos3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//kwlee 2017.0209 test..
-	st_handler_info.nRunStatus = dSTOP;
-	return;
+	
+	
 	///
 	st_sync_info.nSmema_Rear = CTL_REQ;
 	clsRunConveyor.m_nRunStep[CONV_OUT] = 1300;
@@ -3617,8 +3621,9 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw5()
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw4()
 {
-	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
-	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
-	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;
-	st_Picker_info.nPickerData[1][2][FAILPICK] = YES;
+	clsRunConveyor.m_nRunStep[CONV_MID] = 2910;
+// 	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
+// 	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
+// 	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;
+// 	st_Picker_info.nPickerData[1][2][FAILPICK] = YES;
 }

@@ -2638,6 +2638,9 @@ int CRunRobot::OnGetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo)
 
 void CRunRobot::OnRobotRun()
 {
+
+	return; //kwlee 2017.0313 Test
+
 	int nRet_1, nRet_2=0, nRet_3=0, nRect[12]={0,};
 	int nRet,nTemp = 0;
 	double dCurrentPos = 0;
