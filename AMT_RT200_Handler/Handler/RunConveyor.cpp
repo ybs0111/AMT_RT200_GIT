@@ -123,71 +123,109 @@ void CRunConveyor::Smema_Front()
 			m_nSmemaStep = 100;
 			break;
 
-		case 10:
-			m_lWait_Smema[1] = GetCurrentTime();
-			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-			if (m_lWait_Smema[2] < 0)
-			{
-				m_lWait_Smema[0] = GetCurrentTime();
-			}
-
-			//nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
-			//kwlee 2017.0315
+		case 100:			
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON);
-			if(nRet[0] == IO_ON)
+			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);
+			if( nRet[0] == IO_ON && nRet[1] == IO_ON )
 			{
-				if (m_lWait_Smema[2] > 100)
-				{
-					if (st_sync_info.nSmema_Tray_Input_Req == CONV_REQ)
-					{
-						FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_ON);
-						m_nSmemaStep = 200;
-					}
-				}
+				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_InConvInChk, IO_ON); 
+				CTL_Lib.Alarm_Error_Occurrence(304, dWARNING, m_strAlarmCode);				
 			}
 			else
 			{
-				m_nSmemaStep = 100;
+				m_nSmemaStep = 110;
 			}
 			break;
 
-		case 100:
-			//설비에서 Front로 요청
-			//if( FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON) == IO_ON)
-			//kwlee 2017.0315
-			if( FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON) == IO_ON)
+		case 110:
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON);
+			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);	
+			if( nRet[0] == IO_ON || nRet[1] == IO_ON )
 			{
 				m_lWait_Smema[0] = GetCurrentTime();
-				m_nSmemaStep = 10;
-			}
-			else if (st_sync_info.nSmema_Tray_Input_Req == CONV_REQ)
-			{
-				FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_ON);
-				m_lWait_Smema[0] = GetCurrentTime(); //kwlee 2017.0313
 				m_nSmemaStep = 200;
+			}
+			else
+			{
+				m_nSmemaStep = 1000;
 			}
 			break;
 
 		case 200:
-			//nRet[0] = FAS_IO.get_in_bit(st_io_info.i_FrontReady,IO_ON);
-			//kwlee 2017.0315
+			m_lWait_Smema[1] = GetCurrentTime();
+			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
+			if (m_lWait_Smema[2] <= 0)  m_lWait_Smema[0] = GetCurrentTime();
+
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON);
-			if( nRet[0] == IO_ON)
+			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);	
+			if( nRet[0] == IO_ON || nRet[1] == IO_ON )
 			{
-				FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF);
-				m_lWait_Smema[0] = GetCurrentTime();
-				m_nSmemaStep = 210;
+				if (m_lWait_Smema[2] > 30 )
+				{
+					m_nSmemaStep = 1100;
+				}
 			}
 			else
 			{
-
+				m_nSmemaStep = 1000;
 			}
-// 			if( st_basic_info.nModeDevice == WITHOUT_DVC)
-// 			{
-// 				m_lWait_Smema[0] = GetCurrentTime();
-// 				m_nSmemaStep = 210;
-// 			}
 			break;
+
+		case 1000:
+			if (st_sync_info.nSmema_Tray_Input_Req == CONV_REQ)
+			{
+				FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_ON);
+				m_lWait_Smema[0] = GetCurrentTime(); //kwlee 2017.0313
+				m_nSmemaStep = 1100;
+			}
+			break;
+
+		case 1100:
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON);
+			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);	
+			if( nRet[0] == IO_ON || nRet[1] == IO_ON || st_sync_info.nSmema_Front == CTL_READY)
+			{
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 1200;
+			}
+			break;
+
+		case 1200:
+			m_lWait_Smema[1] = GetCurrentTime();
+			m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
+			if (m_lWait_Smema[2] <= 0)  m_lWait_Smema[0] = GetCurrentTime();
+			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_ON);
+			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON);	
+			if( nRet[0] == IO_ON || nRet[1] == IO_ON || st_sync_info.nSmema_Front == CTL_READY)
+			{
+				if (m_lWait_Smema[2] > 30)
+				{
+					FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF);
+					m_nSmemaStep = 2000;
+				}
+			}
+			else
+			{
+				m_nSmemaStep = 1100;
+			}
+			break;
+
+		case 2000:
+	       /////check check
+
+
+
+	
+			
+			if (m_lWait_Smema[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
+			{
+				//FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF); //kwlee 2017.0315
+				st_sync_info.nSmema_Tray_Input_Req = CONV_READY;
+				m_lWait_Smema[0] = GetCurrentTime();
+				m_nSmemaStep = 300;
+			}
+
+
 
 		case 210:
 			//보낼 준비가 되면 Ready On
