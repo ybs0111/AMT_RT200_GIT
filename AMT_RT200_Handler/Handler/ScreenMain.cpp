@@ -1261,7 +1261,9 @@ LRESULT CScreenMain::OnMainCvInMoveDisplay(WPARAM wParam, LPARAM lParam)
 	//rt.left =310;	rt.top = 148;	rt.right = rt.left + mn_Size;	rt.bottom = rt.top + 80;
 	//GetDlgItem(IDC_CUSTOM_MODE )->MoveWindow( &rt );
 	rt.left =0;	rt.top = 0;	rt.right = rt.left +0;	rt.bottom = rt.top + 0;
-	GetDlgItem(IDC_CUSTOM_TM3 )->MoveWindow( &rt );
+	//GetDlgItem(IDC_CUSTOM_TM3 )->MoveWindow( &rt );
+	//kwlee 2017.0313
+	GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
 	
 	SetTrayPos(nPos);
 	
@@ -1326,7 +1328,8 @@ LRESULT CScreenMain::OnMainCvTurnMoveDisplay(WPARAM wParam, LPARAM lParam)
 	}	
 	st_Pcb_info.nLeftSize = mn_Size;
 	rt.left =0;	rt.top = 0;	rt.right = rt.left +0;	rt.bottom = rt.top + 0;
-	GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
+	//GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
+	GetDlgItem(IDC_CUSTOM_TM2 )->MoveWindow( &rt );
 
 	SetTrayPos(nPos);
 	
@@ -1417,7 +1420,9 @@ LRESULT CScreenMain::OnMainCvOutMoveDisplay(WPARAM wParam, LPARAM lParam)
 	//rt.left =310;	rt.top = 148;	rt.right = rt.left + mn_Size;	rt.bottom = rt.top + 80;
 	//GetDlgItem(IDC_CUSTOM_MODE )->MoveWindow( &rt );
 	rt.left =0;	rt.top = 0;	rt.right = rt.left +0;	rt.bottom = rt.top + 0;
-	GetDlgItem(IDC_CUSTOM_TM2 )->MoveWindow( &rt );
+	//GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
+	//kwlee 2017.0314
+	GetDlgItem(IDC_CUSTOM_TM3 )->MoveWindow( &rt );
 	
 	SetTrayPos(nPos);
 	
@@ -2827,43 +2832,48 @@ void CScreenMain::OnBnClickedBtnStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int pos;
-	st_sync_info.TurnConvJobReady[ROBOT] = CTL_READY;
+	CString strTemp,str;
+	//st_sync_info.TurnConvJobReady[ROBOT] = CTL_READY;
+	strTemp.Format(_T("%c13%c"), 0x02, 0x03);
+	pos = strTemp.GetLength();
+	str = strTemp.Mid(1,pos - 2);
 
-	if ( m_nTemp < 3 )
-	{
-		pos = WM_PCB_CV_IN_MOVE_DRAW_MAIN;
-	}
-	else if ( m_nTemp > 2)
-	{
-		
-// 		if (m_nTemp == 5)
-// 		{
-// 			OnMainPcbWork();
-// 		}
-// 		else if (m_nTemp ==6)
-// 		{
-// 			TurnPositionGrid();
-// 		}else if (m_nTemp == 7)
-// 		{
-// 			ReversePositionGrid();
-// 		}
+	return;
+// 	if ( m_nTemp < 3 )
+// 	{
+// 		pos = WM_PCB_CV_IN_MOVE_DRAW_MAIN;
+// 	}
+// 	else if ( m_nTemp > 2)
+// 	{
+// 		
+// // 		if (m_nTemp == 5)
+// // 		{
+// // 			OnMainPcbWork();
+// // 		}
+// // 		else if (m_nTemp ==6)
+// // 		{
+// // 			TurnPositionGrid();
+// // 		}else if (m_nTemp == 7)
+// // 		{
+// // 			ReversePositionGrid();
+// // 		}
+// 
+// 		pos =  WM_PCB_CV_TURN_MOVE_DRAW_MAIN;
+// 		
+// 	}
+// 	else if (m_nTemp<18)
+// 	{
+// 		pos =  WM_PCB_CV_OUT_MOVE_DRAW_MAIN;	
+// 	}
+// 	else
+// 	{
+// 		pos =  WM_PCB_CV_IN_MOVE_DRAW_MAIN;
+// 		//pos = 0;
+// 		m_nTemp = 0;
+// 	}
 
-		pos =  WM_PCB_CV_TURN_MOVE_DRAW_MAIN;
-		
-	}
-	else if (m_nTemp<18)
-	{
-		pos =  WM_PCB_CV_OUT_MOVE_DRAW_MAIN;	
-	}
-	else
-	{
-		pos =  WM_PCB_CV_IN_MOVE_DRAW_MAIN;
-		//pos = 0;
-		m_nTemp = 0;
-	}
 
-
-	st_handler_info.cWndMain->PostMessage(pos,m_nTemp,0);
+	st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,m_nTemp,0);
 	m_nTemp++;
 }
 

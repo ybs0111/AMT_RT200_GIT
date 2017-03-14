@@ -3086,7 +3086,7 @@ BOOL CPublicFunction::IsNum(CString strData)
 int	CPublicFunction::OnIoSafetyCheck(int nIO)
 {
 	int nRet[5]= {0,};
-
+	int nRec[8] = {0,};
 	switch (nIO)
 	{
 		//st_io_info.o_LfTsiteBtmSockIns1Cyl				= 2101;		// S2101
