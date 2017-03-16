@@ -212,6 +212,13 @@ void CRunConveyor::Smema_Front()
 			break;
 
 		case 2000:
+
+
+
+
+
+
+
 	       /////check check
 			if (m_lWait_Smema[2] > st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 			{
