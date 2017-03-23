@@ -47,6 +47,10 @@ public:
 	//kwlee 2017.0307
 	int            m_nCurrLabelChk;
 	int            m_nCheckStep;
+	//kwlee 2017.0315
+	int            m_nVisionStep; 
+	int            m_nVisionRetry;
+	//
 	int            m_nSodimmSecondPlace;
 	CString         m_strBarcode[2];
 	CString         m_strPrintSerial[2];
@@ -113,8 +117,11 @@ public:
 	int     OnFailLabelCheck();
 	void    OnBarcodeReadCheck();
 	void    OnResetRejectData();
+
 	void    OnLabelSensorCheck(); //kwlee 2017.0307
-	int OnBcrConveyorOnOff(int nOnOff);
+	int     OnVisionDataCheck();//kwlee 2017.0315
+	
+	int		OnBcrConveyorOnOff(int nOnOff);
 };
 
 extern CRunRobot	clsRunRobot;

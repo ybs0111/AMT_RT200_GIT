@@ -116,7 +116,6 @@ BEGIN_MESSAGE_MAP(CScreenMain, CFormView)
 	ON_MESSAGE(WM_MAIN_IO_DISPLAY,								OnMainIODisplay) 
 	ON_WM_TIMER()
 	ON_WM_SHOWWINDOW()
-	//ON_NOTIFY(NM_CLICK, IDC_CUSTOM_WORK_INFO,		OnWorkCellClick)
 	ON_WM_DESTROY()
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_BTN_MAIN_ANIMATE,								&CScreenMain::OnClickedBtnMainAnimate)
@@ -198,20 +197,21 @@ void CScreenMain::OnInitialUpdate()
 void CScreenMain::OnMainDisplay()
 {
 	OnMainCountDisplay();
-	OnMainTimeDisplay();
-	OnMainLotDisplay();
-	
-	if (st_handler_info.cWndTitle != NULL)
-	{
-		st_handler_info.cWndTitle->PostMessage(WM_STATUS_CHANGE, DEVICE_MODE, st_basic_info.nModeDevice);			// Device Mode
-		st_handler_info.cWndTitle->PostMessage(WM_STATUS_CHANGE, INTERFACE_MODE, st_work_info.nFtpWork);
-	}
 
-	// jtkim 20150818
-	if (st_track_info.nStatus == YES)
-	{
-		OnMainWorkInfoCommand(MAIN_TRACK_OUT_CREATE_REQ, 0);
-	}
+// 	OnMainTimeDisplay();
+// 	OnMainLotDisplay();
+// 	
+// 	if (st_handler_info.cWndTitle != NULL)
+// 	{
+// 		st_handler_info.cWndTitle->PostMessage(WM_STATUS_CHANGE, DEVICE_MODE, st_basic_info.nModeDevice);			// Device Mode
+// 		st_handler_info.cWndTitle->PostMessage(WM_STATUS_CHANGE, INTERFACE_MODE, st_work_info.nFtpWork);
+// 	}
+// 
+// 	// jtkim 20150818
+// 	if (st_track_info.nStatus == YES)
+// 	{
+// 		OnMainWorkInfoCommand(MAIN_TRACK_OUT_CREATE_REQ, 0);
+// 	}
 }
 
 
@@ -1051,11 +1051,35 @@ void CScreenMain::OnPaint()
 
 }
 
+//kwlee 2017.0320
+void CScreenMain::OnMainTactimeDisplay()
+{
+	CString strTemp,str;
+	if (st_Pcb_info.dwTimeCheck[0][2] > 0 || st_Pcb_info.dwTimeCheck[0][2] < 60)
+	{
+		strTemp.Format(_T("%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+		m_pGridYieldL.SetItemText(3, 1, strTemp);
+
+		str.Format(_T("C/V Out TacTime : %s"),strTemp);
+		clsMem.OnNormalMessageWrite(str);
+	}
+	else
+	{
+		st_Pcb_info.dwTimeCheck[0][2] = 0;
+	}
+	m_pGridYieldL.Invalidate(FALSE);
+}
+
+
 LRESULT CScreenMain::OnMainWorkInfoCommand(WPARAM wParam, LPARAM lParam) 
 {
 
+	OnMainTactimeDisplay();
 	return 0;
 }
+//
+
+
 int CScreenMain::GetCustomTrayMove(int iIdx)
 {
 	switch( iIdx )
@@ -1931,6 +1955,7 @@ void CScreenMain::OnTimer(UINT_PTR nIDEvent)
 		OnMainBufferDisplay();
 		OnMainPickerDisplay();
 		OnMainPcbDataDisplay();
+		OnMainCountDisplay(); //kwlee 2017.0318
 		break;
 	}
 
@@ -1951,14 +1976,15 @@ void CScreenMain::OnMainTimeDisplay()
 	strTime.Format(_T("%02d:%02d:%02d"), st_handler_info.tRun.GetHours(), st_handler_info.tRun.GetMinutes(), st_handler_info.tRun.GetSeconds());
 	m_pGridTimeInfo.SetItemText(0, 1, strTime);
 
+
 	nMtbi = (int)st_handler_info.tRun.GetTotalHours() * 3600 + (int)st_handler_info.tRun.GetMinutes() * 60 + (int)st_handler_info.tRun.GetSeconds();
 	if (st_alarm_info.nAlarmNum > 0)
 	{
 		nMtbi = nMtbi / st_alarm_info.nAlarmNum;
 	}
 
-	strTime.Format(_T("%02d:%02d:%02d"), nMtbi / 3600, (nMtbi % 3600) / 60, nMtbi % 60 );
-	m_pGridTimeInfo.SetItemText(3, 1, strTime);
+// 	strTime.Format(_T("%02d:%02d:%02d"), nMtbi / 3600, (nMtbi % 3600) / 60, nMtbi % 60 );
+// 	m_pGridTimeInfo.SetItemText(3, 1, strTime);
 	
 	strTime.Format(_T("%02d:%02d:%02d"), st_handler_info.tJam.GetHours(), st_handler_info.tJam.GetMinutes(), st_handler_info.tJam.GetSeconds());
 	m_pGridTimeInfo.SetItemText(2, 1, strTime);
@@ -2001,9 +2027,6 @@ void CScreenMain::OnMainTimeDisplay()
 			m_pGridTimeInfo.SetItemText(5, 1, strTime);
 		}
 	}
-
-
-
 	m_pGridTimeInfo.Invalidate(FALSE);
 }
 
@@ -2017,11 +2040,26 @@ void CScreenMain::OnMainCountDisplay()
 	strTemp.Format(_T("%d"), st_count_info.nInCount[0][0]);
 	m_pGridYieldL.SetItemText(2, 1, strTemp);
 
-	strTemp.Format(_T("%d"), st_count_info.nPrimeCount[0][0]);
-	m_pGridYieldL.SetItemText(3, 1, strTemp);
+// 	if (st_Pcb_info.dwTimeCheck[0][2] > 0)
+// 	{
+// 		strTemp.Format(_T("%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+// 		m_pGridYieldL.SetItemText(3, 1, strTemp);
+// 	}
+// 	if (st_Pcb_info.dwTimeCheck[1][2] > 0)
+// 	{
+// 		strTemp.Format(_T("%.2f"), st_Pcb_info.dwTimeCheck[1][2]);
+// 		m_pGridYieldL.SetItemText(3, 2, strTemp);
+// 	}
 
-	strTemp.Format(_T("%d"), st_count_info.nPassCount[0][0]);
-	m_pGridYieldL.SetItemText(3, 2, strTemp);
+	//kwlee 2017.0316
+//	strTemp.Format(_T("%d"), st_count_info.nInCount[0][0]);
+//	m_pGridYieldL.SetItemText(2, 1, strTemp);
+
+//	strTemp.Format(_T("%d"), st_count_info.nPrimeCount[0][0]);
+//	m_pGridYieldL.SetItemText(3, 1, strTemp);
+
+// 	strTemp.Format(_T("%d"), st_count_info.nPassCount[0][0]);
+// 	m_pGridYieldL.SetItemText(3, 2, strTemp);
 
 	// jtkim 20150307
 // 	strTemp.Format(_T("%d"), st_count_info.nPrimeRejectCount[0][0]);
@@ -2030,57 +2068,58 @@ void CScreenMain::OnMainCountDisplay()
 // 	strTemp.Format(_T("%d"), st_count_info.nRejectCount[0][0]);
 // 	m_pGridYieldL.SetItemText(4, 2, strTemp);
 
- 	if (st_count_info.nPrimeCount[0][0] > 0) 
- 	{
- 		dAve = ((double)st_count_info.nPrimeCount[0][0] / (double)st_count_info.nInCount[0][0]) * (double)100;
-// 		dAve = ((double)st_count_info.nPrimeCount[0][0] / ((double)st_count_info.nPrimeCount[0][0] + (double)st_count_info.nPrimeRejectCount[0][0])) * (double)100;
- 		strTemp.Format(_T("%.2f"), dAve);
-		m_pGridYieldL.SetItemText(5, 1, strTemp);
- 	}
- 
- 	if (st_count_info.nPassCount[0][0] > 0) 
- 	{
-		dAve = ((double)st_count_info.nPassCount[0][0] / (double)st_count_info.nInCount[0][0]) * (double)100;
-// 		dAve = ((double)st_count_info.nPassCount[0][0] / ((double)st_count_info.nPassCount[0][0] + (double)st_count_info.nRejectCount[0][0])) * (double)100;
-		strTemp.Format(_T("%.2f"), dAve);
-		m_pGridYieldL.SetItemText(5, 2, strTemp);
-	}
-
-	// daily 수량.
-	strTemp.Format(_T("%d"), st_count_info.nInCount[1][0]);
-	m_pGridYieldD.SetItemText(2, 1, strTemp);
-
-	strTemp.Format(_T("%d"), st_count_info.nPrimeCount[1][0]);
-	m_pGridYieldD.SetItemText(3, 1, strTemp);
-
-	strTemp.Format(_T("%d"), st_count_info.nPassCount[1][0]);
-	m_pGridYieldD.SetItemText(3, 2, strTemp);
-
-	// jtkim 20150307
-// 	strTemp.Format(_T("%d"), st_count_info.nPrimeRejectCount[1][0]);
-// 	m_pGridYieldD.SetItemText(4, 1, strTemp);
+//  	if (st_count_info.nPrimeCount[0][0] > 0) 
+//  	{
+//  		dAve = ((double)st_count_info.nPrimeCount[0][0] / (double)st_count_info.nInCount[0][0]) * (double)100;
+// // 		dAve = ((double)st_count_info.nPrimeCount[0][0] / ((double)st_count_info.nPrimeCount[0][0] + (double)st_count_info.nPrimeRejectCount[0][0])) * (double)100;
+//  		strTemp.Format(_T("%.2f"), dAve);
+// 		m_pGridYieldL.SetItemText(5, 1, strTemp);
+//  	}
+//  
+//  	if (st_count_info.nPassCount[0][0] > 0) 
+//  	{
+// 		dAve = ((double)st_count_info.nPassCount[0][0] / (double)st_count_info.nInCount[0][0]) * (double)100;
+// // 		dAve = ((double)st_count_info.nPassCount[0][0] / ((double)st_count_info.nPassCount[0][0] + (double)st_count_info.nRejectCount[0][0])) * (double)100;
+// 		strTemp.Format(_T("%.2f"), dAve);
+// 		m_pGridYieldL.SetItemText(5, 2, strTemp);
+// 	}
 // 
-// 	strTemp.Format(_T("%d"), st_count_info.nRejectCount[1][0]);
-// 	m_pGridYieldD.SetItemText(4, 2, strTemp);
+// 	// daily 수량.
+// 	strTemp.Format(_T("%d"), st_count_info.nInCount[1][0]);
+// 	m_pGridYieldD.SetItemText(2, 1, strTemp);
+// 
+// 	strTemp.Format(_T("%d"), st_count_info.nPrimeCount[1][0]);
+// 	m_pGridYieldD.SetItemText(3, 1, strTemp);
+// 
+// 	strTemp.Format(_T("%d"), st_count_info.nPassCount[1][0]);
+// 	m_pGridYieldD.SetItemText(3, 2, strTemp);
+// 
+// 	// jtkim 20150307
+// // 	strTemp.Format(_T("%d"), st_count_info.nPrimeRejectCount[1][0]);
+// // 	m_pGridYieldD.SetItemText(4, 1, strTemp);
+// // 
+// // 	strTemp.Format(_T("%d"), st_count_info.nRejectCount[1][0]);
+// // 	m_pGridYieldD.SetItemText(4, 2, strTemp);
+// 
+// 	if (st_count_info.nPrimeCount[1][0] > 0) 
+// 	{
+//  		dAve = ((double)st_count_info.nPrimeCount[1][0] / (double)st_count_info.nInCount[1][0]) * (double)100;
+// // 		dAve = ((double)st_count_info.nPrimeCount[1][0] / ((double)st_count_info.nPrimeCount[1][0] + (double)st_count_info.nPrimeRejectCount[1][0])) * (double)100;
+// 		strTemp.Format(_T("%.2f"), dAve);
+// 		m_pGridYieldD.SetItemText(5, 1, strTemp);
+// 	}
+//  
+// 	if (st_count_info.nPassCount[1][0] > 0) 
+// 	{
+// 		dAve = ((double)st_count_info.nPassCount[1][0] / (double)st_count_info.nInCount[1][0]) * (double)100;
+// // 		dAve = ((double)st_count_info.nPassCount[1][0] / ((double)st_count_info.nPassCount[1][0] + (double)st_count_info.nRejectCount[1][0])) * (double)100;
+// 		strTemp.Format(_T("%.2f"), dAve);
+// 		m_pGridYieldD.SetItemText(5, 2, strTemp);
+// 	}
+// 
 
-	if (st_count_info.nPrimeCount[1][0] > 0) 
-	{
- 		dAve = ((double)st_count_info.nPrimeCount[1][0] / (double)st_count_info.nInCount[1][0]) * (double)100;
-// 		dAve = ((double)st_count_info.nPrimeCount[1][0] / ((double)st_count_info.nPrimeCount[1][0] + (double)st_count_info.nPrimeRejectCount[1][0])) * (double)100;
-		strTemp.Format(_T("%.2f"), dAve);
-		m_pGridYieldD.SetItemText(5, 1, strTemp);
-	}
- 
-	if (st_count_info.nPassCount[1][0] > 0) 
-	{
-		dAve = ((double)st_count_info.nPassCount[1][0] / (double)st_count_info.nInCount[1][0]) * (double)100;
-// 		dAve = ((double)st_count_info.nPassCount[1][0] / ((double)st_count_info.nPassCount[1][0] + (double)st_count_info.nRejectCount[1][0])) * (double)100;
-		strTemp.Format(_T("%.2f"), dAve);
-		m_pGridYieldD.SetItemText(5, 2, strTemp);
-	}
-
-	m_pGridYieldL.Invalidate(FALSE);
-	m_pGridYieldD.Invalidate(FALSE);
+ 	m_pGridYieldL.Invalidate(FALSE);
+ 	m_pGridYieldD.Invalidate(FALSE);
 }
 
 
@@ -2350,11 +2389,13 @@ void CScreenMain::OnInitGridYieldLot()
 	row = 3;
 	m_pGridYieldL.SetItemBkColour(row, 0, BLUE_D, WHITE_C);
 	m_pGridYieldL.SetItemFont(row, 0, &clsFunc.OnLogFont(16));
-	m_pGridYieldL.SetItemText(row, 0, _T("Pass"));
+	//m_pGridYieldL.SetItemText(row, 0, _T("Pass"));
+	//2017.0316
+	m_pGridYieldL.SetItemText(row, 0, _T("TacTime"));
 
 	m_pGridYieldL.SetItemBkColour(row, 1, GREEN_L, BLACK_C);
 	m_pGridYieldL.SetItemFont(row, 1, &clsFunc.OnLogFont(16));
-	m_pGridYieldL.SetItemText(row, 1, _T("0"));
+	m_pGridYieldL.SetItemText(row, 1, _T("0 (초)"));
 
 	m_pGridYieldL.SetItemBkColour(row, 2, GREEN_L, BLACK_C);
 	m_pGridYieldL.SetItemFont(row, 2, &clsFunc.OnLogFont(16));
@@ -2816,7 +2857,7 @@ void CScreenMain::OnMainDisplayFrontSmema()
 void CScreenMain::OnMainDisplayRearSmema()
 {
 
-	if (FAS_IO.get_out_bit(st_io_info.i_OutConvChk, IO_OFF) == IO_ON)
+	if (FAS_IO.get_in_bit(st_io_info.i_RearComplete, IO_OFF) == IO_ON)
 	{
 		m_pGridRearSmema.SetItemBkColour(0, 0, GREEN_C, BLACK_C);
 	}
@@ -3612,26 +3653,24 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw3()
 
 void CScreenMain::OnBnClickedBtnCvInPos3()
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//kwlee 2017.0209 test..
-	
-	
+
 	///
 	st_sync_info.nSmema_Rear = CTL_REQ;
-	clsRunConveyor.m_nRunStep[CONV_OUT] = 1300;
+	
 }
 
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw5()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	st_sync_info.nSmema_Rear = CTL_COMPLETE;
+	st_sync_info.nSmema_Rear = CTL_CLEAR;
 }
 
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw4()
 {
-	clsRunConveyor.m_nRunStep[CONV_MID] = 2910;
+	//clsRunConveyor.m_nRunStep[CONV_MID] = 2910;
+	st_sync_info.nSmema_Rear = CTL_COMPLETE;
 // 	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
 // 	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
 // 	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;

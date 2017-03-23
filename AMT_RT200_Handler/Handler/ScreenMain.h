@@ -136,6 +136,7 @@ public:
 
 	void				OnMainDisplayFrontSmema();
 	void				OnMainDisplayRearSmema();
+	void                OnMainTactimeDisplay();
 
 	void				SetTrayPos(int ildx);
 	void				TurnPositionGrid();
@@ -143,7 +144,7 @@ public:
 	void                OninitTrayMove();
 	void				SetIO_OnOff(int nID,int Onoff);
 	int                 GetCustomTrayMove(int iIdx);
-	               
+	           
 	int                 m_nTemp;
 	bool                mbTurn;
 protected:

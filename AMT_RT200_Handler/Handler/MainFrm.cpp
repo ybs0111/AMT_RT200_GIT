@@ -75,6 +75,7 @@ tagPART_INFO				st_part_info;
 tagTYPE_INFO				st_type_info;
 tagPICKER_DATA_INFO			st_Picker_info; //kwlee 2017.0204
 tagBUFFER_DATA_INFO			st_Buffer_info;
+tagVISION_INFO				st_Vision_info; //kwlee 2017.0315
 /* 2015.0108
 // loader picker 구조체
 tagLD_PICKER_INFO			st_ld_picker_info[MAX_PICKER];
@@ -171,10 +172,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_MESSAGE(WM_CLIENT_MSG_8, OnBarcode_1) //kwlee 2017.0204
 	ON_MESSAGE(WM_CLIENT_MSG_9, OnBarcode_2) //kwlee 2017.0204
 	
-
 	ON_WM_NCLBUTTONDBLCLK()
 	ON_WM_NCLBUTTONDOWN()
 //	ON_WM_KEYUP()
+ON_WM_COPYDATA()
+ON_MESSAGE(WM_MAINFRAME_WORK, OnMainframe_VisionWork) 
 ON_WM_COPYDATA()
 END_MESSAGE_MAP()
 
@@ -253,6 +255,12 @@ CMainFrame::CMainFrame()
 	//kwlee 2017.0310
 	FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder,IO_OFF);
 	////
+	
+	//kwle 2017.0317
+	for(int i =0; i<PICKCNT; i++)
+	{
+		FAS_IO.set_out_bit(st_io_info.o_HeadCylUpDn[i],IO_OFF);
+	}
 
 	st_count_info.nHourSocket = st_count_info.nSocketStart;
 	if (st_count_info.nHourSocket <= 0)
@@ -285,6 +293,7 @@ CMainFrame::~CMainFrame()
 			m_pServer[i] = NULL;
 		}
 	}
+
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -628,7 +637,7 @@ void CMainFrame::OnExit()
 				st_work_info.dCurrPos[i] = COMI.Get_MotCurrentPos(i);
 			}
 		}
-
+		st_count_info.nInCount[0][0] = 0; //kwlee 2017.0316
 		OnThreadDelete();
 
 		OnConfigSave();
@@ -1479,13 +1488,6 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 
 		st_handler_info.tRef	= cur;
 		
-		//20151005
-		st_handler_info.m_tDRef = st_handler_info.m_tDRef + diff;
-
-		for (i =0; i<TSITE_SOCKET_CNT;i++)
-		{
-			st_DB_time.n_Db_time[REF_TIME][i] = st_handler_info.m_tDRef;	
-		}
 
 		if (st_handler_info.nMaintMode == YES)		// 메인트 모드이면 메인트 타임만 업데이트 된다.
 		{
@@ -1533,6 +1535,7 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 								st_handler_info.tRun = st_handler_info.tRun + diff;
 								// jtkim 20150529
 								st_handler_info.tRunUph = st_handler_info.tRunUph + diff;
+
 							}
 							else
 							{
@@ -2621,15 +2624,14 @@ LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 
 	case CLIENT_REV:
 		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_NETWORK].strRev);
-// 		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
+ 		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
 // 		sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
 // 		
 		//clsRunRobot.m_strBarcode[0] = strMsg;
 		//kwlee 2017.0315
 		nLength = strMsg.GetLength();
-		strMsg.Mid(1,nLength - 2);
+		clsRunRobot.m_strBarcode[0] = strMsg.Mid(1,nLength - 2);
 
-		clsRunRobot.m_strBarcode[0] = strMsg;
 		clsRunRobot.m_nBarcodeReadCheck[0] = TRUE;
 		
 		if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
@@ -2666,6 +2668,20 @@ LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 			st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
 		}
 		break;
+	}
+	return 0;
+}
+//kwlee 2017.0315
+LRESULT CMainFrame::OnMainframe_VisionWork(WPARAM wParam, LPARAM lParam)
+{	
+	int mn_command_num = wParam;  // 네트워크 작업을 할 구분 변수
+
+	switch (mn_command_num)
+	{		
+	case MAIN_TEACH_VISION:
+		///OnMainFrame_TeachVision( lParam );
+		break;
+
 	}
 	return 0;
 }
@@ -2731,7 +2747,6 @@ LRESULT CMainFrame::OnBarcode_2(WPARAM wParam, LPARAM lParam)
 						clsMem.OnAbNormalMessagWrite(_T("[TCP/IP] BCR2_NETWORK Client Connect Error."));
 						st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력
 					}
-
 					return 0;
 				}
 
@@ -2749,7 +2764,6 @@ LRESULT CMainFrame::OnBarcode_2(WPARAM wParam, LPARAM lParam)
 			if (m_pClient[BCR2_NETWORK] != NULL)
 			{
 				st_client_info[BCR2_NETWORK].nConnect = NO;
-
 				delete m_pClient[BCR2_NETWORK];
 				m_pClient[BCR2_NETWORK] = NULL;
 			}
@@ -2783,11 +2797,10 @@ LRESULT CMainFrame::OnBarcode_2(WPARAM wParam, LPARAM lParam)
 		case CLIENT_REV:
 			strMsg.Format(_T("%s"), st_client_info[BCR2_NETWORK].strRev);
 			sRcv = sTmp.Mid(0, st_client_info[BCR2_NETWORK].nRevLength);
-
+			//clsRunRobot.m_strBarcode[1] = strMsg;
 			//kwlee 2017.0315
 			nLength = strMsg.GetLength();
-			strMsg.Mid(1,nLength - 2);
-			clsRunRobot.m_strBarcode[1] = strMsg;
+			clsRunRobot.m_strBarcode[1] = strMsg.Mid(1,nLength - 2);
 			clsRunRobot.m_nBarcodeReadCheck[1] = TRUE;
 
 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
