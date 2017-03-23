@@ -36,11 +36,13 @@ public:
 	int		OnMenuChangeChecking();
 	void	OnConfigSave();
 	void	OnConfigLoad();
-
+	
 	void	OnMainVarDefaultSet();
 
 	void    OnThreadCreate();
 	void    OnThreadDelete();
+
+	void    OnMainFrame_TeachVision(int iCommand);//kwlee 2017.0315
 
 protected: // serialization에서만 만들어집니다.
 	CMainFrame();
@@ -143,6 +145,7 @@ public:
 	afx_msg LRESULT OnBarcode_1(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnBarcode_2(WPARAM wParam, LPARAM lParam); 
 	afx_msg LRESULT OnPrinterServer(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnMainframe_VisionWork(WPARAM wParam, LPARAM lParam); //kwlee 2017.0315
 	afx_msg LRESULT OnPrinterClient(WPARAM wParam, LPARAM lParam);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };

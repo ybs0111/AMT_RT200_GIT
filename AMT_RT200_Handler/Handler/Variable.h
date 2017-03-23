@@ -57,7 +57,9 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define	WM_DISPENSER_APPLY		WM_USER + 20
 #define	WM_MOTORSPEED_APPLY		WM_USER + 21
 #define WM_SERIAL_PORT			WM_USER + 25
+#define	WM_MAINFRAME_WORK		WM_USER + 26 //kwlee 2017.0315
 #define	WM_TESTREFERENCE_MANUAL		WM_USER + 21
+
 
 #define	WM_LOTOPEN_APPLY		WM_USER + 26
 #define	WM_LOTSTART_APPLY		WM_USER + 27
@@ -127,6 +129,8 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 //kwlee 2017.0202
 #define BARCODE_TRIGGER_1       1
 #define BARCODE_TRIGGER_2       2
+
+#define MAIN_TEACH_VISION       0 //kwlee 2017.0315
 // *****************************************************************************
 
 // *****************************************************************************
@@ -272,6 +276,7 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define INIT_AUTO_MODE_CHECK        3
 #define INIT_COMPLETE_COMMAND       4
 #define INIT_SKIP_COMMAND		    5
+#define VISION_BIN_FAIL			    6 //kwlee 2017.0315
 // *****************************************************************************
 //  Title Bar 출력용 메세지 정의                                                
 // *****************************************************************************
@@ -297,6 +302,10 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define  NONE              0
 #define  FAIL              1
 #define  GOOD              2
+
+//kwlee 2017.0315
+#define  VISION_FAIL		0
+#define  VISION_GOOD		1
 
 #define  BARCODEREAD       3
 
@@ -911,6 +920,7 @@ struct tagHANDLER_INFO
 
 	//2015.1005
 	CTimeSpan m_tDRef;
+	CTimeSpan m_tDTactime; //kwlee 2017.0318
 	CTimeSpan m_tDRdown[TSITE_SOCKET_CNT];
 	CTimeSpan m_tDUserStop[TSITE_SOCKET_CNT];
 	CTimeSpan m_tDStop[TSITE_SOCKET_CNT];
@@ -1679,6 +1689,9 @@ struct tagOTHER_INFO
 	CString strLastChangeDate[100];	// 최종 step으로 변경되는 시점의 시간
 };
 extern  tagOTHER_INFO  st_other_info;
+
+
+
 // *************************************************************************
 
 // *************************************************************************
@@ -1951,10 +1964,10 @@ extern tagRECOVERY_INFO st_recovery_info;
 //#define MAX_PICKER				4
 #define MAX_BUF_ROW_Y				10
 #define MAX_BUF_COL_X				10
-#define MAX_TRAY_ROW			20
-#define MAX_TRAY_COL			20
-#define MAX_SITE_PICKER		4
-#define MAX_SITE				12
+#define MAX_TRAY_ROW				20
+#define MAX_TRAY_COL				20
+#define MAX_SITE_PICKER				4
+#define MAX_SITE					12
 
 #define LD_ULD_PICKER_PARA			2
 #define TEST_PICKER_PARA			4
@@ -2022,12 +2035,16 @@ struct PCB_info
 	int nLeftSize;
 	int m_arrayID;
 	CString strPcbSerial[2][10];
+	DWORD dwTimeCheck[2][3]; //kwlee 2017.0316
 
 };
-
 extern PCB_info st_Pcb_info;
 
-
+struct tagVISION_INFO
+{
+	CString strVisionData[10];
+};
+extern tagVISION_INFO st_Vision_info;
 //////////////////////////////////////////////////////////////////////////////////////////////
 //2015.0106 전체 plate의 사이트의 트레이 자재 정보를 관리한다 
 //////////////////////////////////////////////////////////////////////////////////////////////

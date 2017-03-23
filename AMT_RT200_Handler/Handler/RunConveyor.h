@@ -18,7 +18,7 @@ public:
 	int m_nErrorStep;
 	int m_TurnConvPosCheck[2];
 	int m_nSmemaFlag;
-
+	int m_nTactimeCheck;
 	CString m_strAlarmCode;
 
 	bool				m_bWStopperFlag[2];

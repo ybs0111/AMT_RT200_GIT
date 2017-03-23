@@ -302,6 +302,21 @@ void CRunLabelFeeder::OnRunFeeder()
 				m_dlTargetpos = st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_5_WORK];
 				m_nRunStep = 4100;
 			}
+			//kwlee 2017.0316
+			else if (st_sync_info.nLabelRbt_Dvc_Req[2] > 0 && st_sync_info.nLabelRbt_Dvc_Req[2] < 5)
+			{
+				dTemp = COMI.Get_MotCurrentPos( M_LABEL_PITCH ) + st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_1_WORK] * st_sync_info.nLabelRbt_Dvc_Req[2];
+				if(  dTemp >= ( st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] + st_motor_info[M_LABEL_PITCH].d_allow ) )
+				{
+					m_dlTargetpos = dTemp;
+					m_nRunStep = 4100;
+				}
+				else
+				{
+					//위치를 벗어난다. 위험 값을 비교하거나 티칭값이 잘못되어 잇는지 확인필요
+					break;
+				}
+			}
 			else
 			{
 				m_nRunStep = 4200;
@@ -314,9 +329,9 @@ void CRunLabelFeeder::OnRunFeeder()
 
 		if (nRet_1 == BD_GOOD) //좌측으로 이동
 		{
-			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
-			m_nRunStep = 5000;
-
+ 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY; 
+ 			m_nRunStep = 5000;
+	
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
 		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
@@ -324,6 +339,8 @@ void CRunLabelFeeder::OnRunFeeder()
 			m_nRunStep = 4100;
 		}
 		break;
+
+	
 
 	case 4200:
 		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] , COMI.mn_manualspeed_rate);
@@ -341,14 +358,12 @@ void CRunLabelFeeder::OnRunFeeder()
 		break;
 
 	case 5000:
-		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_CLEAR )
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_CLEAR)
 		{
 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_NO;
 			m_nRunStep = 1000;
 		}
 		break;
-
-
 
 	default:
 		break;

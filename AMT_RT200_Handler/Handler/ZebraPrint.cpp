@@ -807,7 +807,9 @@ CString	CZebraPrint::OnPrintLabelOffset(int nOffsetX, int nOffsetY, CString strT
 	nY = _wtoi(strOld.Mid(6, 3));
 
 	strNew.Format(_T("LH%03d,%03d"), nX + nOffsetX, nY + nOffsetY);
-	strNew = strNew + _T("^MMTA,-120"); //kwlee 2017.0308
+	
+	//strNew = strNew + _T("^MMP"); //kwlee 2017.0317
+	//strNew = strNew + _T(",~JSB,~TA-240"); //kwlee 2017.0317
 	strData.Replace(strOld, strNew);
 
 	return strData;
