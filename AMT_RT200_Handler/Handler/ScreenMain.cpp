@@ -1261,7 +1261,9 @@ LRESULT CScreenMain::OnMainCvInMoveDisplay(WPARAM wParam, LPARAM lParam)
 	//rt.left =310;	rt.top = 148;	rt.right = rt.left + mn_Size;	rt.bottom = rt.top + 80;
 	//GetDlgItem(IDC_CUSTOM_MODE )->MoveWindow( &rt );
 	rt.left =0;	rt.top = 0;	rt.right = rt.left +0;	rt.bottom = rt.top + 0;
-	GetDlgItem(IDC_CUSTOM_TM3 )->MoveWindow( &rt );
+	//GetDlgItem(IDC_CUSTOM_TM3 )->MoveWindow( &rt );
+	//kwlee 2017.0313
+	GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
 	
 	SetTrayPos(nPos);
 	
@@ -1326,7 +1328,8 @@ LRESULT CScreenMain::OnMainCvTurnMoveDisplay(WPARAM wParam, LPARAM lParam)
 	}	
 	st_Pcb_info.nLeftSize = mn_Size;
 	rt.left =0;	rt.top = 0;	rt.right = rt.left +0;	rt.bottom = rt.top + 0;
-	GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
+	//GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
+	GetDlgItem(IDC_CUSTOM_TM2 )->MoveWindow( &rt );
 
 	SetTrayPos(nPos);
 	
@@ -1417,7 +1420,9 @@ LRESULT CScreenMain::OnMainCvOutMoveDisplay(WPARAM wParam, LPARAM lParam)
 	//rt.left =310;	rt.top = 148;	rt.right = rt.left + mn_Size;	rt.bottom = rt.top + 80;
 	//GetDlgItem(IDC_CUSTOM_MODE )->MoveWindow( &rt );
 	rt.left =0;	rt.top = 0;	rt.right = rt.left +0;	rt.bottom = rt.top + 0;
-	GetDlgItem(IDC_CUSTOM_TM2 )->MoveWindow( &rt );
+	//GetDlgItem(IDC_CUSTOM_TM )->MoveWindow( &rt );
+	//kwlee 2017.0314
+	GetDlgItem(IDC_CUSTOM_TM3 )->MoveWindow( &rt );
 	
 	SetTrayPos(nPos);
 	
@@ -2827,43 +2832,48 @@ void CScreenMain::OnBnClickedBtnStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int pos;
-	
+	CString strTemp,str;
+	//st_sync_info.TurnConvJobReady[ROBOT] = CTL_READY;
+	strTemp.Format(_T("%c13%c"), 0x02, 0x03);
+	pos = strTemp.GetLength();
+	str = strTemp.Mid(1,pos - 2);
 
-	if ( m_nTemp < 3 )
-	{
-		pos = WM_PCB_CV_IN_MOVE_DRAW_MAIN;
-	}
-	else if ( m_nTemp > 2)
-	{
-		
-// 		if (m_nTemp == 5)
-// 		{
-// 			OnMainPcbWork();
-// 		}
-// 		else if (m_nTemp ==6)
-// 		{
-// 			TurnPositionGrid();
-// 		}else if (m_nTemp == 7)
-// 		{
-// 			ReversePositionGrid();
-// 		}
+	return;
+// 	if ( m_nTemp < 3 )
+// 	{
+// 		pos = WM_PCB_CV_IN_MOVE_DRAW_MAIN;
+// 	}
+// 	else if ( m_nTemp > 2)
+// 	{
+// 		
+// // 		if (m_nTemp == 5)
+// // 		{
+// // 			OnMainPcbWork();
+// // 		}
+// // 		else if (m_nTemp ==6)
+// // 		{
+// // 			TurnPositionGrid();
+// // 		}else if (m_nTemp == 7)
+// // 		{
+// // 			ReversePositionGrid();
+// // 		}
+// 
+// 		pos =  WM_PCB_CV_TURN_MOVE_DRAW_MAIN;
+// 		
+// 	}
+// 	else if (m_nTemp<18)
+// 	{
+// 		pos =  WM_PCB_CV_OUT_MOVE_DRAW_MAIN;	
+// 	}
+// 	else
+// 	{
+// 		pos =  WM_PCB_CV_IN_MOVE_DRAW_MAIN;
+// 		//pos = 0;
+// 		m_nTemp = 0;
+// 	}
 
-		pos =  WM_PCB_CV_TURN_MOVE_DRAW_MAIN;
-		
-	}
-	else if (m_nTemp<18)
-	{
-		pos =  WM_PCB_CV_OUT_MOVE_DRAW_MAIN;	
-	}
-	else
-	{
-		pos =  WM_PCB_CV_IN_MOVE_DRAW_MAIN;
-		//pos = 0;
-		m_nTemp = 0;
-	}
 
-
-	st_handler_info.cWndMain->PostMessage(pos,m_nTemp,0);
+	st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,m_nTemp,0);
 	m_nTemp++;
 }
 
@@ -3479,6 +3489,9 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	
+	st_sync_info.nSmema_Front = CTL_READY;
+	return;
+
 		st_Buffer_info.nBufferData[0][3][BIN] = FAIL;
 		st_Buffer_info.nBufferData[0][3][EXIST] = NO;
 	
@@ -3565,14 +3578,15 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw2()
 	st_Buffer_info.strBufferSerial[1][37] = _T("1111_37");
 	st_Buffer_info.strBufferSerial[1][38] = _T("1111_38");
 	return;
-	//st_sync_info.nSmema_Front = CTL_READY;
+	st_sync_info.nSmema_Front = CTL_READY;
 }
 
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-
+	st_sync_info.nSmema_Front = CTL_COMPLETE;
+	return;
 	if(st_Buffer_info.nBufferData[0][37][EXIST] == YES)
 		st_Buffer_info.nBufferData[0][37][BIN] = FAIL; 
 //	st_Buffer_info.nBufferData[0][37][EXIST] = YES;
@@ -3600,8 +3614,8 @@ void CScreenMain::OnBnClickedBtnCvInPos3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//kwlee 2017.0209 test..
-	st_handler_info.nRunStatus = dSTOP;
-	return;
+	
+	
 	///
 	st_sync_info.nSmema_Rear = CTL_REQ;
 	clsRunConveyor.m_nRunStep[CONV_OUT] = 1300;
@@ -3617,8 +3631,9 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw5()
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw4()
 {
-	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
-	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
-	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;
-	st_Picker_info.nPickerData[1][2][FAILPICK] = YES;
+	clsRunConveyor.m_nRunStep[CONV_MID] = 2910;
+// 	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
+// 	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
+// 	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;
+// 	st_Picker_info.nPickerData[1][2][FAILPICK] = YES;
 }

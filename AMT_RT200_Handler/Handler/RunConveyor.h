@@ -17,6 +17,7 @@ public:
 	int m_nPosCheckStep;
 	int m_nErrorStep;
 	int m_TurnConvPosCheck[2];
+	int m_nSmemaFlag;
 
 	CString m_strAlarmCode;
 

@@ -2621,9 +2621,14 @@ LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 
 	case CLIENT_REV:
 		//clsEcFirst.OnDataReceive(st_client_info[PRINTER_NETWORK].strRev);
-		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
-		sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
-		
+// 		strMsg.Format(_T("%s"), st_client_info[BCR1_NETWORK].strRev);
+// 		sRcv = sTmp.Mid(0, st_client_info[BCR1_NETWORK].nRevLength);
+// 		
+		//clsRunRobot.m_strBarcode[0] = strMsg;
+		//kwlee 2017.0315
+		nLength = strMsg.GetLength();
+		strMsg.Mid(1,nLength - 2);
+
 		clsRunRobot.m_strBarcode[0] = strMsg;
 		clsRunRobot.m_nBarcodeReadCheck[0] = TRUE;
 		
@@ -2779,6 +2784,9 @@ LRESULT CMainFrame::OnBarcode_2(WPARAM wParam, LPARAM lParam)
 			strMsg.Format(_T("%s"), st_client_info[BCR2_NETWORK].strRev);
 			sRcv = sTmp.Mid(0, st_client_info[BCR2_NETWORK].nRevLength);
 
+			//kwlee 2017.0315
+			nLength = strMsg.GetLength();
+			strMsg.Mid(1,nLength - 2);
 			clsRunRobot.m_strBarcode[1] = strMsg;
 			clsRunRobot.m_nBarcodeReadCheck[1] = TRUE;
 
