@@ -58,9 +58,6 @@ CRunRobot::CRunRobot(void)
 	m_nVisionStep = 0; 
 	m_nVisionRetry = 0;
 	//
-	//kwlee 2017.0322 Label Test 용
-	m_nPrintOutPutCnt = 35;
-
 	st_sync_info.nBcrReq = CTL_CLEAR;
 	st_sync_info.nLabelCheckReq = CTL_CLEAR;
 }
@@ -404,7 +401,6 @@ void CRunRobot::OnRunInit()
 				{
 					m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;
 				}
-				
 			}
 			OnSetPickerUpDn(0, PICKER_DN, m_npTemp_Picker_YesNo);
 			m_nInitStep = 6800;
@@ -1080,7 +1076,7 @@ int CRunRobot::OnGetVaccumgmCheck(int OnOff,int nPickCnt)
 				//kwlee 2017.0221
 				else
 				{
-					nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 3 - i],IO_ON);
+					nRet = FAS_IO.get_in_bit(st_io_info.i_HeadVaccumCheck[PICKCNT + 4 - i],IO_ON);
 					if (nRet == IO_OFF && st_basic_info.nModeDevice == WITH_DVC)
 					{
 						//kwlee 2017.0221
@@ -1229,16 +1225,17 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 	int i;
 	int nTemp = 0;
 
-
-	for (int i =0; i<PICKCNT; i++ )
+	
+	for (i =0; i<PICKCNT; i++ )
 	{
 		m_npTemp_Picker_YesNo[i] = CTL_NO;
 	}
-
+	
+	i =0; 
 	for (i =0; i<nPickCnt; i++)
 	{
 		if (nMode == 1)
-		{
+		{		
 			if (i < 5 && ( st_Picker_info.nPickerData[0][i][BIN] == FAIL /*|| st_Picker_info.nPickerData[0][i][EXIST] == NO*/ ) )
 			{
 				m_npTemp_Picker_YesNo[st_Picker_info.nPickerData[0][i][Y_FAIL_POS]] = CTL_YES;
@@ -1270,13 +1267,13 @@ void CRunRobot::OnSetLabelPick(int nMode, int nPickCnt)
 				{
 					m_npTemp_Picker_YesNo[i] = CTL_NO;
 				}
+				
 			}
 			else if (i > 4)
 			{
 				//clsRunRobot.m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
 				//kwlee 2017.0204
-				//if (st_Buffer_info.nBufferData[1][nPickCnt - i][BIN] == GOOD)
-				//if (st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][BIN] == GOOD && st_Buffer_info[PICK].nBufferData[1][nPickCnt - i][EXIST] == YES)
+				
 				if (st_Buffer_info.nBufferData[1][39 - (m_nPickCnt - i)][BIN] == GOOD && st_Buffer_info.nBufferData[1][39 - (m_nPickCnt - i)][EXIST] == YES)
 				{
 					m_npTemp_Picker_YesNo[PICKCNT + 3 - i] = CTL_YES;	
@@ -1756,7 +1753,7 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 					//kwlee 2017.0221
 // 					if (st_Picker_info.nPickerData[1][MAX_PICKER - (nPickCnt - i)][BIN] == FAIL && st_Picker_info.nPickerData[1][MAX_PICKER - (nPickCnt -i)][EXIST] == YES)
 // 					{
-						nTemp = MAX_PICKER + st_Picker_info.nPickerData[1][MAX_PICKER - (nPickCnt -i)][Y_FAIL_POS];	
+						nTemp = MAX_PICKER + st_Picker_info.nPickerData[1][MAX_PICKER - (nPickCnt - i)][Y_FAIL_POS];	
 						FAS_IO.set_out_bit(st_io_info.o_HeadVaccum[nTemp + 1],IO_ON);
 // 							st_Picker_info.strPickerSerial[1][nTemp + 1] = _T("");
 // 							st_Picker_info.nPickerData[1][nTemp + 1][BIN] = -1;
@@ -1810,7 +1807,6 @@ void CRunRobot::OnVaccummSet(int nMode, int nPickCnt, int OnOff)
 				}
 				else
 				{
-
 					if (st_basic_info.nPcbType == RDIMM)
 					{
 						if (i < 3)
@@ -2168,7 +2164,7 @@ void CRunRobot::OnSetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo)
 
 	if (nMode > 1) return;
 
-	for (i=0; i<10; i++)
+	for (i=0; i<11; i++)
 	{
 		if (npPickerInfo[i] == YES)
 		{
@@ -2310,7 +2306,7 @@ int CRunRobot::OnFeederInterface()
 			m_dwBcrTime[0] = GetTickCount();
 			break;
 		}
-		if (m_dwBcrTime[2] > 300)
+		if (m_dwBcrTime[2] > 1000)
 		{
 			if(1 || st_sync_info.nLabelRecv == CTL_YES )
 			{
@@ -2377,7 +2373,7 @@ int CRunRobot::OnFeederInterface()
 						::PostMessage(st_handler_info.hWnd, WM_CLIENT_MSG + BCR1_NETWORK, CLIENT_SEND, 0);
 						::PostMessage(st_handler_info.hWnd, WM_CLIENT_MSG + BCR2_NETWORK, CLIENT_SEND, 0);
 					}
-					if (st_basic_info.nModeDevice == WITHOUT_DVC)
+					if (1 || st_basic_info.nModeDevice == WITHOUT_DVC)
 					{
 						m_nBarcodeReadCheck[0] = TRUE;
 						m_nBarcodeReadCheck[1] = TRUE;
@@ -2417,8 +2413,7 @@ int CRunRobot::OnFeederInterface()
 		{
 			m_dwLabelOutTime[0] = GetCurrentTime();
 		}
-		
-		//if (m_dwLabelOutTime[2] > 1000)
+
 		if (m_dwLabelOutTime[2] > 500)
 		{
 			for (int i = 0; i<2; i++)
@@ -2495,14 +2490,14 @@ int CRunRobot::OnGetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo)
 	int m_nCnt = 0;
 	CString strAlarm;
 	int nRet[PICKCNT];
-	int nNum = 10;
+	int nNum = 11;
 
 	for(int i = 0; i<nNum; i++)
 		nRet[i] = NO;
 
 	
 
-	for (i=0; i<10; i++)
+	for (i=0; i<11; i++)
 	{
 		if (npPickerInfo[i] == YES)
 		{
@@ -2618,7 +2613,7 @@ int CRunRobot::OnGetPickerUpDn(int nMode, int nOnOff, int *npPickerInfo)
  		} 		
  	}
 
-	if( m_nCnt >= 10)
+	if( m_nCnt >= 11)
 	{
 		return RET_GOOD;
 	}
@@ -2793,12 +2788,10 @@ void CRunRobot::OnRobotRun()
 		}
 		break;
 
-		//kwlee 2017.0204
 	case 600:
 		m_dpTargetPosList[0] = st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_PLACE_REJECT];
 		m_dpTargetPosList[1] = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_PLACE_REJECT];
 		
-		//label pick 위치 이동
 		nRet_1 = CTL_Lib.Linear_Move(ONLY_MOVE_START, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
 
 		if(nRet_1 == BD_GOOD) //정상적으로 완료된 상태
@@ -3087,62 +3080,61 @@ void CRunRobot::OnRobotRun()
 
 		//kwlee 2017.0210
 	case 2100:
-		nRet_1 = CTL_Lib.Linear_Move(ONLY_MOVE_START, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
+		//nRet_1 = CTL_Lib.Linear_Move(ONLY_MOVE_START, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
+		//kwlee 2017.0323
+		nRet_1 = CTL_Lib.Linear_Move(BOTH_MOVE_FINISH, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
 
 		if(nRet_1 == BD_GOOD) //정상적으로 완료된 상태
 		{
-			m_nRunStep = 3000;
+			///m_nRunStep = 3000;
+			//kwlee 2017.0323
+			m_nRunStep = 3010;
 		}
 		else if(nRet_1 == BD_ERROR)
 		{
 			CTL_Lib.Alarm_Error_Occurrence(710, dWARNING, st_alarm_info.strCode);
 		}
 		break;
-
-	case 3000:
-		//label pick 위치 확인
-		nRet = CTL_Lib.Linear_Move(ONLY_MOVE_CHECK, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
-		if(nRet == BD_GOOD) //정상적으로 완료된 상태 
-		{						
-			m_nRunStep = 3100;
-			//kwlee 2017.0307
-			//m_nRunStep = 3010;
-		}
-		else if (nRet == BD_RETRY)
-		{
-			m_nRunStep = 2100;
-		}
-		else if (nRet == BD_ERROR || nRet == BD_SAFETY)
-		{			
-			m_nRunStep = 2100;
-			CTL_Lib.Alarm_Error_Occurrence(720, dWARNING, st_alarm_info.strCode);
-		}
-		break;
-		
-		//kwlee 2017.0307
-// 	case 3010:
-// 		OnSetFeederClampCylUpDn(0,IO_OFF);
-// 		m_nRunStep = 3020;
-// 		break;
-// 
-// 	case 3020:
-// 		nRet = OnGetFeederClampCylUpDn(0,IO_OFF);
-// 		if (nRet == RET_GOOD)
-// 		{
-// 			m_dwStopperCylWaitTime[0] = GetCurrentTime();
-// 			//FAS_IO.set_out_bit(st_io_info.o_LabelStopperCylinder, IO_OFF);
+		//kwlee 2017.0323
+// 	case 3000:
+// 		//label pick 위치 확인
+// 		nRet = CTL_Lib.Linear_Move(ONLY_MOVE_CHECK, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
+// 		if(nRet == BD_GOOD) //정상적으로 완료된 상태 
+// 		{						
 // 			//m_nRunStep = 3100;
 // 			//kwlee 2017.0307
-// 			//m_nRunStep = 3030;
-// 			m_nRunStep = 3100;
-// 		}
-// 		else if (nRet == RET_ERROR)
-// 		{
-// 			CTL_Lib.Alarm_Error_Occurrence(721, dWARNING, st_alarm_info.strCode);
 // 			m_nRunStep = 3010;
 // 		}
-// 		
+// 		else if (nRet == BD_RETRY)
+// 		{
+// 			m_nRunStep = 2100;
+// 		}
+// 		else if (nRet == BD_ERROR || nRet == BD_SAFETY)
+// 		{			
+// 			m_nRunStep = 2100;
+// 			CTL_Lib.Alarm_Error_Occurrence(720, dWARNING, st_alarm_info.strCode);
+// 		}
 // 		break;
+		
+		//kwlee 2017.0307
+	case 3010:
+		OnSetFeederClampCylUpDn(0,IO_OFF);
+		m_nRunStep = 3020;
+		break;
+
+	case 3020:
+		nRet = OnGetFeederClampCylUpDn(0,IO_OFF);
+		if (nRet == RET_GOOD)
+		{
+			m_dwStopperCylWaitTime[0] = GetCurrentTime();
+			m_nRunStep = 3100;
+		}
+		else if (nRet == RET_ERROR)
+		{
+			CTL_Lib.Alarm_Error_Occurrence(721, dWARNING, st_alarm_info.strCode);
+			m_nRunStep = 3010;
+		}
+		break;
 // 		
 // 	case 3030:
 // 		m_dwStopperCylWaitTime[1] = GetCurrentTime();
@@ -3191,7 +3183,7 @@ void CRunRobot::OnRobotRun()
 					st_sync_info.nBcrReq = CTL_REQ;
 				}
 			}
-// 			m_dwTimeCheck[0] = GetCurrentTime();
+ 			m_dwTimeCheck[0] = GetCurrentTime();
 // 			m_nRunStep = 3110;
 			//kwlee 2017.0320
 			m_nRunStep = 3200;
@@ -3222,6 +3214,8 @@ void CRunRobot::OnRobotRun()
 		{
 			if (st_sync_info.nPrinterStatus == BD_READY && st_sync_info.nBcrReq == CTL_CHANGE)
 			{
+				//kwlee 2017.0318
+				//m_nRunStep = 3210;
 				m_nRunStep = 4000;
 			}
 		}
@@ -3274,13 +3268,17 @@ void CRunRobot::OnRobotRun()
 		break;
 
 	case 3800:
-		nRet_1 = CTL_Lib.Linear_Move(ONLY_MOVE_START, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
+		//nRet_1 = CTL_Lib.Linear_Move(ONLY_MOVE_START, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
+		//kwlee 2017.0323
+		nRet_1 = CTL_Lib.Linear_Move(BOTH_MOVE_FINISH, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
 
 		if(nRet_1 == BD_GOOD) //정상적으로 완료된 상태
 		{
 			//m_nRunStep = 2100;
 			//kwlee 2017.0213
-			m_nRunStep = 3900;
+			//m_nRunStep = 3900;
+			//kwlee 2017.0323
+			m_nRunStep = 4000;
 		}
 		else if(nRet_1 == BD_ERROR)
 		{
@@ -3288,23 +3286,23 @@ void CRunRobot::OnRobotRun()
 			//	m_nRunStep = 0;
 		}
 		break;
-
-	case  3900:
-		nRet = CTL_Lib.Linear_Move(ONLY_MOVE_CHECK, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
-		if(nRet == BD_GOOD) //정상적으로 완료된 상태 
-		{						
-			m_nRunStep = 4000;
-		}
-		else if (nRet == BD_RETRY)
-		{
-			m_nRunStep = 3800;
-		}
-		else if (nRet == BD_ERROR || nRet == BD_SAFETY)
-		{			
-			m_nRunStep = 3800;
-			CTL_Lib.Alarm_Error_Occurrence(720, dWARNING, st_alarm_info.strCode);
-		}
-		break;
+	//kwleee 2017.0323
+// 	case  3900:
+// 		nRet = CTL_Lib.Linear_Move(ONLY_MOVE_CHECK, m_nLinearMove_Index, m_lAxisCnt, m_lpAxisNum, m_dpTargetPosList, COMI.mn_runspeed_rate);
+// 		if(nRet == BD_GOOD) //정상적으로 완료된 상태 
+// 		{						
+// 			m_nRunStep = 4000;
+// 		}
+// 		else if (nRet == BD_RETRY)
+// 		{
+// 			m_nRunStep = 3800;
+// 		}
+// 		else if (nRet == BD_ERROR || nRet == BD_SAFETY)
+// 		{			
+// 			m_nRunStep = 3800;
+// 			CTL_Lib.Alarm_Error_Occurrence(720, dWARNING, st_alarm_info.strCode);
+// 		}
+// 		break;
 
 	case 4000:
 		m_bLabelFeederNum = false;
@@ -3403,8 +3401,8 @@ void CRunRobot::OnRobotRun()
 		{
 			OnBlowSet(0,m_nPickCnt,IO_OFF);
 		}
-		m_nRunStep = 5100;
 		m_dwStopperCylWaitTime[0] = GetCurrentTime();
+		m_nRunStep = 5100;
 		break;
 
 	case 5100:
@@ -3425,8 +3423,9 @@ void CRunRobot::OnRobotRun()
 			{
 				OnVaccummSet(0,m_nPickCnt,IO_ON);
 			}
+			m_nRunStep = 6000;
 		}
-		m_nRunStep = 6000;
+	
 		break;
 
 	case 6000:	
@@ -3493,18 +3492,38 @@ void CRunRobot::OnRobotRun()
 		st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_REQ;
 		st_sync_info.nLabelRbt_Dvc_Req[1] = BCR_UNLOAD;
 		if( m_bLabelFeederNum == true )	st_sync_info.nLabelRbt_Dvc_Req[2] = 1;
-		else											st_sync_info.nLabelRbt_Dvc_Req[2] = 5;
-		m_nRunStep = 7030;
-	
+		else							st_sync_info.nLabelRbt_Dvc_Req[2] = 5;
 		
+		m_dwTimeCheck[0] = GetCurrentTime(); //kwlee 2017.0323 .
+		m_nRunStep = 7030;
+		//kwlee 2017.0323
+		//m_nRunStep = 7100;
 		break;
 
 	case 7030:
-		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_READY )
+// 		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_READY )
+// 		{
+// 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR; 
+// 			m_nRunStep = 7100;
+// 		}
+		//kwlee 2017.0323
+		m_dwTimeCheck[1] = GetCurrentTime();
+		m_dwTimeCheck[2] = m_dwTimeCheck[1] - m_dwTimeCheck[0];
+
+		if (m_dwTimeCheck[2] < 0)
 		{
-			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR; 
-			m_nRunStep = 7100;
+			m_dwTimeCheck[0] = GetCurrentTime();
 		}
+
+		if (m_dwTimeCheck[2] > 1000)
+		{
+			if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_READY )
+			{
+				st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR; 
+				m_nRunStep = 7100;
+			}
+		}
+		
 		break;
 
 	case 7100:
@@ -3519,20 +3538,19 @@ void CRunRobot::OnRobotRun()
 		nRet_1 = OnGetPickerUpDn(0, PICKER_UP, m_npTemp_Picker_YesNo);
 	
 		if(nRet_1 == RET_GOOD)
-		{
-			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR; //kwlee 2017.0318	
+		{	
+			//st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR; //kwlee 2017.0318
  			m_nRunStep = 7300;
  			mn_Retry = 0;
-			
 		}
 		break;
 
 	case 7300:	
 		//z축 up
 		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_PICKERRBT_Z, st_motor_info[M_PICKERRBT_Z].d_pos[ROBOT_SAFETY], COMI.mn_runspeed_rate);
-
 		if (nRet_1 == BD_GOOD) //좌측으로 이동
 		{
+			//st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_CLEAR; //kwlee 2017.0323
 			m_nRunStep = 7310;
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
@@ -3543,7 +3561,8 @@ void CRunRobot::OnRobotRun()
 		break;
 
 
-	case 7310:
+
+	case 7310: //kwlee 2017.0323
 		if (m_nLabelFailCheck ==  TRUE)
 		{
 			OnDataExchange(REJECT_MODE,PICK);
@@ -3555,8 +3574,7 @@ void CRunRobot::OnRobotRun()
 		m_nRunStep = 7320;
 		break;
 	
-	//case 7310:
-	case 7320:
+	case 7320: 
 		if ( 0 && st_basic_info.nModeDevice == WITHOUT_DVC)
 		{
 			m_nRunStep = 13000;
@@ -3795,7 +3813,8 @@ void CRunRobot::OnRobotRun()
 				m_lTurnConvWaitTime[1] = GetCurrentTime();
 				m_lTurnConvWaitTime[2] = m_lTurnConvWaitTime[1] - m_lTurnConvWaitTime[0];
 
-				if (m_lTurnConvWaitTime[2] > 1000 )
+				//if (m_lTurnConvWaitTime[2] > 1000 )
+				if (m_lTurnConvWaitTime[2] > 300 )
 				{
 // 					if (st_sync_info.TurnConvJobReady[CONVEYOR] == CTL_READY)
 // 					{
@@ -4446,7 +4465,6 @@ void CRunRobot::OnSetFeederClampCylUpDn(int nMode, int nOnOff)
 int CRunRobot::OnGetFeederClampCylUpDn(int nMode, int nOnOff)
 {
 	int nWaitTime = WAIT_PICKER_UP_DN;
-
 	int nRet;
 	if (nOnOff == IO_OFF)
 	{

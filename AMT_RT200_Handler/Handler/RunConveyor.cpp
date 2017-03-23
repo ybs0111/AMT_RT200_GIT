@@ -33,7 +33,6 @@ void CRunConveyor::OnThreadRUN()
 {
 	Smema_Front();
 	Smema_Rear();
-
  	switch(st_handler_info.nRunStatus)
  	{
 	case dINIT:

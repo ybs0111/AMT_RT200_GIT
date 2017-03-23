@@ -204,7 +204,6 @@ void CRunLabelFeeder::OnRunFeeder()
 			else if( st_sync_info.nLabelRbt_Dvc_Req[1] == BCR_UNLOAD )
 			{
 				m_nRunStep = 4000;
-				
 			}
 			else
 			{
@@ -234,7 +233,6 @@ void CRunLabelFeeder::OnRunFeeder()
 		{
 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY;
 			m_nRunStep = 3000;
-
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
 		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
@@ -331,7 +329,6 @@ void CRunLabelFeeder::OnRunFeeder()
 		{
  			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_READY; 
  			m_nRunStep = 5000;
-	
 		}
 		else if (nRet_1 == BD_ERROR || nRet_1 == BD_SAFETY)
 		{//모터 알람은 이미 처리했으니 이곳에서는 런 상태만 바꾸면 된다
@@ -339,8 +336,6 @@ void CRunLabelFeeder::OnRunFeeder()
 			m_nRunStep = 4100;
 		}
 		break;
-
-	
 
 	case 4200:
 		nRet_1 = CTL_Lib.Single_Move(BOTH_MOVE_FINISH, M_LABEL_PITCH, st_motor_info[M_LABEL_PITCH].d_pos[LABEL_FEEDER_READY] , COMI.mn_manualspeed_rate);
@@ -358,17 +353,18 @@ void CRunLabelFeeder::OnRunFeeder()
 		break;
 
 	case 5000:
-		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_CLEAR)
+		if( st_sync_info.nLabelRbt_Dvc_Req[0] == CTL_CLEAR )
 		{
 			st_sync_info.nLabelRbt_Dvc_Req[0] = CTL_NO;
 			m_nRunStep = 1000;
 		}
 		break;
 
+
+
 	default:
 		break;
 	}
-
 }
 
 void CRunLabelFeeder::OnSetRejectCyl(int nMode, int nUpDn)
