@@ -2397,9 +2397,6 @@ void CWorkInterface::OnBnClickedButton6()
 	CString strFormat;
 	CString strTmp1,strTmp2;
 
-	
-	
-
 	if (st_client_info[PRINTER_NETWORK].nConnect == CTL_YES)
 	{
 		m_nCntBcrNum++;
@@ -2410,7 +2407,7 @@ void CWorkInterface::OnBnClickedButton6()
 		 strTmp1.Format(_T("A%d"),m_nCntBcrNum);
 		 strTmp2.Format(_T("B%d"),m_nCntBcrNum);
 
-		 //strFormat.Format(_T("^XA^LH500,045^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
+		// strFormat.Format(_T("^XA^LH500,045^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
 		 //kwlee
 		 strFormat.Format(_T("^XA^LH500,025^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1400,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
 		

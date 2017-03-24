@@ -393,10 +393,10 @@ void  CRunConveyor::Smema_Rear()
 				m_nRearSmemaStep = 200;
 			}
 		}
-		else
-		{
-			m_nRearSmemaStep = 100;
-		}
+// 		else
+// 		{
+// 			m_nRearSmemaStep = 100;
+// 		}
 		break;
 
 	case 200:
@@ -407,7 +407,7 @@ void  CRunConveyor::Smema_Rear()
 		{
 			m_lWait_Smema[0] = GetCurrentTime();
 		}
-		if(m_lWait_Smema[2] > 300)
+		if(m_lWait_Smema[2] > 30)
 		{
 			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_ON);
 			st_sync_info.nSmema_Tray_Output_Req = CONV_READY;
@@ -491,11 +491,11 @@ void  CRunConveyor::Smema_Rear()
 				m_nRearSmemaStep = 400;
 			}	
 		}
-		else
-		{
-			m_lWait_Smema[0] = GetCurrentTime();
-			m_nRearSmemaStep = 200;
-		}
+// 		else
+// 		{
+// 			m_lWait_Smema[0] = GetCurrentTime();
+// 			m_nRearSmemaStep = 200;
+// 		}
 		break;
 
 	case 400:
@@ -2918,7 +2918,10 @@ void CRunConveyor::OnTurnConvMove()
 				m_strAlarmCode.Format(_T("5%04d%d"), st_io_info.i_TurnConvPosChk, IO_ON);
 				//CTL_Lib.Alarm_Error_Occurrence(490, dWARNING, m_strAlarmCode);
 				m_nErrorStep = m_nRunStep[CONV_MID];
-				m_nRunStep[CONV_MID] = 5000;
+				//m_nRunStep[CONV_MID] = 5000;
+				//kwlee 2017.0324
+				m_nRunStep[CONV_MID] = 2920;
+			
 			}
 		}
 		break;
@@ -3090,8 +3093,9 @@ void CRunConveyor::OnRearConvMove()
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_OutConvChk,	IO_OFF);//ps100 //트레이가 장비에 진입시 감지 됨
 			nRet[1] = FAS_IO.get_in_bit(st_io_info.i_OutConvPosUpChk,IO_OFF);//ps101 //트레이가 장비에 진입시 감지 됨
 			nRet[2] = FAS_IO.get_in_bit(st_io_info.i_OutInConvPosChk,IO_OFF);
+			nRet[3] = FAS_IO.get_in_bit(st_io_info.i_FrontComplete,IO_OFF);
 
-			if(nRet[0] == IO_OFF && nRet[1] == IO_OFF && nRet[2] == IO_OFF)
+			if(nRet[0] == IO_OFF && nRet[1] == IO_OFF && nRet[2] == IO_OFF && nRet[3] == IO_OFF)
 			{
 				m_nRunStep[CONV_OUT] = 110;
 				st_sync_info.nRearTrayIn = CONV_REQ;
@@ -3196,7 +3200,7 @@ void CRunConveyor::OnRearConvMove()
 				CTL_Lib.Alarm_Error_Occurrence(520, dWARNING, m_strAlarmCode);
 
 				FAS_IO.set_out_bit(st_io_info.o_OutConvMotorOn,IO_OFF);
-				m_nRunStep[CONV_OUT] =1200;
+				m_nRunStep[CONV_OUT] =1100;
 			}
 		}
 		break;
@@ -3315,6 +3319,7 @@ void CRunConveyor::OnRearConvMove()
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 			m_nRunStep[CONV_OUT] = 2000;
 		}
+		
 		break;
 
 	case 2000:
@@ -3344,7 +3349,7 @@ void CRunConveyor::OnRearConvMove()
 // 			}
 // 		}
 		//kwlee 2017.0322
-		if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_OFF && FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_ON) == IO_ON)
+		if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_OFF && FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_ON) == IO_ON ||st_sync_info.nSmema_Rear == CTL_COMPLETE)
 		{
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 			st_sync_info.nSmema_Tray_Output_Req = CONV_CLR;
