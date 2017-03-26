@@ -2645,7 +2645,11 @@ void CScreenMain::OnMainPickerDisplay()
 
 		for (int j = 0; j<MAX_PICKER; j++)
 		{
-			if (st_Picker_info.nPickerData[0][j][BIN] == FAIL )
+			if (st_Picker_info.nPickerData[0][j][BIN] == GOOD )
+			{
+				m_pGridRobotTurnPos.SetItemBkColour(1, j + 1, GREEN_L, BLACK_L);
+			}
+			else if (st_Picker_info.nPickerData[0][j][BIN] == FAIL )
 			{
 				m_pGridRobotTurnPos.SetItemBkColour(1, j + 1, RED_C, BLACK_L);
 			}
@@ -2654,7 +2658,11 @@ void CScreenMain::OnMainPickerDisplay()
 				m_pGridRobotTurnPos.SetItemBkColour(1, j + 1, WHITE_C, BLACK_L);
 			}
 
-			if (st_Picker_info.nPickerData[1][j][BIN] == FAIL)
+			if (st_Picker_info.nPickerData[1][j][BIN] == GOOD)
+			{
+				m_pGridRobotTurnPos.SetItemBkColour(3, j + 1, GREEN_L, BLACK_L);
+			}
+			else if (st_Picker_info.nPickerData[1][j][BIN] == FAIL)
 			{
 				m_pGridRobotTurnPos.SetItemBkColour(3, j + 1, RED_C, BLACK_L);
 			}
@@ -2674,8 +2682,6 @@ void CScreenMain::OnMainPcbDataDisplay()
 {
 //	int   j;
 	int	 /* max_row,*/ max_col;
-
-
 	CString strTmp;
 	CRect rect;
 	max_col = 3;

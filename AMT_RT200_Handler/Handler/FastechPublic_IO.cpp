@@ -2849,7 +2849,7 @@ int CFastechPublic_IO::Initialize_Board()
 	FAS_IO.Set_IO_DefineWord(0, 0, 5, 0x00ff); //0번 Master, 0번 포트, 5번 슬레이브 , 16bit 셋팅			-- Part I/O 검증 완료
 	FAS_IO.Set_IO_DefineWord(0, 0, 6, 0x00ff); //0번 Master, 0번 포트, 6번 슬레이브 , 16bit 셋팅			-- Part I/O 검증 완료
 	FAS_IO.Set_IO_DefineWord(0, 0, 7, 0x00ff); //0번 Master, 0번 포트, 7번 슬레이브 , 16bit 셋팅			-- Part I/O 검증 완료	
-// 
+//
 // 	// port 1
  	FAS_IO.Set_IO_DefineWord(0, 1, 0, 0x00ff); //0번 Master, 1번 포트, 0번 슬레이브 , 16bit 셋팅			
 	// 	FAS_IO.Set_IO_DefineWord(0, 1, 1, 0x003f); //0번 Master, 1번 포트, 1번 슬레이브 , 16bit 셋팅

@@ -2409,7 +2409,7 @@ void CWorkInterface::OnBnClickedButton6()
 
 		// strFormat.Format(_T("^XA^LH500,045^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1100,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
 		 //kwlee
-		 strFormat.Format(_T("^XA^LH500,025^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1400,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
+		 strFormat.Format(_T("^XA^LH500,045^FO10,10^BY3^B3N,N,150,Y,N^FD%s^FS^FO1000,10^BY3^B3N,N,150,Y,N^FD%s^FS^XZ"),strTmp1,strTmp2);
 		
 
 		 //strFormat = _T("^XA^SEE:UHANGUL.DAT^FS^CWJ,E:KFONT3.FNT^FS^CI26^FO110,110,^FD123YBS^FS^FO110,10^FS^FDABCYOON^FS^PQ1^XZ");

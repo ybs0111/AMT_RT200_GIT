@@ -60,6 +60,14 @@ CRunRobot::CRunRobot(void)
 	
 
 	m_nPrintOutPutCnt = 39; //kwlee 2017.0324 Test
+	for (int i = 0; i< 2; i++)
+	{
+		for (int j = 0; j< 40; j++)
+		{
+			st_Buffer_info.nBufferData[i][j][BIN]  = 2;
+			st_Buffer_info.nBufferData[i][j][EXIST] = 1;
+		}
+	}
 	st_sync_info.nBcrReq = CTL_CLEAR;
 	st_sync_info.nLabelCheckReq = CTL_CLEAR;
 }
@@ -2623,6 +2631,7 @@ void CRunRobot::OnRobotRun()
 	int nRet,nTemp = 0;
 	double dCurrentPos = 0;
 	CString str;
+
 	
 	m_dPitch_Y = (st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_FIRST] - st_motor_info[M_PICKERRBT_Y].d_pos[ROBOT_Y_FEEDER_PICK_END])/4;
 	m_dPitch_x = st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_FIRST] - st_motor_info[M_PICKERRBT_X].d_pos[ROBOT_X_FEEDER_PICK_END];

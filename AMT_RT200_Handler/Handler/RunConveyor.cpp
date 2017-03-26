@@ -20,7 +20,7 @@ CRunConveyor::CRunConveyor(void)
 	m_nSmemaStep = 0;
 	m_nRobot_Conv = M_TURN_CONV_PITCH;
 	st_sync_info.nInitConv_pitch = NO;
-	
+	st_sync_info.nSmema_Rear = -1;
 	m_nTactimeCheck = FALSE; //kwlee 20170318
 }
 
@@ -282,12 +282,13 @@ void CRunConveyor::Smema_Front()
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvInChk,IO_OFF);
 			if (nRet[0] == IO_ON)
 			{
+				m_lWait_Smema[0] = GetCurrentTime();
 				m_nSmemaStep = 1200;
 			}
 			else if (nRet[0] == IO_OFF && FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_ON) == IO_OFF || st_sync_info.nSmema_Front == CTL_COMPLETE )
 			{
-				if (m_lWait_Smema[2] < st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
-				{
+ 				if (m_lWait_Smema[2] > 30)
+ 				{
 					//FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF); //kwlee 2017.0315
 					m_lWait_Smema[0] = GetCurrentTime();
 					m_nSmemaStep = 2300;
@@ -324,6 +325,7 @@ void CRunConveyor::Smema_Front()
 			nRet[0] = FAS_IO.get_in_bit(st_io_info.i_InConvPosChk,IO_OFF);
 			if(nRet[0] == IO_ON)
 			{
+				m_lWait_Smema[0] = GetCurrentTime();
 				m_nSmemaStep = 2200;
 			}
 			else if( nRet[0] == IO_OFF /*|| st_basic_info.nModeDevice == WITHOUT_DVC*/)
@@ -351,12 +353,11 @@ void  CRunConveyor::Smema_Rear()
 	int nRet[2];
 	CString strTemp;
 
-
 	switch(m_nRearSmemaStep)
 	{
 	case 0:
-		FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF);
-		FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF);
+// 		FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF);
+// 		FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF);
 		m_nRearSmemaStep = 100;
 		break;
 
@@ -494,7 +495,7 @@ void  CRunConveyor::Smema_Rear()
 // 		else
 // 		{
 // 			m_lWait_Smema[0] = GetCurrentTime();
-// 			m_nRearSmemaStep = 200;
+// 			m_nRearSmemaStep = 110;
 // 		}
 		break;
 
@@ -510,17 +511,19 @@ void  CRunConveyor::Smema_Rear()
 			{
 				st_Pcb_info.dwTimeCheck[0][2] = 0.0f;
 			}
-			st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, MAIN_TIMEINFO,0);
+			//st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, MAIN_TIMEINFO,0);
 
-			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
-			{
-				strTemp.Format(_T("%.1f"),st_Pcb_info.dwTimeCheck[0][2]);
-				clsMem.OnNormalMessageWrite(strTemp);
-				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
-			}
+// 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+// 			{
+// 				strTemp.Format(_T("%.1f"),st_Pcb_info.dwTimeCheck[0][2]);
+// 				clsMem.OnNormalMessageWrite(strTemp);
+// 				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+// 			}
 			//
 
 			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_ON);
+			strTemp.Format(_T("[handler->Rear]Send To Rear Complete Signal"));
+			clsMem.OnNormalMessageWrite(strTemp);
 			m_lWait_Smema[0] = GetCurrentTime();
 			m_nRearSmemaStep = 500;	
 		}
@@ -532,28 +535,48 @@ void  CRunConveyor::Smema_Rear()
 		break;
 
 	case 500:
-		m_lWait_Smema[1] = GetCurrentTime();
-		m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
-		
+// 		m_lWait_Smema[1] = GetCurrentTime();
+// 		m_lWait_Smema[2] = m_lWait_Smema[1] - m_lWait_Smema[0];
+// 		
+// 		nRet[0] = FAS_IO.get_in_bit(st_io_info.i_RearReq,IO_OFF); //kwlee 2017.0314
+// 		nRet[1] = FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_OFF); //kwlee 2017.0314
+// 		 
+// 		if (m_lWait_Smema[2] > 500)
+// 		{
+// 			//if(nRet[0] == IO_OFF && nRet[1] == IO_OFF)
+// 			//kwlee 2017.0320
+// 			if(nRet[0] == IO_OFF && nRet[1] == IO_OFF || st_sync_info.nSmema_Rear == CTL_CLEAR)
+// 			{
+// 				//kwlee 2017.0318
+// 				st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); 
+// 				FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF);
+// 				FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF);
+// 				m_nRearSmemaStep = 0;
+// 			}
+// 			else
+// 			{
+// 				m_lWait_Smema[0] = GetCurrentTime();
+// 				m_nRearSmemaStep = 510;
+// 			}
+// 		}
+		//kwlee 2017.0326
 		nRet[0] = FAS_IO.get_in_bit(st_io_info.i_RearReq,IO_OFF); //kwlee 2017.0314
 		nRet[1] = FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_OFF); //kwlee 2017.0314
-		 
-		if (m_lWait_Smema[2] > 500)
+		if(nRet[0] == IO_OFF && nRet[1] == IO_OFF /*|| st_sync_info.nSmema_Rear == CTL_CLEAR*/)
 		{
-			//if(nRet[0] == IO_OFF && nRet[1] == IO_OFF)
-			//kwlee 2017.0320
-			if(nRet[0] == IO_OFF && nRet[1] == IO_OFF || st_sync_info.nSmema_Rear == CTL_CLEAR)
-			{
-				//kwlee 2017.0318
-				st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); 
-					
-				m_nRearSmemaStep = 0;
-			}
-			else
-			{
-				m_lWait_Smema[0] = GetCurrentTime();
-				m_nRearSmemaStep = 510;
-			}
+			//kwlee 2017.0318
+			st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); 
+			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF);
+			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF);
+
+			strTemp.Format(_T("[1. handler <- Rear]Recive Rear Signal Off"));
+			clsMem.OnNormalMessageWrite(strTemp);
+			m_nRearSmemaStep = 0;
+		}
+		else
+		{
+			m_lWait_Smema[0] = GetCurrentTime();
+			m_nRearSmemaStep = 510;
 		}
 		break;		
 
@@ -569,16 +592,22 @@ void  CRunConveyor::Smema_Rear()
 			//FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF); //kwlee 2017.0314
 			//m_lWait_Smema[0] = GetCurrentTime();
 			//m_nRearSmemaStep = 100; //kwlee 2017.0314
-			if(nRet[0] == IO_OFF && nRet[1] == IO_OFF)
+			if(nRet[0] == IO_OFF && nRet[1] == IO_OFF /*|| st_sync_info.nSmema_Rear == CTL_CLEAR*/)
 			{	
 				//kwlee 2017.0318
-				st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); 
+				//st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); 
+				FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF);
+				FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF);
+
+				strTemp.Format(_T("[2. handler <- Rear]Recive Rear Signal Off"));
 				m_nRearSmemaStep = 0;
 			}
 			else
 			{
 				m_lWait_Smema[0] = GetCurrentTime();
-				m_nRearSmemaStep = 500;
+				//m_nRearSmemaStep = 500;
+				//kwlee 2017.0326
+				m_nRearSmemaStep = 400;
 			}
 		}
 		break;
@@ -3349,7 +3378,9 @@ void CRunConveyor::OnRearConvMove()
 // 			}
 // 		}
 		//kwlee 2017.0322
-		if (FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_ON) == IO_OFF && FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_ON) == IO_ON ||st_sync_info.nSmema_Rear == CTL_COMPLETE)
+		nRet[0] = FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_ON);
+		nRet[1] = FAS_IO.get_in_bit(st_io_info.i_OutConvChk,IO_OFF);
+		if ( nRet[0] == IO_ON  &&  nRet[1] == IO_OFF ||st_sync_info.nSmema_Rear == CTL_COMPLETE)
 		{
 			m_dwConveyorWaitTime[CONV_OUT][0] = GetCurrentTime();
 			st_sync_info.nSmema_Tray_Output_Req = CONV_CLR;
