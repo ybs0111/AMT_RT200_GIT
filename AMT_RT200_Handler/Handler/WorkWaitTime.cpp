@@ -497,7 +497,7 @@ void CWorkWaitTime::OnCellClick(NMHDR *pNotifyStruct, LRESULT* pResult)
 				{
 					nKey = m_nLimitWaitTime[nRow - 1][1];
 
-					KeyPadI(0, 20000, &nKey);
+					KeyPadI(0, 200000, &nKey);
 
 					m_nLimitWaitTime[nRow - 1][1] = nKey;
 

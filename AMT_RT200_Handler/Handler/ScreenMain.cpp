@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "Handler.h"
-#include "MainFrm.h"
+//#include "MainFrm.h"
 #include "ScreenMain.h"
 #include "Variable.h"
 #include "Dialog_Message.h"
@@ -23,6 +23,7 @@
 #include "AlgMemory.h"
 #include "RunConveyor.h"
 #include "RunRobot.h"
+#include "AMTVClassWrapper.h"
 
 #define TM_FRONT_SMEMA		100
 #define TM_REAR_SMEMA		200
@@ -190,7 +191,7 @@ void CScreenMain::OnInitialUpdate()
 	SetTimer(TM_DATA_DISPLAY, 1000, NULL);
 	
 	st_handler_info.cWndMain = this;
-
+	pFrame = (CMainFrame*)::AfxGetMainWnd();
 }
 
 
@@ -2878,14 +2879,15 @@ void CScreenMain::OnMainDisplayRearSmema()
 void CScreenMain::OnBnClickedBtnStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	int pos;
-	CString strTemp,str;
+	pFrame->mp_AMTVClassWrapper->ShowForm();
+	//int pos;
+	//CString strTemp,str;
 	//st_sync_info.TurnConvJobReady[ROBOT] = CTL_READY;
-	strTemp.Format(_T("%c13%c"), 0x02, 0x03);
-	pos = strTemp.GetLength();
-	str = strTemp.Mid(1,pos - 2);
-
-	return;
+// 	strTemp.Format(_T("%c13%c"), 0x02, 0x03);
+// 	pos = strTemp.GetLength();
+// 	str = strTemp.Mid(1,pos - 2);
+	
+	//return;
 // 	if ( m_nTemp < 3 )
 // 	{
 // 		pos = WM_PCB_CV_IN_MOVE_DRAW_MAIN;
@@ -2920,8 +2922,8 @@ void CScreenMain::OnBnClickedBtnStart()
 // 	}
 
 
-	st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,m_nTemp,0);
-	m_nTemp++;
+	//st_handler_info.cWndMain->PostMessage(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,m_nTemp,0);
+	//m_nTemp++;
 }
 
 
@@ -3661,7 +3663,11 @@ void CScreenMain::OnBnClickedBtnCvInPos3()
 {
 
 	///
-	st_sync_info.nSmema_Rear = CTL_REQ;
+	//st_sync_info.nSmema_Rear = CTL_REQ;
+	::SendMessage(st_handler_info.hWnd, WM_MAINFRAME_WORK, MAIN_TEACH_VISION,1);
+	//clsRunRobot.m_nVisionStep = 0;
+	//clsRunRobot.OnVisionDataCheck(1);
+
 	
 }
 
@@ -3676,7 +3682,8 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw5()
 void CScreenMain::OnBnClickedBtnOutPosUpDw4()
 {
 	//clsRunConveyor.m_nRunStep[CONV_MID] = 2910;
-	st_sync_info.nSmema_Rear = CTL_COMPLETE;
+	::SendMessage(st_handler_info.hWnd, WM_MAINFRAME_WORK, MAIN_TEACH_VISION,2);
+	//st_sync_info.nSmema_Rear = CTL_COMPLETE;
 // 	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
 // 	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;
 // 	st_Picker_info.nPickerData[1][1][FAILPICK] = YES;

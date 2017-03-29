@@ -21,7 +21,7 @@
 // ******************************************************************************
 #include "Alg_Excel.h"
 //  ******************************************************************************
-
+class AMTVClassWrapper; //kwlee 2017.0327
 class CClientSocket;
 class CServerSocket;
 
@@ -87,7 +87,7 @@ public:
 	CDialog_Title	m_wndTitleBar;  // 타이틀 바 대화 상자에 대한 클래스 변수 선언 
 	CDialog_List	m_wndListBar;   // 리스트바 클래스
 	
-
+	AMTVClassWrapper *mp_AMTVClassWrapper; //kwlee 2017.0327
 // 재정의입니다.
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);

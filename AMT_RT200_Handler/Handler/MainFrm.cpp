@@ -42,6 +42,7 @@
 #include "CtlBd_Library.h"
 #include "ZebraPrint.h"
 #include "RunRobot.h"
+#include "AMTVClassWrapper.h" //kwlee 2017.0327 Vision
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -171,12 +172,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_MESSAGE(WM_CONV_STATE, OnConVeyorUI)
 	ON_MESSAGE(WM_CLIENT_MSG_8, OnBarcode_1) //kwlee 2017.0204
 	ON_MESSAGE(WM_CLIENT_MSG_9, OnBarcode_2) //kwlee 2017.0204
-	
+	ON_MESSAGE(WM_MAINFRAME_WORK, OnMainframe_VisionWork)  //kwlee 2017.0327
 	ON_WM_NCLBUTTONDBLCLK()
 	ON_WM_NCLBUTTONDOWN()
 //	ON_WM_KEYUP()
 ON_WM_COPYDATA()
-ON_MESSAGE(WM_MAINFRAME_WORK, OnMainframe_VisionWork) 
 ON_WM_COPYDATA()
 END_MESSAGE_MAP()
 
@@ -207,6 +207,7 @@ CMainFrame::CMainFrame()
 // 	m_pNewActiveView = NULL;
 // 	m_pOldActiveView = NULL;
 
+	mp_AMTVClassWrapper = new AMTVClassWrapper();
 	OnFilePath();	
 	// Excel Map 정보 읽기....
 	OnExcelRead();
@@ -294,6 +295,11 @@ CMainFrame::~CMainFrame()
 		}
 	}
 
+	//kwlee 2017.0327
+	if (mp_AMTVClassWrapper != NULL)
+	{
+		mp_AMTVClassWrapper->Exit();
+	}
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -2675,14 +2681,30 @@ LRESULT CMainFrame::OnBarcode_1(WPARAM wParam, LPARAM lParam)
 LRESULT CMainFrame::OnMainframe_VisionWork(WPARAM wParam, LPARAM lParam)
 {	
 	int mn_command_num = wParam;  // 네트워크 작업을 할 구분 변수
+	int nPos = lParam; //Forward //Back
+	CString strTemp = _T("000000000");
+	BSTR bstr;
+	bstr = strTemp.AllocSysString();
+	//CString strTmpResult;
 
 	switch (mn_command_num)
 	{		
 	case MAIN_TEACH_VISION:
-		///OnMainFrame_TeachVision( lParam );
+		///OnMainFrame_TeachVision( nPos );
+		if( mp_AMTVClassWrapper->Result(nPos, &bstr) )
+		{
+			//strTemp = bstr;
+			//strTmpResult = bstr;
+			for (int i = 0; i<9; i++)
+			{
+				//st_Vision_info.strVisionData[i].Format(_T("%s"),strTmpResult[i]);
+				st_Vision_info.strVisionData[i] = bstr[i];
+			}
+		}
+		
 		break;
-
 	}
+	
 	return 0;
 }
 

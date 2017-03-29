@@ -65,6 +65,7 @@ public:
 	DWORD           m_dwTimeCheck[3];
 	DWORD           m_dwBcrTime[3];
 	
+
 	DWORD           m_dwCheckOnOffTime[3]; //kwlee 2017.0307
 	DWORD			m_dwPickUpDnWaitTime[2][3];
 	DWORD			m_dwWRejectCylWaitTime[2][3]; //kwlee 2017.0216
@@ -73,6 +74,8 @@ public:
 	DWORD           m_dwStopperCylWaitTime[3];
 	DWORD           m_dwBcrConvMotorWaitTime[3];
 	
+	DWORD           m_dwTacTimeCheck[3]; //kwlee2017.0328
+
 	bool            m_bSecondPos;
 	bool            m_PickSecondPOs;
 	bool			m_bPickUpDnFlag[2];
@@ -119,7 +122,7 @@ public:
 	void    OnResetRejectData();
 
 	void    OnLabelSensorCheck(); //kwlee 2017.0307
-	int     OnVisionDataCheck();//kwlee 2017.0315
+	int     OnVisionDataCheck(int nPos);//kwlee 2017.0315
 	
 	int		OnBcrConveyorOnOff(int nOnOff);
 };

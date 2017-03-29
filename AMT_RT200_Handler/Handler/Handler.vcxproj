@@ -567,6 +567,7 @@
     <ClInclude Include="AlgMemory.h" />
     <ClInclude Include="Alg_Excel.h" />
     <ClInclude Include="Alg_Mysql.h" />
+    <ClInclude Include="AMTVClassWrapper.h" />
     <ClInclude Include="Animate.h" />
     <ClInclude Include="BannerStatic.h" />
     <ClInclude Include="Barcode_1D.h" />
@@ -697,6 +698,7 @@
     <ClCompile Include="AlgMemory.cpp" />
     <ClCompile Include="Alg_Excel.cpp" />
     <ClCompile Include="Alg_Mysql.cpp" />
+    <ClCompile Include="AMTVClassWrapper.cpp" />
     <ClCompile Include="Animate.cpp" />
     <ClCompile Include="BannerStatic.cpp" />
     <ClCompile Include="Barcode_1D.cpp" />

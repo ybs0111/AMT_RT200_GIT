@@ -116,6 +116,7 @@
     <ClCompile Include="Barcode_1D.cpp" />
     <ClCompile Include="Barcode_2D.cpp" />
     <ClCompile Include="ZebraPrint.cpp" />
+    <ClCompile Include="AMTVClassWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="32bit\FAS_HSSI.h" />
@@ -248,6 +249,7 @@
     <ClInclude Include="Barcode_1D.h" />
     <ClInclude Include="Barcode_2D.h" />
     <ClInclude Include="ZebraPrint.h" />
+    <ClInclude Include="AMTVClassWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Handler.rc" />

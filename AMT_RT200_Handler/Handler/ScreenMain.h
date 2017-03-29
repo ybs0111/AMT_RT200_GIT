@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MainFrm.h"
+
 #include ".\\Controls\\Picture.h"  // 이미지 로딩 클래스
 #include "XPGroupBox.h"
 #include "xShadeButton.h"	// 조그 버튼 생성 클래스 추가
@@ -15,8 +17,7 @@
 #include "MyBasicData.h"
 #include "afxwin.h"
 
-
-
+class CMainFrame;
 
 // CScreenMain 폼 뷰입니다.
 
@@ -147,6 +148,8 @@ public:
 	           
 	int                 m_nTemp;
 	bool                mbTurn;
+
+	CMainFrame *pFrame;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 

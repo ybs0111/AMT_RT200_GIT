@@ -2042,7 +2042,7 @@ extern PCB_info st_Pcb_info;
 
 struct tagVISION_INFO
 {
-	CString strVisionData[10];
+	CString strVisionData[9];
 };
 extern tagVISION_INFO st_Vision_info;
 //////////////////////////////////////////////////////////////////////////////////////////////

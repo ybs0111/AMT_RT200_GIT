@@ -157,7 +157,6 @@ int CCtlBd_Library::Initialize_motor_board(int n_bd_type, CString s_filename)	//
 		{			
 			for(i=0; i<COMI.mn_totalmotoraxis_number; i++)
 			{//n_simul_mode => 0:시뮬레이션 모드 비활성, 1:시뮬레이션 모드 활성
-
 				if(st_work_info.nSimulationMode == 1) //모터를 가상으로 제어하여 실제 모터 출력이 나가고 기구물이 이동한것처럼 동작한다 
 				{//활성
 					COMI.Set_Simulation_Mode(i, 1); 

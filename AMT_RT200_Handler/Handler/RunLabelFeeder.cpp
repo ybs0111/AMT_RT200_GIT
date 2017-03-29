@@ -140,7 +140,9 @@ void CRunLabelFeeder::OnRunInit()
 			m_dwWFeederWaitTime[0] = GetCurrentTime();
 		}
 
-		if (m_dwWFeederWaitTime[2] > 3000)
+		//if (m_dwWFeederWaitTime[2] > 3000)
+		//kwlee 2017.0327
+		if (m_dwWFeederWaitTime[2] > 500)
 		{
 			//FAS_IO.set_out_bit(st_io_info.o_LabelFeederMotorOn,IO_OFF);
 			m_nInitStep = 2300;
