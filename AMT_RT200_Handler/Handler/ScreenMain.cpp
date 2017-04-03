@@ -115,6 +115,7 @@ BEGIN_MESSAGE_MAP(CScreenMain, CFormView)
 	ON_MESSAGE(WM_PCB_CV_TURN_MOVE_DRAW_MAIN,					OnMainCvTurnMoveDisplay) 
 	ON_MESSAGE(WM_PCB_CV_OUT_MOVE_DRAW_MAIN,					OnMainCvOutMoveDisplay) 
 	ON_MESSAGE(WM_MAIN_IO_DISPLAY,								OnMainIODisplay) 
+	ON_MESSAGE(WM_MAIN_MESSAGE_DISPLAY,							OnMainMessageDisplay) //kwlee 2017.0328
 	ON_WM_TIMER()
 	ON_WM_SHOWWINDOW()
 	ON_WM_DESTROY()
@@ -906,7 +907,6 @@ void CScreenMain::OnInitButton()
 {
 
 	short	shBtnColor = 30;
-
 	m_Check_CV_In.SetIcon(IDI_GREEN_LED_ICON,IDI_ICON_LED_ON);
 	m_Check_CV_In.OffsetColor(CButtonST::BTNST_COLOR_BK_IN, shBtnColor);
 	m_Check_CV_In.SetButtonColor(1);
@@ -1053,20 +1053,44 @@ void CScreenMain::OnPaint()
 }
 
 //kwlee 2017.0320
-void CScreenMain::OnMainTactimeDisplay()
+void CScreenMain::OnMainTactimeDisplay(int nPos)
 {
 	CString strTemp,str;
-	if (st_Pcb_info.dwTimeCheck[0][2] > 0 || st_Pcb_info.dwTimeCheck[0][2] < 60)
-	{
-		strTemp.Format(_T("%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
-		m_pGridYieldL.SetItemText(3, 1, strTemp);
+	int nTemp = -1;
+// 	if (st_Pcb_info.dwTimeCheck[0][2] > 0 || st_Pcb_info.dwTimeCheck[0][2] < 60)
+// 	{
+// 		strTemp.Format(_T("%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+// 		m_pGridYieldL.SetItemText(3, 1, strTemp);
+// 
+// 		str.Format(_T("C/V Out TacTime : %s"),strTemp);
+// 		clsMem.OnNormalMessageWrite(str);
+// 	}
+// 	else
+// 	{
+// 		st_Pcb_info.dwTimeCheck[0][2] = 0;
+// 	}
 
-		str.Format(_T("C/V Out TacTime : %s"),strTemp);
-		clsMem.OnNormalMessageWrite(str);
-	}
-	else
+	if (nPos == FRONT)
 	{
-		st_Pcb_info.dwTimeCheck[0][2] = 0;
+		strTemp.Format(_T("F :%.2f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+		nTemp = _wtoi(strTemp);
+		//if (st_Pcb_info.dwTimeCheck[1][2] >= 0 || st_Pcb_info.dwTimeCheck[1][2] < 3600)
+		if (nTemp >= 0 || nTemp < 3600)
+		{
+			strTemp.Format(_T("F :%.2f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+			m_pGridYieldL.SetItemText(3, 1, strTemp);
+		}
+	}
+	if (nPos == REAR)
+	{
+		strTemp.Format(_T("R :%.1f"), (double)st_Pcb_info.dwTimeCheck[1][2] / 1000);
+		nTemp = _wtoi(strTemp);
+		//if (st_Pcb_info.dwTimeCheck[0][2] >= 0 ||  st_Pcb_info.dwTimeCheck[0][2] < 3600)
+		if (nTemp >= 0 || nTemp < 3600)
+		{
+			strTemp.Format(_T("R :%.1f"), (double)st_Pcb_info.dwTimeCheck[1][2] / 1000);
+			m_pGridYieldL.SetItemText(3, 2, strTemp);
+		}
 	}
 	m_pGridYieldL.Invalidate(FALSE);
 }
@@ -1074,8 +1098,9 @@ void CScreenMain::OnMainTactimeDisplay()
 
 LRESULT CScreenMain::OnMainWorkInfoCommand(WPARAM wParam, LPARAM lParam) 
 {
-
-	OnMainTactimeDisplay();
+	int nPos = 0;
+	nPos = (int)wParam;
+	OnMainTactimeDisplay(nPos);
 	return 0;
 }
 //
@@ -1228,7 +1253,36 @@ LRESULT CScreenMain::OnMainIODisplay(WPARAM wParam, LPARAM lParam)
 	SetIO_OnOff(nID,nOnOff);
 	return 0;
 }
+//kwlee 2017.0328
+LRESULT CScreenMain::OnMainMessageDisplay(WPARAM wParam, LPARAM lParam)
+{
+	CDialog_Message dlgMsg;
+	int nResult = -1;
+	
+	nResult = (int)wParam;
+	if (nResult == GOOD)
+	{
+		dlgMsg.m_strMessage			= _T("Vision Result Good");
 
+		dlgMsg.m_nMessageType		= 1;
+		st_other_info.nConfirmMsg	= -1;
+		dlgMsg.DoModal();
+	}
+	else if (nResult == FAIL)
+	{
+		dlgMsg.m_strMessage			= _T("Vision Result Fail");
+
+		dlgMsg.m_nMessageType		= 1;
+		st_other_info.nConfirmMsg	= -1;
+		dlgMsg.DoModal();
+	}
+	else
+	{
+
+	}
+	
+	return 0;
+}
 LRESULT CScreenMain::OnMainCvInMoveDisplay(WPARAM wParam, LPARAM lParam) 
 {
 
@@ -2034,24 +2088,30 @@ void CScreenMain::OnMainTimeDisplay()
 void CScreenMain::OnMainCountDisplay()
 {
 	CString strTemp;
-
+	int nTemp;
 	double dAve;
 
 	// lot 수량.
 	strTemp.Format(_T("%d"), st_count_info.nInCount[0][0]);
 	m_pGridYieldL.SetItemText(2, 1, strTemp);
 
-// 	if (st_Pcb_info.dwTimeCheck[0][2] > 0)
+// 	strTemp.Format(_T("F :%.2f"), (double)st_Pcb_info.dwTimeCheck[1][2] / 1000);
+// 	nTemp = _wtoi(strTemp);
+// 	//if (st_Pcb_info.dwTimeCheck[1][2] >= 0 || st_Pcb_info.dwTimeCheck[1][2] < 3600)
+// 	if (nTemp >= 0 || nTemp < 3600)
 // 	{
-// 		strTemp.Format(_T("%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+// 		strTemp.Format(_T("F :%.2f"), (double)st_Pcb_info.dwTimeCheck[1][2] / 1000);
 // 		m_pGridYieldL.SetItemText(3, 1, strTemp);
 // 	}
-// 	if (st_Pcb_info.dwTimeCheck[1][2] > 0)
+// 	
+// 	strTemp.Format(_T("R :%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
+// 	nTemp = _wtoi(strTemp);
+// 	//if (st_Pcb_info.dwTimeCheck[0][2] >= 0 ||  st_Pcb_info.dwTimeCheck[0][2] < 3600)
+// 	if (nTemp >= 0 || nTemp < 3600)
 // 	{
-// 		strTemp.Format(_T("%.2f"), st_Pcb_info.dwTimeCheck[1][2]);
+// 		strTemp.Format(_T("R :%.1f"), (double)st_Pcb_info.dwTimeCheck[0][2] / 1000);
 // 		m_pGridYieldL.SetItemText(3, 2, strTemp);
 // 	}
-
 	//kwlee 2017.0316
 //	strTemp.Format(_T("%d"), st_count_info.nInCount[0][0]);
 //	m_pGridYieldL.SetItemText(2, 1, strTemp);
@@ -2400,7 +2460,7 @@ void CScreenMain::OnInitGridYieldLot()
 
 	m_pGridYieldL.SetItemBkColour(row, 2, GREEN_L, BLACK_C);
 	m_pGridYieldL.SetItemFont(row, 2, &clsFunc.OnLogFont(16));
-	m_pGridYieldL.SetItemText(row, 2, _T("0"));
+	m_pGridYieldL.SetItemText(row, 2, _T("0 (초)"));
 
 	row = 4;
 	m_pGridYieldL.SetItemBkColour(row, 0, BLUE_D, WHITE_C);
@@ -3192,8 +3252,6 @@ void CScreenMain::OnMainPcbWork()
 				m_GridTm_2.SetItemBkColour(i, j, RGB(128,255,255), CLR_DEFAULT);
 					
 				m_GridTm_2.SetItemText(i, j, strTmp);	
-				
-				
 			}
 		}
 		mbTurn = false;
@@ -3215,8 +3273,6 @@ void CScreenMain::OnMainPcbWork()
 				m_GridTm_2.SetColumnWidth(j, 19);
 				m_GridTm_2.SetItemFormat(i, j, DT_CENTER|DT_VCENTER|DT_SINGLELINE);
 				m_GridTm_2.SetItemState(i, j, GVIS_READONLY);
-
-
 
 				if (st_Pcb_info.nPcbSelect[i][j] == TRUE)
 				{
@@ -3663,11 +3719,11 @@ void CScreenMain::OnBnClickedBtnCvInPos3()
 {
 
 	///
-	//st_sync_info.nSmema_Rear = CTL_REQ;
-	::SendMessage(st_handler_info.hWnd, WM_MAINFRAME_WORK, MAIN_TEACH_VISION,1);
+	st_sync_info.nSmema_Rear = CTL_REQ;
+	//::PostMessage(st_handler_info.hWnd, WM_MAINFRAME_WORK, MAIN_TEACH_VISION,1);
+	//st_handler_info.cWndMain->PostMessage(WM_MAIN_MESSAGE_DISPLAY,0,0); //kwlee 2017.0220
 	//clsRunRobot.m_nVisionStep = 0;
 	//clsRunRobot.OnVisionDataCheck(1);
-
 	
 }
 
@@ -3681,8 +3737,9 @@ void CScreenMain::OnBnClickedBtnOutPosUpDw5()
 
 void CScreenMain::OnBnClickedBtnOutPosUpDw4()
 {
+	st_sync_info.nSmema_Rear = CTL_COMPLETE;
 	//clsRunConveyor.m_nRunStep[CONV_MID] = 2910;
-	::SendMessage(st_handler_info.hWnd, WM_MAINFRAME_WORK, MAIN_TEACH_VISION,2);
+	//::SendMessage(st_handler_info.hWnd, WM_MAINFRAME_WORK, MAIN_TEACH_VISION,2);
 	//st_sync_info.nSmema_Rear = CTL_COMPLETE;
 // 	st_Picker_info.nPickerData[0][0][FAILPICK] = YES;
 // 	st_Picker_info.nPickerData[0][3][FAILPICK] = YES;

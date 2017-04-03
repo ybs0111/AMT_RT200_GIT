@@ -2691,6 +2691,7 @@ LRESULT CMainFrame::OnMainframe_VisionWork(WPARAM wParam, LPARAM lParam)
 	{		
 	case MAIN_TEACH_VISION:
 		///OnMainFrame_TeachVision( nPos );
+		
 		if( mp_AMTVClassWrapper->Result(nPos, &bstr) )
 		{
 			//strTemp = bstr;
@@ -2702,6 +2703,12 @@ LRESULT CMainFrame::OnMainframe_VisionWork(WPARAM wParam, LPARAM lParam)
 			}
 		}
 		
+// 		for (int i = 0; i<9; i++)
+// 		{
+// 			//st_Vision_info.strVisionData[i].Format(_T("%s"),strTmpResult[i]);
+// 			st_Vision_info.strVisionData[i] = bstr[i];
+// 		}
+		st_Vision_info.nVision_Check = TRUE;
 		break;
 	}
 	

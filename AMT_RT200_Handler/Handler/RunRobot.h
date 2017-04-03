@@ -47,6 +47,7 @@ public:
 	//kwlee 2017.0307
 	int            m_nCurrLabelChk;
 	int            m_nCheckStep;
+	int            m_nVisionPos;
 	//kwlee 2017.0315
 	int            m_nVisionStep; 
 	int            m_nVisionRetry;

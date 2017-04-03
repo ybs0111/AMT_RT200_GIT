@@ -89,7 +89,7 @@ void CScreenList::OnInitialUpdate()
 	OnInitGridData();
 	m_pGridData.DeleteAllItems();
 
-//	st_handler_info.cWndList = this;
+	//st_handler_info.cWndList = this;
 	// TODO: Add your specialized code here and/or call the base class
 }
 

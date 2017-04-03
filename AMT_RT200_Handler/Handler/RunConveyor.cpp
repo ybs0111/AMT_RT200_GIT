@@ -113,7 +113,7 @@ void CRunConveyor::Smema_Front()
 {
 	int nRet[2] = {0,};
 	CString strTemp;	
-
+	int nTemp;
 	switch(m_nSmemaStep)
 	{
 		case 0:
@@ -148,6 +148,7 @@ void CRunConveyor::Smema_Front()
 			}
 			else
 			{
+				
 				m_nSmemaStep = 1000;
 			}
 			break;
@@ -168,7 +169,6 @@ void CRunConveyor::Smema_Front()
 			}
 			else
 			{
-				st_Pcb_info.dwTimeCheck[1][0] = GetCurrentTime(); //kwlee 2017.0328
 				m_nSmemaStep = 1000;
 			}
 			break;
@@ -188,19 +188,23 @@ void CRunConveyor::Smema_Front()
 			if( nRet[0] == IO_ON || nRet[1] == IO_ON || st_sync_info.nSmema_Front == CTL_READY)
 			{
 				//kwlee 2017.0318
-				st_Pcb_info.dwTimeCheck[1][1] = GetCurrentTime();
-				st_Pcb_info.dwTimeCheck[1][2] = st_Pcb_info.dwTimeCheck[1][1] - st_Pcb_info.dwTimeCheck[1][0];
+				st_Pcb_info.dwTimeCheck[0][1] = GetCurrentTime();
+				st_Pcb_info.dwTimeCheck[0][2] = st_Pcb_info.dwTimeCheck[0][1] - st_Pcb_info.dwTimeCheck[0][0];
 
 // 				if (st_Pcb_info.dwTimeCheck[1][2] < 0)
 // 				{
 // 					st_Pcb_info.dwTimeCheck[1][2] = 0.0f;
 // 				}
 				//st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, MAIN_TIMEINFO,0);
-				strTemp.Format(_T("[PCB IN TIME] :%.1f"),(double)st_Pcb_info.dwTimeCheck[1][2]/1000);
 
-				clsMem.OnNormalMessageWrite(strTemp);
-				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
-				
+				st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, FRONT,0);
+
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					strTemp.Format(_T("[PCB IN TIME] :%.1f"),(double)st_Pcb_info.dwTimeCheck[0][2]/1000);
+					clsMem.OnNormalMessageWrite(strTemp);
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+				}
 
 				FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF); //kwlee 2017.0320
 				m_nSmemaStep = 1200;
@@ -306,7 +310,7 @@ void CRunConveyor::Smema_Front()
  				if (m_lWait_Smema[2] > 30)
  				{
 					//FAS_IO.set_out_bit(st_io_info.o_Front_LabelReq,IO_OFF); //kwlee 2017.0315
-					/*st_Pcb_info.dwTimeCheck[1][0] = GetCurrentTime(); //kwlee 2017.0328*/
+					st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); //kwlee 2017.0328
 					m_lWait_Smema[0] = GetCurrentTime();
 					m_nSmemaStep = 2300;
 				}
@@ -349,7 +353,7 @@ void CRunConveyor::Smema_Front()
 			{
 				if (m_lWait_Smema[2] < st_wait_info.nLimitWaitTime[WAIT_CONV_REQ])
 				{
-					st_Pcb_info.dwTimeCheck[1][0] = GetCurrentTime(); //kwlee 2017.0328
+					/*st_Pcb_info.dwTimeCheck[1][0] = GetCurrentTime(); //kwlee 2017.0328*/
 					m_nSmemaStep = 0;
 				}
 			}
@@ -430,8 +434,7 @@ void  CRunConveyor::Smema_Rear()
 			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_ON);
 			st_sync_info.nSmema_Tray_Output_Req = CONV_READY;
 			m_lWait_Smema[0] = GetCurrentTime();
-			m_nRearSmemaStep = 300;
-			
+			m_nRearSmemaStep = 300;	
 		}
 		break;
 
@@ -479,6 +482,23 @@ void  CRunConveyor::Smema_Rear()
 			if (nRet[0] == IO_ON || st_sync_info.nSmema_Rear == CTL_COMPLETE)
 			{
 				//FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF); //kwlee 2017.0314
+				
+				//kwlee 2017.0329
+				st_Pcb_info.dwTimeCheck[1][1] = GetCurrentTime();
+				st_Pcb_info.dwTimeCheck[1][2] = st_Pcb_info.dwTimeCheck[1][1] - st_Pcb_info.dwTimeCheck[1][0];
+
+				if (st_Pcb_info.dwTimeCheck[1][2] < 0)
+				{
+					st_Pcb_info.dwTimeCheck[1][2] = 0.0f;
+				}
+				st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, REAR,0);
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					strTemp.Format(_T("[PCB OUT TIME] :%.1f"),(double)st_Pcb_info.dwTimeCheck[1][2]/1000);
+					clsMem.OnNormalMessageWrite(strTemp);
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+				}
+				//
 				m_lWait_Smema[0] = GetCurrentTime();
 				m_nRearSmemaStep = 400;
 			}
@@ -505,21 +525,23 @@ void  CRunConveyor::Smema_Rear()
 			if (m_lWait_Smema[2] > 30)
 			{
 			//	FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF); //kwlee 2017.0314
-				st_Pcb_info.dwTimeCheck[0][1] = GetCurrentTime();
-				st_Pcb_info.dwTimeCheck[0][2] = st_Pcb_info.dwTimeCheck[0][1] - st_Pcb_info.dwTimeCheck[0][0];
+				//kwlee 2017.0329
+				st_Pcb_info.dwTimeCheck[1][1] = GetCurrentTime();
+				st_Pcb_info.dwTimeCheck[1][2] = st_Pcb_info.dwTimeCheck[1][1] - st_Pcb_info.dwTimeCheck[1][0];
 
-				if (st_Pcb_info.dwTimeCheck[0][2] < 0)
+				if (st_Pcb_info.dwTimeCheck[1][2] < 0)
 				{
-					st_Pcb_info.dwTimeCheck[0][2] = 0.0f;
+					st_Pcb_info.dwTimeCheck[1][2] = 0.0f;
 				}
-				//st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, MAIN_TIMEINFO,0);
-
-				
-				strTemp.Format(_T("[PCB OUT TIME] :%.1f"),(double)st_Pcb_info.dwTimeCheck[0][2]/1000);
-				clsMem.OnNormalMessageWrite(strTemp);
-				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
-				
-
+				st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, REAR,0);
+				if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+				{
+					strTemp.Format(_T("[PCB OUT TIME] :%.1f"),(double)st_Pcb_info.dwTimeCheck[1][2]/1000);
+					clsMem.OnNormalMessageWrite(strTemp);
+					st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+				}
+				//
+			
 				m_lWait_Smema[0] = GetCurrentTime();
 				m_nRearSmemaStep = 400;
 			}	
@@ -532,32 +554,16 @@ void  CRunConveyor::Smema_Rear()
 		break;
 
 	case 400:
-	
 		if (st_sync_info.nSmema_Tray_Output_Req == CONV_CLR)
 		{	
-			//kwlee 2017.0318
-// 			st_Pcb_info.dwTimeCheck[0][1] = GetCurrentTime();
-// 			st_Pcb_info.dwTimeCheck[0][2] = st_Pcb_info.dwTimeCheck[0][1] - st_Pcb_info.dwTimeCheck[0][0];
-// 
-// 			if (st_Pcb_info.dwTimeCheck[0][2] < 0)
-// 			{
-// 				st_Pcb_info.dwTimeCheck[0][2] = 0.0f;
-// 			}
-// 			//st_handler_info.cWndMain->PostMessage(WM_WORK_COMMAND, MAIN_TIMEINFO,0);
-// 
-// 			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
-// 			{
-// 				strTemp.Format(_T("[PCB OUT TIME] :%.1f"),st_Pcb_info.dwTimeCheck[0][2]/1000);
-// 
-// 				clsMem.OnNormalMessageWrite(strTemp);
-// 				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
-// 			}
-			//
-
-			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_ON);
-			strTemp.Format(_T("[handler->Rear]Send To Rear Complete Signal"));
-			clsMem.OnNormalMessageWrite(strTemp);
 			m_lWait_Smema[0] = GetCurrentTime();
+			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_ON);
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				strTemp.Format(_T("[handler->Rear]Send To Rear Complete Signal"));
+				clsMem.OnNormalMessageWrite(strTemp);
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);  // 동작 실패 출력
+			}
 			m_nRearSmemaStep = 500;	
 		}
 		else
@@ -595,15 +601,19 @@ void  CRunConveyor::Smema_Rear()
 		//kwlee 2017.0326
 		nRet[0] = FAS_IO.get_in_bit(st_io_info.i_RearReq,IO_OFF); //kwlee 2017.0314
 		nRet[1] = FAS_IO.get_in_bit(st_io_info.i_RearComplete,IO_OFF); //kwlee 2017.0314
-		if(nRet[0] == IO_OFF && nRet[1] == IO_OFF /*|| st_sync_info.nSmema_Rear == CTL_CLEAR*/)
+		if(nRet[0] == IO_OFF && nRet[1] == IO_OFF || st_sync_info.nSmema_Rear == CTL_CLEAR)
 		{
 			//kwlee 2017.0318
-			st_Pcb_info.dwTimeCheck[0][0] = GetCurrentTime(); 
+			st_Pcb_info.dwTimeCheck[1][0] = GetCurrentTime(); 
 			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Ready,IO_OFF);
 			FAS_IO.set_out_bit(st_io_info.o_Rear_Label_Complete,IO_OFF);
 
-			strTemp.Format(_T("[1. handler <- Rear]Recive Rear Signal Off"));
-			clsMem.OnNormalMessageWrite(strTemp);
+			if (st_handler_info.cWndList != NULL)  // 리스트 바 화면 존재
+			{
+				strTemp.Format(_T("[1. handler <- Rear]Recive Rear Signal Off"));
+				clsMem.OnNormalMessageWrite(strTemp);
+				st_handler_info.cWndList->SendMessage(WM_LIST_DATA, 0, NORMAL_MSG);
+			}
 			m_nRearSmemaStep = 0;
 		}
 		else

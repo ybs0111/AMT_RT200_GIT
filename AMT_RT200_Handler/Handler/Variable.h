@@ -74,6 +74,7 @@ typedef unsigned int					UINT32;			// 0 .. 4,294,967,295
 #define WM_PCB_CV_IN_MOVE_DRAW_MAIN    WM_USER + 403
 #define WM_PCB_CV_TURN_MOVE_DRAW_MAIN  WM_USER + 404
 #define WM_PCB_CV_OUT_MOVE_DRAW_MAIN   WM_USER + 405
+#define WM_MAIN_MESSAGE_DISPLAY   WM_USER + 406 //kwlee 2017.0328
 
 #define WM_CLIENT_MSG			WM_USER + 500
 #define WM_CLIENT_MSG_1			WM_USER + 500
@@ -2043,6 +2044,7 @@ extern PCB_info st_Pcb_info;
 struct tagVISION_INFO
 {
 	CString strVisionData[9];
+	int nVision_Check;
 };
 extern tagVISION_INFO st_Vision_info;
 //////////////////////////////////////////////////////////////////////////////////////////////

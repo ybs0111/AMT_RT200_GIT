@@ -137,7 +137,7 @@ public:
 
 	void				OnMainDisplayFrontSmema();
 	void				OnMainDisplayRearSmema();
-	void                OnMainTactimeDisplay();
+	void                OnMainTactimeDisplay(int nPos);
 
 	void				SetTrayPos(int ildx);
 	void				TurnPositionGrid();
@@ -167,6 +167,7 @@ public:
 	afx_msg LRESULT	OnMainCvOutMoveDisplay(WPARAM wParam, LPARAM lParam);
 
 	afx_msg LRESULT	OnMainIODisplay(WPARAM wParam, LPARAM lParam); 
+	afx_msg LRESULT	OnMainMessageDisplay(WPARAM wParam, LPARAM lParam); //kwlee 2017.0328 
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	
